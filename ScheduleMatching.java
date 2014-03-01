@@ -1,13 +1,20 @@
 package comp3111project;
 import java.util.Calendar;
-import java.util.GregorianCalendar;;
+import java.util.GregorianCalendar;
+import java.math.*;;
 
 class DateAndTime{
 GregorianCalendar Date;
 	int time_slot;
+	int weekday;
 	
-	boolean before(DateAndTime date_and_time)
-	{
+	DateAndTime(int year,int month,int day_of_month,int interval){
+		Date = new GregorianCalendar();
+		Date.set(year, month, day_of_month);
+		time_slot=interval;
+		weekday=Date.get(Calendar.DAY_OF_WEEK);
+	}
+	boolean before(DateAndTime date_and_time){
 		if (this.Date.before(date_and_time.Date))
 			return true;
 		else if (this.time_slot<date_and_time.time_slot)
@@ -16,43 +23,7 @@ GregorianCalendar Date;
 			return false;
 	}
 	
-	boolean ValidDayOfMonth(int day,int month,int year)
-	{
-		if (month==GregorianCalendar.JANUARY||month==GregorianCalendar.MARCH||month==GregorianCalendar.MAY||month==GregorianCalendar.JULY||month==GregorianCalendar.AUGUST
-				||month==GregorianCalendar.OCTOBER||month==GregorianCalendar.DECEMBER)
-		{
-			if (day>0&&day<32)
-				return true;
-			else
-				return false;
-		}
-		else if (month==GregorianCalendar.APRIL||month==GregorianCalendar.JUNE||month==GregorianCalendar.SEPTEMBER||month==GregorianCalendar.NOVEMBER)
-		{
-			if (day>0&&day<31)
-				return true;
-			else
-				return false;
-		
-	}
-		else if (year%400==0||(!(year%100==0)&&year%4==0))
-		{
-			if (day>0&&day<30)
-				return true;
-			else
-				return false;
-		
-	}
-		else
-		{
-			if (day>0&&day<29)
-				return true;
-			else
-				return false;
-		
-	}}
-	
-	int NumOfDay(int month,int year)
-	{
+	int NumOfDay(int month,int year){
 		if (month==GregorianCalendar.JANUARY||month==GregorianCalendar.MARCH||month==GregorianCalendar.MAY||month==GregorianCalendar.JULY||month==GregorianCalendar.AUGUST
 				||month==GregorianCalendar.OCTOBER||month==GregorianCalendar.DECEMBER)
 	return 31;
@@ -64,21 +35,69 @@ return 30;
 			return 28;
 	}
 	
-	void add(int time)
+	int NextMonth(int month){
+		switch (month)
+		{
+		case (Calendar.JANUARY):
+			return Calendar.FEBRUARY;
+		case (Calendar.FEBRUARY):
+			return Calendar.MARCH;
+		case (Calendar.MARCH):
+			return Calendar.APRIL;
+		case (Calendar.APRIL):
+			return Calendar.MAY;
+		case (Calendar.MAY):
+			return Calendar.JUNE;
+		case (Calendar.JUNE):
+			return Calendar.JULY;
+		case (Calendar.JULY):
+			return Calendar.AUGUST;
+		case (Calendar.AUGUST):
+			return Calendar.SEPTEMBER;
+		case (Calendar.SEPTEMBER):
+			return Calendar.OCTOBER;
+		case (Calendar.OCTOBER):
+			return Calendar.NOVEMBER;
+		case (Calendar.NOVEMBER):
+			return Calendar.DECEMBER;
+		case (Calendar.DECEMBER):
+			return Calendar.JANUARY;
+		default:
+			return -1;
+		}
+					
+		
+	}
+	DateAndTime add(int time)
 	{
+		DateAndTime result = new DateAndTime(this.Date.get(Calendar.YEAR),this.Date.get(Calendar.MONTH),this.Date.get(Calendar.DAY_OF_MONTH),this.time_slot);
+		int day = time/96, year = result.Date.get(Calendar.YEAR);
+		time%=96;
+	result.time_slot += time;
+	day += result.time_slot/96;
+	result.time_slot%=96;
 		
-		int day=(time-time%96)/96,month=0,year=0;
-	time%=96;
-	this.time_slot+=time;
-	day+=(this.time_slot-this.time_slot%96)/96;
-	this.time_slot%=96;
-		day+=this.Date.get(Calendar.DAY_OF_MONTH);
+	day+=result.Date.get(Calendar.DAY_OF_MONTH);
+		            System.out.println("day(before loop): "+day);
+		     
+	while(true){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+		if (day>result.NumOfDay(result.Date.get(Calendar.MONTH), result.Date.get(Calendar.YEAR))){
+			day-=result.NumOfDay(result.Date.get(Calendar.MONTH), result.Date.get(Calendar.YEAR));
+		System.out.println("day(after loop): "+day);
+			result.Date.set(year,result.NextMonth(Calendar.MONTH), result.Date.get(Calendar.DAY_OF_MONTH));
+		if (result.Date.get(Calendar.MONTH)==Calendar.JANUARY)
+			year++;
+		}
+		else
+			break;
+	}
+	result.Date.set(year,result.Date.get(Calendar.MONTH), day);
+		return result;
 		
-		if (!this.ValidDayOfMonth(day,this.Date.get(Calendar.MONTH), this.Date.get(Calendar.YEAR)))
+		//if (!this.ValidDayOfMonth(day,this.Date.get(Calendar.MONTH), this.Date.get(Calendar.YEAR)))
 		//month+=day/this.NumOfDay(this.Date.MONTH,this.Date.YEAR);
 			//month+=(day-day%this.NumOfDay(this.Date.MONTH,this.Date.YEAR))/this.NumOfDay(this.Date.MONTH,this.Date.YEAR);
 			
-			;
 		
 	}
 }
@@ -87,17 +106,19 @@ class User // object which stores user's info
 {
 	String name;
 int user_id;	
-EventNode schedule_ptr;
+EventNode event_ptr;
+RegularEventNode schedule_ptr;
 
 /*DateAndTime FreeTimeSlot(DateAndTime time,int duration) // find a free time slot which is closest to 'time'
 {
-EventNode ptr=schedule_ptr;
+EventNode event_node_ptr=event_ptr;
+RegularEventNode regular_ptr=schedule_ptr;
 
-if (!ptr.ending_date_and_time.before(time)&&ptr.next.starting_date_and_time.before(time))
-
+if ()
 
 }
 */
+
 boolean IsFree(DateAndTime date_and_time)
 {
 	
@@ -110,6 +131,26 @@ class Guest extends User//node of linked list of guest list
 	Guest next=null;
 };
 
+class RegularEventNode
+{
+int weekday,starting_interval,ending_interval,duration;
+RegularEventNode ptr;
+RegularEventNode(int Weekday,int Starting_interval,int Duration)
+{
+	weekday=Weekday;
+	starting_interval=Starting_interval;
+	duration=Duration;
+	ending_interval=starting_interval+duration;
+	}
+int difference (RegularEventNode node)
+{
+int day_difference = (node.weekday-this.weekday);
+if (day_difference<0)
+	day_difference+=7;
+	int interval = Math.abs(this.duration-node.duration)+day_difference*96;
+return interval;
+}
+}
 class EventNode
 {
 	User eventholder;	
@@ -123,6 +164,7 @@ EventNode next=null;
 	event_id = b ;
 	starting_date_and_time = d ;	
 	duration=e;
+//ending_date_and_time=d.add(e);
 }
 }
 
@@ -138,6 +180,8 @@ Event(String a,int b,User c,DateAndTime d,int e)
 }
 	};
 
+
+	
 	public class ScheduleMatching {
 
 	/**
@@ -152,9 +196,12 @@ Event(String a,int b,User c,DateAndTime d,int e)
 		*/
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GregorianCalendar a =new GregorianCalendar(2014,10,12);
-int month=a.get(Calendar.DAY_OF_MONTH);
-System.out.println(month);
+	//	GregorianCalendar a =new GregorianCalendar(2014,10,12);
+		//DateAndTime b = new DateAndTime(2001,Calendar.FEBRUARY,27,8);
+	//DateAndTime c=b.add(386);
+	//System.out.println("year: "+c.Date.get(Calendar.YEAR)+" month: "+c.Date.get(Calendar.MONTH)+" day: "+c.Date.get(Calendar.DAY_OF_MONTH)+" interval: "+c.time_slot);
+		RegularEventNode a= new RegularEventNode(Calendar.MONDAY,48,4),b=new RegularEventNode(Calendar.SUNDAY,52,4);
+System.out.print(a.difference(b));
 	}
 
-}
+	}
