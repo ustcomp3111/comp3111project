@@ -1,8 +1,9 @@
 package comp3111project;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.math.*;;
 
+
+//Example: 1/1/2014 12:45pm = DateAndTime(2014,Calendar.January,1,51)
 class DateAndTime{
 GregorianCalendar Date;
 	int time_slot;
@@ -13,6 +14,19 @@ GregorianCalendar Date;
 		Date.set(year, month, day_of_month);
 		time_slot=interval;
 		weekday=Date.get(Calendar.DAY_OF_WEEK);
+	}
+	
+	DateAndTime now()
+	{
+		GregorianCalendar now = new GregorianCalendar();
+		int day = now.get(Calendar.DAY_OF_MONTH);
+		int month = now.get(Calendar.MONTH);
+		int year = now.get(Calendar.YEAR);
+		int hour = now.get(Calendar.HOUR);
+		int min = now.get(Calendar.MINUTE);
+		int time_slot = hour*4+(min+1)/15;
+		DateAndTime result = new DateAndTime(year,month,day,time_slot);
+		return result;
 	}
 	boolean before(DateAndTime date_and_time){
 		if (this.Date.before(date_and_time.Date))
@@ -64,22 +78,17 @@ return 30;
 			return Calendar.JANUARY;
 		default:
 			return -1;
-		}
-					
-		
-	}
-	DateAndTime add(int time)
-	{
+		}}
+
+	DateAndTime add(int time){
 		DateAndTime result = new DateAndTime(this.Date.get(Calendar.YEAR),this.Date.get(Calendar.MONTH),this.Date.get(Calendar.DAY_OF_MONTH),this.time_slot);
 		int day = time/96, year = result.Date.get(Calendar.YEAR);
 		time%=96;
 	result.time_slot += time;
 	day += result.time_slot/96;
 	result.time_slot%=96;
-		
 	day+=result.Date.get(Calendar.DAY_OF_MONTH);
 		            System.out.println("day(before loop): "+day);
-		     
 	while(true){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 		if (day>result.NumOfDay(result.Date.get(Calendar.MONTH), result.Date.get(Calendar.YEAR))){
 			day-=result.NumOfDay(result.Date.get(Calendar.MONTH), result.Date.get(Calendar.YEAR));
@@ -93,13 +102,17 @@ return 30;
 	}
 	result.Date.set(year,result.Date.get(Calendar.MONTH), day);
 		return result;
-		
-		//if (!this.ValidDayOfMonth(day,this.Date.get(Calendar.MONTH), this.Date.get(Calendar.YEAR)))
-		//month+=day/this.NumOfDay(this.Date.MONTH,this.Date.YEAR);
-			//month+=(day-day%this.NumOfDay(this.Date.MONTH,this.Date.YEAR))/this.NumOfDay(this.Date.MONTH,this.Date.YEAR);
-			
-		
-	}
+		}
+DateAndTime DateOfWeekday(RegularEventNode Weekday)
+{
+	int count = Weekday.weekday-this.weekday;
+if (count<0)
+	count+=7;
+DateAndTime result = this.add(count*96);
+result.time_slot = Weekday.starting_interval;
+return result;
+}
+	
 }
 
 class User // object which stores user's info
@@ -108,20 +121,28 @@ class User // object which stores user's info
 int user_id;	
 EventNode event_ptr;
 RegularEventNode schedule_ptr;
-
+User(String Name,int id,EventNode eventptr, RegularEventNode scheduleptr)
+{
+	name=Name;
+	user_id=id;
+	event_ptr=eventptr;
+	schedule_ptr=scheduleptr;
+	}
 /*DateAndTime FreeTimeSlot(DateAndTime time,int duration) // find a free time slot which is closest to 'time'
 {
-EventNode event_node_ptr=event_ptr;
-RegularEventNode regular_ptr=schedule_ptr;
-
-if ()
+EventNode Event_ptr=event_ptr;
+RegularEventNode Schedule_ptr=schedule_ptr;
+DateAndTime result;
+if (Schedule_ptr.difference(Schedule_ptr.ptr)>=duration)
+{
+	
+} 
 
 }
 */
 
 boolean IsFree(DateAndTime date_and_time)
 {
-	
 	return true;
 	}
 };
@@ -129,12 +150,17 @@ boolean IsFree(DateAndTime date_and_time)
 class Guest extends User//node of linked list of guest list
 {
 	Guest next=null;
+Guest(String Name,int id,EventNode eventptr, RegularEventNode scheduleptr)
+{
+	super(Name,id ,eventptr, scheduleptr);
+	}
 };
 
 class RegularEventNode
 {
 int weekday,starting_interval,ending_interval,duration;
 RegularEventNode ptr;
+
 RegularEventNode(int Weekday,int Starting_interval,int Duration)
 {
 	weekday=Weekday;
@@ -195,6 +221,7 @@ Event(String a,int b,User c,DateAndTime d,int e)
 			};
 		*/
 	public static void main(String[] args) {
+		
 		// TODO Auto-generated method stub
 	//	GregorianCalendar a =new GregorianCalendar(2014,10,12);
 		//DateAndTime b = new DateAndTime(2001,Calendar.FEBRUARY,27,8);
