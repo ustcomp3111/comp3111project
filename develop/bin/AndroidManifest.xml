@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.develop"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.develop.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.develop.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="com.example.develop.Event"
+            android:label="@string/title_activity_event" >
+        </activity>
+        <activity
+            android:name="com.example.develop.Msgbox"
+            android:label="@string/title_activity_msgbox" >
+        </activity>
+        <activity
+            android:name="com.example.develop.Polling"
+            android:label="@string/title_activity_polling" >
+        </activity>
+        <activity
+            android:name="com.example.develop.SecretList"
+            android:label="@string/title_activity_secret_list" >
+        </activity>
+        <activity
+            android:name="com.example.develop.Schedule"
+            android:label="@string/title_activity_schedule" >
+        </activity>
+    </application>
+
+</manifest>
