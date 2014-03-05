@@ -23,19 +23,30 @@ DateAndTime(int year,int month,int day_of_month,int interval){
 	}
 	boolean before(DateAndTime date_and_time){
 		if (Date.before(date_and_time.Date))
+			{System.out.println("before case1");
 			return true;
-		else if (time_slot<date_and_time.time_slot&&Date.equals(date_and_time.Date))
-			return true;
+			}else if (time_slot<date_and_time.time_slot&&Date.equals(date_and_time.Date))
+			{System.out.println("before case2");
+				return true;}
 		else
-			return false;
+		{System.out.println("before case3");
+			return false;}
 	}
 	boolean after(DateAndTime date_and_time){
+		
+			System.out.println("date_and_time.time_slot: "+date_and_time.time_slot);
+			System.out.println("time_slot: "+time_slot);
+if(Date.equals(date_and_time.Date))
+	System.out.println("equal");
 		if (Date.after(date_and_time.Date))
-			return true;
+		{System.out.println("after case1");
+			return true;}
 		else if (time_slot>date_and_time.time_slot&&Date.equals(date_and_time.Date))
-			return true;
+		{System.out.println("after case2");
+			return true;}
 		else
-			return false;
+		{System.out.println("after case3");
+			return false;}
 	}
 
 	int NumOfDay(int month,int year){
@@ -153,47 +164,54 @@ event_ptr.next=node;
 }}
 void AddRegularEvent(RegularEventNode node)
 {
-	RegularEventNode ptr=schedule_ptr;
+	RegularEventNode ptr=schedule_ptr,ptr2=schedule_ptr;
+	node.next = schedule_ptr;
 	if(schedule_ptr==null)
 	{
 		schedule_ptr = node;
-	node.next = schedule_ptr;
-	System.out.println("schedule ptr is null");
-	}
+	//System.out.println("schedule ptr is null");
+	}	
 	else
 	{	while(true)
-	{
+	{	
 		if (node.end.week_day<ptr.begin.week_day||
 				(node.end.week_day==ptr.begin.week_day&&node.end.time_slot<ptr.begin.time_slot))
 		{
-			System.out.println("node is put at the front");
+//			System.out.println("node is put at the front");
 			node.next=ptr;
-		ptr=node;
+		if(ptr==schedule_ptr)
+			schedule_ptr=node;
+		else
+			ptr2.next=node;
 		break;
 		}
 		else if(ptr.next!=schedule_ptr&&ptr.next!=null)
 		{
-			System.out.println("ptr moves on");
+	//		System.out.println("ptr moves on");
+			ptr2=ptr;
 			ptr=ptr.next;
 		}else
 		{
-			System.out.println("node is put at the back");
-			node.next=schedule_ptr;
+		//	System.out.println("node is put at the back");
 			ptr.next=node;
 			break;
 		}
 	}
-	System.out.println("a node is put in the list");
+	//System.out.println("************");
 	}}
 void printregularevent()
 {
 	RegularEventNode ptr = schedule_ptr;
-while(ptr!=null)
+	boolean end = false;
+	while(ptr!=null)
 {	System.out.println("Regular event starts at: "+ptr.begin.printthis()+" event ends at: "+ptr.end.printthis());
 ptr=ptr.next;
 
+if(end)
+	break;
 if(ptr.next==schedule_ptr||ptr.next==null)
-break;
+end = true;
+
 }
 System.out.println("***The end***");
 }
@@ -215,25 +233,34 @@ DateAndTime result = DateAndTime.Now;
 boolean return_flag=false;
 while(true)
 {
-if (Schedule_ptr.difference(Schedule_ptr.next)>=duration)
+	System.out.println("difference: "+Schedule_ptr.difference(Schedule_ptr.next));
+System.out.println("comparing:\n"+Schedule_ptr.begin.printthis()+"\nand"+Schedule_ptr.next.begin.printthis());
+	if (Schedule_ptr.difference(Schedule_ptr.next)>=duration)
 {
 	result = result.FindDateOfWeekday(Schedule_ptr);
-while (Event_ptr!=null)
-	if (!Event_ptr.overlap(result))
+	System.out.println("suitable time slot: "+result.printthis());	
+	while (true)
+	{
+	if(Event_ptr==null)
+		return result;
+	else if (!Event_ptr.overlap(result))
 		Event_ptr=Event_ptr.next;
 	else
-	{
-		result = result.FindDateOfWeekday(Schedule_ptr);
+	{	
+//		result = result.FindDateOfWeekday(Schedule_ptr);
+	Event_ptr=event_ptr;
+	break;
 	}
-}
-else
-{
-	if (return_flag||Schedule_ptr.next==null)
+}	}
+
+	if (return_flag)
 		break;
-	Schedule_ptr=Schedule_ptr.next;
-	if(Schedule_ptr.next==schedule_ptr)
+	else 
+		{
+		if(Schedule_ptr.next==schedule_ptr)
 return_flag=true;
-}} 
+	Schedule_ptr=Schedule_ptr.next;
+} }
 return result;
 }
 
@@ -284,11 +311,20 @@ return result;
 }
 int difference (RegularEventNode node)
 {
-int day_difference = (node.begin.week_day-this.end.week_day);
-if (day_difference<0)
-	day_difference+=7;
-	int interval = Math.abs(duration-node.duration)+day_difference*96;
-return interval;
+int day_difference = (node.begin.week_day-this.end.week_day),interval=0;
+day_difference=Math.abs(day_difference);
+if (Math.abs(day_difference)>3)
+day_difference = 7-day_difference;
+//System.out.println("day difference: "+day_difference);
+if (node.begin.week_day-this.end.week_day<0)
+{
+//System.out.println("begin.time_slot: "+begin.time_slot+" node.end.time_slot: "+node.end.time_slot);
+	interval = day_difference*96+begin.time_slot-node.end.time_slot;
+}else
+{
+	//System.out.println("node.begin.time_slot: "+node.begin.time_slot+" end.time_slot: "+end.time_slot);
+	interval = day_difference*96+node.begin.time_slot-end.time_slot;
+}return interval;
 }
 
 }
@@ -323,12 +359,23 @@ EventNode next;
 }
 	boolean overlap(DateAndTime date_and_time)
 	{
-		if (end.before(date_and_time)||begin.after(date_and_time))
+		System.out.println("check overlap");
+		System.out.println("Start: "+begin.printthis()+" end: "+end.printthis());
+		System.out.println("date_and_time:"+date_and_time.printthis() );
+		if (end.after(date_and_time)&&begin.before(date_and_time))
+		{	System.out.println("return true");
+			return true;
+		}else
+		{	System.out.println("return false");
+			return false;
+		}}
+	boolean overlap(EventNode event)
+	{
+		if (end.before(event.begin)||begin.after(event.end))
 	return false;
 		else
 			return true;
-	}
-}
+	}}
 
 class Event extends EventNode // store extra information of an event
 {
@@ -359,38 +406,39 @@ Event(String a,int b,User c,DateAndTime d,int e)
 	public static void main(String[] args) {
 		
 User Gordon = new User("Gordon",01,null,null);
-DateAndTime a = new DateAndTime(2014,Calendar.MARCH,5,76), b  = new DateAndTime(2014,Calendar.MARCH,7,72);
+DateAndTime a = new DateAndTime(2014,Calendar.MARCH,9,70), b  = new DateAndTime(2014,Calendar.MARCH,9,72);
 
-EventNode event1 = new EventNode(Gordon,01,a,8), event2 = new EventNode(Gordon,02,b,4);
-RegularEventNode event3 = new RegularEventNode(Calendar.MONDAY,0,3);
-RegularEventNode event4 = new RegularEventNode(Calendar.TUESDAY,0,4);
-RegularEventNode event5 = new RegularEventNode(Calendar.WEDNESDAY,0,5);
-RegularEventNode event6 = new RegularEventNode(Calendar.THURSDAY,0,6);
-RegularEventNode event7 = new RegularEventNode(Calendar.FRIDAY,0,7);
-RegularEventNode event8 = new RegularEventNode(Calendar.SATURDAY,0,8);
-RegularEventNode event9 = new RegularEventNode(Calendar.SUNDAY,0,9);
+EventNode event1 = new EventNode(Gordon,01,b,12), event2 = new EventNode(Gordon,02,a,12);
+RegularEventNode event3 = new RegularEventNode(Calendar.MONDAY,0,72);
+RegularEventNode event4 = new RegularEventNode(Calendar.TUESDAY,0,72);
+RegularEventNode event5 = new RegularEventNode(Calendar.WEDNESDAY,0,72);
+RegularEventNode event6 = new RegularEventNode(Calendar.THURSDAY,0,72);
+RegularEventNode event7 = new RegularEventNode(Calendar.FRIDAY,0,72);
+RegularEventNode event8 = new RegularEventNode(Calendar.SATURDAY,0,72);
+RegularEventNode event9 = new RegularEventNode(Calendar.SUNDAY,0,72);
 
 Gordon.AddEvent(event1);
 Gordon.AddEvent(event2);
-System.out.println("add event done");
+//System.out.println("add event done");
 //Gordon.AddRegularEvent(event8);
-Gordon.AddRegularEvent(event9);
-Gordon.AddRegularEvent(event3);
+//Gordon.AddRegularEvent(event7);
+//Gordon.AddRegularEvent(event9);
+Gordon.AddRegularEvent(event7);
 Gordon.AddRegularEvent(event4);
 Gordon.AddRegularEvent(event5);
+Gordon.AddRegularEvent(event3);
+Gordon.AddRegularEvent(event9);
 Gordon.AddRegularEvent(event6);
-Gordon.AddRegularEvent(event7);
+Gordon.AddRegularEvent(event8);
+//System.out.println("add regular event done");
+//Gordon.printevent();
+//Gordon.printregularevent();
+DateAndTime test = DateAndTime.Now;
+//System.out.println("object created");
 
+test=Gordon.FreeTimeSlot(test,4);
+//System.out.println(test.printthis());
 
-System.out.println("add regular event done");
-Gordon.printevent();
-Gordon.printregularevent();
-RegularEventNode ptr = Gordon.schedule_ptr.next;
-while (ptr!=null&&ptr!=Gordon.schedule_ptr)
-{System.out.println("+1");
-ptr=ptr.next;
-}
-	Gordon.event_ptr.begin.printthis();
 	}
 
 	}
