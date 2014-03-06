@@ -7,14 +7,18 @@ class DateAndTime{
 GregorianCalendar Date;
 static GregorianCalendar now = new GregorianCalendar();
 	int time_slot;
-	int weekday;
+//	int weekday;
 	static DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH),now.get(Calendar.HOUR)*4+(now.get(Calendar.MINUTE)+1)/15);
 	
 DateAndTime(int year,int month,int day_of_month,int interval){
-		Date = new GregorianCalendar();
-		Date.set(year, month, day_of_month);
+		Date = new GregorianCalendar(year, month, day_of_month);
+		//Date.set(year, month, day_of_month,0,0,0);
 		time_slot=interval;
-		weekday=Date.get(Calendar.DAY_OF_WEEK);
+	//weekday=Date.get(Calendar.DAY_OF_WEEK);
+	}
+int weekday()
+{
+	return Date.get(Calendar.DAY_OF_WEEK);
 	}
 	String printthis()
 	{
@@ -22,31 +26,28 @@ DateAndTime(int year,int month,int day_of_month,int interval){
 		return " Year: "+Date.get(Calendar.YEAR)+" Month: "+(Date.get(Calendar.MONTH)+1)+" Day: "+Date.get(Calendar.DAY_OF_MONTH)+" Weekday: "+Date.get(Calendar.DAY_OF_WEEK)+" time: "+time_slot;
 	}
 	boolean before(DateAndTime date_and_time){
-		if (Date.before(date_and_time.Date))
-			{System.out.println("before case1");
-			return true;
-			}else if (time_slot<date_and_time.time_slot&&Date.equals(date_and_time.Date))
-			{System.out.println("before case2");
-				return true;}
-		else
-		{System.out.println("before case3");
-			return false;}
-	}
-	boolean after(DateAndTime date_and_time){
-		
-			System.out.println("date_and_time.time_slot: "+date_and_time.time_slot);
-			System.out.println("time_slot: "+time_slot);
-if(Date.equals(date_and_time.Date))
-	System.out.println("equal");
 		if (Date.after(date_and_time.Date))
-		{System.out.println("after case1");
-			return true;}
-		else if (time_slot>date_and_time.time_slot&&Date.equals(date_and_time.Date))
-		{System.out.println("after case2");
-			return true;}
+			return false;
+		else if (Date.before(date_and_time.Date))
+			
+			return true;
+			else if (time_slot<date_and_time.time_slot&&Date.equals(date_and_time.Date))
+			
+				return true;
 		else
-		{System.out.println("after case3");
-			return false;}
+			return false;
+	}
+	boolean after(DateAndTime date_and_time){	
+			if (Date.after(date_and_time.Date))
+			return true;
+			else if (Date.before(date_and_time.Date))
+				return false;
+			
+			else if (time_slot>date_and_time.time_slot&&Date.equals(date_and_time.Date))
+			return true;
+		else
+		
+			return false;
 	}
 
 	int NumOfDay(int month,int year){
@@ -116,22 +117,21 @@ return 30;
 		return result;
 		}
 
-DateAndTime FindDateOfWeekday(RegularEventNode Weekday)
+DateAndTime FindDateOfWeekday(RegularEventNode Event)
 {
-	int count = Weekday.begin.week_day-this.weekday;
-if (count<0)
+	int count = Event.begin.week_day-this.weekday();
+	if (count<0)
 	count+=7;
-DateAndTime result = this.add(count*96);
-result.time_slot = Weekday.duration;
+DateAndTime result = this.add(count*96-this.time_slot+ Event.end.time_slot);
 return result;
 }
+
 DateAndTime FindDateOfWeekday(int week_day)
 {
-	int count = week_day-this.weekday;
+	int count = week_day-this.weekday();
 if (count<0)
 	count+=7;
-DateAndTime result = this.add(count*96);
-result.time_slot = 0;
+DateAndTime result = this.add(count*96-this.time_slot);
 return result;
 }
 }
@@ -233,9 +233,11 @@ DateAndTime result = DateAndTime.Now;
 boolean return_flag=false;
 while(true)
 {
-	System.out.println("difference: "+Schedule_ptr.difference(Schedule_ptr.next));
-System.out.println("comparing:\n"+Schedule_ptr.begin.printthis()+"\nand"+Schedule_ptr.next.begin.printthis());
-	if (Schedule_ptr.difference(Schedule_ptr.next)>=duration)
+	System.out.println("Comparing: "+Schedule_ptr.end.printthis()+
+			" and "+Schedule_ptr.next.begin.printthis());
+if(Schedule_ptr==null)
+	break;
+else if (Schedule_ptr.next==null||Schedule_ptr.difference(Schedule_ptr.next)>=duration)
 {
 	result = result.FindDateOfWeekday(Schedule_ptr);
 	System.out.println("suitable time slot: "+result.printthis());	
@@ -359,16 +361,11 @@ EventNode next;
 }
 	boolean overlap(DateAndTime date_and_time)
 	{
-		System.out.println("check overlap");
-		System.out.println("Start: "+begin.printthis()+" end: "+end.printthis());
-		System.out.println("date_and_time:"+date_and_time.printthis() );
 		if (end.after(date_and_time)&&begin.before(date_and_time))
-		{	System.out.println("return true");
 			return true;
-		}else
-		{	System.out.println("return false");
+		else
 			return false;
-		}}
+		}
 	boolean overlap(EventNode event)
 	{
 		if (end.before(event.begin)||begin.after(event.end))
@@ -417,7 +414,7 @@ RegularEventNode event7 = new RegularEventNode(Calendar.FRIDAY,0,72);
 RegularEventNode event8 = new RegularEventNode(Calendar.SATURDAY,0,72);
 RegularEventNode event9 = new RegularEventNode(Calendar.SUNDAY,0,72);
 
-Gordon.AddEvent(event1);
+//Gordon.AddEvent(event1);
 Gordon.AddEvent(event2);
 //System.out.println("add event done");
 //Gordon.AddRegularEvent(event8);
@@ -431,14 +428,19 @@ Gordon.AddRegularEvent(event9);
 Gordon.AddRegularEvent(event6);
 Gordon.AddRegularEvent(event8);
 //System.out.println("add regular event done");
-//Gordon.printevent();
-//Gordon.printregularevent();
+Gordon.printevent();
+Gordon.printregularevent();
 DateAndTime test = DateAndTime.Now;
 //System.out.println("object created");
 
 test=Gordon.FreeTimeSlot(test,4);
 //System.out.println(test.printthis());
+/*DateAndTime e = new DateAndTime(2014,1,1,0),f = new DateAndTime(2014,1,1,0);
+System.out.println(e.Date.toString());
+System.out.println(f.Date.toString());
 
-	}
+if(e.Date.after(f.Date))
+	System.out.println("true");
+*/	}
 
 	}
