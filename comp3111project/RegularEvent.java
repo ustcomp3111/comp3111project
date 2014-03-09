@@ -1,5 +1,11 @@
 package comp3111project;
-
+class RegularEvent extends RegularEventNode
+{
+RegularEvent(int Weekday, int Begin, int Duration) 
+{
+	super(Weekday,Begin,Duration) ;
+	}
+}
 class RegularEventNode {
     WeekdayAndTime begin, end;
     int duration;

@@ -6,21 +6,14 @@ public class ScheduleMatching {
     /**
      * @param args
      */
-    /*
-     * DateAndTime matching(Event event,int duration) {
-     * 
-     * 
-     * 
-     * };
-     */
     public static void main(String[] args) {
  
-        User Gordon = new User("Gordon", 01, null, null);
-        DateAndTime a = new DateAndTime(2014, Calendar.MARCH, 9, 70), b = new DateAndTime(
-                2014, Calendar.MARCH, 9, 72);
+/*        User Gordon = new User("Gordon", 01, null, null);
+        DateAndTime a = new DateAndTime(2014, Calendar.MARCH, 8, 72),
+        		b = new DateAndTime(2014, Calendar.MARCH, 9, 73);
  
-        EventNode event1 = new EventNode(Gordon, 01, b, 12), event2 = new EventNode(
-                Gordon, 02, a, 12);
+        EventNode event1 = new EventNode(Gordon, 01, a, 12),
+        		event2 = new EventNode(Gordon, 02, b, 12);
         RegularEventNode mon = new RegularEventNode(Calendar.MONDAY, 0, 72);
         RegularEventNode tue = new RegularEventNode(Calendar.TUESDAY, 0, 72);
         RegularEventNode wed = new RegularEventNode(Calendar.WEDNESDAY, 0,
@@ -30,10 +23,10 @@ public class ScheduleMatching {
         RegularEventNode sat = new RegularEventNode(Calendar.SATURDAY, 0, 72);
         RegularEventNode sun = new RegularEventNode(Calendar.SUNDAY, 0, 72);
  
-         Gordon.AddEvent(event1);
-        Gordon.AddEvent(event2);
-         System.out.println("add event done");
-         System.out.println("adding mon");
+        Gordon.AddEvent(event1);
+       	Gordon.AddEvent(event2);
+        System.out.println("add event done");
+        System.out.println("adding mon");
         Gordon.AddRegularEvent(mon);
         System.out.println("adding wed");
         Gordon.AddRegularEvent(wed);
@@ -52,15 +45,16 @@ public class ScheduleMatching {
         System.out.println("add regular event done");
         Gordon.printevent();
         Gordon.printregularevent();
-        DateAndTime test = DateAndTime.Now;
-       //  System.out.println("object created");
+      
+        DateAndTime test = DateAndTime.Now();
+       	System.out.println("object created");
        
-        test = Gordon.FreeTimeSlot(test, 4);
-         System.out.println(test.printthis());
-        /*
-         * DateAndTime e = new DateAndTime(2014,1,1,0),f = new
-         * DateAndTime(2014,1,1,0); System.out.println(e.Date.toString());
-         * System.out.println(f.Date.toString());
-         * 
-         * if(e.Date.after(f.Date)) System.out.println("true");
-         */}}
+        test = Gordon.FreeTimeSlot(test, 12);
+        System.out.println(test.printthis());
+ 
+         
+        DateAndTime e = new DateAndTime(2014,1,1,0),f = new
+       	DateAndTime(2014,1,1,0); 
+        System.out.println(e.Date.toString());
+        */
+    	}}

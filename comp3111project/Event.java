@@ -19,16 +19,17 @@ class EventNode {
        end = d.add(e);
        next = null;
    }
-
+ 
    boolean overlap(DateAndTime date_and_time) {
-       if (end.after(date_and_time) && begin.before(date_and_time))
+       if (end.after(date_and_time) 
+    		   &&begin.before(date_and_time))
            return true;
        else
            return false;
    }
 
    boolean overlap(EventNode event) {
-       if (end.before(event.begin) || begin.after(event.end))
+       if (begin.after(event.end)||end.before(event.begin))
            return false;
        else
            return true;
@@ -38,11 +39,49 @@ class EventNode {
 class Event extends EventNode // store extra information of an event
 {
    String event_name;
-   Guest guestlist_ptr = null;
+   Guest guest_list_ptr = null;
 
    Event(String a, int b, User c, DateAndTime d, int e) {
        super(c, b, d, e);
        event_name = a;
+   }
+   void AddGuest(Guest guest)
+   {
+	   Guest ptr = guest_list_ptr;
+   if(ptr==null)
+	   ptr = guest;
+   else if(ptr.name==null)
+	   ptr.next = guest;
+   else
+   {
+	   while(ptr.name!=null)
+	 ptr = ptr.next;
+		  ptr = guest;
+   }
+   }  
+   DateAndTime Matching()
+   {
+	   Guest ptr = guest_list_ptr;
+	   DateAndTime time = DateAndTime.Now(),border_line = DateAndTime.Now().add(96*31);	   
+	   while(ptr!=null&&time.before(border_line))
+	   {
+		  time = this.eventholder.FreeTimeSlot(time, duration);
+		  
+		  while(ptr!=null)
+	   {
+			   if(ptr.attend&&ptr.overlap(time,duration))
+		   {
+			   ptr = guest_list_ptr;
+			   break;
+		   }else
+			   ptr = ptr.next;
+	   }
+		  if(ptr==null)
+			  return time;
+
+	   }
+	   System.out.println("failed to find a suitable time for every guest");
+	   return DateAndTime.Now();
    }
 };
 //Example: 1/1/2014 12:45pm = DateAndTime(2014,Calendar.January,1,51)
@@ -51,10 +90,17 @@ class DateAndTime {
     static GregorianCalendar now = new GregorianCalendar();
     int time_slot;
     // int weekday;
-    static DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
+    /*static DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
             now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
             now.get(Calendar.HOUR) * 4 + (now.get(Calendar.MINUTE) + 1) / 15);
- 
+ */
+    static DateAndTime Now()
+    {
+    	DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
+                now.get(Calendar.HOUR) * 4 + (now.get(Calendar.MINUTE) + 1) / 15);
+    	return Now;
+    }
     DateAndTime(int year, int month, int day_of_month, int interval) {
         Date = new GregorianCalendar(year, month, day_of_month);
         // Date.set(year, month, day_of_month,0,0,0);
