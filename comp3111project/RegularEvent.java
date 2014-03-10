@@ -1,17 +1,19 @@
 package comp3111project;
-class RegularEvent extends RegularEventNode
+class RegularEventNode
 {
-RegularEvent(int Weekday, int Begin, int Duration) 
+	RegularEventNode next=null;
+	RegularEvent regular_event;
+RegularEventNode(int Weekday, int Begin, int Duration) 
 {
-	super(Weekday,Begin,Duration) ;
+	 regular_event = new RegularEvent(Weekday,Begin,Duration) ;
 	}
 }
-class RegularEventNode {
+class RegularEvent {
     WeekdayAndTime begin, end;
     int duration;
     RegularEventNode next;
  
-    RegularEventNode(int Weekday, int Begin, int Duration) {
+    RegularEvent(int Weekday, int Begin, int Duration) {
         begin = new WeekdayAndTime(Weekday, Begin);
         duration = Duration;
         end = this.add(duration);
@@ -32,7 +34,7 @@ class RegularEventNode {
         return result;
     }
  
-    boolean overlap(RegularEventNode node)
+    boolean overlap(RegularEvent node)
     {
     	if (Math.max(begin.difference(node.end), node.begin.difference(end))-duration-node.duration<0)
     	return true;
@@ -40,7 +42,7 @@ class RegularEventNode {
     		return false;
     	
     }
-    	  int difference(RegularEventNode node) {
+    	  int difference(RegularEvent node) {
     		
     		    if (begin.difference(node.end)<node.begin.difference(end))
     		       //this event is in front of node

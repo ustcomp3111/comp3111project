@@ -1,5 +1,6 @@
 package comp3111project;
  import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ScheduleMatching {
  
@@ -8,12 +9,12 @@ public class ScheduleMatching {
      */
     public static void main(String[] args) {
  
-/*        User Gordon = new User("Gordon", 01, null, null);
+      User Gordon = new User("Gordon", 01, null, null);
         DateAndTime a = new DateAndTime(2014, Calendar.MARCH, 8, 72),
         		b = new DateAndTime(2014, Calendar.MARCH, 9, 73);
  
-        EventNode event1 = new EventNode(Gordon, 01, a, 12),
-        		event2 = new EventNode(Gordon, 02, b, 12);
+        EventNode event1 = new EventNode("event1",01, Gordon, a, 12),
+        		event2 = new EventNode("event2",02, Gordon, b, 12);
         RegularEventNode mon = new RegularEventNode(Calendar.MONDAY, 0, 72);
         RegularEventNode tue = new RegularEventNode(Calendar.TUESDAY, 0, 72);
         RegularEventNode wed = new RegularEventNode(Calendar.WEDNESDAY, 0,
@@ -47,14 +48,11 @@ public class ScheduleMatching {
         Gordon.printregularevent();
       
         DateAndTime test = DateAndTime.Now();
-       	System.out.println("object created");
-       
+       Calendar test2;
+     test2  = GregorianCalendar.getInstance();
+       System.out.println("Now: "+test.printthis());      
         test = Gordon.FreeTimeSlot(test, 12);
         System.out.println(test.printthis());
- 
-         
-        DateAndTime e = new DateAndTime(2014,1,1,0),f = new
-       	DateAndTime(2014,1,1,0); 
-        System.out.println(e.Date.toString());
-        */
+        
+        
     	}}

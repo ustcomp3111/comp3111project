@@ -47,13 +47,13 @@ class User // object which stores user's info
                 	end = true;
             	*/if(ptr.next==null)
             		ptr.next=schedule_ptr;            	
-            	if (node.overlap(ptr))
+            	if (node.regular_event.overlap(ptr.regular_event))
             	{
             //		System.out.println("failed to add");
             	break;
             	}
-            	else if (node.end.week_day < ptr.begin.week_day
-            		|| (node.end.week_day == ptr.begin.week_day && node.end.time_slot < ptr.begin.time_slot)) {
+            	else if (node.regular_event.end.week_day < ptr.regular_event.begin.week_day
+            		|| (node.regular_event.end.week_day == ptr.regular_event.begin.week_day && node.regular_event.end.time_slot < ptr.regular_event.begin.time_slot)) {
               //       System.out.println("node is put at the front");
                     node.next=ptr;
                      if (ptr == schedule_ptr) 
@@ -91,29 +91,29 @@ class User // object which stores user's info
     }
  
     void printregularevent() {
-        //System.out.println("Regular Event of " + this.name);
+        System.out.println("Regular Event of " + this.name);
         RegularEventNode ptr = schedule_ptr;
         boolean end = false;
         while (true) {
         	if (ptr.next==schedule_ptr||ptr.next == null)
         		end = true;
-      //  	System.out.println("Regular event starts at: "
-          //          + ptr.begin.printthis() + " event ends at: "
-           //         + ptr.end.printthis());
+        	System.out.println("Regular event starts at: "
+                    + ptr.regular_event.begin.printthis() + " event ends at: "
+                    + ptr.regular_event.end.printthis());
             ptr = ptr.next;
             if (end)
                 break;
         }
-    //    System.out.println("***The end***");
+        System.out.println("***The end***");
     }
  
     void printevent() {
         System.out.println("Event of " + this.name);
         EventNode ptr = event_ptr;
         while (ptr != null) {
-            System.out.println("Event id: " + ptr.event_id
-                    + " event starts at: " + ptr.begin.printthis()
-                    + " event ends at: " + ptr.end.printthis());
+            System.out.println("Event id: " + ptr.event.event_id
+                    + " event starts at: " + ptr.event.begin.printthis()
+                    + " event ends at: " + ptr.event.end.printthis());
             ptr = ptr.next;
         }
         System.out.println("***The end***");
@@ -126,31 +126,33 @@ class User // object which stores user's info
     {
         EventNode Event_ptr = event_ptr;
         RegularEventNode Schedule_ptr = schedule_ptr;
-        DateAndTime result = DateAndTime.Now();
-        EventNode Result;
+        DateAndTime result = time;//DateAndTime.Now();
+        Event Result;
         boolean return_flag = false;
-        while(Schedule_ptr.begin.week_day<time.weekday())
+        while(Schedule_ptr.regular_event.begin.week_day<time.weekday())
         	Schedule_ptr=Schedule_ptr.next;
-        RegularEventNode starting_point = Schedule_ptr;
+        if(Schedule_ptr.regular_event.end.time_slot<time.time_slot&&Schedule_ptr.regular_event.begin.week_day==time.weekday())
+        	Schedule_ptr=Schedule_ptr.next;
+        	RegularEventNode starting_point = Schedule_ptr;
         while (true) {
             if (Schedule_ptr == null)
                 break;
             else if (Schedule_ptr.next == null
-                    || Schedule_ptr.difference(Schedule_ptr.next) >= duration) {
-                result = result.FindDateOfWeekday(Schedule_ptr);
-                Result = new EventNode(this,0,result,duration);
-                System.out.println("suitable time: "+result.printthis());
+                    || Schedule_ptr.regular_event.difference(Schedule_ptr.next.regular_event) >= duration) {
+                result = result.FindDateOfWeekday(Schedule_ptr.regular_event);
+                Result = new Event("",0,this,result,duration);
+               System.out.println("suitable time: "+result.printthis());
                 while (true) {
                 	
                     if (Event_ptr == null)
                         return result;
                     System.out.println("comparing: "+Result.begin.printthis()+" \nend: "+Result.end.printthis()
-                    +"\nand "+Event_ptr.begin.printthis()+"\nend"+Event_ptr.end.printthis());
-                    if (!Event_ptr.overlap(Result))
+                    +"\nand "+Event_ptr.event.begin.printthis()+"\nend"+Event_ptr.event.end.printthis());
+                    if (!Event_ptr.event.overlap(Result))
                         Event_ptr = Event_ptr.next;
                     else {
-                        // result = result.FindDateOfWeekday(Schedule_ptr);
-                        result = Event_ptr.end;
+                     
+                        result = Event_ptr.event.end;
                     	Event_ptr = event_ptr;
                         break;
                     }
@@ -174,21 +176,21 @@ class User // object which stores user's info
     }
 boolean overlap(DateAndTime time, int duration)
 {
-	EventNode ptr = event_ptr,
-			event = new EventNode(this,0,time,duration);
-	RegularEventNode ptr2 = schedule_ptr, 
-	weekday_of_event = new RegularEventNode(time.weekday(),time.time_slot,duration);
+	EventNode ptr = event_ptr;
+		Event event = new Event("",0,this,time,duration);
+	RegularEventNode ptr2 = schedule_ptr; 
+	RegularEvent weekday_of_event = new RegularEvent(time.weekday(),time.time_slot,duration);
 	
 	while(ptr2!=null)
 	{
-	if(ptr2.overlap(weekday_of_event))	
+	if(ptr2.regular_event.overlap(weekday_of_event))	
 	return true;
 	else
 		ptr2 = ptr2.next;
 	}
 	while(ptr!=null)
 	{
-	if(ptr.overlap(event))
+	if(ptr.event.overlap(event))
 		return true;
 	else
 		ptr = ptr.next;
@@ -197,11 +199,12 @@ return false;
 }
 };
  
-class Guest extends User// node of linked list of guest list
+class Guest // node of linked list of guest list
 {
     Guest next = null;
     boolean attend = false;
+    User user; 
     Guest(String Name, int id, EventNode eventptr, RegularEventNode scheduleptr) {
-        super(Name, id, eventptr, scheduleptr);
+        user=new User(Name, id, eventptr, scheduleptr);
     }
 };

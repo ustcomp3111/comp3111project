@@ -4,20 +4,21 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-class EventNode {
-   User eventholder;
-   int event_id, duration;
-   DateAndTime begin;
-   DateAndTime end;
-   EventNode next;
+class Event {
+	String event_name;
+	Guest guest_list_ptr = null;
+	User eventholder;
+	int event_id, duration;
+	DateAndTime begin;
+	DateAndTime end;
 
-   EventNode(User a, int b, DateAndTime d, int e) {
-       eventholder = a;
+   Event(String name, int b, User a, DateAndTime d, int e) {
+	   String event_name = name;
+	   eventholder = a;
        event_id = b;
        begin = d;
        duration = e;
        end = d.add(e);
-       next = null;
    }
  
    boolean overlap(DateAndTime date_and_time) {
@@ -28,33 +29,22 @@ class EventNode {
            return false;
    }
 
-   boolean overlap(EventNode event) {
+   boolean overlap(Event event) {
        if (begin.after(event.end)||end.before(event.begin))
            return false;
        else
            return true;
-   }
-}
-
-class Event extends EventNode // store extra information of an event
-{
-   String event_name;
-   Guest guest_list_ptr = null;
-
-   Event(String a, int b, User c, DateAndTime d, int e) {
-       super(c, b, d, e);
-       event_name = a;
    }
    void AddGuest(Guest guest)
    {
 	   Guest ptr = guest_list_ptr;
    if(ptr==null)
 	   ptr = guest;
-   else if(ptr.name==null)
+   else if(ptr.next==null)
 	   ptr.next = guest;
    else
    {
-	   while(ptr.name!=null)
+	   while(ptr.next!=null)
 	 ptr = ptr.next;
 		  ptr = guest;
    }
@@ -69,7 +59,7 @@ class Event extends EventNode // store extra information of an event
 		  
 		  while(ptr!=null)
 	   {
-			   if(ptr.attend&&ptr.overlap(time,duration))
+			   if(ptr.attend&&ptr.user.overlap(time,duration))
 		   {
 			   ptr = guest_list_ptr;
 			   break;
@@ -83,6 +73,18 @@ class Event extends EventNode // store extra information of an event
 	   System.out.println("failed to find a suitable time for every guest");
 	   return DateAndTime.Now();
    }
+}
+
+class EventNode // store extra information of an event
+{
+
+   EventNode next = null;
+   Event event;
+   EventNode(String a, int b, User c, DateAndTime d, int e) {
+       event = new Event(a,b, c, d, e);
+
+   }
+   
 };
 //Example: 1/1/2014 12:45pm = DateAndTime(2014,Calendar.January,1,51)
 class DateAndTime {
@@ -98,7 +100,7 @@ class DateAndTime {
     {
     	DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
-                now.get(Calendar.HOUR) * 4 + (now.get(Calendar.MINUTE) + 1) / 15);
+                now.get(Calendar.HOUR_OF_DAY) * 4 + (now.get(Calendar.MINUTE) + 1) / 15);
     	return Now;
     }
     DateAndTime(int year, int month, int day_of_month, int interval) {
@@ -227,12 +229,15 @@ class DateAndTime {
         return result;
     }
  
-    DateAndTime FindDateOfWeekday(RegularEventNode Event) {
+    DateAndTime FindDateOfWeekday(RegularEvent Event) {
         int count = Event.begin.week_day - this.weekday();
-        if (count < 0)
+        if (count < 0||(count==0&&this.time_slot>=Event.end.time_slot))
             count += 7;
+        //System.out.println("count: "+count);
         DateAndTime result = this.add(count * 96 - this.time_slot
                 + Event.end.time_slot);
+       // System.out.println("this: "+this.printthis()+"\n Event: "+Event.begin.printthis());
+        //System.out.println("result: "+result.printthis());
         return result;
     }
  
