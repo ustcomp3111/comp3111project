@@ -11,7 +11,7 @@ class Event {
 	int event_id, duration;
 	DateAndTime begin;
 	DateAndTime end;
-
+	
    Event(String name, int b, User a, DateAndTime d, int e) {
 	   String event_name = name;
 	   eventholder = a;
@@ -20,7 +20,19 @@ class Event {
        duration = e;
        end = d.add(e);
    }
- 
+  void printthis()
+  {
+	  System.out.println("Event name: "+event_name+"\nEvent holder: "+eventholder.name+"\n Guest list: ");
+	  Guest ptr = guest_list_ptr;
+	  while(ptr!=null)
+	  {		  
+	  if(ptr.attend)
+		  System.out.println(ptr.user.name+" attend: T");
+		  else
+			  System.out.println(ptr.user.name+" attend: F");
+				  ptr=ptr.next;		  
+	  }
+  }
    boolean overlap(DateAndTime date_and_time) {
        if (end.after(date_and_time) 
     		   &&begin.before(date_and_time))
@@ -39,63 +51,76 @@ class Event {
    {
 	   Guest ptr = guest_list_ptr;
    if(ptr==null)
-	   ptr = guest;
+	   guest_list_ptr = guest;
    else if(ptr.next==null)
-	   ptr.next = guest;
+	   guest_list_ptr.next = guest;
    else
    {
 	   while(ptr.next!=null)
 	 ptr = ptr.next;
-		  ptr = guest;
+		  ptr.next = guest;
    }
    }  
+   
    DateAndTime Matching()
    {
+	   return Matching(DateAndTime.Now());
+	 
+   }
+   DateAndTime Matching(DateAndTime date_and_time)
+   {
 	   Guest ptr = guest_list_ptr;
-	   DateAndTime time = DateAndTime.Now(),border_line = DateAndTime.Now().add(96*31);	   
+	   DateAndTime time = date_and_time,border_line = date_and_time.add(96*31);	   
 	   while(ptr!=null&&time.before(border_line))
 	   {
-		  time = this.eventholder.FreeTimeSlot(time, duration);
-		  
+		   System.out.println("1st loop");
+		  time = this.eventholder.FreeTimeSlot(time.add(duration), duration);
+		  //System.out.println(time.printthis());
 		  while(ptr!=null)
 	   {
-			   if(ptr.attend&&ptr.user.overlap(time,duration))
+			  System.out.println("2nd loop");
+			  if(ptr.user.overlap(time,duration))
+			   //if(ptr.attend&&ptr.user.overlap(time,duration))
 		   {
 			   ptr = guest_list_ptr;
 			   break;
 		   }else
 			   ptr = ptr.next;
 	   }
+//		ptr = ptr.next;
 		  if(ptr==null)
+		  {
+			  System.out.println("return time");
 			  return time;
-
+		  }
+		  
 	   }
 	   System.out.println("failed to find a suitable time for every guest");
 	   return DateAndTime.Now();
    }
 }
 
-class EventNode // store extra information of an event
+//For constructing linked list
+class EventNode
 {
 
    EventNode next = null;
    Event event;
+   EventNode(Event e)
+   {
+	   event = e;
+   }
    EventNode(String a, int b, User c, DateAndTime d, int e) {
        event = new Event(a,b, c, d, e);
-
    }
    
 };
 //Example: 1/1/2014 12:45pm = DateAndTime(2014,Calendar.January,1,51)
 class DateAndTime {
     GregorianCalendar Date;
-    static GregorianCalendar now = new GregorianCalendar();
+    private static GregorianCalendar now = new GregorianCalendar();
     int time_slot;
-    // int weekday;
-    /*static DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
-            now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
-            now.get(Calendar.HOUR) * 4 + (now.get(Calendar.MINUTE) + 1) / 15);
- */
+//    Find the current time in DateAndTime format
     static DateAndTime Now()
     {
     	DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
@@ -149,7 +174,7 @@ class DateAndTime {
  
             return false;
     }
- 
+ //Find the number of days of a month in a year
     int NumOfDay(int month, int year) {
         if (month == GregorianCalendar.JANUARY
                 || month == GregorianCalendar.MARCH
@@ -201,6 +226,9 @@ class DateAndTime {
         }
     }
  
+    //e.g time = 100(15 minutes*100 = 1 day and 1 hours)
+    //[31/1/2014 15:00] + 100 = 1/2/2014 16:00
+    //time should be a +ve integer
     DateAndTime add(int time) {
         DateAndTime result = new DateAndTime(this.Date.get(Calendar.YEAR),
                 this.Date.get(Calendar.MONTH),
@@ -229,9 +257,12 @@ class DateAndTime {
         return result;
     }
  
+    //Find the next date of a weekday from the date represented by this object
+    //e.g Regular event = Tuesday 12:00, this event = 1/1/2014 12:00
+    //FindDateOfWeekday = 7/1/2014 12:00
     DateAndTime FindDateOfWeekday(RegularEvent Event) {
         int count = Event.begin.week_day - this.weekday();
-        if (count < 0||(count==0&&this.time_slot>=Event.end.time_slot))
+        if (count < 0||(count==0&&this.time_slot>Event.end.time_slot))
             count += 7;
         //System.out.println("count: "+count);
         DateAndTime result = this.add(count * 96 - this.time_slot
