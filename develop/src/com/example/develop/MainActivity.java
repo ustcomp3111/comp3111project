@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.content.Intent;
 
 public class MainActivity extends Activity implements OnClickListener {
 	Button login,event,polling,msgbox,slist,schedule;			//buttons
-	EditText debugbox;											//text fields
+	TextView debugbox;											//text fields
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		schedule = (Button) findViewById(R.id.b_schedule);
 		
 
-		debugbox = (EditText) findViewById(R.id.debugbox);		//text fields linking
+		debugbox = (TextView) findViewById(R.id.debugbox);		//text fields linking
 		
 		login.setOnClickListener(this);
 		event.setOnClickListener(this);
@@ -51,6 +51,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case(R.id.b_login)	:	{
 								debugbox.setText("Login clicked");
 								Intent temp = new Intent(this, Login.class);
+								finish();
 								startActivity(temp);
 								break;
 								}
