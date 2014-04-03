@@ -9,8 +9,13 @@
     tools:context=".Event" >
 
     <TextView
+        android:id="@+id/events"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:text="Events"
+        android:textSize="40px" />
 
 </RelativeLayout>
