@@ -25,33 +25,45 @@ class User // object which stores user's info
         }
     }
  
-    void AddRegularEvent(RegularEventNode node) {        
-    	
-    	RegularEventNode ptr = schedule_ptr, ptr2 = schedule_ptr;
-       
+    boolean AddRegularEvent(RegularEventNode node) {            	
+    	RegularEventNode ptr = schedule_ptr, ptr2 = schedule_ptr;       
+    	try{
     	if (schedule_ptr == null) {
             schedule_ptr = node;
-            node.next=node;
-      
-        }
+            node.next=node;      
+        return true;
+    	}    	
         else if (ptr.next==schedule_ptr)
+        {
+        	if (node.regular_event.overlap(ptr.regular_event))
+        	{
+        	/*	System.out.println("failed to add "+ptr.regular_event.regular_event_name);
+        		node.regular_event.printthis();
+        		System.out.println("overlaps");
+        		ptr.regular_event.printthis();
+        		System.out.println("^^^^^^");
+        	*/return false;
+        	}else
         	ptr.next=node;        	       
+        }
         else {
             while (true) {
-            	/*if (end)
-            		break;
-            	if (ptr.next==schedule_ptr)
-                	end = true;
-            	*/if(ptr.next==null)
-            		ptr.next=schedule_ptr;            	
+
             	if (node.regular_event.overlap(ptr.regular_event))
             	{
-            		//System.out.println("failed to add");
-            	break;
-            	}
+              /*		System.out.println("failed to add "+ptr.regular_event.regular_event_name);      		
+            		node.regular_event.printthis();
+            		System.out.println("overlaps");
+            		ptr.regular_event.printthis();
+            		System.out.println("^^^^^");*/
+            		return false;
+            	}    	
+            	if(ptr.next==null)
+            		ptr.next=schedule_ptr;            	
+            	
             	else if (node.regular_event.end.week_day < ptr.regular_event.begin.week_day
-            		|| (node.regular_event.end.week_day == ptr.regular_event.begin.week_day && node.regular_event.end.time_slot < ptr.regular_event.begin.time_slot)) {
-                  //   System.out.println("node is put at the front");
+            		|| (node.regular_event.end.week_day == ptr.regular_event.begin.week_day && node.regular_event.end.time_slot < ptr.regular_event.begin.time_slot)) 
+            	{
                     node.next=ptr;
                      if (ptr == schedule_ptr) 
                      {
@@ -59,38 +71,34 @@ class User // object which stores user's info
                     		 ptr=ptr.next;
                     	while(ptr.next!=schedule_ptr);
                     	 ptr.next = node;
-                    	 schedule_ptr = node;
-                     
+                    	 schedule_ptr = node;                     
                      }
                      else
             		ptr2.next = node;    
-                    break;
-            	}
-            	
+                    return true;
+            	}            	
             	else if (ptr.next==schedule_ptr)
-            	{
-            
+            	{            
             		node.next=schedule_ptr;
-            		//System.out.println(node.next.regular_event.begin.printthis());
-            		ptr.next=node;            	
-            	
-            	break;
+            		ptr.next=node;            	            	
+            	return true;
             	}
             	else
             	{
-            	    // System.out.println("ptr moves on");
                      ptr2 = ptr;
                      ptr = ptr.next;	
-            	}
-            }
-        }
-    		//System.out.println("************");
+            	}}}
+    	}
+    	catch(Exception e)
+    	{
+    		return false;
+    	}
+    	return true;	
     }
  
     void printregularevent() {
         System.out.println("Regular Event of " + this.name);
         RegularEventNode ptr = schedule_ptr,starting_point = schedule_ptr;
-       //int count = 16;
        do {
         	
         	System.out.println("Regular event starts at: "
@@ -99,7 +107,6 @@ class User // object which stores user's info
             ptr = ptr.next;
        
        }
-      //while(count!=0);
        while ((!ptr.equals(starting_point)&&ptr.next != null));
         System.out.println("***The end***");
     }
@@ -116,64 +123,71 @@ class User // object which stores user's info
         System.out.println("***The end***");
     }
  // find a free time slot which is closest to 'time' , and duration = "duration"
-    DateAndTime FreeTimeSlot(DateAndTime time, int duration) 
-                                                               
+    DateAndTime FreeTimeSlot(DateAndTime time, int duration)                                                                
     {
-    	  System.out.println("find free time slot");
         EventNode Event_ptr = event_ptr;
         RegularEventNode Schedule_ptr = schedule_ptr;
-        DateAndTime result = time;
+        boolean tmp;
+        DateAndTime result = time,fail = new DateAndTime(0,0,0,0);
         Event Result;
         boolean return_flag = false;
         //Move schedule ptr to a suitable position for scanning
-        while(Schedule_ptr.regular_event.begin.week_day<time.weekday())
+        while(Schedule_ptr.next!=null&&Schedule_ptr.regular_event.begin.week_day<time.weekday())
         	Schedule_ptr=Schedule_ptr.next;
         while(Schedule_ptr.regular_event.end.time_slot<time.time_slot&&Schedule_ptr.regular_event.begin.week_day==time.weekday())
         	Schedule_ptr=Schedule_ptr.next;
         //store the starting point of scanning
         	RegularEventNode starting_point = Schedule_ptr;
-        while (true) {
-        	//step 1: find a timeslot from regular event schedule of the user
-            if (Schedule_ptr == null)
-                break;
-            else if (Schedule_ptr.next == null
+        	tmp = new RegularEventNode(time.weekday(),time.time_slot,duration).regular_event.overlap(Schedule_ptr.regular_event);
+        	if(!tmp)
+        	{
+        	Schedule_ptr = new RegularEventNode(time.weekday(),time.time_slot,duration);
+        		Schedule_ptr.next = starting_point;
+        	}
+        	while (true) {
+        	System.out.println("*******");
+        	System.out.println("comparing ");
+        	Schedule_ptr.regular_event.printthis();
+        	Schedule_ptr.next.regular_event.printthis();
+        	System.out.println("difference: "+Schedule_ptr.regular_event.difference(Schedule_ptr.next.regular_event));
+        	System.out.println("*******\n");        	
+        		//step 1: find a timeslot from regular event schedule of the user
+             if (Schedule_ptr.next == null
                     || Schedule_ptr.regular_event.difference(Schedule_ptr.next.regular_event) >= duration) {
-                result = result.FindDateOfWeekday(Schedule_ptr.regular_event);
+                System.out.println("Proposed Date and time:");
+            	result = result.FindDateOfWeekday(Schedule_ptr.regular_event);
                 Result = new Event("",0,this,result,duration);
-             //  System.out.println("suitable time slot: ");
-              // Schedule_ptr.regular_event.printthis();
-               // System.out.println("suitable time: "+result.printthis());
+                Result.printthis();
                 while (true) {
-                	/**
-                	 * This part is buggy, it must be fixed later
-                	 */
-                	// step 2: check if the time slot contradict to one-time events of the user
-                    if (Event_ptr == null)
-                        //"result" has been compared with all one-time events,and there is no conflict
+                	// step 2: check if the time slot contradict to one-time events of the user                	
+                	if (Event_ptr == null)
+                     //"Result" has been compared with all one-time events,and there is no conflict                 
                     	return result;
-                   // System.out.println("comparing: "+Result.begin.printthis()+" \nend: "+Result.end.printthis()
-                   // +"\nand "+Event_ptr.event.begin.printthis()+"\nend"+Event_ptr.event.end.printthis());
-                    if (!Event_ptr.event.overlap(Result))
-                        Event_ptr = Event_ptr.next;
-                    else {
-                     
-                        result = Event_ptr.event.end;
-                    	Event_ptr = event_ptr;
-                        break;
+                	System.out.println("#######");
+                	System.out.println("comparing ");
+                	Event_ptr.event.printthis();
+                	Result.printthis();
+                	System.out.println("#######\n");
+                     if (!Event_ptr.event.overlap(Result))
+                        Event_ptr = Event_ptr.next;           
+                    	else {                    		                  
+                    result = Event_ptr.event.end;
+                    Result = new Event(this,result,duration);
+                    Event_ptr = event_ptr;
+                    if(Schedule_ptr.next==null||!Result.end.before(result.FindDateOfWeekday(Schedule_ptr.next.regular_event)))
+                    	break;
                     }
                 }
             }
- 
             if (return_flag)
-                break;
+                return fail;
             else {
-                if (Schedule_ptr.next == starting_point)
-                    return_flag = true;
-                Schedule_ptr = Schedule_ptr.next;
-            }
- 
+                if (Schedule_ptr.next == starting_point && !Schedule_ptr.equals(tmp))                
+                	return_flag = true;                
+                }
+            Schedule_ptr = Schedule_ptr.next;
         }
-        return result;
+       // return result;
     }
  
 boolean overlap(DateAndTime time, int duration)
@@ -181,7 +195,7 @@ boolean overlap(DateAndTime time, int duration)
 	EventNode ptr = event_ptr;
 		Event event = new Event("",0,this,time,duration);
 	RegularEventNode ptr2 = schedule_ptr; 
-	RegularEvent weekday_of_event = new RegularEvent(time.weekday(),time.time_slot,duration);
+	RegularEvent weekday_of_event = new RegularEvent("",0,time.weekday(),time.time_slot,duration);
 	
 	do
 	{

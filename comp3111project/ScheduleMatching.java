@@ -13,37 +13,45 @@ public class ScheduleMatching {
     	User Gordon = new User("Gordon", 01), Wa = new User ("Wa",02), Chi = new User ("Chi",03),
     			Shirley = new User("Shirley",04), Calvin = new User("Calvin",05);
       
-    	DateAndTime a = new DateAndTime(2014, Calendar.MARCH, 18, 72),
-        		b = new DateAndTime(2014, Calendar.MARCH, 9, 73);
- 
-        Event gathering = new Event("gathering",01, Gordon, DateAndTime.Now(), 12),
-        		meeting = new Event("meeting",02, Gordon, b, 8);
-        
-        RegularEvent mon = new RegularEvent(Calendar.MONDAY, 0, 72);
-        RegularEvent tue = new RegularEvent(Calendar.TUESDAY, 0, 72);
-        RegularEvent wed = new RegularEvent(Calendar.WEDNESDAY, 0,72);
-        RegularEvent thu = new RegularEvent(Calendar.THURSDAY, 0, 72);
-        RegularEvent fri = new RegularEvent(Calendar.FRIDAY, 0, 72);
-        RegularEvent sat = new RegularEvent(Calendar.SATURDAY, 0, 32);
-        RegularEvent sun = new RegularEvent(Calendar.SUNDAY, 0, 32);
-        RegularEvent part_time = new RegularEvent(Calendar.SUNDAY, 48, 32);
-        RegularEvent part_time2 = new RegularEvent(Calendar.SATURDAY, 48, 32);
-        RegularEvent part_time3 = new RegularEvent(Calendar.MONDAY, 72, 6);	
-        RegularEvent leaveHK = new RegularEvent(Calendar.SUNDAY, 80, 48);
-        RegularEvent part_time4 = new RegularEvent(Calendar.WEDNESDAY, 80, 6);
+    	DateAndTime a = new DateAndTime(2014, Calendar.APRIL, 4, 0),
+        		b = new DateAndTime(2014, Calendar.APRIL, 7, 82),
+    	c = new DateAndTime(2014, Calendar.APRIL, 8, 70);
+        Event gathering = new Event("gathering",01, Gordon, a, 8),
+        		meeting = new Event("meeting",02, Gordon, b, 13),
+        meeting2 = new Event("meeting2",03, Gordon, c, 4);
+        RegularEvent mon = new RegularEvent("mon",0,Calendar.MONDAY, 0, 72);
+        RegularEvent tue = new RegularEvent("tue",0,Calendar.TUESDAY, 0, 72);
+        RegularEvent wed = new RegularEvent("wed",0,Calendar.WEDNESDAY, 0,72);
+        RegularEvent thu = new RegularEvent("thu",0,Calendar.THURSDAY, 0, 72);
+        RegularEvent fri = new RegularEvent("fri",0,Calendar.FRIDAY, 0, 72);
+        RegularEvent sat = new RegularEvent("sat",0,Calendar.SATURDAY, 0, 72);
+        RegularEvent sun = new RegularEvent("sun",0,Calendar.SUNDAY, 0, 72);
+        RegularEvent part_time = new RegularEvent("pt",0,Calendar.MONDAY, 76, 10);
+        RegularEvent part_time2 = new RegularEvent("pt2",0,Calendar.FRIDAY, 75, 10);
+        RegularEvent part_time3 = new RegularEvent("pt3",0,Calendar.SUNDAY, 72, 20);	
+        RegularEvent leaveHK = new RegularEvent("",0,Calendar.SUNDAY, 80, 48);
+        RegularEvent part_time4 = new RegularEvent("",0,Calendar.WEDNESDAY, 80, 6);
         Gordon.AddRegularEvent(new RegularEventNode(mon));
-        Gordon.AddRegularEvent(new RegularEventNode(tue));
-        Gordon.AddRegularEvent(new RegularEventNode(wed));
-        //Gordon.printregularevent();
+        Gordon.AddRegularEvent(new RegularEventNode(mon));
+       Gordon.AddRegularEvent(new RegularEventNode(tue));
+        Gordon.AddRegularEvent(new RegularEventNode(wed));;
         Gordon.AddRegularEvent(new RegularEventNode(thu));
         Gordon.AddRegularEvent(new RegularEventNode(fri));
         Gordon.AddRegularEvent(new RegularEventNode(sat));
         Gordon.AddRegularEvent(new RegularEventNode(sun));
-        Gordon.AddRegularEvent(new RegularEventNode(part_time4));
-        //Gordon.AddRegularEvent(new RegularEventNode(part_time3));
+        Gordon.AddRegularEvent(new RegularEventNode(part_time));
+        Gordon.AddRegularEvent(new RegularEventNode(part_time2));
+        Gordon.AddRegularEvent(new RegularEventNode(part_time3));
+        //Gordon.AddRegularEvent(new RegularEventNode(part_time4)); 
+      
+        Gordon.AddEvent(new EventNode(meeting));
+        Gordon.AddEvent(new EventNode(meeting2));
+        
+        Gordon.printregularevent();
+        Gordon.printevent();
         //System.out.println(Gordon.schedule_ptr.regular_event.begin.printthis());
        //System.out.println(Gordon.schedule_ptr.next.regular_event.begin.printthis());
-        Gordon.printregularevent();
+       // System.out.println(Gordon.FreeTimeSlot(a,12).printthis());
         Wa.AddRegularEvent(new RegularEventNode(mon));
         Wa.AddRegularEvent(new RegularEventNode(tue));
         Wa.AddRegularEvent(new RegularEventNode(wed));
@@ -79,6 +87,7 @@ public class ScheduleMatching {
         Calvin.AddRegularEvent(new RegularEventNode(sat));
         Calvin.AddRegularEvent(new RegularEventNode(sun));
         Calvin.AddRegularEvent(new RegularEventNode(part_time3));
+        Calvin.AddEvent(new EventNode(meeting2));
         Calvin.printregularevent();
         Gordon.AddEvent(new EventNode(gathering));
         Wa.AddEvent(new EventNode(meeting));
@@ -86,7 +95,8 @@ public class ScheduleMatching {
         gathering.AddGuest(new Guest(Chi));
         gathering.AddGuest(new Guest(Shirley));
         gathering.AddGuest(new Guest(Calvin));
-        gathering.printthis();
-        //System.out.println(Gordon.FreeTimeSlot(a, 1).printthis());
-        System.out.println(gathering.Matching(DateAndTime.Now().add(96*3)).printthis());
+        
+      //  gathering.printthis();
+        System.out.println(Gordon.FreeTimeSlot(a, 12).printthis());
+      //  System.out.println(gathering.Matching(DateAndTime.Now().add(96)).printthis());
     }}

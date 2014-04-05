@@ -20,6 +20,14 @@ class Event {
        duration = e;
        end = d.add(e);
    }
+   Event( User a, DateAndTime d, int e) {
+	   String event_name = "";
+	   eventholder = a;
+       event_id = 0;
+       begin = d;
+       duration = e;
+       end = d.add(e);
+   }  
   void printthis()
   {
 	  System.out.println("Event name: "+event_name+"\nEvent holder: "+eventholder.name+"\n Guest list: ");
@@ -32,17 +40,11 @@ class Event {
 			  System.out.println(ptr.user.name+" attend: F");
 				  ptr=ptr.next;		  
 	  }
+  System.out.println("begin: "+begin.printthis()+"\nend: "+end.printthis()+"\n"); 		  
   }
-   boolean overlap(DateAndTime date_and_time) {
-       if (end.after(date_and_time) 
-    		   &&begin.before(date_and_time))
-           return true;
-       else
-           return false;
-   }
 
    boolean overlap(Event event) {
-       if (begin.after(event.end)||end.before(event.begin))
+       if (!begin.before(event.end)||!end.after(event.begin))
            return false;
        else
            return true;
@@ -70,30 +72,29 @@ class Event {
    DateAndTime Matching(DateAndTime date_and_time)
    {
 	   Guest ptr = guest_list_ptr;
-	   DateAndTime time = date_and_time,border_line = date_and_time.add(96*31);	   
+	   DateAndTime time = date_and_time,border_line = date_and_time.add(96*30);	   
 	   while(ptr!=null&&time.before(border_line))
 	   {
-		   System.out.println("1st loop");
 		  time = this.eventholder.FreeTimeSlot(time.add(duration), duration);
-		  //System.out.println(time.printthis());
+		  System.out.println("Proposed date and time:\n"+time.printthis());
 		  while(ptr!=null)
 	   {
-			  System.out.println("2nd loop");
 			  if(ptr.user.overlap(time,duration))
 			   //if(ptr.attend&&ptr.user.overlap(time,duration))
-		   {
+		   
+				  {
+				 System.out.println("overlaped: "+ptr.user.name);			  
 			   ptr = guest_list_ptr;
 			   break;
-		   }else
+		   }
+			  else
 			   ptr = ptr.next;
 	   }
-//		ptr = ptr.next;
 		  if(ptr==null)
 		  {
 			  System.out.println("return time");
 			  return time;
-		  }
-		  
+		  }  
 	   }
 	   System.out.println("failed to find a suitable time for every guest");
 	   return DateAndTime.Now();
@@ -130,15 +131,17 @@ class DateAndTime {
     }
     DateAndTime(int year, int month, int day_of_month, int interval) {
         Date = new GregorianCalendar(year, month, day_of_month);
-        // Date.set(year, month, day_of_month,0,0,0);
         time_slot = interval;
-        // weekday=Date.get(Calendar.DAY_OF_WEEK);
     }
  
     int weekday() {
         return Date.get(Calendar.DAY_OF_WEEK);
     }
- 
+    WeekdayAndTime ReturnWeekdayAndTime()
+    {
+ 	   return new WeekdayAndTime(weekday(),time_slot);
+ 	   
+    }
     String printthis() {
  
         return " Year: " + Date.get(Calendar.YEAR) + " Month: "
@@ -239,17 +242,16 @@ class DateAndTime {
         day += result.time_slot / 96;
         result.time_slot %= 96;
         day += result.Date.get(Calendar.DAY_OF_MONTH);
-        // System.out.println("day(before loop): "+day);
         while (true) {
             if (day > result.NumOfDay(result.Date.get(Calendar.MONTH),
                     result.Date.get(Calendar.YEAR))) {
                 day -= result.NumOfDay(result.Date.get(Calendar.MONTH),
                         result.Date.get(Calendar.YEAR));
-                // System.out.println("day(after loop): "+day);
-                result.Date.set(year, result.NextMonth(Calendar.MONTH),
+                result.Date.set(result.Date.get(Calendar.YEAR), result.NextMonth(result.Date.get(Calendar.MONTH)),
                         result.Date.get(Calendar.DAY_OF_MONTH));
                 if (result.Date.get(Calendar.MONTH) == Calendar.JANUARY)
-                    year++;
+                   // year++;
+                	result.Date.set(result.Date.get(Calendar.YEAR)+1,result.Date.get(Calendar.MONTH),result.Date.get(Calendar.DAY_OF_MONTH));
             } else
                 break;
         }
@@ -264,11 +266,8 @@ class DateAndTime {
         int count = Event.begin.week_day - this.weekday();
         if (count < 0||(count==0&&this.time_slot>Event.end.time_slot))
             count += 7;
-        //System.out.println("count: "+count);
         DateAndTime result = this.add(count * 96 - this.time_slot
                 + Event.end.time_slot);
-       // System.out.println("this: "+this.printthis()+"\n Event: "+Event.begin.printthis());
-        //System.out.println("result: "+result.printthis());
         return result;
     }
  
