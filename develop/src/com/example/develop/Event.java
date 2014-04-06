@@ -13,11 +13,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Event extends Activity {
 	
@@ -60,18 +57,19 @@ public class Event extends Activity {
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
             List<String> Events_joined = new ArrayList<String>();
-            
+    		User user = User.getInstance();
+    		
             try {
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("username", "admin"));	//put the name here, it will return the events, here i use admin
+                params.add(new BasicNameValuePair("username", user.getId()));
 
                 JSONArray jArray = jsonParser.makeHttpRequest(LOGIN_URL, params);
 
                for(int i = 0; i <jArray.length();i++ ) {
             	                   JSONObject json = jArray.getJSONObject(i);
 
-            	                   Events_joined.add(json.getString("event_name"));	//an example to show you how to get data from json object
+            	                   Events_joined.add(json.getString("event_name"));
                }
 
                for(int i = 0; i<Events_joined.size();i++) {

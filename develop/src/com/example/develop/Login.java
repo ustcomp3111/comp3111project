@@ -10,12 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,7 +22,7 @@ import android.widget.Toast;
 
 public class Login extends Activity implements OnClickListener{
 	
-	private EditText user, pass;
+	private EditText id, pass;
 	private Button mSubmit, mRegister;
 	
 	 // Progress Dialog
@@ -34,6 +32,7 @@ public class Login extends Activity implements OnClickListener{
     JSONParser jsonParser = new JSONParser();
     
     private static final String LOGIN_URL = "http://124.244.60.23/weu/login.php";
+    private static final String REGISTER_URL = "http://124.244.60.23/weu/register.php";
     
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
@@ -44,7 +43,7 @@ public class Login extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		user = (EditText)findViewById(R.id.et_id);
+		id = (EditText)findViewById(R.id.et_id);
 		pass = (EditText)findViewById(R.id.et_pw);
 		
 		mSubmit = (Button)findViewById(R.id.b_confirm);
@@ -63,9 +62,7 @@ public class Login extends Activity implements OnClickListener{
 				new AttemptLogin().execute();
 			break;
 		case R.id.b_reg:
-				//wilmer : need to add register function
-				//Intent i = new Intent(this, Register.class);
-				//startActivity(i);
+				new AttemptRegister().execute();
 			break;
 
 		default:
@@ -81,7 +78,7 @@ public class Login extends Activity implements OnClickListener{
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(Login.this);
-            pDialog.setMessage("Trying to login...");
+            pDialog.setMessage("Connecting...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -93,9 +90,9 @@ public class Login extends Activity implements OnClickListener{
 			// TODO Auto-generated method stub
 
             int success;
-            String username = user.getText().toString();
+            String username = id.getText().toString();
             String password = pass.getText().toString();
- 
+    		User user = User.getInstance();
             try {
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -109,14 +106,66 @@ public class Login extends Activity implements OnClickListener{
 
                 if (success == 1) {
                 	Intent i = new Intent(Login.this, MainActivity.class);
+                	user.setId(username);
                 	finish();
     				startActivity(i);
                 	return json.getString(TAG_MESSAGE);
                 }else{
-                	Log.d("Login Failure!", json.getString(TAG_MESSAGE));
                 	return json.getString(TAG_MESSAGE);
                 	
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+ 
+            return null;
+			
+		}
+
+        protected void onPostExecute(String file_url) {
+            pDialog.dismiss();
+            if (file_url != null){
+            	Toast.makeText(Login.this, file_url, Toast.LENGTH_LONG).show();
+            }
+ 
+        }
+		
+	}
+	
+	class AttemptRegister extends AsyncTask<String, String, String> {
+
+		boolean failure = false;
+		
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Login.this);
+            pDialog.setMessage("Registering...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+
+        }
+		
+		@Override
+		protected String doInBackground(String... args) {
+			// TODO Auto-generated method stub
+
+            String username = id.getText().toString();
+            String password = pass.getText().toString();
+
+            try {
+            	
+            	List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("password", password));
+
+                JSONArray jArray = jsonParser.makeHttpRequest(REGISTER_URL, params);
+
+                JSONObject json = jArray.getJSONObject(0);
+
+               	return json.getString(TAG_MESSAGE);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
