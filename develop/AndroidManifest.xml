@@ -3,7 +3,9 @@
     package="com.example.develop"
     android:versionCode="1"
     android:versionName="1.0" >
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="18" />
@@ -45,6 +47,10 @@
         <activity
             android:name="com.example.develop.Schedule"
             android:label="@string/title_activity_schedule" >
+        </activity>
+        <activity
+            android:name="com.example.develop.Create_Option"
+            android:label="@string/title_activity_create__option" >
         </activity>
     </application>
 
