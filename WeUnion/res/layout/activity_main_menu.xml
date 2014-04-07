@@ -1,0 +1,103 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Main_menu" 
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30px" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.43" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_middle"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" >
+
+            <ImageView
+                android:id="@+id/middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/weu_menu_middle" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_top"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/relativeLayout_middle"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/weu_menu_top" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_right"
+            android:layout_width="100dp"
+            android:layout_height="170dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/relativeLayout_middle" >
+
+            <ImageView
+                android:id="@+id/right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/weu_menu_right" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_left"
+            android:layout_width="100dp"
+            android:layout_height="170dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/relativeLayout_middle">
+
+            <ImageView
+                android:id="@+id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/weu_menu_left" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_bottom"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/relativeLayout_middle"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/weu_menu_bottom" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</TableLayout>
