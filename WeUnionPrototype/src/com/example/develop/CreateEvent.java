@@ -73,7 +73,7 @@ public class CreateEvent extends Activity implements OnClickListener {
 		               params2.add(new BasicNameValuePair("Holder",User.getInstance().getId()));
 		               params2.add(new BasicNameValuePair("Date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("Duration",set_event_duration.getText().toString()));		    
-		               params2.add(new BasicNameValuePair("Time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())*4))));
+		             //  params2.add(new BasicNameValuePair("Time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())*4))));
 		               params2.add(new BasicNameValuePair("Venue",set_event_venue.getText().toString()));
 		              
 		                jArray = jsonParser.makeHttpRequest(Global.POST_URL, params2);
@@ -81,16 +81,16 @@ public class CreateEvent extends Activity implements OnClickListener {
 		               if (success==1)
 		               {
 		            	
-		                  	 i = new Intent(CreateEvent.this, Event.class);
+		                  	// i = new Intent(CreateEvent.this, Event.class);
 		                  	finish();
-		    				startActivity(i);
+		    			//	startActivity(i);
 		               }
 		               
 		
 		}
 		catch(Exception e)
 		{
-			 Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
+
 			
 		}
 			// TODO Auto-generated method stub

@@ -46,8 +46,7 @@ public class Event extends Activity implements OnClickListener{
 	//     JSONParser jsonParser = new JSONParser();
 	    
 	  new AttemptShowEvents().execute();
-	  
-	     Toast.makeText(getApplicationContext(),"length of list:"+Global.count, Toast.LENGTH_LONG).show();
+
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 	        android.R.layout.simple_list_item_1, list);
 	    event_listview.setAdapter(adapter);
@@ -108,10 +107,9 @@ public class Event extends Activity implements OnClickListener{
 		           	    	ptr = ptr.next;
 		           	    }
 		              }
-			    	 
+			    if(list.size()==0)
 		   for (ptr = Global.active_user.event_ptr; ptr!=null; ptr = ptr.next) {
 		     list.add(ptr.event.event_name);
-		Global.count++;   
 		}
 		}
 		catch(Exception e)
@@ -133,7 +131,11 @@ public class Event extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_create_new_event_button)
 		{ i = new Intent(Event.this, CreateEvent.class);
-			startActivity(i);
+		list = new ArrayList<String>();
+		Global.active_user.event_ptr = null;
+		finish();
+		startActivity(i);
+		
 		}
 		else
 			 Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();

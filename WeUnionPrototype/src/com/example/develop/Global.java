@@ -7,9 +7,9 @@ import comp3111project.EventNode;
 import comp3111project.RegularEvent;
 import comp3111project.User;
 public class Global {
-	public static final String LOGIN_URL = "http://124.244.60.23/weu/login.php";
-	public static final String EVENT_URL = "http://124.244.60.23/weu/event.php";
-	public static final String POST_URL = "http://124.244.60.23/weu/postevent.php";
+	public static  String LOGIN_URL = "http://124.244.60.23/weu/login.php";
+	public static  String EVENT_URL = "http://124.244.60.23/weu/event.php";
+	public static  String POST_URL = "http://124.244.60.23/weu/postevent.php";
 	
     static User Default = new User("no name",0);
 	static DateAndTime time = new DateAndTime(2014, Calendar.JANUARY, 1, 0);
