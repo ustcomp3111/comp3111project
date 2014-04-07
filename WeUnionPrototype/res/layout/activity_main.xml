@@ -64,12 +64,4 @@
         android:layout_centerHorizontal="true"
         android:ems="10"/>
 
-    <Button
-        android:id="@+id/developer_option"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/debugbox"
-        android:layout_below="@+id/b_schedule"
-        android:text="Developers option" />
-
 </RelativeLayout>

@@ -10,14 +10,13 @@ import android.widget.TextView;
 import android.content.Intent;
 
 public class MainActivity extends Activity implements OnClickListener {
-	Button login,event,polling,msgbox,slist,schedule,developer_option;			//buttons
+	Button login,event,polling,msgbox,slist,schedule;			//buttons
 	TextView debugbox;											//text fields
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		User user = User.getInstance();
 
 		login = (Button) findViewById(R.id.b_login);			//buttons linking
 		event = (Button) findViewById(R.id.b_event);
@@ -25,7 +24,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		msgbox = (Button) findViewById(R.id.b_msgbox);
 		slist = (Button) findViewById(R.id.b_slist);
 		schedule = (Button) findViewById(R.id.b_schedule);
-		developer_option = (Button) findViewById(R.id.developer_option);
+		
 
 		debugbox = (TextView) findViewById(R.id.debugbox);		//text fields linking
 		
@@ -35,7 +34,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		msgbox.setOnClickListener(this);
 		slist.setOnClickListener(this);
 		schedule.setOnClickListener(this);
-		developer_option.setOnClickListener(this);
+
 	}
 
 	@Override
@@ -93,13 +92,6 @@ public class MainActivity extends Activity implements OnClickListener {
 									startActivity(temp);
 									break;
 									}
-		case(R.id.developer_option)	:	{
-			
-			debugbox.setText("developer's option clicked");
-			Intent temp = new Intent(this, Developer.class);
-			startActivity(temp);
-			break;
-			}
 		default: break;
 				
 		

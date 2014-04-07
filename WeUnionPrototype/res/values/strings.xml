@@ -10,7 +10,8 @@
     <string name="title_activity_polling">Polling</string>
     <string name="title_activity_secret_list">SecretList</string>
     <string name="title_activity_schedule">Schedule</string>
-    <string name="title_activity_developer">Developer</string>
-    <string name="title_activity_event_detail">Event_detail</string>
+    <string name="title_activity_create__option">Create_Option</string>
+    <string name="title_activity_event_detail">EventDetail</string>
+    <string name="title_activity_create_event">CreateEvent</string>
 
 </resources>
