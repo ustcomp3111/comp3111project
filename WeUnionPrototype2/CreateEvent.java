@@ -1,0 +1,92 @@
+package com.example.develop;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import comp3111project.DateAndTime;
+import comp3111project.EventNode;
+import comp3111project.Events;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+public class CreateEvent extends Activity implements OnClickListener {
+	Button confirm_button;
+	EditText set_event_name, set_event_year, set_event_month ,
+ set_event_day , set_event_duration,set_event_venue, set_event_start_time;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_create_event);
+
+			 confirm_button = (Button) findViewById(R.id.create_event_confirm_button);
+			 set_event_name = (EditText)findViewById(R.id.create_event_event_name_input);
+			 set_event_year = (EditText)findViewById(R.id.create_event_year);
+			 set_event_month = (EditText)findViewById(R.id.create_event_month);
+			 set_event_day = (EditText)findViewById(R.id.create_event_day);
+			 set_event_start_time = (EditText)findViewById(R.id.create_event_time);
+			 set_event_venue = (EditText)findViewById(R.id.create_event_venue);
+			 set_event_duration = (EditText)findViewById(R.id.create_event_hour_input);
+			 confirm_button.setOnClickListener(this);
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+	
+		getMenuInflater().inflate(R.menu.create_event, menu);
+		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		if(v.getId()==R.id.create_event_confirm_button)
+			new AttemptCreateEvent().execute();
+	}
+
+
+	class AttemptCreateEvent extends AsyncTask<String, String, String> {
+		  JSONParser jsonParser = new JSONParser();
+		int success = 0;
+		  @Override
+		protected String doInBackground(String... arg0) {
+			   try{
+
+			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
+		               params2.add(new BasicNameValuePair("Event_name",set_event_name.getText().toString()));
+		               params2.add(new BasicNameValuePair("Venue",set_event_venue.getText().toString()));
+		               params2.add(new BasicNameValuePair("Duration",set_event_duration.getText().toString()));
+		               params2.add(new BasicNameValuePair("Date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));
+		               params2.add(new BasicNameValuePair("Time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())*4))));
+		               params2.add(new BasicNameValuePair("Holder",User.getInstance().getId()));
+		              
+		               JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
+		               success = jArray2.getJSONObject(0).getInt("success");
+		               if (success==1)
+		            	   Toast.makeText(getApplicationContext(),"Event created!", Toast.LENGTH_LONG).show();
+		               else
+		            	   Toast.makeText(getApplicationContext(),"Failed!", Toast.LENGTH_LONG).show();
+		
+		}
+		catch(Exception e)
+		{
+			 Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
+			
+		}
+			// TODO Auto-generated method stub
+			return null;
+		}
+	
+	}
+}
