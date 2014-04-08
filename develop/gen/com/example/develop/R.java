@@ -25,11 +25,20 @@ public final class R {
         public static final int weunion_icon=0x7f020001;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080022;
+<<<<<<< HEAD
+        public static final int LinearLayout1=0x7f080024;
         public static final int RL=0x7f080009;
         public static final int RelativeLayout1=0x7f080018;
         public static final int TableLayout1=0x7f080000;
-        public static final int action_settings=0x7f080026;
+        public static final int action_settings=0x7f08002a;
+=======
+        public static final int LinearLayout1=0x7f080059;
+        public static final int RL=0x7f080009;
+        public static final int RelativeLayout1=0x7f080018;
+        public static final int TableLayout1=0x7f080000;
+        public static final int action_settings=0x7f08005d;
+        public static final int addEvent=0x7f080020;
+>>>>>>> 0b7ad79ee714dcb3eeb999fc81d0d0e8399197b8
         public static final int b_add_option=0x7f080006;
         public static final int b_confirm=0x7f08000f;
         public static final int b_event=0x7f080012;
@@ -40,30 +49,106 @@ public final class R {
         public static final int b_reg=0x7f080010;
         public static final int b_schedule=0x7f080016;
         public static final int b_slist=0x7f080015;
+        public static final int blank0=0x7f080021;
         public static final int button1=0x7f08001d;
+        public static final int button2=0x7f08001e;
         public static final int debugbox=0x7f080017;
         public static final int editText_option=0x7f080004;
         public static final int editText_title=0x7f080002;
         public static final int et_id=0x7f08000c;
         public static final int et_pw=0x7f08000e;
         public static final int events=0x7f080008;
+<<<<<<< HEAD
+        public static final int expandableListView1=0x7f08001f;
         public static final int imageView1=0x7f08000a;
-        public static final int linearLayout1=0x7f08001e;
+        public static final int linearLayout1=0x7f080020;
+=======
+        public static final int fridayRelativeLayout=0x7f080052;
+        public static final int imageView1=0x7f08000a;
+        public static final int linearLayout1=0x7f080055;
+>>>>>>> 0b7ad79ee714dcb3eeb999fc81d0d0e8399197b8
         public static final int listOption=0x7f080005;
+        public static final int mondayRelativeLayout=0x7f08004c;
         public static final int msg=0x7f080019;
         public static final int msg_event=0x7f08001a;
-        public static final int msglist_msg=0x7f080020;
-        public static final int msglist_time=0x7f080021;
-        public static final int msglist_username=0x7f08001f;
+<<<<<<< HEAD
+        public static final int msglist_msg=0x7f080022;
+        public static final int msglist_time=0x7f080023;
+        public static final int msglist_username=0x7f080021;
+=======
+        public static final int msglist_msg=0x7f080057;
+        public static final int msglist_time=0x7f080058;
+        public static final int msglist_username=0x7f080056;
+        public static final int myEvent01=0x7f08004b;
+        public static final int myEvent02=0x7f08004d;
+        public static final int myEvent03=0x7f080050;
+        public static final int myEvent04=0x7f080053;
+>>>>>>> 0b7ad79ee714dcb3eeb999fc81d0d0e8399197b8
         public static final int post=0x7f08001b;
         public static final int post_msg=0x7f08001c;
+        public static final int saturdayRelativeLayout=0x7f080054;
+        public static final int scrollView1=0x7f080030;
+        public static final int sundayRelativeLayout=0x7f08004a;
         public static final int t_eoption=0x7f080003;
         public static final int t_etitle=0x7f080001;
+        public static final int t_eventname=0x7f080029;
         public static final int t_id=0x7f08000b;
-        public static final int t_optionname=0x7f080024;
-        public static final int t_optionnum=0x7f080023;
+<<<<<<< HEAD
+        public static final int t_optionname=0x7f080026;
+        public static final int t_optionnum=0x7f080025;
+        public static final int t_polltitle=0x7f080028;
         public static final int t_pw=0x7f08000d;
-        public static final int t_votenum=0x7f080025;
+        public static final int t_votenum=0x7f080027;
+=======
+        public static final int t_optionname=0x7f08005b;
+        public static final int t_optionnum=0x7f08005a;
+        public static final int t_pw=0x7f08000d;
+        public static final int t_votenum=0x7f08005c;
+        public static final int textDate0=0x7f080023;
+        public static final int textDate1=0x7f080025;
+        public static final int textDate2=0x7f080027;
+        public static final int textDate3=0x7f080029;
+        public static final int textDate4=0x7f08002b;
+        public static final int textDate5=0x7f08002d;
+        public static final int textDate6=0x7f08002f;
+        public static final int textFri=0x7f08002c;
+        public static final int textMon=0x7f080024;
+        public static final int textSat=0x7f08002e;
+        public static final int textSun=0x7f080022;
+        public static final int textThu=0x7f08002a;
+        public static final int textTime00a=0x7f080031;
+        public static final int textTime01a=0x7f080032;
+        public static final int textTime02a=0x7f080033;
+        public static final int textTime03a=0x7f080034;
+        public static final int textTime04a=0x7f080035;
+        public static final int textTime05a=0x7f080036;
+        public static final int textTime06a=0x7f080037;
+        public static final int textTime07a=0x7f080038;
+        public static final int textTime08a=0x7f080039;
+        public static final int textTime09a=0x7f08003a;
+        public static final int textTime10a=0x7f08003b;
+        public static final int textTime11a=0x7f08003c;
+        public static final int textTime12a=0x7f08003d;
+        public static final int textTime13a=0x7f08003e;
+        public static final int textTime14a=0x7f08003f;
+        public static final int textTime15a=0x7f080040;
+        public static final int textTime16a=0x7f080041;
+        public static final int textTime17a=0x7f080042;
+        public static final int textTime18a=0x7f080043;
+        public static final int textTime19a=0x7f080044;
+        public static final int textTime20a=0x7f080045;
+        public static final int textTime21a=0x7f080046;
+        public static final int textTime22a=0x7f080047;
+        public static final int textTime23a=0x7f080048;
+        public static final int textTime24a=0x7f080049;
+        public static final int textTue=0x7f080026;
+        public static final int textView0=0x7f08001e;
+        public static final int textWed=0x7f080028;
+        public static final int textYear=0x7f08001f;
+        public static final int thursdayRelativeLayout=0x7f080051;
+        public static final int tuesdayRelativeLayout=0x7f08004e;
+        public static final int wednesdayRelativeLayout=0x7f08004f;
+>>>>>>> 0b7ad79ee714dcb3eeb999fc81d0d0e8399197b8
     }
     public static final class layout {
         public static final int activity_create__option=0x7f030000;
@@ -74,8 +159,10 @@ public final class R {
         public static final int activity_polling=0x7f030005;
         public static final int activity_schedule=0x7f030006;
         public static final int activity_secret_list=0x7f030007;
-        public static final int msglist=0x7f030008;
-        public static final int optionlist=0x7f030009;
+        public static final int activity_vote=0x7f030008;
+        public static final int msglist=0x7f030009;
+        public static final int optionlist=0x7f03000a;
+        public static final int pollinglist=0x7f03000b;
     }
     public static final class menu {
         public static final int create__option=0x7f070000;
@@ -86,6 +173,8 @@ public final class R {
         public static final int polling=0x7f070005;
         public static final int schedule=0x7f070006;
         public static final int secret_list=0x7f070007;
+        public static final int view__polling=0x7f070008;
+        public static final int vote=0x7f070009;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -98,6 +187,8 @@ public final class R {
         public static final int title_activity_polling=0x7f050006;
         public static final int title_activity_schedule=0x7f050008;
         public static final int title_activity_secret_list=0x7f050007;
+        public static final int title_activity_view__polling=0x7f05000a;
+        public static final int title_activity_vote=0x7f05000b;
     }
     public static final class style {
         /** 

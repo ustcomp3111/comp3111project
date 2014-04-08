@@ -11,5 +11,7 @@
     <string name="title_activity_secret_list">SecretList</string>
     <string name="title_activity_schedule">Schedule</string>
     <string name="title_activity_create__option">Create_Option</string>
+    <string name="title_activity_view__polling">View_Polling</string>
+    <string name="title_activity_vote">Vote</string>
 
 </resources>

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Polling extends Activity {
 
-	Button hold;
+	Button hold,view;
 	TextView debugbox;	
 
 	
@@ -23,6 +23,7 @@ public class Polling extends Activity {
 		setContentView(R.layout.activity_polling);
 		
 		hold = (Button) findViewById(R.id.button1);
+		view = (Button) findViewById(R.id.button2);
 		
 		hold.setOnClickListener (new OnClickListener() {
 			
@@ -34,6 +35,17 @@ public class Polling extends Activity {
 		}
 		
 		});
+		
+		view.setOnClickListener (new OnClickListener() {
+			
+			public void onClick (View v){
+				Intent intent=new Intent (v.getContext(),Vote.class);
+				startActivityForResult(intent,0);
+				finish();
+				
+			}
+			
+			});
 			
 	}
 	

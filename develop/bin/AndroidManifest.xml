@@ -52,6 +52,14 @@
             android:name="com.example.develop.Create_Option"
             android:label="@string/title_activity_create__option" >
         </activity>
+        <activity
+            android:name="com.example.develop.View_Polling"
+            android:label="@string/title_activity_view__polling" >
+        </activity>
+        <activity
+            android:name="com.example.develop.Vote"
+            android:label="@string/title_activity_vote" >
+        </activity>
     </application>
 
 </manifest>
