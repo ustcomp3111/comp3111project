@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.widget.TextView;
 
-public class Event_detail extends Activity {
+public class EventDetail extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

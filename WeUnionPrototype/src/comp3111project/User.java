@@ -130,7 +130,7 @@ public class User // object which stores user's info
         RegularEventNode Schedule_ptr = schedule_ptr;
         boolean tmp;
         DateAndTime result = time,fail = new DateAndTime(0,0,0,0);
-        Event Result;
+        Events Result;
         boolean return_flag = false;
         //Move schedule ptr to a suitable position for scanning
         while(Schedule_ptr.next!=null&&Schedule_ptr.regular_event.begin.week_day<time.weekday())
@@ -157,7 +157,7 @@ public class User // object which stores user's info
                     || Schedule_ptr.regular_event.difference(Schedule_ptr.next.regular_event) >= duration) {
                 System.out.println("Proposed Date and time:");
             	result = result.FindDateOfWeekday(Schedule_ptr.regular_event);
-                Result = new Event("",0,this,result,duration,"");
+                Result = new Events("",0,this,result,duration,"");
                 Result.printthis();
                 while (true) {
                 	// step 2: check if the time slot contradict to one-time events of the user                	
@@ -173,7 +173,7 @@ public class User // object which stores user's info
                         Event_ptr = Event_ptr.next;           
                     	else {                    		                  
                     result = Event_ptr.event.end;
-                    Result = new Event(this,result,duration);
+                    Result = new Events(this,result,duration);
                     Event_ptr = event_ptr;
                     if(Schedule_ptr.next==null||!Result.end.before(result.FindDateOfWeekday(Schedule_ptr.next.regular_event)))
                     	break;
@@ -194,7 +194,7 @@ public class User // object which stores user's info
 boolean overlap(DateAndTime time, int duration)
 {
 	EventNode ptr = event_ptr;
-		Event event = new Event("",0,this,time,duration,"");
+		Events event = new Events("",0,this,time,duration,"");
 	RegularEventNode ptr2 = schedule_ptr; 
 	RegularEvent weekday_of_event = new RegularEvent("",0,time.weekday(),time.time_slot,duration);
 	

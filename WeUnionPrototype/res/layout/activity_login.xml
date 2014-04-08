@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RL"
     android:layout_width="match_parent"
@@ -7,49 +7,39 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Login" >
+    tools:context=".Login" 
+    android:background="#ffffff">
 
-    <TextView
-        android:id="@+id/t_pw"
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/t_id"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="18dp"
-        android:text="Password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="214dp"
+        android:src="@drawable/weunion_icon" />
 
     <TextView
         android:id="@+id/t_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/t_pw"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/t_pw"
-        android:layout_marginTop="90dp"
-        android:text="ID"
+        android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/et_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/t_id"
-        android:layout_marginLeft="19dp"
-        android:layout_toRightOf="@+id/t_id"
-        android:ems="10" >
+        android:ems="10" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/t_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/et_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/et_id"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/et_id"
         android:ems="10"
         android:inputType="textWebPassword" />
 
@@ -57,17 +47,12 @@
         android:id="@+id/b_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/et_pw"
         android:text="Login" />
 
     <Button
         android:id="@+id/b_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/et_pw"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="43dp"
         android:text="Register" />
 
-</RelativeLayout>
+</TableLayout>

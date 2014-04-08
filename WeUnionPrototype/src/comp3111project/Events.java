@@ -4,16 +4,16 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-public class Event {
+public class Events {
 	public String event_name = "no name event";
 	public Guest guest_list_ptr = null;
 	public User host;
 	public int event_id, duration;
 	public DateAndTime begin;
 	public DateAndTime end;
-	public Event next = null;
+	public Events next = null;
 	public String location;
-   public Event(String name, int b, User a, DateAndTime d, int e,String f) {
+   public Events(String name, int b, User a, DateAndTime d, int e,String f) {
 	   event_name = name;
 	   host = a;
        event_id = b;
@@ -23,7 +23,7 @@ public class Event {
        
        location = f;
    }
-   Event( User a, DateAndTime d, int e) {
+   Events( User a, DateAndTime d, int e) {
 	   String event_name = "";
 	   host = a;
        event_id = 0;
@@ -46,7 +46,7 @@ public class Event {
   System.out.println("begin: "+begin.printthis()+"\nend: "+end.printthis()+"\n"); 		  
   }
 
-   boolean overlap(Event event) {
+   boolean overlap(Events event) {
        if (!begin.before(event.end)||!end.after(event.begin))
            return false;
        else

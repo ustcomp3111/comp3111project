@@ -10,6 +10,13 @@ public class Schedule extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule);
+		/*TextView display_month =(TextView) findViewById(R.id.textView0);
+		display_month.setText(current_month);*/
+		
+		/*For adding TextView dynamicallyunder RelativeLayout
+			RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout);
+			TextView child = getLayoutInflater().inflate(R.layout.child);
+			layout.addView(child);*/
 	}
 
 	@Override

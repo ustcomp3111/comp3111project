@@ -49,12 +49,16 @@
             android:label="@string/title_activity_schedule" >
         </activity>
         <activity
-            android:name="com.example.develop.Developer"
-            android:label="@string/title_activity_developer" >
+            android:name="com.example.develop.Create_Option"
+            android:label="@string/title_activity_create__option" >
         </activity>
         <activity
-            android:name="com.example.develop.Event_detail"
+            android:name="com.example.develop.EventDetail"
             android:label="@string/title_activity_event_detail" >
+        </activity>
+        <activity
+            android:name="com.example.develop.CreateEvent"
+            android:label="@string/title_activity_create_event" >
         </activity>
     </application>
 
