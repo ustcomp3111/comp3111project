@@ -108,41 +108,7 @@ public class Login extends Activity implements OnClickListener{
 
                 JSONObject json = jArray.getJSONObject(0);
                 success = json.getInt(TAG_SUCCESS);
-//***
-               
-                	/*
-                    List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-                    params2.add(new BasicNameValuePair("username",username));	//put the name here, it will return the events, here i use admin
-                    Events tmp ;
-                    JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
-        			EventNode ptr = Global.active_user.event_ptr;
-        			Global.count = jArray2.length();
-                   for(int i = 0; i <jArray2.length();i++ ) {
-                	 Global.test++;
-                	   JSONObject json2 = jArray2.getJSONObject(i);
-        				String [] array = json2.getString("date").split("-");
-        				DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
-                	  // name = json2.getString("event_name");
-        tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),Global.active_user,
-        date_and_time,json2.getInt("duration"),"");
 
-                	    if(ptr == null)
-        				{
-        					ptr = new EventNode(tmp);
-        					Global.active_user.event_ptr = ptr;
-        				}
-                	    else
-                	    {
-                	    	ptr.next =new EventNode(tmp);
-                	    	ptr = ptr.next;
-                	    }
-                   }
-                   */
-              
-                //***
-                
-                
-                
                 
                 if (success == 1) {
                 	Intent i = new Intent(Login.this, MainActivity.class);

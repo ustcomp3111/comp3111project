@@ -69,33 +69,33 @@ public class CreateEvent extends Activity implements OnClickListener {
 			   try{
 
 			    	
-		               params2.add(new BasicNameValuePair("Event_name",set_event_name.getText().toString()));
-		               params2.add(new BasicNameValuePair("Holder",User.getInstance().getId()));
-		               params2.add(new BasicNameValuePair("Date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
-		               params2.add(new BasicNameValuePair("Duration",set_event_duration.getText().toString()));		    
-		             //  params2.add(new BasicNameValuePair("Time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())*4))));
-		               params2.add(new BasicNameValuePair("Venue",set_event_venue.getText().toString()));
+		               params2.add(new BasicNameValuePair("event_name",set_event_name.getText().toString()));
+		               params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
+		               params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
+		               params2.add(new BasicNameValuePair("duration",set_event_duration.getText().toString()));		    
+		              params2.add(new BasicNameValuePair("begin_time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())*4))));
+		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
 		              
 		                jArray = jsonParser.makeHttpRequest(Global.POST_URL, params2);
 		               success = jArray.getJSONObject(0).getInt("success");
-		               if (success==1)
-		               {
-		            	
-		                  	// i = new Intent(CreateEvent.this, Event.class);
-		                  	finish();
-		    			//	startActivity(i);
-		               }
-		               
-		
-		}
+		     
+		      }
 		catch(Exception e)
 		{
 
 			
 		}
-			// TODO Auto-generated method stub
-			return null;
-		}
-	
-	}
+			   
+			   // TODO Auto-generated method stub
+			if(success == 1)
+			   return "Event is created!";
+			else
+				return "Failed to created event!";
+		  }
+		  protected void onPostExecute(String message) {
+
+	            	 Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();	 
+	            	 finish(); 
+		  }
+}
 }

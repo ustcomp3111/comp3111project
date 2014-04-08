@@ -44,7 +44,7 @@ public class Event extends Activity implements OnClickListener{
 	     create_event_button = (Button) findViewById(R.id.event_create_new_event_button);
 	     create_event_button.setOnClickListener(this);
 	//     JSONParser jsonParser = new JSONParser();
-	    
+	    Global.active_user.name = User.getInstance().getId();
 	  new AttemptShowEvents().execute();
 
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -55,7 +55,7 @@ public class Event extends Activity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
-				EventNode ptr =  Global.active_user.event_ptr;;
+				EventNode ptr =  Global.active_user.event_ptr;
 				String event_name = (String) a.getAdapter().getItem(position);
 				while(ptr!=null)
 				{
@@ -88,7 +88,7 @@ public class Event extends Activity implements OnClickListener{
 		               JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 		   			EventNode ptr = Global.active_user.event_ptr;
 		              for(int i = 0; i <jArray2.length();i++ ) {
-		           	 Global.test++;
+		           	 
 		           	   JSONObject json2 = jArray2.getJSONObject(i);
 		   				String [] array = json2.getString("date").split("-");
 		   				DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
