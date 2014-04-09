@@ -60,6 +60,14 @@
             android:name="com.example.weunion.Create_Option"
             android:label="@string/title_activity_create__option" >
         </activity>
+        <activity
+            android:name="com.example.weunion.Vote"
+            android:label="@string/title_activity_vote" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.Schedule"
+            android:label="@string/title_activity_schedule" >
+        </activity>
     </application>
 
 </manifest>

@@ -89,7 +89,7 @@ public class CreateEvent extends Activity implements OnClickListener {
 		               params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
 		               params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("duration",set_event_duration.getText().toString()));		    
-		               params2.add(new BasicNameValuePair("begin_time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())*4))));
+		               params2.add(new BasicNameValuePair("begin_time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())))));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
 
 		                jArray = jsonParser.makeHttpRequest(Global.POST_URL, params2);

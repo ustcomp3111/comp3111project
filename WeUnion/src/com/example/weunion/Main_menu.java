@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class Main_menu extends Activity implements OnClickListener{
 
 	TextView username;
-	ImageView events, msgbox, startvote;
+	ImageView events, msgbox, startvote, schedule;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,9 +26,12 @@ public class Main_menu extends Activity implements OnClickListener{
 		events = (ImageView) findViewById(R.id.top);
 		msgbox = (ImageView) findViewById(R.id.left);
 		startvote = (ImageView) findViewById(R.id.right);
+		schedule = (ImageView) findViewById(R.id.bottom);
+		schedule.setOnClickListener(this);
 		startvote.setOnClickListener(this);
 		events.setOnClickListener(this);
 		msgbox.setOnClickListener(this);
+		
 	}
 
 	@Override
@@ -55,7 +58,8 @@ public class Main_menu extends Activity implements OnClickListener{
 			startActivity(k);			
 			break;
 		case R.id.bottom:
-			
+			Intent l = new Intent(Main_menu.this, Schedule.class);
+			startActivity(l);	
 			break;
 			
 		default:

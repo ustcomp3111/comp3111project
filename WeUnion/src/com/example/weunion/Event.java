@@ -44,7 +44,7 @@ public class Event extends Activity implements OnClickListener{
 	     
 	    event_listview.setAdapter(new ArrayAdapter<String>(this,
 	    android.R.layout.simple_list_item_1, eventlist));
-	/*	event_listview.setTextFilterEnabled(true);
+/*		event_listview.setTextFilterEnabled(true);
 	    eventlist.add("First_test_event");
 	    eventlist.add("Second_test_event");
 	    eventlist.add("testing");
@@ -54,8 +54,7 @@ public class Event extends Activity implements OnClickListener{
 	    eventlist.add("debug1");
 	    eventlist.add("debug2");
 	    eventlist.add("debug3");
-	    
-	  */
+*/
 	    Global.active_user.name = User.getInstance().getId();
 	    new AttemptShowEvents().execute();
 
@@ -77,7 +76,7 @@ public class Event extends Activity implements OnClickListener{
 						 ptr = ptr.next;
 				}
 				 Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
-				 
+//				Global.active_event = 
 				Intent i = new Intent(Event.this, EventDetail.class);
 				startActivity(i);
 			}
@@ -107,7 +106,7 @@ public class Event extends Activity implements OnClickListener{
 		               Events tmp ;
 
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
-			//			    eventlist.add("WOWOWO333333");
+						 //   eventlist.add("WOWOWO333333");
 		   			EventNode ptr = Global.active_user.event_ptr;
 		              for(int i = 0; i <jArray2.length();i++ ) {
 		            	  Global.test++;
@@ -155,7 +154,8 @@ public class Event extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_create_new_event_button)
 		{ i = new Intent(Event.this, CreateEvent.class);
-			startActivity(i);
+		finish();
+		startActivity(i);
 		}
 	}
 
