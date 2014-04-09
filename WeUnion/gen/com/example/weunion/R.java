@@ -32,18 +32,18 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f08007a;
         public static final int RL=0x7f080025;
-        public static final int RelativeLayout1=0x7f080037;
+        public static final int RelativeLayout1=0x7f080038;
         public static final int TableLayout1=0x7f080010;
         public static final int action_settings=0x7f08007e;
         public static final int addEvent=0x7f080040;
         public static final int b_add_option=0x7f080016;
         public static final int b_confirm=0x7f08002b;
         public static final int b_create_event=0x7f080009;
+        public static final int b_logout=0x7f080037;
         public static final int b_ok=0x7f080017;
         public static final int b_reg=0x7f08002c;
         public static final int blank0=0x7f080041;
         public static final int bottom=0x7f080036;
-        public static final int button1=0x7f08003c;
         public static final int button2=0x7f08003d;
         public static final int create_event_date=0x7f080001;
         public static final int create_event_day=0x7f080005;
@@ -78,8 +78,8 @@ public final class R {
         public static final int listOption=0x7f080015;
         public static final int middle=0x7f080026;
         public static final int mondayRelativeLayout=0x7f08006c;
-        public static final int msg=0x7f080038;
-        public static final int msg_event=0x7f080039;
+        public static final int msg=0x7f080039;
+        public static final int msg_event=0x7f08003a;
         public static final int msglist_msg=0x7f080078;
         public static final int msglist_time=0x7f080079;
         public static final int msglist_username=0x7f080077;
@@ -88,8 +88,8 @@ public final class R {
         public static final int myEvent03=0x7f080070;
         public static final int myEvent04=0x7f080073;
         public static final int my_events=0x7f080018;
-        public static final int post=0x7f08003a;
-        public static final int post_msg=0x7f08003b;
+        public static final int post=0x7f08003b;
+        public static final int post_msg=0x7f08003c;
         public static final int relativeLayout_bottom=0x7f080035;
         public static final int relativeLayout_left=0x7f080033;
         public static final int relativeLayout_middle=0x7f08002e;

@@ -123,7 +123,6 @@ public class Create_Option extends Activity implements OnClickListener{
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
 
-            int success;
             String titlename = title.getText().toString();
             String eventname = "meeting"; //event name
     		

@@ -6,8 +6,6 @@ package com.example.weunion;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,7 +22,7 @@ public class Polling extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_polling);
 		
-		hold = (Button) findViewById(R.id.button1);
+		hold = (Button) findViewById(R.id.b_logout);
 		view = (Button) findViewById(R.id.button2);
 		
 		hold.setOnClickListener (new OnClickListener() {

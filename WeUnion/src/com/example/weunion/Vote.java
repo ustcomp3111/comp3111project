@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class Vote extends Activity {

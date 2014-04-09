@@ -4,7 +4,6 @@ import java.util.Calendar;
 import comp3111project.DateAndTime;
 import comp3111project.Events;
 import comp3111project.EventNode;
-import comp3111project.RegularEvent;
 import comp3111project.User;
 public class Global {
 	public static final String LOGIN_URL = "http://124.244.60.23/weu/login.php";

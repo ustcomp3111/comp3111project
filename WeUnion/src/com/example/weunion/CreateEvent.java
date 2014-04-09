@@ -6,11 +6,6 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import comp3111project.DateAndTime;
-import comp3111project.EventNode;
-import comp3111project.Events;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
