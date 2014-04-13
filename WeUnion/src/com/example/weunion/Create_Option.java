@@ -1,7 +1,6 @@
 package com.example.weunion;
 
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +8,13 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +32,7 @@ public class Create_Option extends Activity implements OnClickListener{
 	private static final String TAG_OPTIONNUM = "option";
 	private static final String TAG_VOTE = "vote";
 	private static final String TAG_OPTIONNAME = "option_name";
-	private static final String VOTE_URL ="http://124.244.60.23/weu/vote.php";
+	private static final String VOTE_URL ="http://124.244.60.23/weu/startvote.php";
 
     private static final String TAG_MESSAGE = "message";
 	private EditText title, option;
@@ -43,7 +40,7 @@ public class Create_Option extends Activity implements OnClickListener{
 	private ListView list;
 	ArrayList<HashMap<String,String>> optionlist = new ArrayList<HashMap<String,String>>();
 	private SimpleAdapter adapter;
-	private List<String> options = new ArrayList<String>();
+	private String[] options = new String[5];
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +86,8 @@ public class Create_Option extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.b_add_option:
-				counter++;
 		        HashMap<String, String> map = new HashMap<String, String>();
-		        options.add(option.getText().toString());		        
+		        options[counter++]=option.getText().toString();		        
 		        map.put(TAG_OPTIONNUM, (Integer.toString(counter)+"."));
 		        map.put(TAG_OPTIONNAME, option.getText().toString());
 		        map.put(TAG_VOTE, "vote : 0");
@@ -127,22 +123,30 @@ public class Create_Option extends Activity implements OnClickListener{
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
 
-            int success;
             String titlename = title.getText().toString();
-            
-    		User user = User.getInstance();
+            String eventname = "meeting"; //event name
+    		
             try {
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
+            	params.add(new BasicNameValuePair("eventname", eventname));
                 params.add(new BasicNameValuePair("title", titlename));
-               //fuck params.add(new BasicNameValuePair("option", options));
+                params.add(new BasicNameValuePair("option1", options[0]));
+                params.add(new BasicNameValuePair("option2", options[1]));
+                params.add(new BasicNameValuePair("option3", options[2]));
+                params.add(new BasicNameValuePair("option4", options[3]));
+                params.add(new BasicNameValuePair("option5", options[4]));
+                params.add(new BasicNameValuePair("vote1", "0"));
+                params.add(new BasicNameValuePair("vote2", "0"));
+                params.add(new BasicNameValuePair("vote3", "0"));
+                params.add(new BasicNameValuePair("vote4", "0"));
+                params.add(new BasicNameValuePair("vote5", "0"));
 
-              /*  JSONArray jArray = jsonParser.makeHttpRequest(VOTE_URL, params);
+              JSONArray jArray = jsonParser.makeHttpRequest(VOTE_URL, params);
 
                 	finish();
                 	JSONObject json = jArray.getJSONObject(0);
-                	return json.getString(TAG_MESSAGE);*/
-                return "Polling started successfully!";
+                	return json.getString(TAG_MESSAGE);
             } catch (Exception e) {
                 e.printStackTrace();
             }

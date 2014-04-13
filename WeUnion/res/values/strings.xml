@@ -13,5 +13,7 @@
     <string name="title_activity_polling">Polling</string>
     <string name="title_activity_create_option">CreateOption</string>
     <string name="title_activity_create__option">Create_Option</string>
+    <string name="title_activity_vote">Vote</string>
+    <string name="title_activity_schedule">Schedule</string>
 
 </resources>

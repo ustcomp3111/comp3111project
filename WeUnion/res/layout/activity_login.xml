@@ -27,7 +27,8 @@
         android:id="@+id/et_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:ems="10" 
+		android:singleLine="true"/>
 
     <TextView
         android:id="@+id/t_pw"
@@ -36,12 +37,13 @@
         android:text="Password"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
+	 <EditText
         android:id="@+id/et_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textWebPassword" />
+        android:inputType="textWebPassword" 
+		android:singleLine="true"/>
 
     <Button
         android:id="@+id/b_confirm"

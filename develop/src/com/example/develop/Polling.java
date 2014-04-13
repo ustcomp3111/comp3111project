@@ -5,6 +5,7 @@ package com.example.develop;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +43,6 @@ public class Polling extends Activity {
 				Intent intent=new Intent (v.getContext(),Vote.class);
 				startActivityForResult(intent,0);
 				finish();
-				
 			}
 			
 			});
