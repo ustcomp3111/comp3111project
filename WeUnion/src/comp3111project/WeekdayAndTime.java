@@ -1,9 +1,10 @@
 package comp3111project;
 
 public class WeekdayAndTime {
-    int week_day, time_slot;
+    public int week_day;
+	public int time_slot;
  
-    WeekdayAndTime(int weekday, int timeslot) {
+    public WeekdayAndTime(int weekday, int timeslot) {
         week_day = weekday;
         time_slot = timeslot;
     }

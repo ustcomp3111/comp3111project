@@ -17,7 +17,7 @@ public class RegularEvent {
         end = this.add(duration);
         next = null;
     }
-    RegularEvent(int Weekday, int Begin, int Duration) {
+    public RegularEvent(int Weekday, int Begin, int Duration) {
         regular_event_name = "";
         regular_event_id = 0;
     	begin = new WeekdayAndTime(Weekday, Begin);
@@ -28,7 +28,7 @@ public class RegularEvent {
     //e.g time = 95 (= 23 hours and 45 minutes )
     //[Monday 13:00] + 95 = Tuesday 12:45
    // time should be a +ve integer 
-    WeekdayAndTime add(int time) {
+    public WeekdayAndTime add(int time) {
         WeekdayAndTime result;// = new WeekdayAndTime(begin.week_day,duration);
         int day = 0;
         time += begin.time_slot;
@@ -40,7 +40,7 @@ public class RegularEvent {
         result = new WeekdayAndTime((begin.week_day-1 + day)%7+1, time);
         return result;
     }
-    boolean Within(WeekdayAndTime time)
+    public boolean Within(WeekdayAndTime time)
     {
    if(this.begin.week_day==this.end.week_day)
     	{
@@ -50,7 +50,7 @@ public class RegularEvent {
     		else
     			return false;
     	}
-    	else if(this.begin.difference(this.end)==1)
+    	else if(Math.abs(this.begin.week_day-this.end.week_day)==1||this.begin.week_day==7&&this.end.week_day==1)
     	{
     		if((time.week_day==this.begin.week_day&&time.time_slot>this.begin.time_slot)
     				||(time.week_day==this.end.week_day&&time.time_slot<this.end.time_slot))
@@ -65,11 +65,11 @@ public class RegularEvent {
     		return false;
     }
     
-    void printthis ()
+    public void printthis ()
     {
     System.out.println("Regular event name: "+regular_event_name+"\nbegin: "+begin.printthis()+"\nend: "+end.printthis());	
     }
-    boolean overlap(RegularEvent node)
+    public boolean overlap(RegularEvent node)
     {
     	 if((this.Within(node.begin)||this.Within(node.end))||(node.Within(begin)||node.Within(end))||(this.begin.equals(node.begin)&&this.end.equals(node.end)))
     	return true;
@@ -77,7 +77,7 @@ public class RegularEvent {
     		return false;
     	
     }
-    int difference(RegularEvent node) 
+    public int difference(RegularEvent node) 
     {
    return end.difference(node.begin);
     }

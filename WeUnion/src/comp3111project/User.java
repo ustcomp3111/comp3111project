@@ -26,7 +26,7 @@ public class User // object which stores user's info
         }
     }
  
-    boolean AddRegularEvent(RegularEventNode node) {            	
+    public boolean AddRegularEvent(RegularEventNode node) {            	
     	RegularEventNode ptr = schedule_ptr, ptr2 = schedule_ptr;       
     	try{
     	if (schedule_ptr == null) {
@@ -97,7 +97,7 @@ public class User // object which stores user's info
     	return true;	
     }
  
-    void printregularevent() {
+    public void printregularevent() {
         System.out.println("Regular Event of " + this.name);
         RegularEventNode ptr = schedule_ptr,starting_point = schedule_ptr;
        do {
@@ -112,7 +112,7 @@ public class User // object which stores user's info
         System.out.println("***The end***");
     }
  
-    void printevent() {
+    public void printevent() {
         System.out.println("Event of " + this.name);
         EventNode ptr = event_ptr;
         while (ptr != null) {
