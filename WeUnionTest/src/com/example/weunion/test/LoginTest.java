@@ -61,7 +61,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 		 
 	 } 	*/
 	 
-	 public void testcorrect_Login() {
+	/* public void testcorrect_Login() {
 		 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Login.class.getName(), null, false);
 		 mActivity.runOnUiThread(new Runnable() {
 			    @Override
@@ -77,7 +77,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 		 assertNotNull(nextActivity);
 		 nextActivity.finish();
    
-	 }
+	 }*/
 
 
  
