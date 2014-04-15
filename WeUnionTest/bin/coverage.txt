@@ -1,0 +1,21 @@
+[EMMA v2.0.5312 report, generated Wed Apr 16 00:24:22 CST 2014]
+-------------------------------------------------------------------------------
+OVERALL COVERAGE SUMMARY:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+22%  (7/32)!	11%  (16/152)!	8%   (365/4427)!	9%   (83.1/878)!	all classes
+
+OVERALL STATS SUMMARY:
+
+total packages:	2
+total classes:	32
+total methods:	152
+total executable files:	22
+total executable lines:	878
+
+COVERAGE BREAKDOWN BY PACKAGE:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+12%  (3/24)!	8%   (9/106)!	6%   (151/2698)!	7%   (37.8/536)!	com.example.weunion
+50%  (4/8)!	15%  (7/46)!	12%  (214/1729)!	13%  (45.3/342)!	comp3111project
+-------------------------------------------------------------------------------

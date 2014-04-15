@@ -139,7 +139,9 @@ public class Msgbox extends Activity implements OnClickListener{
 		}
 
         protected void onPostExecute(String file_url) {
-            pDialog.dismiss();
+        	if (pDialog != null) { 
+                pDialog.dismiss();
+           }
           
         }
         
@@ -196,13 +198,24 @@ public class Msgbox extends Activity implements OnClickListener{
 		}
 
         protected void onPostExecute(String file_url) {
-            pDialog.dismiss();
+        	if (pDialog != null) { 
+                pDialog.dismiss();
+           }
             if (file_url != null){
             	Toast.makeText(Msgbox.this, file_url, Toast.LENGTH_LONG).show(); 
             }
             my_msg.setText("");
         }
 		
+	}
+	
+	@Override
+	public void onPause() {
+	    super.onPause();
+
+	    if(pDialog != null)
+	        pDialog.dismiss();
+	    pDialog = null;
 	}
 	
 	public static String getCurrentTimeStamp(){

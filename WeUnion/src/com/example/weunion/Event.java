@@ -138,12 +138,22 @@ public class Event extends Activity implements OnClickListener{
 			return null;
 		}
 		 protected void onPostExecute(String file_url) {
-	            pDialog.dismiss();
+	        	if (pDialog != null) { 
+	                pDialog.dismiss();
+	           }
 
 		 }
 	
 	}
+	
+	@Override
+	public void onPause() {
+	    super.onPause();
 
+	    if(pDialog != null)
+	        pDialog.dismiss();
+	    pDialog = null;
+	}
 	
 	public void onClick(View v) {
 	
