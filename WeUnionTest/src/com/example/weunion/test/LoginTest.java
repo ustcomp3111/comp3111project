@@ -5,7 +5,6 @@ import com.example.weunion.Login;
 import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2; 
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
  
@@ -13,9 +12,10 @@ import android.widget.EditText;
 public class LoginTest extends ActivityInstrumentationTestCase2<Login> { 
  
 	private Login mActivity;
+
 	EditText id,pw;
 	Button login,reg;
-	
+
 	public LoginTest() { 
 		 super(Login.class); 	 
 	 } 
@@ -30,6 +30,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 	 pw = (EditText)mActivity.findViewById(com.example.weunion.R.id.et_pw);
 	 login = (Button)mActivity.findViewById(com.example.weunion.R.id.b_confirm);
 	 reg = (Button)mActivity.findViewById(com.example.weunion.R.id.b_reg);	 
+
 	}
 	
 	@Override 
@@ -42,27 +43,26 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 	 public void testView() { // checks if the activity is created 
 		assertNotNull(getActivity()); 
 	 } 
-
 	
-	/* public void testfail_Login() {
-		 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Login.class.getName(), null, false);
-		 mActivity.runOnUiThread(new Runnable() {
-			    @Override
-			    public void run() {
-				      // click button and open next activity.			    
-				      id.setText("abc");
-				      pw.setText("def");
-				      login.performClick();
-				}
-			  });	
-		 
-		 com.example.weunion.Login nextActivity = (com.example.weunion.Login) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
-		 assertNull(nextActivity);
-		 
-	 } 	*/
+	 public void testfail_Login() {
+	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Login.class.getName(), null, false);
+	 mActivity.runOnUiThread(new Runnable() {
+		    @Override
+		    public void run() {
+			      // click button and open next activity.			    
+			      id.setText("abc");
+			      pw.setText("def");
+			      login.performClick();
+			}
+		  });	
 	 
-	/* public void testcorrect_Login() {
-		 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Login.class.getName(), null, false);
+	 com.example.weunion.Login nextActivity = (com.example.weunion.Login) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+	 assertNull(nextActivity);
+	 
+	 } 	
+	 
+	 public void testcorrect_Login() {
+		 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Main_menu.class.getName(), null, false);
 		 mActivity.runOnUiThread(new Runnable() {
 			    @Override
 			    public void run() {
@@ -73,12 +73,10 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 				}
 			  });	
 		 
-		 Login nextActivity = (Login) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+		 com.example.weunion.Main_menu nextActivity = (com.example.weunion.Main_menu) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
 		 assertNotNull(nextActivity);
 		 nextActivity.finish();
    
-	 }*/
-
-
+	 }
  
 }

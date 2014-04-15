@@ -1,0 +1,6 @@
+CD workspace
+android update project -p WeUnion
+android update test-project -m ../WeUnion -p WeUnionTest 
+CD WeUnionTest 
+ant clean debug 
+ant clean emma debug install test
