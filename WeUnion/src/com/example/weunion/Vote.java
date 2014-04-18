@@ -7,17 +7,15 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.ExpandableListView;
-import android.widget.SimpleAdapter;
+//import android.widget.SimpleAdapter;
 
 public class Vote extends Activity {
 
 	String[] polltitle={"Title1","Title2","Title3","Title4","Title5","Title6","Title7"};
-	private ExpandableListView Listpolling;
+	//private ExpandableListView Listpolling;
 	ArrayList<HashMap<String,String>> pollinglist = new ArrayList<HashMap<String,String>>();
-	private SimpleAdapter adapter;
-	
-	
-	
+	//private SimpleAdapter adapter;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -5,7 +5,7 @@ public class RegularEventNode
 	RegularEventNode next=null;
 	RegularEvent regular_event;  //Points to the regular event which this objects refers to
 
-public RegularEventNode(RegularEvent event)
+RegularEventNode(RegularEvent event)
 {
 	regular_event = event;
 	}

@@ -1,0 +1,10 @@
+SET JAVA_HOME=C:\Program Files\Java\jdk1.8.0
+SET ANDROID_HOME=C:\Users\Yip\Desktop\adt-bundle-windows-x86_64-20131030\sdk
+SET ANT_HOME=\\YIP-PC\Users\Yip\apache-ant-1.9.3
+SET PATH=%PATH%;%JAVA_HOME%\bin;%ANT_HOME%\bin;%ANDROID_HOME%\tools;
+CD workspace
+android update project -p WeUnion
+android update test-project -m ../WeUnion -p WeUnionTest 
+CD WeUnionTest 
+ant clean debug 
+ant clean emma debug install test

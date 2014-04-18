@@ -6,7 +6,7 @@ public class Guest
     Guest next = null;
     boolean attend = false;
     User user; 
-    public Guest(User u)
+    Guest(User u)
     {
     	user=u;
     }

@@ -46,13 +46,13 @@ public class Events {
   System.out.println("begin: "+begin.printthis()+"\nend: "+end.printthis()+"\n"); 		  
   }
 
-   public boolean overlap(Events event) {
+   boolean overlap(Events event) {
        if (!begin.before(event.end)||!end.after(event.begin))
            return false;
        else
            return true;
    }
-   public void AddGuest(Guest guest)
+   void AddGuest(Guest guest)
    {
 	   Guest ptr = guest_list_ptr;
    if(ptr==null)
@@ -72,7 +72,7 @@ public class Events {
 	   return Matching(DateAndTime.Now());
 	 
    }
-   public DateAndTime Matching(DateAndTime date_and_time)
+   DateAndTime Matching(DateAndTime date_and_time)
    {
 	   Guest ptr = guest_list_ptr;
 	   DateAndTime time = date_and_time,border_line = date_and_time.add(96*30);	   

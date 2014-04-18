@@ -33,7 +33,7 @@ public class Login extends Activity implements OnClickListener{
     
     private static final String LOGIN_URL = "http://124.244.60.23/weu/login.php";
     private static final String REGISTER_URL = "http://124.244.60.23/weu/register.php";
-    
+
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
 	
@@ -175,7 +175,10 @@ public class Login extends Activity implements OnClickListener{
 		}
 
         protected void onPostExecute(String file_url) {
-            pDialog.dismiss();
+        	if (pDialog != null) { 
+                pDialog.dismiss();
+           }
+           
             if (file_url != null){
             	Toast.makeText(Login.this, file_url, Toast.LENGTH_LONG).show();
             }
