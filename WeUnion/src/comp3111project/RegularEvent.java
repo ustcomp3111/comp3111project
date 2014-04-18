@@ -50,7 +50,7 @@ public class RegularEvent {
     		else
     			return false;
     	}
-    	else if(this.begin.difference(this.end)==1)
+	else if(Math.abs(this.begin.week_day-this.end.week_day)==1||this.begin.week_day==7&&this.end.week_day==1)
     	{
     		if((time.week_day==this.begin.week_day&&time.time_slot>this.begin.time_slot)
     				||(time.week_day==this.end.week_day&&time.time_slot<this.end.time_slot))
