@@ -1,0 +1,408 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Schedule" >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#E0E3E1">
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="#D9DBDD"
+     android:orientation="horizontal" >
+
+      <TextView
+          android:id="@+id/textView0"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:text="" />
+
+      <TextView
+         android:id="@+id/textYear"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="2"
+         android:text="April 2014" />
+
+      <Button
+          android:id="@+id/addEvent"
+          style="?android:attr/buttonStyleSmall"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_weight="0.5"
+          android:text="+" />
+
+      </LinearLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="#D9DBDD"
+     android:orientation="horizontal" >
+
+     <TextView
+         android:id="@+id/blank0"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+		android:layout_weight="3"
+         android:text="" />
+     <TextView
+         android:id="@+id/textSun"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Sun " />
+
+     <TextView
+         android:id="@+id/textDate0"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+
+     <TextView
+         android:id="@+id/textMon"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Mon " />
+
+     <TextView
+         android:id="@+id/textDate1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+
+     <TextView
+         android:id="@+id/textTue"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Tue " />
+
+     <TextView
+         android:id="@+id/textDate2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+
+     <TextView
+         android:id="@+id/textWed"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Wed " />
+
+     <TextView
+         android:id="@+id/textDate3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+
+     <TextView
+         android:id="@+id/textThu"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Thu " />
+
+     <TextView
+         android:id="@+id/textDate4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+
+     <TextView
+         android:id="@+id/textFri"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Fri " />
+
+     <TextView
+         android:id="@+id/textDate5"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+
+     <TextView
+         android:id="@+id/textSat"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="Sat " />
+
+     <TextView
+         android:id="@+id/textDate6"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.5"
+         android:text="" />
+ </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+ <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#A6F5FA" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#fff" >
+
+            <TextView
+                android:id="@+id/textTime00a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="12am " />
+
+            <TextView
+                android:id="@+id/textTime01a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="1am " />
+
+
+            <TextView
+                android:id="@+id/textTime02a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="2am " />
+
+            <TextView
+                android:id="@+id/textTime03a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="3am " />
+
+            <TextView
+                android:id="@+id/textTime04a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="4am " />
+ 
+            <TextView
+                android:id="@+id/textTime05a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="5am " />
+
+            <TextView
+                android:id="@+id/textTime06a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="6am " />
+
+            <TextView
+                android:id="@+id/textTime07a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="7am " />
+
+            <TextView
+                android:id="@+id/textTime08a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="8am " />
+
+            <TextView
+                android:id="@+id/textTime09a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="9am " />
+
+           <TextView
+                android:id="@+id/textTime10a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="10am " />            
+
+           <TextView
+                android:id="@+id/textTime11a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="11am " />
+
+ 
+           <TextView
+                android:id="@+id/textTime12a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="12nn" />
+
+
+           <TextView
+                android:id="@+id/textTime13a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="1pm " />
+
+ 
+           <TextView
+                android:id="@+id/textTime14a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="2pm " />
+
+           <TextView
+                android:id="@+id/textTime15a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="3pm " />
+
+ 
+           <TextView
+                android:id="@+id/textTime16a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="4pm " />
+
+           <TextView
+                android:id="@+id/textTime17a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="5pm " />
+
+           <TextView
+                android:id="@+id/textTime18a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="6pm " />
+
+           <TextView
+                android:id="@+id/textTime19a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="7pm " />
+
+           <TextView
+                android:id="@+id/textTime20a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="8pm " />
+
+           <TextView
+                android:id="@+id/textTime21a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="9pm " />
+
+           <TextView
+                android:id="@+id/textTime22a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="10pm " />
+
+           <TextView
+                android:id="@+id/textTime23a"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="11pm " />
+
+           <TextView
+                android:id="@+id/textTime24a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12am " />
+
+        </LinearLayout>
+        
+
+<RelativeLayout
+		android:id="@+id/sundayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2" 
+		android:orientation="vertical">
+           <TextView
+               android:id="@+id/myEvent01"
+               android:layout_width="match_parent"
+               android:layout_height="120dp"
+               android:layout_marginTop="600dp"
+               android:background="#ff0"
+               android:text="Gather" />
+	</RelativeLayout>
+	<RelativeLayout
+		android:id="@+id/mondayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2">
+
+		<TextView
+		    android:id="@+id/myEvent02"
+		    android:layout_width="match_parent"
+		    android:layout_height="40dp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_marginTop="800dp"
+		    android:background="#ff0"
+		    android:text="Busy" />
+
+	</RelativeLayout>
+	<RelativeLayout
+		android:id="@+id/tuesdayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2" >
+	</RelativeLayout>
+	<RelativeLayout
+		android:id="@+id/wednesdayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2" >
+		           <TextView
+               android:id="@+id/myEvent03"
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:layout_marginTop="400dp"
+               android:background="#ff0"
+               android:text="Lunch" />
+	</RelativeLayout>
+	<RelativeLayout
+		android:id="@+id/thursdayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2">
+	</RelativeLayout>
+	<RelativeLayout
+		android:id="@+id/fridayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2" >
+		                      <TextView
+               android:id="@+id/myEvent04"
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:layout_marginTop="400dp"
+               android:background="#ff0"
+               android:text="Lesson" />
+	</RelativeLayout>
+	
+	<RelativeLayout
+		android:id="@+id/saturdayRelativeLayout"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:layout_weight="2">
+	</RelativeLayout>
+    </LinearLayout>    
+    </ScrollView>
+
+
+
+</LinearLayout>
+
+</RelativeLayout>
