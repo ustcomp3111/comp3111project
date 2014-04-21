@@ -8,11 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import comp3111project.DateAndTime;
 import comp3111project.EventNode;
 import comp3111project.Events;
@@ -25,66 +21,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class Event extends Fragment implements OnClickListener{
-	Button create_event_button;
-
-LinearLayout l;
-
-	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-
-		l = (LinearLayout) inflater.inflate(R.layout.activity_event,container,false);
-		ListView event_listview = (ListView) l.findViewById(R.id.my_events);
-	     create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
-	     create_event_button.setOnClickListener(this);
-	     
-	    event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
-	    android.R.layout.simple_list_item_1, Global.eventlist));
-
-	    event_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
-	    {
-			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position,
-					long id) {
-				EventNode ptr =  Global.active_user.event_ptr;;
-				String event_name = (String) a.getAdapter().getItem(position);
-				while(ptr!=null)
-				{
-					 if (ptr.event.event_name == event_name)
-				{
-						 Global.active_event =new EventNode (ptr.event);
-				break;
-				}
-					 else 
-						 ptr = ptr.next;
-				}
-				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
-				Intent i = new Intent(getActivity(), EventDetail.class);
-				startActivity(i);
-			}
-	    	
-	    });
-	    return l;
-	}
-
-public void onClick(View v) {
-	
-		Intent i ;
-		// TODO Auto-generated method stub
-		if(v.getId()==R.id.event_create_new_event_button)
-		{ i = new Intent(getActivity(), CreateEvent.class);
-		//finish();
-		startActivity(i);
-		}
-	}
-
-	
-	}
-
-/*
 public class Event extends Activity implements OnClickListener{
 	Button create_event_button;
     private ProgressDialog pDialog;
@@ -102,7 +41,17 @@ public class Event extends Activity implements OnClickListener{
 	     
 	    event_listview.setAdapter(new ArrayAdapter<String>(this,
 	    android.R.layout.simple_list_item_1, eventlist));
-
+/*		event_listview.setTextFilterEnabled(true);
+	    eventlist.add("First_test_event");
+	    eventlist.add("Second_test_event");
+	    eventlist.add("testing");
+	    eventlist.add("testing testing");
+	    eventlist.add("testing bugs");
+	    eventlist.add("testing");
+	    eventlist.add("debug1");
+	    eventlist.add("debug2");
+	    eventlist.add("debug3");
+*/
 	    Global.active_user.name = User.getInstance().getId();
 	    new AttemptShowEvents().execute();
 
@@ -220,4 +169,3 @@ public class Event extends Activity implements OnClickListener{
 	
 	}
 
-*/
