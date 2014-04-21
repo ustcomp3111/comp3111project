@@ -49,7 +49,8 @@ public class Main_menu extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.top:
-			Intent i = new Intent(Main_menu.this, Event.class);
+			//Intent i = new Intent(Main_menu.this, Event.class);
+			Intent i = new Intent(Main_menu.this, EventMenu.class);
 			startActivity(i);
 			break;
 		case R.id.left:

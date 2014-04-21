@@ -1,0 +1,133 @@
+package com.example.weunion;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import comp3111project.DateAndTime;
+import comp3111project.EventNode;
+import comp3111project.Events;
+
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.app.ProgressDialog;
+public class EventMenu extends FragmentActivity {
+PagerAdapter pageradapter;
+JSONParser jsonParser = new JSONParser();
+private ProgressDialog pDialog;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_event_menu);
+	    Global.active_user.name = User.getInstance().getId();   
+	    
+	    new AttemptShowEvents().execute();
+		
+	   
+	
+	}
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.event_menu, menu);
+		return true;
+	}
+
+private void initialize()
+{
+	List<Fragment> fragment_list = new Vector<Fragment>();
+	fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
+	fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
+	this.pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
+ViewPager pager = (ViewPager)super.findViewById(R.id.event_menu_viewpager);
+pager.setAdapter(pageradapter);
+}
+	class AttemptShowEvents extends AsyncTask<String, String, String> {
+		
+	       @Override
+	        protected void onPreExecute() {
+	            super.onPreExecute();
+	            pDialog = new ProgressDialog(EventMenu.this);
+	            pDialog.setMessage("Loading events...");
+	            pDialog.setIndeterminate(false);
+	            pDialog.setCancelable(true);
+	            pDialog.show();
+	        }
+
+		@Override
+		protected String doInBackground(String... arg0) {
+		   try{
+
+			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
+		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
+		               Events tmp ;
+
+			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
+					
+		   			//EventNode ptr = Global.active_user.event_ptr;
+		              for(int i = 0; i <jArray2.length();i++ ) {
+		            	 
+		            	  JSONObject json2 = jArray2.getJSONObject(i);
+		            	  Global.eventlist.add(json2.getString("event_name"));
+		            	  
+		            	  String [] array = json2.getString("date").split("-");
+		            	  DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
+		       
+		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
+		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));
+		            	 
+		            	  Global.active_user.AddEvent(new EventNode(tmp));
+		           	    /*
+		           	     if(ptr == null)
+		   				{
+		   					ptr = new EventNode(tmp);
+		   					Global.active_user.event_ptr = ptr;
+		   				}
+		           	    else
+		           	    {
+		           	    	ptr.next = new EventNode(tmp);
+		           	    	ptr = ptr.next;
+		           	    }*/
+		              }
+		              EventMenu.this.initialize();
+			   }
+		catch(Exception e)
+		{
+			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
+			
+		}
+		
+			// TODO Auto-generated method stub
+			return null;
+		}
+		 protected void onPostExecute(String file_url) {
+	        	if (pDialog != null) { 
+	                pDialog.dismiss();
+	           }
+
+		 }
+}
+	 @Override
+	 public void onPause() {
+		    super.onPause();
+
+		    if(pDialog != null)
+		        pDialog.dismiss();
+		    pDialog = null;
+		}
+}
