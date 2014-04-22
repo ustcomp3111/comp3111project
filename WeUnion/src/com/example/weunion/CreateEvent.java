@@ -92,7 +92,7 @@ public class CreateEvent extends Activity implements OnClickListener {
 		               success = jArray.getJSONObject(0).getInt("success");
 		               if (success==1)
 		               {		            	
-		                  	 i = new Intent(CreateEvent.this, Event.class);
+		                  	 i = new Intent(CreateEvent.this, EventMenu.class);
 		                  	finish();
 		    				startActivity(i);
 		               }

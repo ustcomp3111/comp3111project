@@ -14,16 +14,36 @@ public class User // object which stores user's info
     }
  
    public void AddEvent(EventNode node) {
-        EventNode ptr = event_ptr;
-        if (event_ptr == null)
-            event_ptr = node;
-        else if (event_ptr.next == null)
-            event_ptr.next = node;
-        else {
-            while (ptr.next != null)
-                ptr = ptr.next;
-            ptr.next = node;
-        }
+	   EventNode ptr = event_ptr;
+       node.next=null;
+       if (event_ptr == null)
+           event_ptr = node;
+       else if (event_ptr.next==null&&!node.event.begin.before(event_ptr.event.begin))
+                      	
+       		event_ptr.next = node;     	
+       
+       else
+       {
+       	if(node.event.begin.before(event_ptr.event.begin))
+       	{
+       		node.next = event_ptr;
+       	event_ptr = node;
+       	}
+       	else
+       	{
+       	while(ptr.next!=null)
+       	{
+       	if(!node.event.begin.before(ptr.event.begin)&&node.event.begin.before(ptr.next.event.begin))
+       	{
+       		node.next = ptr.next;
+       		ptr.next = node;
+       	break;
+       	}
+       	ptr = ptr.next;
+       	}
+       	if(ptr.next==null)
+       		ptr.next = node;
+       }}
     }
  
     boolean AddRegularEvent(RegularEventNode node) {            	
