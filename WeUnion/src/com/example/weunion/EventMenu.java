@@ -15,11 +15,7 @@ import comp3111project.Events;
 
 
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -31,21 +27,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.app.ProgressDialog;
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class EventMenu extends FragmentActivity implements ActionBar.TabListener {
+public class EventMenu extends FragmentActivity {
 PagerAdapter pageradapter;
 JSONParser jsonParser = new JSONParser();
-ActionBar bar;
-ViewPager pager;
 private ProgressDialog pDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_menu);
-	    Global.active_user.name = User.getInstance().getId();  
+	    Global.active_user.name = User.getInstance().getId();   
+	    
 	    new AttemptShowEvents().execute();
 		
 	   
+	
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -55,42 +50,12 @@ private ProgressDialog pDialog;
 
 private void initialize()
 {
-	
 	List<Fragment> fragment_list = new Vector<Fragment>();
 	fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
 	this.pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
- pager = (ViewPager)super.findViewById(R.id.event_menu_viewpager);
+ViewPager pager = (ViewPager)super.findViewById(R.id.event_menu_viewpager);
 pager.setAdapter(pageradapter);
-pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
-		{
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onPageSelected(int p) {
-				// TODO Auto-generated method stub
-				bar.setSelectedNavigationItem(p);
-			}
-	
-		}
-		);
-
-bar = getActionBar();
-//bar.setHomeButtonEnabled(false);
-//bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-bar.addTab(bar.newTab().setText("All Events"));
-bar.addTab(bar.newTab().setText("Events by me"));
 }
 	class AttemptShowEvents extends AsyncTask<String, String, String> {
 		
@@ -171,19 +136,4 @@ bar.addTab(bar.newTab().setText("Events by me"));
 		        pDialog.dismiss();
 		    pDialog = null;
 		}
-	@Override
-	public void onTabReselected(Tab arg0, android.app.FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void onTabSelected(Tab tab, android.app.FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		pager.setCurrentItem(tab.getPosition());
-	}
-	@Override
-	public void onTabUnselected(Tab arg0, android.app.FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
 }
