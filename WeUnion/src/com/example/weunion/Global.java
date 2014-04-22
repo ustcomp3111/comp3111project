@@ -17,7 +17,7 @@ public class Global {
 	public static comp3111project.User active_user = new comp3111project.User("",0) , other_users = null;
     public static final  User Null = null;
     public static EventNode active_event = new EventNode(no_name_event);
-    public static ArrayList<String> eventlist = new ArrayList<String>();
+    public static ArrayList<String> eventlist = new ArrayList<String>(),list_of_event_by_me = new ArrayList<String>();;
     //  public static int count = 0, test = 1;
    // public static String string = "";
     {
