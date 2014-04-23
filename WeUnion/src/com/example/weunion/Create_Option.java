@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Create_Option extends Activity implements OnClickListener{
@@ -35,7 +37,8 @@ public class Create_Option extends Activity implements OnClickListener{
 	private static final String VOTE_URL ="http://124.244.60.23/weu/startvote.php";
 
     private static final String TAG_MESSAGE = "message";
-	private EditText title, option;
+	private TextView eventname2;
+    private EditText title, option;
 	private Button add,ok;
 	private ListView list;
 	ArrayList<HashMap<String,String>> optionlist = new ArrayList<HashMap<String,String>>();
@@ -48,13 +51,16 @@ public class Create_Option extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_create_option);
 		// Show the Up button in the action bar.
 		
+			eventname2 = (TextView) findViewById(R.id.t_ename2);
 			title = (EditText)findViewById(R.id.editText_title);
 			option = (EditText)findViewById(R.id.editText_option);
 			add=(Button)findViewById(R.id.b_add_option);
 			ok=(Button)findViewById(R.id.b_ok);
 			list=(ListView)findViewById(R.id.listOption);
 
-		
+			Intent intent = getIntent();
+			String eee = intent.getStringExtra(Select_Event.EVENT_NAME);
+			eventname2.setText(eee);
 			adapter = new SimpleAdapter(this, optionlist,
 			R.layout.optionlist,
 			new String[] {TAG_OPTIONNUM,TAG_OPTIONNAME, TAG_VOTE},
@@ -124,7 +130,7 @@ public class Create_Option extends Activity implements OnClickListener{
 			// TODO Auto-generated method stub
 
             String titlename = title.getText().toString();
-            String eventname = "meeting"; //event name
+            String eventname = eventname2.getText().toString(); //event name
     		
             try {
             	

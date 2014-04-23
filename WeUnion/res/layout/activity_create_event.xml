@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/t_ename2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/create_event_month"
@@ -52,7 +52,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/create_event_date"
-        android:layout_toRightOf="@+id/textView2"
+        android:layout_toRightOf="@+id/t_ename2"
         android:ems="10"
         android:inputType="number" />
 

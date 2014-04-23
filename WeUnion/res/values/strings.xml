@@ -17,5 +17,6 @@
     <string name="title_activity_schedule">Schedule</string>
     <string name="title_activity_event_menu">EventMenu</string>
     <string name="title_activity_event_by_me">EventByMe</string>
+    <string name="title_activity_select__event">Select_Event</string>
 
 </resources>

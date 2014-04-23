@@ -76,6 +76,10 @@
             android:name="com.example.weunion.EventByMe"
             android:label="@string/title_activity_event_by_me" >
         </activity>
+        <activity
+            android:name="com.example.weunion.Select_Event"
+            android:label="@string/title_activity_select__event" >
+        </activity>
     </application>
 
 </manifest>

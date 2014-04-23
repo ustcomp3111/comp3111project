@@ -28,7 +28,7 @@ public class Polling extends Activity {
 		hold.setOnClickListener (new OnClickListener() {
 			
 		public void onClick (View v){
-			Intent intent=new Intent (v.getContext(),Create_Option.class);
+			Intent intent=new Intent (v.getContext(),Select_Event.class);
 			startActivityForResult(intent,0);
 			finish();
 			
