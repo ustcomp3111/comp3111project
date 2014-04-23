@@ -169,14 +169,15 @@ public final class R {
         public static final int activity_event_by_me=0x7f030003;
         public static final int activity_event_detail=0x7f030004;
         public static final int activity_event_menu=0x7f030005;
-        public static final int activity_login=0x7f030006;
-        public static final int activity_main_menu=0x7f030007;
-        public static final int activity_msgbox=0x7f030008;
-        public static final int activity_polling=0x7f030009;
-        public static final int activity_schedule=0x7f03000a;
-        public static final int activity_vote=0x7f03000b;
-        public static final int msglist=0x7f03000c;
-        public static final int optionlist=0x7f03000d;
+        public static final int activity_friend=0x7f030006;
+        public static final int activity_login=0x7f030007;
+        public static final int activity_main_menu=0x7f030008;
+        public static final int activity_msgbox=0x7f030009;
+        public static final int activity_polling=0x7f03000a;
+        public static final int activity_schedule=0x7f03000b;
+        public static final int activity_vote=0x7f03000c;
+        public static final int msglist=0x7f03000d;
+        public static final int optionlist=0x7f03000e;
     }
     public static final class menu {
         public static final int create__option=0x7f070000;
@@ -186,13 +187,14 @@ public final class R {
         public static final int event_by_me=0x7f070004;
         public static final int event_detail=0x7f070005;
         public static final int event_menu=0x7f070006;
-        public static final int login=0x7f070007;
-        public static final int main_menu=0x7f070008;
-        public static final int menu=0x7f070009;
-        public static final int msgbox=0x7f07000a;
-        public static final int polling=0x7f07000b;
-        public static final int schedule=0x7f07000c;
-        public static final int vote=0x7f07000d;
+        public static final int friend=0x7f070007;
+        public static final int login=0x7f070008;
+        public static final int main_menu=0x7f070009;
+        public static final int menu=0x7f07000a;
+        public static final int msgbox=0x7f07000b;
+        public static final int polling=0x7f07000c;
+        public static final int schedule=0x7f07000d;
+        public static final int vote=0x7f07000e;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;

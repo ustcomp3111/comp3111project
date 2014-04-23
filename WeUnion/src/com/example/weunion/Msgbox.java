@@ -1,10 +1,10 @@
 package com.example.weunion;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -27,12 +27,15 @@ import android.widget.Toast;
 
 public class Msgbox extends Activity implements OnClickListener{
 	
+	public int msg_id = -1;
+	public int p_msg_id = -1;
 	private ListView msg;
 	private Button post;
 	private EditText my_msg;
 	private TextView event;
 	
 	ArrayList<HashMap<String,String>> postlist = new ArrayList<HashMap<String,String>>();
+	ArrayList<HashMap<String,String>> templist = new ArrayList<HashMap<String,String>>();
 	private SimpleAdapter adapter;
 	 // Progress Dialog
     private ProgressDialog pDialog;
@@ -73,9 +76,19 @@ public class Msgbox extends Activity implements OnClickListener{
 		
 		post.setOnClickListener(this);
 		new AttemptDisplayMsg().execute();
+
+        Timer timer = new Timer();
+        timer.schedule(task, 5000, 5000);
 	
 	}
 
+	 @Override
+	    protected void onDestroy() {
+	 // TODO Auto-generated method stub
+	 super.onDestroy();
+	 task.cancel();
+	    }
+	 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -88,6 +101,69 @@ public class Msgbox extends Activity implements OnClickListener{
 		}
 	}
 	
+	class UpdateMsg extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+		
+		@Override
+		protected String doInBackground(String... args) {
+			// TODO Auto-generated method stub
+            String Event = "First_test_event";
+
+            try {
+            	
+            	List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("event_name", Event));
+                params.add(new BasicNameValuePair("msg_id", Integer.toString(msg_id)));
+
+                JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_URL, params);
+
+                if (jArray!=null) {
+
+                    for(int i = 0; i <jArray.length();i++ ) {
+                 	                   JSONObject json = jArray.getJSONObject(i);
+                 	                   msg_id = json.getInt("msg_id");
+                 	                   HashMap<String, String> map = new HashMap<String, String>();
+                 	                   map.put(TAG_USERNAME, json.getString(TAG_USERNAME)+" wrote :");
+                 	                   map.put(TAG_MSG, json.getString(TAG_MSG));
+                 	                   map.put(TAG_TIME, "at "+json.getString(TAG_TIME));
+                 	                   
+                 	                   templist.add(map);
+                    }
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            
+            return null;			
+		}		
+		
+		protected void onPostExecute(String file_url) {            
+        	if (p_msg_id<msg_id) {
+        		for (HashMap<String, String> map : templist) postlist.add(map);
+        		adapter.notifyDataSetChanged();
+        		templist.clear();
+        		p_msg_id = msg_id;
+        	}            
+        	msg.setSelection(msg.getAdapter().getCount() - 1);
+        }
+	}
+	
+	private TimerTask task = new TimerTask() {
+		
+		 @Override
+		 public void run() {
+		  // TODO Auto-generated method stub
+			 new UpdateMsg().execute();	
+		 }
+	};
+
+
 	class AttemptDisplayMsg extends AsyncTask<String, String, String> {
 
 		boolean failure = false;
@@ -119,12 +195,13 @@ public class Msgbox extends Activity implements OnClickListener{
 
                     for(int i = 0; i <jArray.length();i++ ) {
                  	                   JSONObject json = jArray.getJSONObject(i);
+                 	                   msg_id = json.getInt("msg_id");
                  	                   HashMap<String, String> map = new HashMap<String, String>();
                  	                   map.put(TAG_USERNAME, json.getString(TAG_USERNAME)+" wrote :");
                  	                   map.put(TAG_MSG, json.getString(TAG_MSG));
                  	                   map.put(TAG_TIME, "at "+json.getString(TAG_TIME));
                  	                   
-                 	                   postlist.add(map);
+                 	                   postlist.add(map);                 	                   
 										
                     }
                 }
@@ -133,7 +210,7 @@ public class Msgbox extends Activity implements OnClickListener{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
- 
+
             return null;
 			
 		}
@@ -142,7 +219,12 @@ public class Msgbox extends Activity implements OnClickListener{
         	if (pDialog != null) { 
                 pDialog.dismiss();
            }
-          
+            
+        	if (p_msg_id<msg_id) {
+        		adapter.notifyDataSetChanged();
+        		p_msg_id = msg_id;
+        	}            
+
         }
         
  		
@@ -155,12 +237,6 @@ public class Msgbox extends Activity implements OnClickListener{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Msgbox.this);
-            pDialog.setMessage("Posting...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-
         }
 		
 		@Override
@@ -179,13 +255,6 @@ public class Msgbox extends Activity implements OnClickListener{
                 JSONArray jArray = jsonParser.makeHttpRequest(POST_URL, params);
 
                 JSONObject json = jArray.getJSONObject(0);
-
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put(TAG_USERNAME, username+" wrote :");
-                map.put(TAG_MSG, my_msg.getText().toString());
-                map.put(TAG_TIME, "at "+getCurrentTimeStamp());
-                 
-                postlist.add(map);
    
                	return json.getString(TAG_MESSAGE);
 
@@ -198,38 +267,19 @@ public class Msgbox extends Activity implements OnClickListener{
 		}
 
         protected void onPostExecute(String file_url) {
-        	if (pDialog != null) { 
-                pDialog.dismiss();
-           }
+            my_msg.setText("");
             if (file_url != null){
             	Toast.makeText(Msgbox.this, file_url, Toast.LENGTH_LONG).show(); 
             }
-            my_msg.setText("");
+            task.run();
+        	if (p_msg_id<msg_id) {
+        		adapter.notifyDataSetChanged();
+        		 msg.setSelection(msg.getAdapter().getCount() - 1);
+        		p_msg_id = msg_id;
+        	}
         }
 		
 	}
 	
-	@Override
-	public void onPause() {
-	    super.onPause();
-
-	    if(pDialog != null)
-	        pDialog.dismiss();
-	    pDialog = null;
-	}
-	
-	public static String getCurrentTimeStamp(){
-	    try {
-
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	        String currentTimeStamp = dateFormat.format(new Date()); // Find todays date
-
-	        return currentTimeStamp;
-	    } catch (Exception e) {
-	        e.printStackTrace();
-
-	        return null;
-	    }
-	}
 
 }
