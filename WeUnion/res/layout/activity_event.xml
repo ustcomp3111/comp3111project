@@ -22,10 +22,10 @@
         android:layout_height="242dp" >
     </ListView>
 
-    <Button
+<!--    <Button
         android:id="@+id/event_create_new_event_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create new event" />
-
+-->
 </TableLayout>

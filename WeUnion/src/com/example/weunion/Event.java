@@ -28,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 public class Event extends Fragment implements OnClickListener{
-	Button create_event_button;
+	//Button create_event_button;
 
 LinearLayout l;
 
@@ -36,8 +36,8 @@ LinearLayout l;
 
 		l = (LinearLayout) inflater.inflate(R.layout.activity_event,container,false);
 		ListView event_listview = (ListView) l.findViewById(R.id.my_events);
-	     create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
-	     create_event_button.setOnClickListener(this);
+	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
+	     //create_event_button.setOnClickListener(this);
 	     
 	    event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1, Global.eventlist));
@@ -72,7 +72,7 @@ public void onClick(View v) {
 	
 		Intent i ;
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.event_create_new_event_button)
+		if(v.getId()==R.id.event_menu_create_event_button)
 		{ i = new Intent(getActivity(), CreateEvent.class);
 		//finish();
 		startActivity(i);
