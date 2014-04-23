@@ -18,7 +18,7 @@
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/trytry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/create_event_month"
@@ -41,9 +41,9 @@
         android:id="@+id/create_event_year"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toLeftOf="@+id/textView1"
+        android:layout_alignBaseline="@+id/trytry"
+        android:layout_alignBottom="@+id/trytry"
+        android:layout_toLeftOf="@+id/trytry"
         android:ems="10"
         android:inputType="number" />
 

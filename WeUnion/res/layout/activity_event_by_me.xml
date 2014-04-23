@@ -10,7 +10,7 @@
     tools:context=".EventByMe" >
 
       <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/trytry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Events By Me"

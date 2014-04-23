@@ -12,11 +12,14 @@ public class MyAdapter extends BaseExpandableListAdapter {
 	String[] parentList={"Where to eat?","Theme of Event","Duration"};
 	String[][] childList={{"LG7","LG1","Cafe","McDonalds"},{"Bicycle","BBQ","Sing K"},{"1 hour","2 hour","3 hour"}};
 	
+	
 	public MyAdapter(Context context) {
 		// TODO Auto-generated constructor stub
 		this.context=context;
 	}
 
+	
+	
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
