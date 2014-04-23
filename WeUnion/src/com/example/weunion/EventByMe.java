@@ -28,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 public class EventByMe extends Fragment implements OnClickListener{
-	//Button create_event_button;
+	Button create_event_button;
 	
 LinearLayout l;
 
@@ -36,8 +36,8 @@ LinearLayout l;
 
 		l = (LinearLayout) inflater.inflate(R.layout.activity_event_by_me,container,false);
 		ListView event_listview = (ListView) l.findViewById(R.id.event_by_me_list);
-	  //   create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
-	    // create_event_button.setOnClickListener(this);
+	     create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
+	     create_event_button.setOnClickListener(this);
 	  
 	  
 	    	 event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
@@ -63,7 +63,6 @@ LinearLayout l;
 				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), EventDetail.class);
 				startActivity(i);
-			
 			}
 	    	
 	    });
@@ -71,15 +70,14 @@ LinearLayout l;
 	}
 
 public void onClick(View v) {
-	/*
+	
 		Intent i ;
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_create_new_event_button)
 		{ i = new Intent(getActivity(), CreateEvent.class);
-		
+		//finish();
 		startActivity(i);
 		}
-	*/
 	}
 
 	

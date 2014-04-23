@@ -13,20 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:orientation="vertical" >
-
         <android.support.v4.view.ViewPager
-            android:id="@+android:id/event_menu_viewpager"
-            android:layout_width="fill_parent"
-            android:layout_height="385dp" />
-
+    android:id="@+android:id/event_menu_viewpager"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    />
     </LinearLayout>
-
-      <Button
-          android:id="@+id/event_menu_create_event_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_centerHorizontal="true"
-          android:text="Create new event" />
-
 </RelativeLayout>
