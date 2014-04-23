@@ -33,7 +33,7 @@ public class Msgbox extends Activity implements OnClickListener{
 	private Button post;
 	private EditText my_msg;
 	private TextView event;
-	
+	private String temp_message;
 	ArrayList<HashMap<String,String>> postlist = new ArrayList<HashMap<String,String>>();
 	ArrayList<HashMap<String,String>> templist = new ArrayList<HashMap<String,String>>();
 	private SimpleAdapter adapter;
@@ -94,7 +94,11 @@ public class Msgbox extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.post:
-				new AttemptPost().execute();
+				if (!my_msg.getText().toString().equals("")) {
+					temp_message = my_msg.getText().toString();
+					my_msg.setText("");
+					new AttemptPost().execute();
+				}
 			break;
 		default:
 			break;
@@ -226,8 +230,7 @@ public class Msgbox extends Activity implements OnClickListener{
         	}            
 
         }
-        
- 		
+         		
 	}
 	
 	class AttemptPost extends AsyncTask<String, String, String> {
@@ -250,7 +253,7 @@ public class Msgbox extends Activity implements OnClickListener{
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("eventname", TAG_TEST_EVENT)); //put event variable here, now for testing only
-                params.add(new BasicNameValuePair("msg",my_msg.getText().toString()));
+                params.add(new BasicNameValuePair("msg",temp_message));
 
                 JSONArray jArray = jsonParser.makeHttpRequest(POST_URL, params);
 
