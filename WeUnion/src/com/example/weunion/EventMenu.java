@@ -23,6 +23,7 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
@@ -31,15 +32,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public class EventMenu extends FragmentActivity implements ActionBar.TabListener{
+public class EventMenu extends FragmentActivity implements ActionBar.TabListener,OnClickListener{
 PagerAdapter pageradapter;
 JSONParser jsonParser = new JSONParser();
 private ProgressDialog pDialog;
 ActionBar bar;
 ViewPager pager;
 List<Fragment> fragment_list;
-	
+Button create_event_button;
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,6 +77,10 @@ List<Fragment> fragment_list;
 			
 		}
 	});
+     create_event_button = (Button) findViewById(R.id.event_menu_create_event_button);
+    create_event_button.setOnClickListener(this);
+    
+	
 	 bar = getActionBar();
 	    bar.setHomeButtonEnabled(false);
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -111,7 +117,9 @@ private void initialize()
 			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
 		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
 		               Events tmp ;
-
+Global.eventlist = new ArrayList<String>();
+Global.list_of_event_by_me = new ArrayList<String>();
+Global.active_user.event_ptr = null;
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 					
 		   			//EventNode ptr = Global.active_user.event_ptr;
@@ -189,4 +197,15 @@ private void initialize()
 	 	// TODO Auto-generated method stub
 	 	
 	 }
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent i ;
+		// TODO Auto-generated method stub
+		if(v.getId()==R.id.event_menu_create_event_button)
+		{ i = new Intent(this, CreateEvent.class);
+		finish();
+		startActivity(i);
+		}
+	}
 }
