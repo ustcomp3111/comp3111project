@@ -156,7 +156,6 @@ public final class R {
         public static final int textTime24a=0x7f08006b;
         public static final int textTue=0x7f080048;
         public static final int textView0=0x7f080040;
-        public static final int textView1=0x7f080002;
         public static final int textView3=0x7f08000e;
         public static final int textView4=0x7f080008;
         public static final int textView5=0x7f08000c;
@@ -164,6 +163,7 @@ public final class R {
         public static final int textYear=0x7f080041;
         public static final int thursdayRelativeLayout=0x7f080073;
         public static final int top=0x7f080032;
+        public static final int trytry=0x7f080002;
         public static final int tuesdayRelativeLayout=0x7f080070;
         public static final int username=0x7f08002f;
         public static final int wednesdayRelativeLayout=0x7f080071;
