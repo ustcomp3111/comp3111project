@@ -2,6 +2,7 @@ package com.example.weunion;
 
 import java.util.ArrayList;
 import android.app.DatePickerDialog;
+import android.os.Bundle;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,13 +24,20 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
-public class CreateEvent extends Activity implements OnClickListener {
+public class CreateEvent extends Activity implements OnClickListener,RadioGroup.OnCheckedChangeListener {
 	Button confirm_button,set_date_button,set_begin_time_button;
 	EditText set_event_name,
 	set_event_year, set_event_month ,set_event_day ,
-	set_event_duration,set_event_venue, set_event_start_time;
-	DatePicker datepicker;
+	set_event_duration,set_event_venue;//, set_event_start_time;
+	TextView selected_date;
+	RadioGroup select_min;
+	RadioButton radio_button_00,radio_button_15,radio_button_30,radio_button_45;
+	NumberPicker select_hour;
 	JSONArray jArray;
 	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
 	 Intent i;
@@ -37,7 +45,7 @@ public class CreateEvent extends Activity implements OnClickListener {
 	 private ProgressDialog pDialog;
 	 private Calendar now;
 	 final int SET_DATE_DIALOG_ID = 1;
-	 int year,month,day;
+	 int year,month,day,hour,min;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,14 +57,32 @@ public class CreateEvent extends Activity implements OnClickListener {
 			 //set_event_year = (EditText)findViewById(R.id.create_event_year);
 			 //set_event_month = (EditText)findViewById(R.id.create_event_month);
 			// set_event_day = (EditText)findViewById(R.id.create_event_day);
-			 set_event_start_time = (EditText)findViewById(R.id.create_event_time);
+			// set_event_start_time = (EditText)findViewById(R.id.create_event_time);
 			 set_event_venue = (EditText)findViewById(R.id.create_event_venue);
 			 set_event_duration = (EditText)findViewById(R.id.create_event_set_duration);
 			 confirm_button.setOnClickListener(this);
 			 set_date_button.setOnClickListener(this);
+			 selected_date = (TextView) findViewById(R.id.Create_event_selected_date);
+			 now = Calendar.getInstance();
+			 selected_date.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR));
+			 select_min = (RadioGroup) findViewById(R.id.create_event_set_min_radioGroup);
+			 select_hour = (NumberPicker) findViewById(R.id.create_event_hour_Picker);
+			 select_hour.setMaxValue(23);
+			 select_hour.setMinValue(0);
+			 select_hour.setValue(0);
+			 select_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
+             public void onValueChange(NumberPicker view, int oldValue, int newValue) {
+               
+               hour = newValue;
+             }
+        });
+			 radio_button_00 = (RadioButton) findViewById(R.id.create_event_set_00);
+			 radio_button_15 = (RadioButton) findViewById(R.id.create_event_set_15);
+			 radio_button_30 = (RadioButton) findViewById(R.id.create_event_set_30);
+			 radio_button_45 = (RadioButton) findViewById(R.id.create_event_set_45);
+			 select_min.setOnCheckedChangeListener(this);
 			 //set_begin_time_button.setOnClickListener(this);
 			// datepicker = (DatePicker) findViewById(R.id.create_event_datepicker);
-			
 			 //datepicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), null);
 			 
 			 
@@ -78,7 +104,7 @@ public class CreateEvent extends Activity implements OnClickListener {
     	
 		else if(v.getId()==R.id.create_event_set_date_button)
 		{
-			 now = Calendar.getInstance();
+			
 			 showDialog(SET_DATE_DIALOG_ID);
 			
 		}
@@ -99,10 +125,10 @@ public class CreateEvent extends Activity implements OnClickListener {
 	 	    year = y;
 	 	    month = m;
 	 	    day = d;
+	 	    selected_date.setText(d+"-"+m+"-"+y);
 	 		   // TODO Auto-generated method stub
 	 	   }
-	 	 },
-	      now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+	 	 },now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 	  
 	   default:
 	    return null;
@@ -136,7 +162,7 @@ public class CreateEvent extends Activity implements OnClickListener {
 		              // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(Integer.parseInt(set_event_duration.getText().toString())*4)));		    
-		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(Integer.parseInt(set_event_start_time.getText().toString())*4)));
+		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
 
 		                jArray = jsonParser.makeHttpRequest(Global.POST_URL, params2);
@@ -167,6 +193,21 @@ public class CreateEvent extends Activity implements OnClickListener {
 	            }
 	 
 	        }
+	}
+
+
+
+	@Override
+	public void onCheckedChanged(RadioGroup g, int id) {
+		// TODO Auto-generated method stub
+		if(id == radio_button_00.getId())
+			min = 0;
+		else if(id == radio_button_15.getId())
+			min = 1;
+		else if(id == radio_button_30.getId())
+			min = 2;
+		else
+			min = 3;
 	}
 	
 }

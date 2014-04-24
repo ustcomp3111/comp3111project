@@ -7,52 +7,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CreateEvent" >
-<!--     <EditText
-        android:id="@+id/create_event_month"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_event_date"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="number" />-->
-<!--
-    <EditText
-        android:id="@+id/create_event_year"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/trytry"
-        android:layout_alignBottom="@+id/trytry"
-        android:layout_toLeftOf="@+id/trytry"
-        android:ems="10"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/create_event_day"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_event_date"
-        android:layout_toRightOf="@+id/t_ename2"
-        android:ems="10"
-        android:inputType="number" />
--->
-
-    <EditText
-        android:id="@+id/create_event_time"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toRightOf="@+id/textView5"
-        android:ems="10"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/create_event_time"
-        android:layout_toRightOf="@+id/create_event_time"
-        android:text="hour(s)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/create_event_confirm_button"
@@ -66,7 +20,6 @@
         android:id="@+id/create_event_event_name_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/create_event_date"
         android:layout_alignParentRight="true"
         android:ems="10" >
 
@@ -93,24 +46,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/create_event_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_event_event_name"
-        android:layout_centerHorizontal="true"
-        android:text="Date (YYYY-MM-DD):"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/create_event_set_date_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_event_date"
-        android:layout_marginTop="18dp"
-        android:layout_toRightOf="@+id/create_event_event_name"
-        android:text="Set Date" />
-
-    <TextView
         android:id="@+id/create_event_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,6 +68,7 @@
         android:id="@+id/create_event_set_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView5"
         android:layout_alignTop="@+id/create_event_duration"
         android:layout_toRightOf="@+id/create_event_duration"
         android:ems="10"
@@ -142,10 +78,78 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/create_event_event_name"
+        android:layout_alignLeft="@+id/create_event_duration"
         android:layout_below="@+id/create_event_set_date_button"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:text="Starting time (0-23):"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/create_event_event_name"
+        android:layout_alignTop="@+id/create_event_set_date_button"
+        android:text="Selected\nDate"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/create_event_set_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_event_event_name"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/Create_event_selected_date"
+        android:text="Set Date" />
+
+    <TextView
+        android:id="@+id/Create_event_selected_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/create_event_event_name_input"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <NumberPicker
+        android:id="@+id/create_event_hour_Picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/create_event_duration"
+        android:layout_alignLeft="@+id/textView1" />
+
+    <RadioGroup
+        android:id="@+id/create_event_set_min_radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/create_event_set_date_button"
+        android:layout_centerVertical="true" >
+
+        <RadioButton
+            android:id="@+id/create_event_set_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="00" />
+
+        <RadioButton
+            android:id="@+id/create_event_set_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15" />
+
+        <RadioButton
+            android:id="@+id/create_event_set_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30" />
+        
+        <RadioButton
+            android:id="@+id/create_event_set_45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45" />   
+        
+    </RadioGroup>
 
 </RelativeLayout>
