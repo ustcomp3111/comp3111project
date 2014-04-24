@@ -29,13 +29,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 public class EventByMe extends Fragment implements OnClickListener{
 	//Button create_event_button;
-	
+	ListView event_listview;
 LinearLayout l;
 
 	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 		l = (LinearLayout) inflater.inflate(R.layout.activity_event_by_me,container,false);
-		ListView event_listview = (ListView) l.findViewById(R.id.event_by_me_list);
+		event_listview = (ListView) l.findViewById(R.id.event_by_me_list);
 	  //   create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
 	    // create_event_button.setOnClickListener(this);
 	  
@@ -69,7 +69,7 @@ LinearLayout l;
 	    });
 	    return l;
 	}
-
+	
 public void onClick(View v) {
 	/*
 		Intent i ;

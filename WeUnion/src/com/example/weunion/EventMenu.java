@@ -87,6 +87,7 @@ Button create_event_button;
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
 		
+		
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -135,17 +136,7 @@ Global.active_user.event_ptr = null;
 		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));
 		            	 
 		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		           	    /*
-		           	     if(ptr == null)
-		   				{
-		   					ptr = new EventNode(tmp);
-		   					Global.active_user.event_ptr = ptr;
-		   				}
-		           	    else
-		           	    {
-		           	    	ptr.next = new EventNode(tmp);
-		           	    	ptr = ptr.next;
-		           	    }*/
+		         
 		              }
 		              EventNode ptr = Global.active_user.event_ptr;
 		              while(ptr!=null)
@@ -171,7 +162,7 @@ Global.active_user.event_ptr = null;
 	        	if (pDialog != null) { 
 	                pDialog.dismiss();
 	           }
-
+	        
 		 }
 }
 	 @Override

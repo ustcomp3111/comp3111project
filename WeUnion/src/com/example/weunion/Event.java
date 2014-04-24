@@ -29,13 +29,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 public class Event extends Fragment implements OnClickListener{
 	//Button create_event_button;
-
+	ListView event_listview;
 LinearLayout l;
 
 	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 		l = (LinearLayout) inflater.inflate(R.layout.activity_event,container,false);
-		ListView event_listview = (ListView) l.findViewById(R.id.my_events);
+		event_listview = (ListView) l.findViewById(R.id.my_events);
 	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
 	     //create_event_button.setOnClickListener(this);
 	     
