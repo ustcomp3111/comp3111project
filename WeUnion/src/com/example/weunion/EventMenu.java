@@ -142,9 +142,13 @@ Global.active_user.event_ptr = null;
 		              while(ptr!=null)
 		              {          
 		            	  if(ptr.event.host.name.equals(Global.active_user.name))
+		            	  {
 		       		  Global.list_of_event_by_me.add(ptr.event.event_name);
-	            	  Global.eventlist.add(ptr.event.event_name);
-		              ptr = ptr.next;
+		            	  Global.event_by_me_id.add(ptr.event.event_id);
+		            	  }
+		            	 Global.eventlist.add(ptr.event.event_name);
+		            	 Global.event_id_list.add(ptr.event.event_id);
+		            	 ptr = ptr.next;
 		              }
 		          
 		       	

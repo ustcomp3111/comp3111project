@@ -49,10 +49,10 @@ LinearLayout l;
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
 				EventNode ptr =  Global.active_user.event_ptr;;
-				String event_name = (String) a.getAdapter().getItem(position);
+				
 				while(ptr!=null)
 				{
-					 if (ptr.event.event_name == event_name)
+					 if (ptr.event.event_id == Global.event_by_me_id.get(position))
 				{
 						 Global.active_event =new EventNode (ptr.event);
 				break;

@@ -1,12 +1,22 @@
 package com.example.weunion;
 
+import java.util.List;
+import java.util.Vector;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class EventDetail extends Activity {
-
+public class EventDetail extends FragmentActivity implements OnClickListener{
+	ViewPager pager;
+	List<Fragment> fragment_list;
+	PagerAdapter pageradapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,6 +34,13 @@ TextView event = (TextView) findViewById(R.id.event_detail_eventname);
 	end.setText(Global.active_event.event.end.toString());	
 	duration.setText(Integer.toString(Global.active_event.event.duration/4)+" hours "+(Integer.toString((Global.active_event.event.duration%4)*15))+" minutes");
 	venue.setText(Global.active_event.event.location);	
+	fragment_list = new Vector<Fragment>();
+	fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
+	
+	pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
+	pager = (ViewPager)super.findViewById(R.id.event_detail_viewpager);
+pager.setAdapter(pageradapter);
+
 	}
 
 	@Override
@@ -31,6 +48,12 @@ TextView event = (TextView) findViewById(R.id.event_detail_eventname);
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.event_detail, menu);
 		return true;
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

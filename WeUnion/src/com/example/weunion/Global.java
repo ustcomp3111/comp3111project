@@ -1,6 +1,7 @@
 package com.example.weunion;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import comp3111project.DateAndTime;
 import comp3111project.Events;
@@ -18,6 +19,7 @@ public class Global {
     public static final  User Null = null;
     public static EventNode active_event = new EventNode(no_name_event);
     public static ArrayList<String> eventlist = new ArrayList<String>(),list_of_event_by_me = new ArrayList<String>();;
+    public static ArrayList<Integer> event_id_list = new ArrayList<Integer>(),event_by_me_id = new ArrayList<Integer>();
     //  public static int count = 0, test = 1;
    // public static String string = "";
     {
