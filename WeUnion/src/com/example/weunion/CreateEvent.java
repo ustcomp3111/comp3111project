@@ -1,6 +1,8 @@
 package com.example.weunion;
 
 import java.util.ArrayList;
+import android.app.DatePickerDialog;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -10,39 +12,54 @@ import org.json.JSONArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 public class CreateEvent extends Activity implements OnClickListener {
-	Button confirm_button;
-	EditText set_event_name, set_event_year, set_event_month ,
- set_event_day , set_event_duration,set_event_venue, set_event_start_time;
+	Button confirm_button,set_date_button,set_begin_time_button;
+	EditText set_event_name,
+	set_event_year, set_event_month ,set_event_day ,
+	set_event_duration,set_event_venue, set_event_start_time;
+	DatePicker datepicker;
 	JSONArray jArray;
 	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
 	 Intent i;
 	 JSONParser jsonParser = new JSONParser();
 	 private ProgressDialog pDialog;
+	 private Calendar now;
+	 final int SET_DATE_DIALOG_ID = 1;
+	 int year,month,day;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_event);
 
-			 confirm_button = (Button)findViewById(R.id.b_create_event);
+			 confirm_button = (Button)findViewById(R.id.create_event_confirm_button);
+			 set_date_button = (Button) findViewById(R.id.create_event_set_date_button);
 			 set_event_name = (EditText)findViewById(R.id.create_event_event_name_input);
-			 set_event_year = (EditText)findViewById(R.id.create_event_year);
-			 set_event_month = (EditText)findViewById(R.id.create_event_month);
-			 set_event_day = (EditText)findViewById(R.id.create_event_day);
+			 //set_event_year = (EditText)findViewById(R.id.create_event_year);
+			 //set_event_month = (EditText)findViewById(R.id.create_event_month);
+			// set_event_day = (EditText)findViewById(R.id.create_event_day);
 			 set_event_start_time = (EditText)findViewById(R.id.create_event_time);
 			 set_event_venue = (EditText)findViewById(R.id.create_event_venue);
-			 set_event_duration = (EditText)findViewById(R.id.create_event_hour_input);
+			 set_event_duration = (EditText)findViewById(R.id.create_event_set_duration);
 			 confirm_button.setOnClickListener(this);
-
+			 set_date_button.setOnClickListener(this);
+			 //set_begin_time_button.setOnClickListener(this);
+			// datepicker = (DatePicker) findViewById(R.id.create_event_datepicker);
+			
+			 //datepicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), null);
+			 
+			 
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,13 +69,47 @@ public class CreateEvent extends Activity implements OnClickListener {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.b_create_event)
+		if(v.getId()==R.id.create_event_confirm_button)
 			new AttemptCreateEvent().execute();
-    	Log.d("hi","here2");
+    	
+		else if(v.getId()==R.id.create_event_set_date_button)
+		{
+			 now = Calendar.getInstance();
+			 showDialog(SET_DATE_DIALOG_ID);
+			
+		}
+/*		else if(v.getId()==R.id.create_event_set_begin_time_button) 
+		{}
+	*/	Log.d("hi","here2");
 	}
+	@Override
+	 protected Dialog onCreateDialog(int id) {
+	  // TODO Auto-generated method stub
+	  switch(id){
+	   case SET_DATE_DIALOG_ID:
+	    return new DatePickerDialog(this,
+	    new DatePickerDialog.OnDateSetListener(){
+	 	   @Override
+	 	   public void onDateSet(DatePicker view, int y, 
+	 	     int m, int d) {
+	 	    year = y;
+	 	    month = m;
+	 	    day = d;
+	 		   // TODO Auto-generated method stub
+	 	   }
+	 	 },
+	      now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+	  
+	   default:
+	    return null;
+	    
+	  }
+	 }
+	    
 
 
 	class AttemptCreateEvent extends AsyncTask<String, String, String> {
@@ -82,9 +133,10 @@ public class CreateEvent extends Activity implements OnClickListener {
 
 		               params2.add(new BasicNameValuePair("event_name",set_event_name.getText().toString()));
 		               params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
-		               params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
-		               params2.add(new BasicNameValuePair("duration",set_event_duration.getText().toString()));		    
-		               params2.add(new BasicNameValuePair("begin_time",Integer.toString((Integer.parseInt(set_event_start_time.getText().toString())))));
+		              // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
+		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
+		               params2.add(new BasicNameValuePair("duration",String.valueOf(Integer.parseInt(set_event_duration.getText().toString())*4)));		    
+		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(Integer.parseInt(set_event_start_time.getText().toString())*4)));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
 
 		                jArray = jsonParser.makeHttpRequest(Global.POST_URL, params2);
@@ -116,4 +168,6 @@ public class CreateEvent extends Activity implements OnClickListener {
 	 
 	        }
 	}
+	
 }
+

@@ -7,36 +7,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CreateEvent" >
-
-    <EditText
+<!--     <EditText
         android:id="@+id/create_event_month"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/create_event_date"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/trytry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/create_event_month"
-        android:layout_alignBottom="@+id/create_event_month"
-        android:layout_toLeftOf="@+id/create_event_month"
-        android:text="----"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/t_ename2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/create_event_month"
-        android:layout_alignBottom="@+id/create_event_month"
-        android:layout_toRightOf="@+id/create_event_month"
-        android:text="----"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
+        android:inputType="number" />-->
+<!--
     <EditText
         android:id="@+id/create_event_year"
         android:layout_width="100dp"
@@ -55,35 +34,44 @@
         android:layout_toRightOf="@+id/t_ename2"
         android:ems="10"
         android:inputType="number" />
+-->
+
+    <EditText
+        android:id="@+id/create_event_time"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_toRightOf="@+id/textView5"
+        android:ems="10"
+        android:inputType="number" />
 
     <TextView
-        android:id="@+id/create_event_duration"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/create_event_time"
-        android:layout_marginTop="16dp"
-        android:text="Duration:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/create_event_duration"
-        android:layout_below="@+id/create_event_duration"
-        android:layout_marginTop="16dp"
-        android:text="Venue:"
+        android:layout_alignBottom="@+id/create_event_time"
+        android:layout_toRightOf="@+id/create_event_time"
+        android:text="hour(s)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/b_create_event"
+        android:id="@+id/create_event_confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/create_event_duration"
         android:text="Create event" />
+
+    <EditText
+        android:id="@+id/create_event_event_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/create_event_date"
+        android:layout_alignParentRight="true"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
     <TextView
         android:id="@+id/create_event_event_name"
@@ -91,75 +79,73 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="14dp"
         android:text="Event name:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/create_event_event_name_input"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/create_event_day"
-        android:layout_below="@+id/create_event_event_name"
-        android:ems="10" />
+        android:layout_above="@+id/create_event_confirm_button"
+        android:layout_alignLeft="@+id/create_event_duration"
+        android:text="Venue:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/create_event_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/create_event_event_name_input"
+        android:layout_below="@+id/create_event_event_name"
+        android:layout_centerHorizontal="true"
         android:text="Date (YYYY-MM-DD):"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <Button
+        android:id="@+id/create_event_set_date_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/create_event_month"
-        android:layout_marginTop="14dp"
-        android:text="Starting time (0-23):"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/create_event_time"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toRightOf="@+id/create_event_date"
-        android:ems="10"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/create_event_hour_input"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/create_event_duration"
-        android:layout_toRightOf="@+id/create_event_duration"
-        android:ems="10"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_below="@+id/create_event_date"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/create_event_event_name"
+        android:text="Set Date" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/create_event_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/create_event_hour_input"
-        android:layout_toRightOf="@+id/create_event_hour_input"
-        android:text="hour(s)"
+        android:layout_above="@+id/create_event_venue"
+        android:layout_marginBottom="47dp"
+        android:layout_toLeftOf="@+id/create_event_event_name_input"
+        android:text="Duration:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/create_event_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/create_event_duration"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:ems="10" />
+
+    <EditText
+        android:id="@+id/create_event_set_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/create_event_duration"
+        android:layout_toRightOf="@+id/create_event_duration"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/create_event_event_name"
+        android:layout_below="@+id/create_event_set_date_button"
+        android:layout_marginTop="14dp"
+        android:text="Starting time (0-23):"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
