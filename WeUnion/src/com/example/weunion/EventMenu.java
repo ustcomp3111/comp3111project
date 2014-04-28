@@ -49,7 +49,9 @@ Button create_event_button;
 	    Global.active_user.name = User.getInstance().getId();   
 	   
 	    new AttemptShowEvents().execute();
-		fragment_list = new Vector<Fragment>();
+	    while(!Global.initialiation_is_completed);
+		
+	    	fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
 		fragment_list.add(Fragment.instantiate(this, EventByMe.class.getName()));
 		
@@ -87,7 +89,7 @@ Button create_event_button;
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
 		
-		
+	Global.initialiation_is_completed = false;	
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -158,7 +160,7 @@ Global.active_user.event_ptr = null;
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
 			
 		}
-		  
+	        Global.initialiation_is_completed = true;
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -166,7 +168,7 @@ Global.active_user.event_ptr = null;
 	        	if (pDialog != null) { 
 	                pDialog.dismiss();
 	           }
-	        
+
 		 }
 }
 	 @Override

@@ -67,12 +67,12 @@ public final class R {
         public static final int et_pw=0x7f080035;
         public static final int event_by_me_list=0x7f080020;
         public static final int event_detail_begin_time=0x7f080026;
-        public static final int event_detail_begin_time_value=0x7f08002b;
+        public static final int event_detail_begin_time_value=0x7f08002a;
         public static final int event_detail_duration=0x7f080024;
         public static final int event_detail_duration_value=0x7f080025;
         public static final int event_detail_end_time=0x7f080027;
         public static final int event_detail_end_time_value=0x7f08002c;
-        public static final int event_detail_event_holder_value=0x7f08002a;
+        public static final int event_detail_event_holder_value=0x7f08002b;
         public static final int event_detail_eventname=0x7f080021;
         public static final int event_detail_guest_list=0x7f08002e;
         public static final int event_detail_holder=0x7f080023;
