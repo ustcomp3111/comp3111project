@@ -5,18 +5,21 @@ import java.util.Vector;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class EventDetail extends FragmentActivity implements OnClickListener{
 	ViewPager pager;
 	List<Fragment> fragment_list;
 	PagerAdapter pageradapter;
+	Button msg_box;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,11 +27,12 @@ public class EventDetail extends FragmentActivity implements OnClickListener{
 TextView host = (TextView) findViewById(R.id.event_detail_event_holder_value);
 TextView begin = (TextView) findViewById(R.id.event_detail_begin_time_value);
 TextView end = (TextView) findViewById(R.id.event_detail_end_time_value);	
-TextView duration = (TextView) findViewById(R.id.event_detail_duration_value);	
+TextView duration = (TextView) findViewById(R.id.event_detail_value_of_duration);	
 TextView venue = (TextView) findViewById(R.id.event_detail_venue_value);
-TextView event = (TextView) findViewById(R.id.event_detail_eventname);
-
-	event.setText(Global.active_event.event.event_name);
+TextView event = (TextView) findViewById(R.id.event_detail_event_name);
+msg_box = (Button) findViewById(R.id.event_detail_msg_box_button);
+msg_box.setOnClickListener(this);
+event.setText(Global.active_event.event.event_name);
 	host.setText(Global.active_event.event.host.name);
 	begin.setText(Global.active_event.event.begin.toString());
 	end.setText(Global.active_event.event.end.toString());	
@@ -51,9 +55,15 @@ pager.setAdapter(pageradapter);
 	}
 
 	@Override
-	public void onClick(View arg0) {
+	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		Intent i ;
 		
+		if(v.getId()==R.id.event_detail_msg_box_button)
+		{ i = new Intent(this, Msgbox.class);
+		finish();
+		startActivity(i);
+		}
 	}
 
 }
