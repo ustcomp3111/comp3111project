@@ -47,9 +47,9 @@ Button create_event_button;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_menu);
 	    Global.active_user.name = User.getInstance().getId();   
-	   
+	   //Global.active_user = new User(0,User.getInstance().getId());
 	    new AttemptShowEvents().execute();
-	    while(!Global.initialiation_is_completed);
+	    while(!Global.initialization_is_completed);
 		
 	    	fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
@@ -89,7 +89,7 @@ Button create_event_button;
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
 		
-	Global.initialiation_is_completed = false;	
+	Global.initialization_is_completed = false;	
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -160,7 +160,7 @@ Global.active_user.event_ptr = null;
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
 			
 		}
-	        Global.initialiation_is_completed = true;
+	        Global.initialization_is_completed = true;
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -196,7 +196,7 @@ Global.active_user.event_ptr = null;
 	 }
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		
 		Intent i ;
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_menu_create_event_button)

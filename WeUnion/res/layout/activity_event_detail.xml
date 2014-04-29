@@ -19,15 +19,6 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/event_detail_event_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Event Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/event_detail_begin_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,15 +90,6 @@
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/event_detail_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/event_detail_event_name"
-        android:layout_toLeftOf="@+id/event_detail_guest_list"
-        android:text="Host: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
    
 
     <TextView
@@ -119,59 +101,14 @@
         android:text="Guests"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/create_event_pending_guest_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/create_event_not_going_guest_button"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/create_event_not_going_guest_button"
-        android:layout_toRightOf="@+id/create_event_not_going_guest_button"
-        android:text="Pending: 00" />
-
-    <Button
-        android:id="@+id/create_event_all_guest_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/create_event_going_guest_button"
-        android:layout_toLeftOf="@+id/create_event_going_guest_button"
-        android:text="All: 00" />
-
-    <Button
-        android:id="@+id/create_event_not_going_guest_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+android:id/event_detail_viewpager"
-        android:layout_toRightOf="@+id/event_detail_venue"
-        android:text="Decline: 00" />
-
-    <Button
-        android:id="@+id/create_event_going_guest_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/event_detail_guest_list"
-        android:layout_toLeftOf="@+id/create_event_not_going_guest_button"
-        android:text="Join: 00" />
-
-    <Button
-        android:id="@+id/event_detail_msg_box_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/event_detail_event_name"
-        android:layout_alignParentBottom="true"
-        android:text="Message box" />
-
     <android.support.v4.view.ViewPager
         android:id="@+android:id/event_detail_viewpager"
         android:layout_width="fill_parent"
         android:layout_height="254dp"
-        android:layout_alignLeft="@+id/create_event_all_guest_button"
-        android:layout_below="@+id/create_event_all_guest_button" >
+        android:layout_above="@+id/event_detail_msg_box_button"
+        android:layout_alignLeft="@+id/event_detail_all_guest_button"
+        android:layout_below="@+id/event_detail_all_guest_button" >
+
     </android.support.v4.view.ViewPager>
 
     <TextView
@@ -182,5 +119,58 @@
         android:layout_toRightOf="@+id/linearLayout1"
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/event_detail_msg_box_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/event_detail_holder"
+        android:layout_alignParentBottom="true"
+        android:text="Message box" />
+
+    <TextView
+        android:id="@+id/event_detail_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/event_detail_guest_list"
+        android:text="Host: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/event_detail_all_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_detail_guest_list"
+        android:layout_toLeftOf="@+id/event_detail_begin_time"
+        android:text="All: 00" />
+
+    <Button
+        android:id="@+id/event_detail_going_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+android:id/event_detail_viewpager"
+        android:layout_alignLeft="@+id/event_detail_begin_time"
+        android:text="Join: 00" />
+
+    <Button
+        android:id="@+id/event_detail_not_going_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+android:id/event_detail_viewpager"
+        android:layout_toRightOf="@+id/event_detail_going_guest_button"
+        android:text="Decline: 00" />
+
+    <Button
+        android:id="@+id/event_detail_pending_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+android:id/event_detail_viewpager"
+        android:layout_toRightOf="@+id/event_detail_not_going_guest_button"
+        android:text="Pending: 00" />
 
 </RelativeLayout>

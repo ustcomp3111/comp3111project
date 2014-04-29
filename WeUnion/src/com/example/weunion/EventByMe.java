@@ -48,7 +48,7 @@ LinearLayout l;
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
-				EventNode ptr =  Global.active_user.event_ptr;;
+				EventNode ptr =  Global.active_user.event_ptr;
 				
 				while(ptr!=null)
 				{
