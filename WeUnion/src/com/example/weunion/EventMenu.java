@@ -122,6 +122,8 @@ private void initialize()
 		               Events tmp ;
 Global.eventlist = new ArrayList<String>();
 Global.list_of_event_by_me = new ArrayList<String>();
+Global.event_id_list = new ArrayList<Integer>();
+Global.event_by_me_id = new ArrayList<Integer>();
 Global.active_user.event_ptr = null;
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 					

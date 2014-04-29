@@ -206,4 +206,9 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 			startActivity(i);
 			}*/
 		}
-	}
+		@Override
+		public void onBackPressed() {
+		    finish();
+		    startActivity(new Intent(this,EventDetail.class));
+		}	
+}

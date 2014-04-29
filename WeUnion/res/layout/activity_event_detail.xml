@@ -173,4 +173,13 @@
         android:layout_toRightOf="@+id/event_detail_not_going_guest_button"
         android:text="Pending: 00" />
 
+    <Button
+        android:id="@+id/event_detail_setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/event_detail_msg_box_button"
+        android:layout_alignBottom="@+id/event_detail_msg_box_button"
+        android:layout_toRightOf="@+id/event_detail_msg_box_button"
+        android:text="Settings" />
+
 </RelativeLayout>

@@ -111,7 +111,11 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		else if(set_event_venue.getText().toString().trim().length() ==0)
 			Toast.makeText(getApplicationContext(),"Venue cannot be empty!", Toast.LENGTH_LONG).show();
 		else
+		{
 			new AttemptCreateEvent().execute();
+			    
+			
+		}
 		}
 		else if(v.getId()==R.id.create_event_set_date_button)
 		{
@@ -169,8 +173,9 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 
 
 		               params2.add(new BasicNameValuePair("event_name",set_event_name.getText().toString()));
-		               params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
-		              // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
+		              // params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
+		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
+		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(Integer.parseInt(set_event_duration.getText().toString())*4)));		    
 		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
@@ -191,7 +196,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		}
 		catch(Exception e)
 		{
-			 //Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();		
+			 Toast.makeText(getApplicationContext(),"Failed to create event!", Toast.LENGTH_LONG).show();		
 		}
 			// TODO Auto-generated method stub
 			return null;
@@ -221,6 +226,9 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			min = 3;
 	     selected_time.setText(hour+":"+min*15);
 	}
-	
+	public void onBackPressed() {
+	    finish();
+	    startActivity(new Intent(this,EventMenu.class));
+	}	
 }
 

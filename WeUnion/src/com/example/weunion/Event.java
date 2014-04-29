@@ -54,13 +54,15 @@ LinearLayout l;
 					 if (ptr.event.event_id == Global.event_id_list.get(position))
 				{
 						 Global.active_event =new EventNode (ptr.event);
-				break;
+						 Toast.makeText(getActivity(),"Host: "+Global.active_event.event.host.name, Toast.LENGTH_LONG).show();
+						 break;
 				}
 					 else 
 						 ptr = ptr.next;
 				}
 				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), EventDetail.class);
+				getActivity().finish();
 				startActivity(i);
 			}
 	    	
@@ -70,14 +72,14 @@ LinearLayout l;
 
 public void onClick(View v) {
 	
-		Intent i ;
+	/*	Intent i ;
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_menu_create_event_button)
 		{ i = new Intent(getActivity(), CreateEvent.class);
-		//finish();
+		getActivity().finish();
 		startActivity(i);
 		}
-	}
+	*/}
 
 	
 	}

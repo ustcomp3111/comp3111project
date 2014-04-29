@@ -14,12 +14,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventDetail extends FragmentActivity implements OnClickListener{
 	ViewPager pager;
 	List<Fragment> fragment_list;
 	PagerAdapter pageradapter;
-	Button msg_box,all_guest,joined_guest,declined_guest,pending_guest;
+	Button msg_box,all_guest,joined_guest,declined_guest,pending_guest,setting;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,11 +37,13 @@ all_guest =  (Button) findViewById(R.id.event_detail_all_guest_button);
 joined_guest =  (Button) findViewById(R.id.event_detail_going_guest_button);
 declined_guest = (Button) findViewById(R.id.event_detail_not_going_guest_button);
 pending_guest =  (Button) findViewById(R.id.event_detail_pending_guest_button);
+setting =  (Button) findViewById(R.id.event_detail_setting_button);
 msg_box.setOnClickListener(this);
 all_guest.setOnClickListener(this);
 joined_guest.setOnClickListener(this);
 declined_guest.setOnClickListener(this);
 pending_guest.setOnClickListener(this);
+setting.setOnClickListener(this);
 //event.setText(Global.active_event.event.event_name);
 	host.setText(Global.active_event.event.host.name);
 	begin.setText(Global.active_event.event.begin.toString());
@@ -69,31 +72,50 @@ pager.setAdapter(pageradapter);
 		Intent i = new Intent(this, Msgbox.class);
 		
 		if(v.getId()==R.id.event_detail_msg_box_button)
-		{ 
-		finish();
-		}
-		else if (v.getId()==R.id.event_detail_all_guest_button)
+		{
+			finish();
+			startActivity(i);
+		}				
+		 if (v.getId()==R.id.event_detail_all_guest_button)
 		{
 			i = new Intent(this, GuestList.class);
 		Global.guest_list_choice = 0;
+		finish();
+		startActivity(i);
 		}
 		else if (v.getId()==R.id.event_detail_going_guest_button)
 		{
 			i = new Intent(this, GuestList.class);
 		Global.guest_list_choice = 1;
+		finish();
+		startActivity(i);
 		}
 		else if (v.getId()==R.id.event_detail_not_going_guest_button)
 		{
 			i = new Intent(this, GuestList.class);
 		Global.guest_list_choice = 2;
+		finish();
+		startActivity(i);
 		}
 		else if (v.getId()==R.id.event_detail_pending_guest_button)
 		{
 			i = new Intent(this, GuestList.class);
 		Global.guest_list_choice = 3;
-		}
+		finish();
 		startActivity(i);
+		}
+		else if (v.getId()==R.id.event_detail_setting_button)
+		{
+			if (Global.active_user.name.equals(Global.active_event.event.host.name))
+				 Toast.makeText(getApplicationContext(),"not implemented yet", Toast.LENGTH_LONG).show();
+			else
+				 Toast.makeText(getApplicationContext(),"You are allowed to modify this event", Toast.LENGTH_LONG).show();
+		}
+			
 	
 	}
-
+	public void onBackPressed() {
+	    finish();
+	    startActivity(new Intent(this,EventMenu.class));
+	}
 }
