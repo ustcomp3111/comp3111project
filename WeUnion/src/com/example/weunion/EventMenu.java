@@ -23,6 +23,7 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
@@ -31,23 +32,26 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public class EventMenu extends FragmentActivity implements ActionBar.TabListener{
+public class EventMenu extends FragmentActivity implements ActionBar.TabListener,OnClickListener{
 PagerAdapter pageradapter;
 JSONParser jsonParser = new JSONParser();
 private ProgressDialog pDialog;
 ActionBar bar;
 ViewPager pager;
 List<Fragment> fragment_list;
-	
+Button create_event_button;
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_menu);
 	    Global.active_user.name = User.getInstance().getId();   
-	   
+	   //Global.active_user = new User(0,User.getInstance().getId());
 	    new AttemptShowEvents().execute();
-		fragment_list = new Vector<Fragment>();
+	    while(!Global.initialization_is_completed);
+		
+	    	fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
 		fragment_list.add(Fragment.instantiate(this, EventByMe.class.getName()));
 		
@@ -75,12 +79,17 @@ List<Fragment> fragment_list;
 			
 		}
 	});
+     create_event_button = (Button) findViewById(R.id.event_menu_create_event_button);
+    create_event_button.setOnClickListener(this);
+    
+	
 	 bar = getActionBar();
 	    bar.setHomeButtonEnabled(false);
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
 		
+	Global.initialization_is_completed = false;	
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -111,7 +120,11 @@ private void initialize()
 			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
 		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
 		               Events tmp ;
-
+Global.eventlist = new ArrayList<String>();
+Global.list_of_event_by_me = new ArrayList<String>();
+Global.event_id_list = new ArrayList<Integer>();
+Global.event_by_me_id = new ArrayList<Integer>();
+Global.active_user.event_ptr = null;
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 					
 		   			//EventNode ptr = Global.active_user.event_ptr;
@@ -127,25 +140,19 @@ private void initialize()
 		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));
 		            	 
 		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		           	    /*
-		           	     if(ptr == null)
-		   				{
-		   					ptr = new EventNode(tmp);
-		   					Global.active_user.event_ptr = ptr;
-		   				}
-		           	    else
-		           	    {
-		           	    	ptr.next = new EventNode(tmp);
-		           	    	ptr = ptr.next;
-		           	    }*/
+		         
 		              }
 		              EventNode ptr = Global.active_user.event_ptr;
 		              while(ptr!=null)
 		              {          
 		            	  if(ptr.event.host.name.equals(Global.active_user.name))
+		            	  {
 		       		  Global.list_of_event_by_me.add(ptr.event.event_name);
-	            	  Global.eventlist.add(ptr.event.event_name);
-		              ptr = ptr.next;
+		            	  Global.event_by_me_id.add(ptr.event.event_id);
+		            	  }
+		            	 Global.eventlist.add(ptr.event.event_name);
+		            	 Global.event_id_list.add(ptr.event.event_id);
+		            	 ptr = ptr.next;
 		              }
 		          
 		       	
@@ -155,7 +162,7 @@ private void initialize()
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
 			
 		}
-		  
+	        Global.initialization_is_completed = true;
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -189,4 +196,15 @@ private void initialize()
 	 	// TODO Auto-generated method stub
 	 	
 	 }
+	@Override
+	public void onClick(View v) {
+		
+		Intent i ;
+		// TODO Auto-generated method stub
+		if(v.getId()==R.id.event_menu_create_event_button)
+		{ i = new Intent(this, CreateEvent.class);
+		finish();
+		startActivity(i);
+		}
+	}
 }

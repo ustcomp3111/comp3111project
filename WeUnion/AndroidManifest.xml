@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
     <application
@@ -46,8 +46,7 @@
         </activity>
         <activity
             android:name="com.example.weunion.Msgbox"
-            android:label="@string/title_activity_msgbox"
-            android:windowSoftInputMode="stateHidden" >
+            android:label="@string/title_activity_msgbox" >
         </activity>
         <activity
             android:name="com.example.weunion.Polling"
@@ -80,6 +79,10 @@
         <activity
             android:name="com.example.weunion.Select_Event"
             android:label="@string/title_activity_select__event" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.GuestList"
+            android:label="@string/title_activity_guest_list" >
         </activity>
     </application>
 

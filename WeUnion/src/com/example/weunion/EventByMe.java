@@ -28,16 +28,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 public class EventByMe extends Fragment implements OnClickListener{
-	Button create_event_button;
-	
+	//Button create_event_button;
+	ListView event_listview;
 LinearLayout l;
 
 	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 		l = (LinearLayout) inflater.inflate(R.layout.activity_event_by_me,container,false);
-		ListView event_listview = (ListView) l.findViewById(R.id.event_by_me_list);
-	     create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
-	     create_event_button.setOnClickListener(this);
+		event_listview = (ListView) l.findViewById(R.id.event_by_me_list);
+	  //   create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
+	    // create_event_button.setOnClickListener(this);
 	  
 	  
 	    	 event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
@@ -48,11 +48,11 @@ LinearLayout l;
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
-				EventNode ptr =  Global.active_user.event_ptr;;
-				String event_name = (String) a.getAdapter().getItem(position);
+				EventNode ptr =  Global.active_user.event_ptr;
+				
 				while(ptr!=null)
 				{
-					 if (ptr.event.event_name == event_name)
+					 if (ptr.event.event_id == Global.event_by_me_id.get(position))
 				{
 						 Global.active_event =new EventNode (ptr.event);
 				break;
@@ -62,22 +62,25 @@ LinearLayout l;
 				}
 				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), EventDetail.class);
+				getActivity().finish();
 				startActivity(i);
+			
 			}
 	    	
 	    });
 	    return l;
 	}
-
-public void onClick(View v) {
 	
+public void onClick(View v) {
+	/*
 		Intent i ;
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_create_new_event_button)
 		{ i = new Intent(getActivity(), CreateEvent.class);
-		//finish();
+		
 		startActivity(i);
 		}
+	*/
 	}
 
 	

@@ -62,11 +62,7 @@ public class Login extends Activity implements OnClickListener{
 				new AttemptLogin().execute();
 			break;
 		case R.id.b_reg:
-				if ((id.getText().toString().length()>15) || (pass.getText().toString().length()>15)) {
-	            	Toast.makeText(Login.this, "ID and Password are limited to 15 char only!" , Toast.LENGTH_LONG).show(); 
-				} else if ((id.getText().toString().length()<7) || (pass.getText().toString().length()<7)) {
-	            	Toast.makeText(Login.this, "ID and Password should be longer than 6 char!" , Toast.LENGTH_LONG).show(); 
-				} else new AttemptRegister().execute();
+				new AttemptRegister().execute();
 			break;
 
 		default:

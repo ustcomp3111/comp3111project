@@ -1,3 +1,5 @@
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,12 +10,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Event_detail" >
 
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/event_detail_begin_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/event_detail_holder"
+        android:layout_below="@+id/event_detail_holder"
+        android:text="Begins at: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/event_detail_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/event_detail_begin_time"
+        android:layout_below="@+id/event_detail_begin_time"
+        android:text="Ends at: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/event_detail_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/event_detail_end_time"
+        android:layout_below="@+id/event_detail_end_time"
+        android:text="Duration: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/event_detail_venue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/event_detail_duration"
+        android:layout_below="@+id/event_detail_duration"
+        android:text="Venue: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/event_detail_begin_time_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/event_detail_end_time"
         android:layout_alignLeft="@+id/event_detail_event_holder_value"
+        android:layout_below="@+id/event_detail_holder"
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -21,24 +67,13 @@
         android:id="@+id/event_detail_end_time_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/event_detail_end_time"
-        android:layout_alignBottom="@+id/event_detail_end_time"
+        android:layout_above="@+id/event_detail_duration"
         android:layout_alignLeft="@+id/event_detail_begin_time_value"
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/event_detail_venue_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/event_detail_venue"
-        android:layout_alignBottom="@+id/event_detail_venue"
-        android:layout_alignLeft="@+id/event_detail_end_time_value"
-        android:text="(none)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/event_detail_duration_value"
+        android:id="@+id/event_detail_value_of_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/event_detail_end_time_value"
@@ -47,70 +82,104 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/event_detail_begin_time"
+        android:id="@+id/event_detail_venue_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/event_detail_eventname"
-        android:layout_below="@+id/event_detail_holder"
-        android:text="Begins at:"
+        android:layout_alignLeft="@+id/event_detail_value_of_duration"
+        android:layout_below="@+id/event_detail_value_of_duration"
+        android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/event_detail_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/event_detail_eventname"
-        android:layout_below="@+id/event_detail_eventname"
-        android:text="Host"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+   
 
     <TextView
-        android:id="@+id/event_detail_end_time"
+        android:id="@+id/event_detail_guest_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/event_detail_begin_time"
-        android:layout_below="@+id/event_detail_begin_time"
-        android:text="Ends at:"
+        android:layout_below="@+id/event_detail_venue"
+        android:layout_centerHorizontal="true"
+        android:text="Guests"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/event_detail_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/event_detail_duration_value"
-        android:layout_alignBottom="@+id/event_detail_duration_value"
-        android:layout_alignLeft="@+id/event_detail_end_time"
-        android:text="Duration:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <android.support.v4.view.ViewPager
+        android:id="@+android:id/event_detail_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="254dp"
+        android:layout_above="@+id/event_detail_msg_box_button"
+        android:layout_alignLeft="@+id/event_detail_all_guest_button"
+        android:layout_below="@+id/event_detail_all_guest_button" >
 
-    <TextView
-        android:id="@+id/event_detail_venue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/event_detail_duration"
-        android:layout_below="@+id/event_detail_duration"
-        android:text="Venue:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/event_detail_eventname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:text="Event Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    </android.support.v4.view.ViewPager>
 
     <TextView
         android:id="@+id/event_detail_event_holder_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/event_detail_begin_time_value"
-        android:layout_marginLeft="54dp"
-        android:layout_toRightOf="@+id/event_detail_begin_time"
+        android:layout_toRightOf="@+id/linearLayout1"
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/event_detail_msg_box_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/event_detail_holder"
+        android:layout_alignParentBottom="true"
+        android:text="Message box" />
+
+    <TextView
+        android:id="@+id/event_detail_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/event_detail_guest_list"
+        android:text="Host: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/event_detail_all_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_detail_guest_list"
+        android:layout_toLeftOf="@+id/event_detail_begin_time"
+        android:text="All: 00" />
+
+    <Button
+        android:id="@+id/event_detail_going_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+android:id/event_detail_viewpager"
+        android:layout_alignLeft="@+id/event_detail_begin_time"
+        android:text="Join: 00" />
+
+    <Button
+        android:id="@+id/event_detail_not_going_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+android:id/event_detail_viewpager"
+        android:layout_toRightOf="@+id/event_detail_going_guest_button"
+        android:text="Decline: 00" />
+
+    <Button
+        android:id="@+id/event_detail_pending_guest_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+android:id/event_detail_viewpager"
+        android:layout_toRightOf="@+id/event_detail_not_going_guest_button"
+        android:text="Pending: 00" />
+
+    <Button
+        android:id="@+id/event_detail_setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/event_detail_msg_box_button"
+        android:layout_alignBottom="@+id/event_detail_msg_box_button"
+        android:layout_toRightOf="@+id/event_detail_msg_box_button"
+        android:text="Settings" />
 
 </RelativeLayout>

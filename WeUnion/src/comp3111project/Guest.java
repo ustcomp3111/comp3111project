@@ -4,7 +4,9 @@ package comp3111project;
 public class Guest 
 {
     Guest next = null;
-    boolean attend = false;
+    
+    boolean respond = false, attend = false;
+    
     User user; 
     Guest(User u)
     {
