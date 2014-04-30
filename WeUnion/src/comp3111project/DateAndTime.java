@@ -23,7 +23,10 @@ class DateAndTime {
  String TimeSlotToString()
  {
 	 int hour = this.time_slot/4, minute = 15*(this.time_slot%4);
+if(minute!=0)
 	 return Integer.toString(hour)+":"+Integer.toString(minute);
+else
+	 return Integer.toString(hour)+":00";
  }
     public String toString ()
  {

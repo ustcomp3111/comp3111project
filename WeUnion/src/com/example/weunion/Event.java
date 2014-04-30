@@ -54,7 +54,6 @@ LinearLayout l;
 					 if (ptr.event.event_id == Global.event_id_list.get(position))
 				{
 						 Global.active_event =new EventNode (ptr.event);
-						 Toast.makeText(getActivity(),"Host: "+Global.active_event.event.host.name, Toast.LENGTH_LONG).show();
 						 break;
 				}
 					 else 

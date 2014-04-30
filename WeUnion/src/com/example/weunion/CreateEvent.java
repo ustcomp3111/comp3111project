@@ -33,11 +33,12 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 	Button confirm_button,set_date_button,set_begin_time_button;
 	EditText set_event_name,
 	set_event_year, set_event_month ,set_event_day ,
-	set_event_duration,set_event_venue;//, set_event_start_time;
-	TextView selected_time;
-	RadioGroup select_min;
-	RadioButton radio_button_00,radio_button_15,radio_button_30,radio_button_45;
-	NumberPicker select_hour;
+	set_event_venue;//, set_event_start_time;
+	TextView selected_time,selected_duration;
+	RadioGroup select_min,select_duration_min;
+	RadioButton radio_button_00,radio_button_15,radio_button_30,radio_button_45,
+	radio_button_duration_00,radio_button_duration_15,radio_button_duration_30,radio_button_duration_45;
+	NumberPicker select_hour,select_duration_hour;
 	JSONArray jArray;
 	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
 	 Intent i;
@@ -45,13 +46,13 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 	 private ProgressDialog pDialog;
 	 private Calendar now;
 	 final int SET_DATE_DIALOG_ID = 1;
-	 int year,month,day,hour,min;
+	 int year,month,day,hour,min,duration_hour,duration_min;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_event);
 
-			 confirm_button = (Button)findViewById(R.id.create_event_button);
+			 confirm_button = (Button)findViewById(R.id.create_event_confirm_button);
 			 set_date_button = (Button) findViewById(R.id.create_event_set_date_button);
 			 now = Calendar.getInstance();
 			 set_date_button.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR));
@@ -60,14 +61,15 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 //set_event_month = (EditText)findViewById(R.id.create_event_month);
 			// set_event_day = (EditText)findViewById(R.id.create_event_day);
 			// set_event_start_time = (EditText)findViewById(R.id.create_event_time);
-			 set_event_venue = (EditText)findViewById(R.id.create_event_venue);
-			 set_event_duration = (EditText)findViewById(R.id.create_event_set_duration);
+			 set_event_venue = (EditText)findViewById(R.id.create_event_event_venue);
+			 //set_event_duration = (EditText)findViewById(R.id.create_event_set_duration);
 			 confirm_button.setOnClickListener(this);
 			 set_date_button.setOnClickListener(this);
 			 selected_time = (TextView) findViewById(R.id.create_event_selected_time);
-			 
+			 selected_duration = (TextView) findViewById(R.id.create_event_show_selected_duration);
 			 
 			 select_min = (RadioGroup) findViewById(R.id.create_event_set_min_radioGroup);
+			 select_duration_min = (RadioGroup) findViewById(R.id.create_event_set_duration_radioGroup);
 			 select_hour = (NumberPicker) findViewById(R.id.create_event_hour_Picker);
 			 select_hour.setMaxValue(23);
 			 select_hour.setMinValue(0);
@@ -76,7 +78,21 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {
                
                hour = newValue;
-             selected_time.setText(hour+":"+min*15);
+             if(min!=0)
+               selected_time.setText(hour+":"+min*15);
+             else
+            	 selected_time.setText(hour+":00"); 
+             }
+        });
+			 select_duration_hour = (NumberPicker) findViewById(R.id.create_event_duration_hour_Picker);
+			 select_duration_hour.setMaxValue(23);
+			 select_duration_hour.setMinValue(0);
+			 select_duration_hour.setValue(0);
+			 select_duration_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
+             public void onValueChange(NumberPicker view, int oldValue, int newValue) {
+               
+               duration_hour = newValue;
+             selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+"minutes");
              }
         });
 			 radio_button_00 = (RadioButton) findViewById(R.id.create_event_set_00);
@@ -84,6 +100,11 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 radio_button_30 = (RadioButton) findViewById(R.id.create_event_set_30);
 			 radio_button_45 = (RadioButton) findViewById(R.id.create_event_set_45);
 			 select_min.setOnCheckedChangeListener(this);
+			 radio_button_duration_00 = (RadioButton) findViewById(R.id.create_event_duration_set_00);
+			 radio_button_duration_15 = (RadioButton) findViewById(R.id.create_event_duration_set_15);
+			 radio_button_duration_30 = (RadioButton) findViewById(R.id.create_event_duration_set_30);
+			 radio_button_duration_45 = (RadioButton) findViewById(R.id.create_event_duration_set_45);
+			 select_duration_min.setOnCheckedChangeListener(this);
 			 //set_begin_time_button.setOnClickListener(this);
 			// datepicker = (DatePicker) findViewById(R.id.create_event_datepicker);
 			 //datepicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), null);
@@ -102,12 +123,12 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.create_event_button)
+		if(v.getId()==R.id.create_event_confirm_button)
 		{
 		if(set_event_name.getText().toString().trim().length() ==0)
 			Toast.makeText(getApplicationContext(),"Event name cannot be empty!", Toast.LENGTH_LONG).show();
-		else if(set_event_duration.getText().toString().trim().length() ==0)
-			Toast.makeText(getApplicationContext(),"Duration cannot be empty!", Toast.LENGTH_LONG).show();
+		else if(duration_hour==0&&duration_min==0)
+			Toast.makeText(getApplicationContext(),"Duration cannot be zero!", Toast.LENGTH_LONG).show();
 		else if(set_event_venue.getText().toString().trim().length() ==0)
 			Toast.makeText(getApplicationContext(),"Venue cannot be empty!", Toast.LENGTH_LONG).show();
 		else
@@ -177,7 +198,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
 		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
-		               params2.add(new BasicNameValuePair("duration",String.valueOf(Integer.parseInt(set_event_duration.getText().toString())*4)));		    
+		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    
 		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
 
@@ -222,9 +243,21 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			min = 1;
 		else if(id == radio_button_30.getId())
 			min = 2;
-		else
+		else if (id == radio_button_45.getId())
 			min = 3;
-	     selected_time.setText(hour+":"+min*15);
+		else if(id == radio_button_duration_00.getId())
+			duration_min = 0;
+		else if(id == radio_button_duration_15.getId())
+			duration_min = 1;
+		else if(id == radio_button_duration_30.getId())
+			duration_min = 2;
+		else if (id == radio_button_duration_45.getId())
+			duration_min = 3;
+	    if(min!=0) 
+		selected_time.setText(hour+":"+min*15);
+	    else
+	   	selected_time.setText(hour+":00");
+		selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+"minutes");
 	}
 	public void onBackPressed() {
 	    finish();
