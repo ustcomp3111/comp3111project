@@ -21,22 +21,26 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int expected2=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int weu_menu_bottom=0x7f020002;
-        public static final int weu_menu_left=0x7f020003;
-        public static final int weu_menu_middle=0x7f020004;
-        public static final int weu_menu_right=0x7f020005;
-        public static final int weu_menu_top=0x7f020006;
-        public static final int weunion_icon=0x7f020007;
+        public static final int card_background_green=0x7f020000;
+        public static final int card_background_red=0x7f020001;
+        public static final int chat_background_green=0x7f020002;
+        public static final int expected2=0x7f020003;
+        public static final int ic_action_new_w=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int weu_menu_bottom=0x7f020006;
+        public static final int weu_menu_left=0x7f020007;
+        public static final int weu_menu_middle=0x7f020008;
+        public static final int weu_menu_right=0x7f020009;
+        public static final int weu_menu_top=0x7f02000a;
+        public static final int weunion_icon=0x7f02000b;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f08008f;
+        public static final int LinearLayout1=0x7f080090;
         public static final int LinearLayout2=0x7f080085;
         public static final int RL=0x7f080035;
         public static final int RelativeLayout1=0x7f080048;
         public static final int TableLayout1=0x7f080013;
-        public static final int action_settings=0x7f080093;
+        public static final int action_settings=0x7f080094;
         public static final int addEvent=0x7f080050;
         public static final int b_add_option=0x7f08001b;
         public static final int b_confirm=0x7f08003b;
@@ -100,9 +104,10 @@ public final class R {
         public static final int mondayRelativeLayout=0x7f08007c;
         public static final int msg=0x7f080049;
         public static final int msg_event=0x7f08004a;
-        public static final int msglist_msg=0x7f08008d;
-        public static final int msglist_time=0x7f08008e;
-        public static final int msglist_username=0x7f08008c;
+        public static final int msglist_RL=0x7f08008c;
+        public static final int msglist_msg=0x7f08008e;
+        public static final int msglist_time=0x7f08008f;
+        public static final int msglist_username=0x7f08008d;
         public static final int myEvent01=0x7f08007b;
         public static final int myEvent02=0x7f08007d;
         public static final int myEvent03=0x7f080080;
@@ -126,11 +131,11 @@ public final class R {
         public static final int t_etitle=0x7f080016;
         public static final int t_hname=0x7f08008a;
         public static final int t_id=0x7f080037;
-        public static final int t_optionname=0x7f080091;
-        public static final int t_optionnum=0x7f080090;
+        public static final int t_optionname=0x7f080092;
+        public static final int t_optionnum=0x7f080091;
         public static final int t_pw=0x7f080039;
         public static final int t_vname=0x7f08008b;
-        public static final int t_votenum=0x7f080092;
+        public static final int t_votenum=0x7f080093;
         public static final int textDate0=0x7f080053;
         public static final int textDate1=0x7f080055;
         public static final int textDate2=0x7f080057;

@@ -73,6 +73,8 @@ pager.setAdapter(pageradapter);
 		
 		if(v.getId()==R.id.event_detail_msg_box_button)
 		{
+			//passing the name of event to msgbox
+			Msgbox.Event_Name = Global.active_event.event.event_name;
 			finish();
 			startActivity(i);
 		}				

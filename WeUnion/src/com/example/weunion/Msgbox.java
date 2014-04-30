@@ -52,7 +52,7 @@ public class Msgbox extends Activity implements OnClickListener{
     private static final String TAG_USERNAME = "user_name";
     private static final String TAG_MSG = "msg";
     
-    private static final String TAG_TEST_EVENT = "First_test_event";
+    public static String Event_Name = "First_test_event";	//default, use for debug
 
 
 	@Override
@@ -72,13 +72,13 @@ public class Msgbox extends Activity implements OnClickListener{
 		post = (Button) findViewById(R.id.post);
 		my_msg = (EditText) findViewById(R.id.post_msg);
 		event = (TextView) findViewById(R.id.msg_event);
-		event.setText(TAG_TEST_EVENT);
+		event.setText(Event_Name);
 		
 		post.setOnClickListener(this);
 		new AttemptDisplayMsg().execute();
 
         Timer timer = new Timer();
-        timer.schedule(task, 5000, 5000);
+        timer.schedule(task, 1000, 1500);
 	
 	}
 
@@ -111,12 +111,11 @@ public class Msgbox extends Activity implements OnClickListener{
 		@Override
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
-            String Event = "First_test_event";
 
             try {
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("event_name", Event));
+                params.add(new BasicNameValuePair("event_name", Event_Name));
                 params.add(new BasicNameValuePair("msg_id", Integer.toString(msg_id)));
 
                 JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_URL, params);
@@ -149,8 +148,9 @@ public class Msgbox extends Activity implements OnClickListener{
         		adapter.notifyDataSetChanged();
         		templist.clear();
         		p_msg_id = msg_id;
+        		msg.setSelection(msg.getAdapter().getCount() - 1);
         	}            
-        	msg.setSelection(msg.getAdapter().getCount() - 1);
+        	
         }
 	}
 	
@@ -182,12 +182,11 @@ public class Msgbox extends Activity implements OnClickListener{
 		@Override
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
-            String Event = "First_test_event";
 
             try {
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("event_name", Event));
+                params.add(new BasicNameValuePair("event_name", Event_Name));
 
                 JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_URL, params);
 
@@ -249,7 +248,7 @@ public class Msgbox extends Activity implements OnClickListener{
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("username", username));
-                params.add(new BasicNameValuePair("eventname", TAG_TEST_EVENT)); //put event variable here, now for testing only
+                params.add(new BasicNameValuePair("eventname", Event_Name)); //put event variable here, now for testing only
                 params.add(new BasicNameValuePair("msg",my_msg.getText().toString()));
 
                 JSONArray jArray = jsonParser.makeHttpRequest(POST_URL, params);

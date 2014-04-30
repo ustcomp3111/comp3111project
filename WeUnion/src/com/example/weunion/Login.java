@@ -14,6 +14,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -89,7 +90,7 @@ public class Login extends Activity implements OnClickListener{
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
 
-            int success;
+            int success =-1;
             String username = id.getText().toString();
             String password = pass.getText().toString();
     		User user = User.getInstance();
@@ -98,7 +99,8 @@ public class Login extends Activity implements OnClickListener{
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
-
+                
+                Log.d("Login","Fetch from "+LOGIN_URL);
                 JSONArray jArray = jsonParser.makeHttpRequest(LOGIN_URL, params);
 
                 JSONObject json = jArray.getJSONObject(0);
@@ -114,11 +116,10 @@ public class Login extends Activity implements OnClickListener{
                 	return json.getString(TAG_MESSAGE);
                 	
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                return ("Fail to connect to server!");
             }
- 
-            return null;
 			
 		}
 
