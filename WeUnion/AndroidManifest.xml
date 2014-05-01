@@ -111,7 +111,9 @@
         </activity>
         <activity
             android:name="com.example.weunion.Friend"
-            android:label="@string/title_activity_friend" >
+            android:label="@string/title_activity_friend" 
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
