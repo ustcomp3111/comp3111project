@@ -96,47 +96,41 @@
         android:id="@+id/event_info_event_holder_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/event_info_begin_time"
-        android:layout_toLeftOf="@+id/event_info_pending_guest_button"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/event_info_holder"
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/event_info_all_guest_button"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/event_info_guest_list"
-        android:layout_toLeftOf="@+id/event_info_going_guest_button"
         android:text="All: 00" />
 
     <Button
         android:id="@+id/event_info_going_guest_button"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/event_info_all_guest_button"
-        android:layout_alignBottom="@+id/event_info_all_guest_button"
-        android:layout_alignLeft="@+id/event_info_end_time"
+        android:layout_below="@+id/event_info_all_guest_button"
         android:text="Join: 00" />
 
     <Button
         android:id="@+id/event_info_not_going_guest_button"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/event_info_going_guest_button"
-        android:layout_alignBottom="@+id/event_info_going_guest_button"
-        android:layout_toRightOf="@+id/event_info_going_guest_button"
+        android:layout_below="@+id/event_info_going_guest_button"
         android:text="Decline: 00" />
 
     <Button
         android:id="@+id/event_info_pending_guest_button"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/event_info_not_going_guest_button"
-        android:layout_toRightOf="@+id/event_info_not_going_guest_button"
+        android:layout_below="@+id/event_info_not_going_guest_button"
         android:text="Pending: 00" />
 
     <TextView
