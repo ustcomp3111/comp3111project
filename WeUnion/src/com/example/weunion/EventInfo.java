@@ -59,40 +59,40 @@ return l;
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-/*		Intent i;
+		Intent i;
 		
 				
 		 if (v.getId()==R.id.event_detail_all_guest_button)
 		{
-			i = new Intent(this, GuestList.class);
+			i = new Intent(getActivity(), GuestList.class);
 		Global.guest_list_choice = 0;
-		finish();
+		getActivity().finish();
 		startActivity(i);
 		}
-		else if (v.getId()==R.id.event_detail_going_guest_button)
+		else if (v.getId()==R.id.event_info_going_guest_button)
 		{
-			i = new Intent(this, GuestList.class);
+			i = new Intent(getActivity(), GuestList.class);
 		Global.guest_list_choice = 1;
-		finish();
+		getActivity().finish();
 		startActivity(i);
 		}
-		else if (v.getId()==R.id.event_detail_not_going_guest_button)
+		else if (v.getId()==R.id.event_info_not_going_guest_button)
 		{
-			i = new Intent(this, GuestList.class);
+			i = new Intent(getActivity(), GuestList.class);
 		Global.guest_list_choice = 2;
-		finish();
+		getActivity().finish();
 		startActivity(i);
 		}
-		else if (v.getId()==R.id.event_detail_pending_guest_button)
+		else if (v.getId()==R.id.event_info_pending_guest_button)
 		{
-			i = new Intent(this, GuestList.class);
+			i = new Intent(getActivity(), GuestList.class);
 		Global.guest_list_choice = 3;
-		finish();
+		getActivity().finish();
 		startActivity(i);
 		}
 
 			
-	*/
+	
 	}
 
 

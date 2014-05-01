@@ -44,8 +44,9 @@ public class EventDetail extends FragmentActivity{
 
 		Msgbox.Event_Name = Global.active_event.event.event_name;
 	fragment_list = new Vector<Fragment>();
-	fragment_list.add(Fragment.instantiate(this, Msgbox.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, EventInfo.class.getName()));
+	fragment_list.add(Fragment.instantiate(this, Msgbox.class.getName()));
+	
 	pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
 	pager = (ViewPager)super.findViewById(R.id.event_detail_viewpager);
 pager.setAdapter(pageradapter);
