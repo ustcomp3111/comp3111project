@@ -22,7 +22,7 @@ public class Main_menu extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_main_menu);
 
 		username = (TextView) findViewById(R.id.username);
-		username.setText("Logged in as "+User.getInstance().getId());
+		username.setText("Logged in as "+User.getInstance().getName());
 		events = (ImageView) findViewById(R.id.top);
 		msgbox = (ImageView) findViewById(R.id.left);
 		startvote = (ImageView) findViewById(R.id.right);
