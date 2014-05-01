@@ -55,7 +55,11 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 confirm_button = (Button)findViewById(R.id.create_event_confirm_button);
 			 set_date_button = (Button) findViewById(R.id.create_event_set_date_button);
 			 now = Calendar.getInstance();
+			 year = now.get(Calendar.YEAR);
+			 month = now.get(Calendar.MONTH);
+			 day = now.get(Calendar.DAY_OF_MONTH);
 			 set_date_button.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR));
+			 
 			 set_event_name = (EditText)findViewById(R.id.create_event_event_name_input);
 			 //set_event_year = (EditText)findViewById(R.id.create_event_year);
 			 //set_event_month = (EditText)findViewById(R.id.create_event_month);
