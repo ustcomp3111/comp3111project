@@ -1,5 +1,7 @@
 package com.example.weunion;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +10,12 @@ import android.widget.TextView;
 
 public class MyAdapter extends BaseExpandableListAdapter {
 
+	JSONParser jsonParser = new JSONParser();
 	private Context context;
-	String[] parentList={"Where to eat?","Theme of Event","Duration"};
-	String[][] childList={{"LG7","LG1","Cafe","McDonalds"},{"Bicycle","BBQ","Sing K"},{"1 hour","2 hour","3 hour"}};
+	public static final String POLLING_URL ="http://124.244.60.23/weu/event.php";
+	public static ArrayList<String> parentList= new ArrayList<String>();
+	ArrayList<String> Allevent = new ArrayList<String>();
+	public static ArrayList<ArrayList<String>> childList=new ArrayList<ArrayList<String>>();
 	
 	
 	public MyAdapter(Context context) {
@@ -37,7 +42,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		TextView tv=new TextView(context);
-		tv.setText(childList[groupPosition][childPosition]);
+		tv.setText(childList.get(groupPosition).get(childPosition));
 		tv.setPadding(30, 10, 10, 10);
 		tv.setTextSize(25);
 		return tv;
@@ -46,7 +51,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 	@Override
 	public int getChildrenCount(int groupPosition) {
 		// TODO Auto-generated method stub
-		return childList[groupPosition].length;
+		return childList.get(groupPosition).size();
 	}
 
 	@Override
@@ -58,7 +63,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 	@Override
 	public int getGroupCount() {
 		// TODO Auto-generated method stub
-		return parentList.length;
+		return parentList.size();
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 			View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		TextView tv=new TextView(context);
-		tv.setText(parentList[groupPosition]);
+		tv.setText(parentList.get(groupPosition));
 		tv.setPadding(50, 10, 10, 10);
 		tv.setTextSize(25);
 		return tv;

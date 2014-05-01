@@ -35,12 +35,12 @@ public final class R {
         public static final int weunion_icon=0x7f02000b;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080094;
+        public static final int LinearLayout1=0x7f08008e;
         public static final int LinearLayout2=0x7f080089;
         public static final int RL=0x7f080039;
         public static final int RelativeLayout1=0x7f08004c;
         public static final int TableLayout1=0x7f080017;
-        public static final int action_settings=0x7f080098;
+        public static final int action_settings=0x7f08009a;
         public static final int addEvent=0x7f080054;
         public static final int b_add_option=0x7f08001f;
         public static final int b_confirm=0x7f08003f;
@@ -109,15 +109,17 @@ public final class R {
         public static final int mondayRelativeLayout=0x7f080080;
         public static final int msg=0x7f08004d;
         public static final int msg_event=0x7f08004e;
-        public static final int msglist_RL=0x7f080090;
-        public static final int msglist_msg=0x7f080092;
-        public static final int msglist_time=0x7f080093;
-        public static final int msglist_username=0x7f080091;
+        public static final int msglist_RL=0x7f080092;
+        public static final int msglist_msg=0x7f080094;
+        public static final int msglist_time=0x7f080095;
+        public static final int msglist_username=0x7f080093;
         public static final int myEvent01=0x7f08007f;
         public static final int myEvent02=0x7f080081;
         public static final int myEvent03=0x7f080084;
         public static final int myEvent04=0x7f080087;
         public static final int my_events=0x7f080022;
+        public static final int option_chkbox=0x7f080099;
+        public static final int option_lv=0x7f08008f;
         public static final int post=0x7f08004f;
         public static final int post_msg=0x7f080050;
         public static final int relativeLayout_bottom=0x7f080049;
@@ -134,13 +136,13 @@ public final class R {
         public static final int t_ename2=0x7f080019;
         public static final int t_eoption=0x7f08001c;
         public static final int t_etitle=0x7f08001a;
-        public static final int t_hname=0x7f08008e;
+        public static final int t_hname=0x7f080090;
         public static final int t_id=0x7f08003b;
-        public static final int t_optionname=0x7f080096;
-        public static final int t_optionnum=0x7f080095;
+        public static final int t_optionname=0x7f080097;
+        public static final int t_optionnum=0x7f080096;
         public static final int t_pw=0x7f08003d;
-        public static final int t_vname=0x7f08008f;
-        public static final int t_votenum=0x7f080097;
+        public static final int t_vname=0x7f080091;
+        public static final int t_votenum=0x7f080098;
         public static final int textDate0=0x7f080057;
         public static final int textDate1=0x7f080059;
         public static final int textDate2=0x7f08005b;
@@ -208,9 +210,11 @@ public final class R {
         public static final int activity_schedule=0x7f03000c;
         public static final int activity_select__event=0x7f03000d;
         public static final int activity_vote=0x7f03000e;
-        public static final int eventlist=0x7f03000f;
-        public static final int msglist=0x7f030010;
-        public static final int optionlist=0x7f030011;
+        public static final int activity_vote__option=0x7f03000f;
+        public static final int eventlist=0x7f030010;
+        public static final int msglist=0x7f030011;
+        public static final int optionlist=0x7f030012;
+        public static final int optionnamelist=0x7f030013;
     }
     public static final class menu {
         public static final int create__option=0x7f070000;
@@ -230,6 +234,7 @@ public final class R {
         public static final int schedule=0x7f07000e;
         public static final int select__event=0x7f07000f;
         public static final int vote=0x7f070010;
+        public static final int vote__option=0x7f070011;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -250,6 +255,7 @@ public final class R {
         public static final int title_activity_schedule=0x7f05000d;
         public static final int title_activity_select__event=0x7f050010;
         public static final int title_activity_vote=0x7f05000c;
+        public static final int title_activity_vote__option=0x7f050012;
     }
     public static final class style {
         /** 

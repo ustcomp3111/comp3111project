@@ -44,6 +44,7 @@ public class Create_Option extends Activity implements OnClickListener{
 	ArrayList<HashMap<String,String>> optionlist = new ArrayList<HashMap<String,String>>();
 	private SimpleAdapter adapter;
 	private String[] options = new String[5];
+	String eid;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class Create_Option extends Activity implements OnClickListener{
 
 			Intent intent = getIntent();
 			String eee = intent.getStringExtra(Select_Event.EVENT_NAME);
+			eid = intent.getStringExtra(Select_Event.EVENT_ID);
 			eventname2.setText(eee);
 			adapter = new SimpleAdapter(this, optionlist,
 			R.layout.optionlist,
@@ -135,7 +137,7 @@ public class Create_Option extends Activity implements OnClickListener{
             try {
             	
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
-            	params.add(new BasicNameValuePair("eventname", eventname));
+            	params.add(new BasicNameValuePair("event_id", eid));
                 params.add(new BasicNameValuePair("title", titlename));
                 params.add(new BasicNameValuePair("option1", options[0]));
                 params.add(new BasicNameValuePair("option2", options[1]));

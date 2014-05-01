@@ -31,12 +31,14 @@ public class Select_Event extends Activity {
 	ArrayList<String> eventlist = new ArrayList<String>();
 	ArrayList<String> hostlist = new ArrayList<String>();
 	ArrayList<String> venuelist = new ArrayList<String>();
+	ArrayList<String> eventidlist = new ArrayList<String>();
 	private SimpleAdapter adapter;
 	private ListView selecteventlist;
 	private static final String TAG_ENAME = "event";
 	private static final String TAG_HOST = "host";
 	private static final String TAG_VENUE = "venue";
-	protected static final String EVENT_NAME = null;
+	protected static String EVENT_NAME;
+	protected static String EVENT_ID;
 	ArrayList<HashMap<String,String>> elist = new ArrayList<HashMap<String,String>>();
 	
 	
@@ -64,9 +66,11 @@ public class Select_Event extends Activity {
 						int position, long arg3) {
 					
 					String event_name = eventlist.get(position);
+					String event_id = eventidlist.get(position);
 					Toast.makeText(getApplicationContext(),event_name+" is selected", Toast.LENGTH_LONG).show();
 					Intent i = new Intent(Select_Event.this, Create_Option.class);
 					i.putExtra(EVENT_NAME, event_name);
+					i.putExtra(EVENT_ID, event_id);
 					startActivity(i);
 					
 				}
@@ -105,6 +109,7 @@ public class Select_Event extends Activity {
 		            	  eventlist.add(json2.getString("event_name"));
 		            	  hostlist.add(json2.getString("holder"));
 		            	  venuelist.add(json2.getString("venue"));
+		            	  eventidlist.add(json2.getString("event_id"));
 		            	  
 		            	  HashMap<String, String> map = new HashMap<String, String>();
     	                   map.put(TAG_ENAME, json2.getString("event_name"));
@@ -113,34 +118,8 @@ public class Select_Event extends Activity {
     	                   
     	                   elist.add(map);
 		            	  
-		            	  String [] array = json2.getString("date").split("-");
-		            	  DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
-		       
-		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
-		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));
-		            	 
-		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		           	    /*
-		           	     if(ptr == null)
-		   				{
-		   					ptr = new EventNode(tmp);
-		   					Global.active_user.event_ptr = ptr;
-		   				}
-		           	    else
-		           	    {
-		           	    	ptr.next = new EventNode(tmp);
-		           	    	ptr = ptr.next;
-		           	    }*/
+		            	  
 		              }
-		              EventNode ptr = Global.active_user.event_ptr;
-		              while(ptr!=null)
-		              {          
-		            	  if(ptr.event.host.name.equals(Global.active_user.name))
-		       		  Global.list_of_event_by_me.add(ptr.event.event_name);
-	            	  Global.eventlist.add(ptr.event.event_name);
-		              ptr = ptr.next;
-		              }
-		          
 		       	
 			   }
 		catch(Exception e)

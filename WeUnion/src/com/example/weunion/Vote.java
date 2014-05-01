@@ -19,10 +19,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 //import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter;
 
@@ -30,13 +34,13 @@ public class Vote extends Activity {
 
 	JSONParser jsonParser = new JSONParser();
 	private ProgressDialog pDialog;
-	ArrayList<String> eventlist2 = new ArrayList<String>();
+	ArrayList<String> eventidlist2 = new ArrayList<String>();
 	ArrayList<String> polllist = new ArrayList<String>();
-	private TextView trytry;
-
+	ArrayList<ArrayList<String>> pollidlist = new ArrayList<ArrayList<String>>();
+	protected static String POLLING_ID;
 	private ExpandableListView Listpolling;
 	ArrayList<HashMap<String,String>> pollinglist = new ArrayList<HashMap<String,String>>();
-	private SimpleAdapter adapter;
+
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +49,6 @@ public class Vote extends Activity {
 	
 		new AttemptGetEvents().execute();
   
-	trytry=(TextView) findViewById(R.id.trytry);
-
-	trytry.setText("HIHI");
 	
 
 
@@ -55,6 +56,22 @@ public class Vote extends Activity {
 		
 		ExpandableListView Listpolling=(ExpandableListView)findViewById(R.id.expandableListView1);
 		Listpolling.setAdapter(new MyAdapter(this));
+
+		Listpolling.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				
+				String ptitle=MyAdapter.childList.get(groupPosition).get(childPosition);
+				//String pid=pollidlist.get(groupPosition).get(childPosition);
+            	Toast.makeText(getApplicationContext(),ptitle+" is selected", Toast.LENGTH_LONG).show();
+				Intent i = new Intent(Vote.this, Main_menu.class);
+				//i.putExtra(POLLING_ID, pid);
+				startActivity(i);
+				return true;
+			}
+        });
 	
 	
 	}
@@ -75,48 +92,41 @@ public class Vote extends Activity {
 		protected String doInBackground(String... arg0) {
 		   try{
 
-			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
-		               Events tmp ;
+		    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
+		    	 List<NameValuePair> params3 = new ArrayList<NameValuePair>();
+		    	 JSONArray jArray2,jArray3;
 
-			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
-					
-		   			//EventNode ptr = Global.active_user.event_ptr;
-		              for(int i = 0; i <jArray2.length();i++ ) {
-		            	 
-		            	  JSONObject json2 = jArray2.getJSONObject(i);
-		            	//  Global.eventlist.add(json2.getString("event_name"));
-		            	  eventlist2.add(json2.getString("event_name"));
-		            	  
-		            	  
-		            	  String [] array = json2.getString("date").split("-");
-		            	  DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
-		       
-		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
-		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));
-		            	 
-		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		           	    /*
-		           	     if(ptr == null)
-		   				{
-		   					ptr = new EventNode(tmp);
-		   					Global.active_user.event_ptr = ptr;
-		   				}
-		           	    else
-		           	    {
-		           	    	ptr.next = new EventNode(tmp);
-		           	    	ptr = ptr.next;
-		           	    }*/
+	               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
+
+	               jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
+
+	              for(int i = 0; i <jArray2.length();i++ ) {
+	            	  
+	            	  JSONObject json2 = jArray2.getJSONObject(i);
+	            	  MyAdapter.parentList.add(json2.getString("event_name"));
+	            	  eventidlist2.add(json2.getString("event_id"));
+	            	
 		              }
-		              EventNode ptr = Global.active_user.event_ptr;
-		              while(ptr!=null)
-		              {          
-		            	  if(ptr.event.host.name.equals(Global.active_user.name))
-		       		  Global.list_of_event_by_me.add(ptr.event.event_name);
-	            	  Global.eventlist.add(ptr.event.event_name);
-		              ptr = ptr.next;
-		              }
-		          
+	              
+	              for(int i=0;i<eventidlist2.size();i++)
+	              {
+	            	  params3.add(new BasicNameValuePair("event_id",eventidlist2.get(i)));
+	            	  jArray3 = jsonParser.makeHttpRequest(Global.POLLING_URL, params3);
+	            	  ArrayList<String> temp = new ArrayList<String>();
+	            	  for(int j = 0; j <jArray3.length();j++ ) {
+		            	   JSONObject json3 = jArray3.getJSONObject(j);
+		            	   //pollidlist.get(i).add(json3.getString("polling_id"));
+		            	   temp.add(json3.getString("polling_title"));
+		               }
+		               MyAdapter.childList.add(temp);
+		               params3.clear();
+	            	  
+	            	  
+	              }
+	               
+
+	               
+	               
 		       	
 			   }
 		catch(Exception e)
