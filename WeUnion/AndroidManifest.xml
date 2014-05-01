@@ -105,6 +105,10 @@
             android:name="com.example.weunion.Vote_Option"
             android:label="@string/title_activity_vote__option" >
         </activity>
+        <activity
+            android:name="com.example.weunion.EventInfo"
+            android:label="@string/title_activity_event_info" >
+        </activity>
     </application>
 
 </manifest>

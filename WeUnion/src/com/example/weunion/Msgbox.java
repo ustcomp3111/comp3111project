@@ -16,23 +16,28 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Msgbox extends Activity implements OnClickListener{
+public class Msgbox extends Fragment implements OnClickListener{
 	
 	public int msg_id = -1;
 	public int p_msg_id = -1;
 	private ListView msg;
 	private Button post;
 	private EditText my_msg;
-	private TextView event;
+	//private TextView event;
 	
 	ArrayList<HashMap<String,String>> postlist = new ArrayList<HashMap<String,String>>();
 	ArrayList<HashMap<String,String>> templist = new ArrayList<HashMap<String,String>>();
@@ -56,34 +61,36 @@ public class Msgbox extends Activity implements OnClickListener{
 
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public	View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)  {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_msgbox);
-		adapter = new SimpleAdapter( this, postlist,
+	RelativeLayout l = (RelativeLayout) inflater.inflate(R.layout.activity_msgbox,container,false);
+		//super.onCreate(savedInstanceState);
+		//setContentView(R.layout.activity_msgbox);
+		adapter = new SimpleAdapter( getActivity(), postlist,
 				 R.layout.msglist,
 				 new String[] {TAG_USERNAME, TAG_MSG, TAG_TIME},
 				 new int[] { R.id.msglist_username, R.id.msglist_msg, R.id.msglist_time} );		
 		
-		msg = (ListView)findViewById(R.id.msg);
+		msg = (ListView)l.findViewById(R.id.msg);
 		msg.setAdapter(adapter);
 		msg.setTextFilterEnabled(true);
 		
-		post = (Button) findViewById(R.id.post);
-		my_msg = (EditText) findViewById(R.id.post_msg);
-		event = (TextView) findViewById(R.id.msg_event);
-		event.setText(Event_Name);
+		post = (Button) l.findViewById(R.id.post_button);
+		my_msg = (EditText) l.findViewById(R.id.post_msg);
+		my_msg.setFocusable(false);
+		//event = (TextView) l.findViewById(R.id.msg_event);
+		//event.setText(Event_Name);
 		
 		post.setOnClickListener(this);
 		new AttemptDisplayMsg().execute();
 
         Timer timer = new Timer();
         timer.schedule(task, 1000, 1500);
-	
+	return l;
 	}
 
 	 @Override
-	    protected void onDestroy() {
+	public void onDestroy() {
 	 // TODO Auto-generated method stub
 	 super.onDestroy();
 	 task.cancel();
@@ -93,7 +100,7 @@ public class Msgbox extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.post:
+		case R.id.post_button:
 				new AttemptPost().execute();
 			break;
 		default:
@@ -171,7 +178,7 @@ public class Msgbox extends Activity implements OnClickListener{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Msgbox.this);
+            pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Retrieving Data...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -268,7 +275,7 @@ public class Msgbox extends Activity implements OnClickListener{
         protected void onPostExecute(String file_url) {
             my_msg.setText("");
             if (file_url != null){
-            	Toast.makeText(Msgbox.this, file_url, Toast.LENGTH_LONG).show(); 
+            	Toast.makeText(getActivity(), file_url, Toast.LENGTH_LONG).show(); 
             }
             task.run();
         	if (p_msg_id<msg_id) {
