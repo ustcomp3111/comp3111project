@@ -77,7 +77,7 @@ public class Msgbox extends Fragment implements OnClickListener{
 		
 		post = (Button) l.findViewById(R.id.post_button);
 		my_msg = (EditText) l.findViewById(R.id.post_msg);
-		my_msg.setFocusable(false);
+		
 		//event = (TextView) l.findViewById(R.id.msg_event);
 		//event.setText(Event_Name);
 		

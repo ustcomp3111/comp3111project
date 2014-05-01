@@ -12,7 +12,7 @@ public class Global {
 	public static final String EVENT_URL = "http://124.244.60.23/weu/event.php";
 	public static final String POST_URL = "http://124.244.60.23/weu/postevent.php";
 	public static final String POLLING_URL = "http://124.244.60.23/weu/readpolling.php";
-	
+	public static final String SHOW_GUEST_URL = "http://143.89.172.155/weu/showguest.php";
    // static User Default = new User("no name",0);
 	//static DateAndTime time = new DateAndTime(0, Calendar.JANUARY, 1, 0);
     //static Events no_name_event = new Events("no name event",01, Default, time, 8,"");

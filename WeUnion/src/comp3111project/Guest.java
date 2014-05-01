@@ -3,16 +3,21 @@ package comp3111project;
  // For constructing linked list
 public class Guest 
 {
-    Guest next = null;
+   public Guest next = null;
     
-    boolean respond = false, attend = false;
+    public boolean respond = false, attend = false;
     
     User user; 
-    Guest(User u)
+    Guest(User u,boolean r,boolean a)
     {
     	user=u;
+    respond = r;
+    attend = a;
     }
-    Guest(String Name, int id) {
+    public Guest(String Name, int id,boolean r,boolean a) {
         user=new User(Name, id);
+        respond = r;
+        attend = a;
+        
     }
 };

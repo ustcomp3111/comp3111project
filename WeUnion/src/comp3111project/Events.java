@@ -52,7 +52,7 @@ public class Events {
        else
            return true;
    }
-   void AddGuest(Guest guest)
+   public void AddGuest(Guest guest)
    {
 	   Guest ptr = guest_list_ptr;
    if(ptr==null)
