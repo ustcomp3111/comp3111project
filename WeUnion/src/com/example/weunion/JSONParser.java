@@ -28,7 +28,7 @@ public class JSONParser {
 	
 	// Android local host IP: 10.0.2.2:80
 	// External IP: 
-	public final String URL = "http://124.244.60.23/weu/";
+	public static final String URL = "http://124.244.60.23/weu/";
 
 	public JSONParser() {
 

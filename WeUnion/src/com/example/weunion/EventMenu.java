@@ -46,7 +46,7 @@ Button create_event_button;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_menu);
-	    Global.active_user.name = User.getInstance().getId();   
+	    Global.active_user.name = User.getInstance().getName();   
 	   //Global.active_user = new User(0,User.getInstance().getId());
 	    new AttemptShowEvents().execute();
 	    while(!Global.initialization_is_completed);
@@ -118,7 +118,7 @@ private void initialize()
 		   try{
 
 			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
+		               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
 		               Events tmp ;
 Global.eventlist = new ArrayList<String>();
 Global.list_of_event_by_me = new ArrayList<String>();

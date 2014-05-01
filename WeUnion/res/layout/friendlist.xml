@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/friendlist_RL"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/card_background_green"
+    android:minHeight="40dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/friendlist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/friendlist_null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+    />
+
+    <TextView
+        android:id="@+id/friendlist_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/friendlist_id"
+        android:layout_toRightOf="@+id/friendlist_null"
+        android:text="ID"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>

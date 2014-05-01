@@ -9,13 +9,20 @@ public class User {
 	    }
 	    
 	    //fields
-	    private String id="admin";
-	    
-		public String getId() {
+	    private String name="Anonymous";
+	    public int getId() {
 			return id;
 		}
-		public void setId(String id) {
+		public void setId(int id) {
 			this.id = id;
+		}
+
+		private int id =-1;
+		public String getName() {
+			return name;
+		}
+		public void setName(String temp) {
+			this.name = temp;
 		}
 	    
 }

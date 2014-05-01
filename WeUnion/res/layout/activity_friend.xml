@@ -1,11 +1,77 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Friend" >
+    tools:context=".Msgbox" >
+
+    <ListView
+        android:id="@+id/friendlist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView1"
+        android:stackFromBottom="true" 
+        android:divider="@null"
+        android:dividerHeight="0dp">
+        
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_id"
+        android:layout_centerHorizontal="true"
+        android:text="My Friends"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/search"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/search_id"
+        android:layout_below="@+id/search_name"
+        android:layout_marginTop="15dp"
+        android:text="Search" />
+    
+ 	<Button
+ 	    android:id="@+id/add_fd"
+ 	    style="?android:attr/buttonStyleSmall"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignRight="@+id/search"
+        android:layout_alignParentTop="true"
+ 	    android:layout_toRightOf="@+id/search_name"
+ 	    android:text="Add" />
+ 
+    <EditText
+        android:id="@+id/search_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_name"
+        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:inputType="number" 
+        android:hint="Search by ID"
+    	android:singleLine="true" />  
+    	
+     <EditText
+        android:id="@+id/search_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10" 
+        android:hint="Search by name"
+        android:singleLine="true" />
 
 </RelativeLayout>

@@ -109,6 +109,10 @@
             android:name="com.example.weunion.EventInfo"
             android:label="@string/title_activity_event_info" >
         </activity>
+        <activity
+            android:name="com.example.weunion.Friend"
+            android:label="@string/title_activity_friend" >
+        </activity>
     </application>
 
 </manifest>

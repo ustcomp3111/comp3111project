@@ -173,7 +173,7 @@ Global.initialization_is_completed = false;
 	       protected String doInBackground(String... arg0) {
 	    	   try{
 			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
+		               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
 		               Global.active_user.event_ptr = null;
 			           JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 			           

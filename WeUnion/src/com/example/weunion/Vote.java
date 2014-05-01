@@ -97,7 +97,7 @@ public class Vote extends Activity {
 		    	 List<NameValuePair> params3 = new ArrayList<NameValuePair>();
 		    	 JSONArray jArray2,jArray3;
 
-	               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
+	               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
 
 	               jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 

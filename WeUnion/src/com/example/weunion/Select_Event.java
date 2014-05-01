@@ -96,7 +96,7 @@ public class Select_Event extends Activity {
 		   try{
 
 			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-		               params2.add(new BasicNameValuePair("username",User.getInstance().getId()));
+		               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
 		               Events tmp ;
 
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);

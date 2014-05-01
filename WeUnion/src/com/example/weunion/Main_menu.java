@@ -53,7 +53,7 @@ public class Main_menu extends Activity implements OnClickListener{
 			startActivity(i);
 			break;
 		case R.id.left:
-			Intent j = new Intent(Main_menu.this, Msgbox.class);
+			Intent j = new Intent(Main_menu.this, Friend.class);
 			startActivity(j);
 			break;
 		case R.id.right:

@@ -21,5 +21,6 @@
     <string name="title_activity_guest_list">GuestList</string>
     <string name="title_activity_vote__option">Vote_Option</string>
     <string name="title_activity_event_info">EventInfo</string>
+    <string name="title_activity_friend">Friend</string>
 
 </resources>

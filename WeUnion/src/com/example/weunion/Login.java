@@ -108,7 +108,8 @@ public class Login extends Activity implements OnClickListener{
 
                 if (success == 1) {
                 	Intent i = new Intent(Login.this, Main_menu.class);
-                	user.setId(username);
+                	user.setName(username);
+                	user.setId(json.getInt("user_id"));
                 	finish();
     				startActivity(i);
                 	return json.getString(TAG_MESSAGE);

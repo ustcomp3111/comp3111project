@@ -249,7 +249,7 @@ public class Msgbox extends Fragment implements OnClickListener{
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
 
-            String username = User.getInstance().getId();
+            String username = User.getInstance().getName();
 
             try {
             	
