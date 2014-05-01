@@ -64,10 +64,9 @@ public class Vote extends Activity {
 					int groupPosition, int childPosition, long id) {
 				
 				String ptitle=MyAdapter.childList.get(groupPosition).get(childPosition);
-				//String pid=pollidlist.get(groupPosition).get(childPosition);
+				Vote_Option.pollingid=pollidlist.get(groupPosition).get(childPosition);
             	Toast.makeText(getApplicationContext(),ptitle+" is selected", Toast.LENGTH_LONG).show();
-				Intent i = new Intent(Vote.this, Main_menu.class);
-				//i.putExtra(POLLING_ID, pid);
+				Intent i = new Intent(Vote.this, Vote_Option.class);
 				startActivity(i);
 				return true;
 			}
@@ -86,6 +85,8 @@ public class Vote extends Activity {
 	            pDialog.setIndeterminate(false);
 	            pDialog.setCancelable(true);
 	            pDialog.show();
+	            MyAdapter.parentList.clear();
+	            MyAdapter.childList.clear();
 	        }
 
 		@Override
@@ -113,12 +114,14 @@ public class Vote extends Activity {
 	            	  params3.add(new BasicNameValuePair("event_id",eventidlist2.get(i)));
 	            	  jArray3 = jsonParser.makeHttpRequest(Global.POLLING_URL, params3);
 	            	  ArrayList<String> temp = new ArrayList<String>();
+	            	  ArrayList<String> temp1 = new ArrayList<String>();
 	            	  for(int j = 0; j <jArray3.length();j++ ) {
 		            	   JSONObject json3 = jArray3.getJSONObject(j);
-		            	   //pollidlist.get(i).add(json3.getString("polling_id"));
+		            	   temp1.add(json3.getString("polling_id"));
 		            	   temp.add(json3.getString("polling_title"));
 		               }
 		               MyAdapter.childList.add(temp);
+		               pollidlist.add(temp1);
 		               params3.clear();
 	            	  
 	            	  

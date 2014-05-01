@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class Vote_Option extends Activity {
 	
@@ -31,39 +32,29 @@ public class Vote_Option extends Activity {
 	private static final String TAG_ONAME = "oname";
 	ArrayList<HashMap<String,String>> olist = new ArrayList<HashMap<String,String>>();
 	ArrayList<String> oplist = new ArrayList<String>();
-	private String pollingid;
+	public static String pollingid="1";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_vote__option);
 		
-		Intent intent = getIntent();
-		pollingid = intent.getStringExtra(Vote.POLLING_ID);
+		
 		optionlist=(ListView) findViewById(R.id.option_lv);
 		adapter = new SimpleAdapter(this, olist,
-		R.layout.eventlist,
+		R.layout.optionnamelist,
 		new String[] {TAG_ONAME},
 		new int[] { R.id.option_chkbox} );
 		
-		
+		Toast.makeText(getApplicationContext(),pollingid, Toast.LENGTH_LONG).show();
 
         optionlist.setAdapter(adapter);
  		optionlist.setTextFilterEnabled(true);
  		
  		new AttemptGetOptions().execute();
  		
- 		
- 		HashMap<String, String> map = new HashMap<String, String>();
- 		for(int i=0;i<oplist.size();i++)
- 		{
- 			map.put(TAG_ONAME, oplist.get(i));
- 			olist.add(map);
- 		}
-		
-		
-		
-		
+
+ 		//Toast.makeText(getApplicationContext(),oplist.get(0), Toast.LENGTH_LONG).show();
 	}
 	
 	
@@ -84,16 +75,16 @@ public class Vote_Option extends Activity {
 		   try{
 
 			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-		               params2.add(new BasicNameValuePair("poll_id",pollingid));
-		               Events tmp ;
+		               params2.add(new BasicNameValuePair("polling_id",pollingid));
 
-			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.POLLING_URL, params2);
+
+			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.POLLINGID_URL, params2);
 					
-		   			//EventNode ptr = Global.active_user.event_ptr;
+		   			
 		              for(int i = 0; i <jArray2.length();i++ ) {
 		            	 
 		            	  JSONObject json2 = jArray2.getJSONObject(i);
-		            	//  Global.eventlist.add(json2.getString("event_name"));
+		            
 		            	  oplist.add(json2.getString("option1"));
 		            	  oplist.add(json2.getString("option2"));
 		            	  oplist.add(json2.getString("option3"));
@@ -101,7 +92,16 @@ public class Vote_Option extends Activity {
 		            	  oplist.add(json2.getString("option5"));
 		            	  
 		            
-		            	  
+		            	 
+		           		for(int j=0;j<oplist.size();j++)
+		           		{
+		           			if(!oplist.get(j).equals(""))
+		           			{
+		           				HashMap<String, String> map = new HashMap<String, String>();
+		           				map.put(TAG_ONAME, oplist.get(j));
+		           				olist.add(map);
+		           			}
+		           		}
 		            	  
 		              }
 		       	

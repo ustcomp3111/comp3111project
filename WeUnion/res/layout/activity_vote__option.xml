@@ -11,7 +11,7 @@
     tools:context=".Vote_Option" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/option_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select options to vote :"
@@ -20,7 +20,14 @@
     <ListView
         android:id="@+id/option_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="268dp"
+        android:layout_weight="0.51" >
     </ListView>
+
+    <Button
+        android:id="@+id/button_vote"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:text="Vote" />
 
 </LinearLayout>

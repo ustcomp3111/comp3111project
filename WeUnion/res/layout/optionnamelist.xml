@@ -8,6 +8,7 @@
         android:id="@+id/option_chkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox" />
+        android:text="CheckBox"
+        android:textSize="28sp" />
 
 </LinearLayout>
