@@ -7,7 +7,7 @@ public class Guest
     
     public boolean respond = false, attend = false;
     
-    User user; 
+    public User user; 
     Guest(User u,boolean r,boolean a)
     {
     	user=u;

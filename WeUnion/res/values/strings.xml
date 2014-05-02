@@ -22,5 +22,9 @@
     <string name="title_activity_vote__option">Vote_Option</string>
     <string name="title_activity_event_info">EventInfo</string>
     <string name="title_activity_friend">Friend</string>
+    <string name="title_activity_all_guest">AllGuest</string>
+    <string name="title_activity_going_guest">GoingGuest</string>
+    <string name="title_activity_declined_guest">DeclinedGuest</string>
+    <string name="title_activity_pending_guest">PendingGuest</string>
 
 </resources>

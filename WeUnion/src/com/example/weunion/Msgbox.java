@@ -66,7 +66,8 @@ public class Msgbox extends Fragment implements OnClickListener{
 	RelativeLayout l = (RelativeLayout) inflater.inflate(R.layout.activity_msgbox,container,false);
 		//super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_msgbox);
-		adapter = new SimpleAdapter( getActivity(), postlist,
+	Event_Name = Global.active_event.event.event_name;
+	adapter = new SimpleAdapter( getActivity(), postlist,
 				 R.layout.msglist,
 				 new String[] {TAG_USERNAME, TAG_MSG, TAG_TIME},
 				 new int[] { R.id.msglist_username, R.id.msglist_msg, R.id.msglist_time} );		

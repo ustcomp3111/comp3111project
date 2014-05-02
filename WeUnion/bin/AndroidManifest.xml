@@ -111,9 +111,25 @@
         </activity>
         <activity
             android:name="com.example.weunion.Friend"
-            android:label="@string/title_activity_friend" 
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_friend"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.AllGuest"
+            android:label="@string/title_activity_all_guest" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.GoingGuest"
+            android:label="@string/title_activity_going_guest" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.DeclinedGuest"
+            android:label="@string/title_activity_declined_guest" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.PendingGuest"
+            android:label="@string/title_activity_pending_guest" >
         </activity>
     </application>
 
