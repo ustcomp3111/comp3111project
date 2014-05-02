@@ -103,7 +103,8 @@ class AttemptDisplayfd extends AsyncTask<String, String, String> {
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair(TAG_A_ID, Integer.toString(User.getInstance().getId())));
                 params.add(new BasicNameValuePair(TAG_A_NAME, User.getInstance().getName()));
-
+                friend_list = new ArrayList<String>();
+                friend_id_list = new ArrayList<Integer>();
                 JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_FD_URL, params);
 
                 if (jArray!=null) {
