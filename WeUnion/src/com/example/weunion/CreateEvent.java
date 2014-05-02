@@ -221,7 +221,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		}
 		catch(Exception e)
 		{
-			 Toast.makeText(getApplicationContext(),"Failed to create event!", Toast.LENGTH_LONG).show();		
+			// Toast.makeText(getApplicationContext(),"Failed to create event!", Toast.LENGTH_LONG).show();		
 		}
 			// TODO Auto-generated method stub
 			return null;

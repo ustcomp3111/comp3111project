@@ -22,18 +22,11 @@
         android:id="@+android:id/guest_list_viewpager"
         android:layout_width="fill_parent"
         android:layout_height="385dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
 
     </android.support.v4.view.ViewPager>
-
-    <Button
-        android:id="@+id/guest_list_invite_friends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Add guest" />
 
 </RelativeLayout>

@@ -131,6 +131,10 @@
             android:name="com.example.weunion.PendingGuest"
             android:label="@string/title_activity_pending_guest" >
         </activity>
+        <activity
+            android:name="com.example.weunion.InviteGuest"
+            android:label="@string/title_activity_invite_guest" >
+        </activity>
     </application>
 
 </manifest>

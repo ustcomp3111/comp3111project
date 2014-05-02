@@ -33,14 +33,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class GuestList extends FragmentActivity implements ActionBar.TabListener,OnClickListener{
+public class GuestList extends FragmentActivity implements ActionBar.TabListener{
 	PagerAdapter pageradapter;
 	JSONParser jsonParser = new JSONParser();
 	private ProgressDialog pDialog;
 	ActionBar bar;
 	ViewPager pager;
 	List<Fragment> fragment_list;
-	Button add_guest_button;
+	//Button add_guest_button;
 	//@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 			fragment_list.add(Fragment.instantiate(this, GoingGuest.class.getName()));
 			fragment_list.add(Fragment.instantiate(this, DeclinedGuest.class.getName()));
 			fragment_list.add(Fragment.instantiate(this, PendingGuest.class.getName()));
-			
+			fragment_list.add(Fragment.instantiate(this, InviteGuest.class.getName()));
 			pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
 			pager = (ViewPager)super.findViewById(R.id.guest_list_viewpager);
 		pager.setAdapter(pageradapter);
@@ -103,8 +103,8 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 				
 			}
 		});
-	     add_guest_button = (Button) findViewById(R.id.guest_list_invite_friends);
-	    add_guest_button.setOnClickListener(this);
+	  //   add_guest_button = (Button) findViewById(R.id.guest_list_invite_friends);
+	   // add_guest_button.setOnClickListener(this);
 	    
 		
 		 bar = getActionBar();
@@ -114,6 +114,7 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 			bar.addTab(bar.newTab().setText("Join").setTabListener(this));
 			bar.addTab(bar.newTab().setText("Decline").setTabListener(this));
 			bar.addTab(bar.newTab().setText("Pending").setTabListener(this));
+			bar.addTab(bar.newTab().setText("Invite friends").setTabListener(this));
 		//Global.initialization_is_completed = false;	
 			pager.setCurrentItem(Global.guest_list_choice);	
 	}
@@ -147,7 +148,7 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 		 	// TODO Auto-generated method stub
 		 	
 		 }
-		@Override
+	/*	@Override
 		public void onClick(View v) {
 			
 			Intent i ;
@@ -157,8 +158,8 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 				/*{ i = new Intent(this, CreateEvent.class);
 			finish();
 			startActivity(i);
-			}*/
-		}
+			}
+		}*/
 		@Override
 		public void onBackPressed() {
 		    finish();

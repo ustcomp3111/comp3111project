@@ -46,8 +46,8 @@ Button create_event_button;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_menu);
-	    Global.active_user.name = User.getInstance().getName();   
-	   //Global.active_user = new User(0,User.getInstance().getId());
+	    //Global.active_user.name = User.getInstance().getName();   
+	   Global.active_user = new comp3111project.User(User.getInstance().getName(),User.getInstance().getId());
 	    new AttemptShowEvents().execute();
 	    while(!Global.initialization_is_completed);
 		

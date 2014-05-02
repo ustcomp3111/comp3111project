@@ -1,13 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="500dp"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EventInfo" >
-
 
     <TextView
         android:id="@+id/event_info_begin_time"
@@ -81,17 +83,6 @@
         android:text="(none)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-
-
-    <TextView
-        android:id="@+id/event_info_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/event_info_guest_list"
-        android:text="Host: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <TextView
         android:id="@+id/event_info_event_holder_value"
         android:layout_width="wrap_content"
@@ -133,14 +124,75 @@
         android:layout_below="@+id/event_info_not_going_guest_button"
         android:text="Pending: 00" />
 
+    <Button
+        android:id="@+id/event_info_invite_friend_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/event_info_pending_guest_button"
+        android:layout_alignRight="@+id/event_info_pending_guest_button"
+        android:layout_below="@+id/event_info_pending_guest_button"
+        android:text="Invite Friends!" />
+
+    <TextView
+        android:id="@+id/event_info_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/event_info_guest_list"
+        android:text="Host: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RadioGroup
+        android:id="@+id/event_info_response_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_info_response_text"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/event_info_going_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Join" />
+
+        <RadioButton
+            android:id="@+id/event_info_decline_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decline" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/event_info_response_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/event_info_response_radio_group"
+        android:layout_toRightOf="@+id/event_info_response_radio_group"
+        android:text="Confirm" />
+
+    <TextView
+        android:id="@+id/event_info_response_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/event_info_response_radio_group"
+        android:layout_below="@+id/event_info_invite_friend_button"
+        android:layout_marginTop="13dp"
+        android:text="Your response: pending"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/event_info_guest_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/event_info_venue_value"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="Guests"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
+</ScrollView>
