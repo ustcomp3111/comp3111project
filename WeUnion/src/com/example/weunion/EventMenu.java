@@ -54,7 +54,7 @@ Button create_event_button;
 	    	fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
 		fragment_list.add(Fragment.instantiate(this, EventByMe.class.getName()));
-		
+		fragment_list.add(Fragment.instantiate(this, JoinedEvent.class.getName()));
 		this.pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
 		pager = (ViewPager)super.findViewById(R.id.event_menu_viewpager);
 	pager.setAdapter(pageradapter);
@@ -88,7 +88,7 @@ Button create_event_button;
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
-		
+		bar.addTab(bar.newTab().setText("Events I Joined").setTabListener(this));
 	Global.initialization_is_completed = false;	
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,46 +117,46 @@ private void initialize()
 		protected String doInBackground(String... arg0) {
 		   try{
 
-			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
+			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>(),params3 = new ArrayList<NameValuePair>();
 		               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
+		               params3.add(new BasicNameValuePair("user_name",User.getInstance().getName()));  
 		               Events tmp ;
-Global.eventlist = new ArrayList<String>();
-Global.list_of_event_by_me = new ArrayList<String>();
-Global.event_id_list = new ArrayList<Integer>();
-Global.event_by_me_id = new ArrayList<Integer>();
+Global.joined_event_list = new ArrayList<String>();
+Global.my_event_list = new ArrayList<String>();
+Global.all_event_list = new ArrayList<String>();
+Global.joined_event_id_list = new ArrayList<Integer>();
+Global.my_event_id_list = new ArrayList<Integer>();
+Global.all_event_id_list = new ArrayList<Integer>();
 Global.active_user.event_ptr = null;
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
-					
-		   			//EventNode ptr = Global.active_user.event_ptr;
-		              for(int i = 0; i <jArray2.length();i++ ) {
-		            	 
-		            	  JSONObject json2 = jArray2.getJSONObject(i);
-		            	//  Global.eventlist.add(json2.getString("event_name"));
-		            	  
-		            	  String [] array = json2.getString("date").split("-");
-		            	  DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
-		       
+			              JSONArray jArray3 = jsonParser.makeHttpRequest(Global.JOINED_EVENT_URL, params3);
+			              String [] array;
+			              DateAndTime date_and_time;
+		              for(int i = 0; i <jArray2.length();i++ ) {		            	 		            	  		            	  		            	  
+		            		  JSONObject json2 = jArray2.getJSONObject(i);
+		            		  array = json2.getString("date").split("-");
+		            	  date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));		       
 		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
-		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));
-		            	 
+		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));		            	 
 		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		         
+		            		 Global.my_event_list.add(json2.getString("event_name"));
+			            	 Global.my_event_id_list.add(json2.getInt("event_id"));
+			            	 Global.all_event_list.add(json2.getString("event_name"));
+			            	 Global.all_event_id_list.add(json2.getInt("event_id")); 
 		              }
-		              EventNode ptr = Global.active_user.event_ptr;
-		              while(ptr!=null)
-		              {          
-		            	  if(ptr.event.host.name.equals(Global.active_user.name))
-		            	  {
-		       		  Global.list_of_event_by_me.add(ptr.event.event_name);
-		            	  Global.event_by_me_id.add(ptr.event.event_id);
-		            	  }
-		            	 Global.eventlist.add(ptr.event.event_name);
-		            	 Global.event_id_list.add(ptr.event.event_id);
-		            	 ptr = ptr.next;
+		              for(int i = 0; i <jArray3.length();i++ ) {
+			            	 JSONObject json3 = jArray3.getJSONObject(i);
+			            	 array = json3.getString("date").split("-");
+			            	  date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json3.getInt("time"));
+			            	  tmp = new Events(json3.getString("event_name"),json3.getInt("event_id"),new comp3111project.User(json3.getString("holder"),0),
+			            			  	date_and_time,json3.getInt("duration"),json3.getString("venue"));
+			            	  Global.active_user.AddEvent(new EventNode(tmp));
+			            		 Global.joined_event_list.add(json3.getString("event_name"));
+				            	 Global.joined_event_id_list.add(json3.getInt("event_id"));
+				            	 Global.all_event_list.add(json3.getString("event_name"));
+				            	 Global.all_event_id_list.add(json3.getInt("event_id")); 
 		              }
-		          
-		       	
-			   }
+		         	}
 		catch(Exception e)
 		{
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
@@ -206,5 +206,9 @@ Global.active_user.event_ptr = null;
 		finish();
 		startActivity(i);
 		}
+	
+	}
+	public void onBackPressed() {
+	    finish();
 	}
 }

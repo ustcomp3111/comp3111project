@@ -54,7 +54,7 @@
             android:name="com.example.weunion.Msgbox"
             android:label="@string/title_activity_msgbox"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name="com.example.weunion.Polling"
@@ -134,6 +134,10 @@
         <activity
             android:name="com.example.weunion.InviteGuest"
             android:label="@string/title_activity_invite_guest" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.JoinedEvent"
+            android:label="@string/title_activity_joined_event" >
         </activity>
     </application>
 

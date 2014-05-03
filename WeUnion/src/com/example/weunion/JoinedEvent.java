@@ -27,58 +27,61 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-public class Event extends Fragment implements OnClickListener{
+public class JoinedEvent extends Fragment implements OnClickListener{
 	//Button create_event_button;
-	ListView event_listview;
+	ListView joined_event_listview;
 LinearLayout l;
 
 	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-		l = (LinearLayout) inflater.inflate(R.layout.activity_event,container,false);
-		event_listview = (ListView) l.findViewById(R.id.my_events);
-	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
-	     //create_event_button.setOnClickListener(this);
-	     
-	    event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
-	    android.R.layout.simple_list_item_1, Global.all_event_list));
+		l = (LinearLayout) inflater.inflate(R.layout.activity_joined_event,container,false);
+		joined_event_listview = (ListView) l.findViewById(R.id.joined_event_list);
+	  //   create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
+	    // create_event_button.setOnClickListener(this);
+	  
+	  
+	    	 joined_event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
+	    android.R.layout.simple_list_item_1, Global.joined_event_list));
 
-	    event_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
+	    joined_event_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
 	    {
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
 				EventNode ptr =  Global.active_user.event_ptr;
-				//String event_name = (String) a.getAdapter().getItem(position);
+				
 				while(ptr!=null)
 				{
-					 if (ptr.event.event_id == Global.all_event_id_list.get(position))
+					 if (ptr.event.event_id == Global.joined_event_id_list.get(position))
 				{
 						 Global.active_event =new EventNode (ptr.event);
-						 break;
+				break;
 				}
 					 else 
 						 ptr = ptr.next;
 				}
 				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), EventDetail.class);
-				//getActivity().finish();
+			//	getActivity().finish();
 				startActivity(i);
+			
 			}
 	    	
 	    });
 	    return l;
 	}
-
-public void onClick(View v) {
 	
-	/*	Intent i ;
+public void onClick(View v) {
+	/*
+		Intent i ;
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.event_menu_create_event_button)
+		if(v.getId()==R.id.event_create_new_event_button)
 		{ i = new Intent(getActivity(), CreateEvent.class);
-		getActivity().finish();
+		
 		startActivity(i);
 		}
-	*/}
+	*/
+	}
 
 	
 	}

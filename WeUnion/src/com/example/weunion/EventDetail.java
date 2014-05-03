@@ -109,7 +109,7 @@ bar.addTab(bar.newTab().setText("Messages").setTabListener(this));
 	
 	public void onBackPressed() {
 	    finish();
-	    startActivity(new Intent(this,EventMenu.class));
+	//    startActivity(new Intent(this,EventMenu.class));
 	}
 
 

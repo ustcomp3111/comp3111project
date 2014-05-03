@@ -41,7 +41,7 @@ LinearLayout l;
 	  
 	  
 	    	 event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
-	    android.R.layout.simple_list_item_1, Global.list_of_event_by_me));
+	    android.R.layout.simple_list_item_1, Global.my_event_list));
 
 	    event_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
 	    {
@@ -52,7 +52,7 @@ LinearLayout l;
 				
 				while(ptr!=null)
 				{
-					 if (ptr.event.event_id == Global.event_by_me_id.get(position))
+					 if (ptr.event.event_id == Global.my_event_id_list.get(position))
 				{
 						 Global.active_event =new EventNode (ptr.event);
 				break;
@@ -62,7 +62,7 @@ LinearLayout l;
 				}
 				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), EventDetail.class);
-				getActivity().finish();
+			//	getActivity().finish();
 				startActivity(i);
 			
 			}

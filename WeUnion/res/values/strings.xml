@@ -27,5 +27,6 @@
     <string name="title_activity_declined_guest">DeclinedGuest</string>
     <string name="title_activity_pending_guest">PendingGuest</string>
     <string name="title_activity_invite_guest">InviteGuest</string>
+    <string name="title_activity_joined_event">JoinedEvent</string>
 
 </resources>

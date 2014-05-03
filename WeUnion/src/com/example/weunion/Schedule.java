@@ -201,8 +201,8 @@ Global.initialization_is_completed = false;
 			           while(ptr!=null)
 			           		{          
 			        	   		if(ptr.event.host.name.equals(Global.active_user.name))
-			        	   			Global.list_of_event_by_me.add(ptr.event.event_name);
-			        	   			Global.eventlist.add(ptr.event.event_name);
+			        	   			Global.my_event_list.add(ptr.event.event_name);
+			        	   			Global.joined_event_list.add(ptr.event.event_name);
 			        	   		
 			        	   			ptr = ptr.next;
 			           		i++;
