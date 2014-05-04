@@ -188,15 +188,19 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 				w = 4;
 				break;
 				case(4):
-				weekday = "friday";
+				weekday = "thursday";
 				w = 5;
 				break;
 				case(5):
-				weekday = "saturday";
+				weekday = "friday";
 				w = 6;
 				break;
-				default:
+				case(6):
 				weekday = "saturday";
+				w = 7;
+				break;
+				default:
+				weekday = "sunday";
 				w = 7;
 				}
 				dialog.dismiss();
