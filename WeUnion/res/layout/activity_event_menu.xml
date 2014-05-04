@@ -39,4 +39,14 @@
           android:layout_toRightOf="@+id/event_menu_create_event_button"
           android:text="R_event" />
 
+      <Button
+          android:id="@+id/secret_list_button"
+          style="?android:attr/buttonStyleSmall"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBaseline="@+id/event_menu_create_event_button"
+          android:layout_alignBottom="@+id/event_menu_create_event_button"
+          android:layout_alignParentLeft="true"
+          android:text="S_list" />
+
 </RelativeLayout>

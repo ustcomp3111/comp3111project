@@ -34,22 +34,24 @@ import android.widget.Toast;
 public class InviteGuest extends Fragment{
 	//Button invite_button;
 	ListView invite_guest_listview;
-	ArrayList<String > friend_list = new ArrayList<String>();
-	ArrayList<Integer> friend_id_list = new ArrayList<Integer>();
+	//ArrayList<String > friend_list = new ArrayList<String>();
+	//ArrayList<Integer> friend_id_list = new ArrayList<Integer>();
 LinearLayout l;
 JSONParser jsonParser = new JSONParser();
-private ProgressDialog pDialog;
+/*private ProgressDialog pDialog;
 private static final String DISPLAY_FD_URL = JSONParser.URL+"friend.php";
 private static final String TAG_A_ID = "A_id";
 private static final String TAG_A_NAME = "A_name";
 private static final String TAG_B_ID = "B_id";
 private static final String TAG_B_NAME = "B_name";
+*/
 int position;
 boolean friend_invited = false;
 	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 		l = (LinearLayout) inflater.inflate(R.layout.activity_invite_guest,container,false);
-		new AttemptDisplayfd().execute();
+		//new AttemptDisplayfd().execute();
+		new AttemptShowFd(0).execute();
 		while(!Global.initialization_is_completed);
 		Global.initialization_is_completed = false;
 		invite_guest_listview = (ListView) l.findViewById(R.id.invite_friend_list);
@@ -57,7 +59,7 @@ boolean friend_invited = false;
 	     //create_event_button.setOnClickListener(this);
 		 
 		 invite_guest_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
-	    android.R.layout.simple_list_item_1,friend_list ));
+	    android.R.layout.simple_list_item_1,Global.friend_list ));
 		 invite_guest_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
 		    {
 				@Override
@@ -68,9 +70,9 @@ boolean friend_invited = false;
 			boolean end = false;
 			while(ptr!=null)
 			{
-				if(ptr.user.user_id==friend_id_list.get(p)||friend_id_list.get(p)==Global.active_event.event.host.user_id)
+				if(ptr.user.user_id==Global.friend_id_list.get(p)||Global.friend_id_list.get(p)==Global.active_event.event.host.user_id)
 				{
-					Toast.makeText(getActivity(),friend_list.get(p)+" is already invited!", Toast.LENGTH_LONG).show();		
+					Toast.makeText(getActivity(),Global.friend_list.get(p)+" is already invited!", Toast.LENGTH_LONG).show();		
 				end = true;
 				break;
 				}
@@ -80,13 +82,13 @@ boolean friend_invited = false;
 			{
 			new AttemptInviteFd().execute();
 			if(friend_invited)
-				Toast.makeText(getActivity(),friend_list.get(p)+" invited!", Toast.LENGTH_LONG).show();	
+				Toast.makeText(getActivity(),Global.friend_list.get(p)+" invited!", Toast.LENGTH_LONG).show();	
 			friend_invited = false;
-			
+			Global.active_event.event.AddGuest(new Guest(Global.friend_list.get(p),Global.friend_id_list.get(p),false,false));
 			}}});
 	    return l;
 	}
-class AttemptDisplayfd extends AsyncTask<String, String, String> {
+/*class AttemptDisplayfd extends AsyncTask<String, String, String> {
 		
         @Override
         protected void onPreExecute() {
@@ -103,20 +105,20 @@ class AttemptDisplayfd extends AsyncTask<String, String, String> {
             	List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair(TAG_A_ID, Integer.toString(User.getInstance().getId())));
                 params.add(new BasicNameValuePair(TAG_A_NAME, User.getInstance().getName()));
-                friend_list = new ArrayList<String>();
-                friend_id_list = new ArrayList<Integer>();
+                Global.friend_list = new ArrayList<String>();
+                Global.friend_id_list = new ArrayList<Integer>();
                 JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_FD_URL, params);
 
                 if (jArray!=null) {
 
                     for(int i = 0; i <jArray.length();i++ ) {
                  	                   JSONObject json = jArray.getJSONObject(i);;
-                 	                   friend_id_list.add(json.getInt(TAG_B_ID));
-                 	                   friend_list.add(json.getString(TAG_B_NAME));             	                   
+                 	                  Global.friend_id_list.add(json.getInt(TAG_B_ID));
+                 	                 Global.friend_list.add(json.getString(TAG_B_NAME));             	                   
                  	                 
                     }
-                    if(friend_list.size()==0)
-           	    	 friend_list.add("(you have no friend :forever alone: )");
+                    if(Global.friend_list.size()==0)
+                    	Global.friend_list.add("(you have no friend :forever alone: )");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -132,6 +134,7 @@ class AttemptDisplayfd extends AsyncTask<String, String, String> {
         }
   	
 	}
+*/
 class AttemptInviteFd extends AsyncTask<String, String, String> {
 	
     @Override
@@ -147,8 +150,8 @@ class AttemptInviteFd extends AsyncTask<String, String, String> {
         try {
         	
         	List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("user_id",Integer.toString(friend_id_list.get(position))));
-            params.add(new BasicNameValuePair("user_name", friend_list.get(position)));
+            params.add(new BasicNameValuePair("user_id",Integer.toString(Global.friend_id_list.get(position))));
+            params.add(new BasicNameValuePair("user_name", Global.friend_list.get(position)));
             params.add(new BasicNameValuePair("event_id", Integer.toString(Global.active_event.event.event_id)));
             params.add(new BasicNameValuePair("event_name", Global.active_event.event.event_name));
             params.add(new BasicNameValuePair("joined", Integer.toString(0)));

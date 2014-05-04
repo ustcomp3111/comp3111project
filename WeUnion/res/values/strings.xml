@@ -30,5 +30,8 @@
     <string name="title_activity_joined_event">JoinedEvent</string>
     <string name="title_activity_weekly_agenda">WeeklyAgenda</string>
     <string name="title_activity_create_regular_event">CreateRegularEvent</string>
+    <string name="title_activity_secret_list">SecretList</string>
+    <string name="title_activity_my_secret_list">MySecretList</string>
+    <string name="title_activity_add_secret_list">AddSecretList</string>
 
 </resources>

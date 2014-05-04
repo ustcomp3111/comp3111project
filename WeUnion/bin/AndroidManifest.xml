@@ -147,6 +147,18 @@
             android:name="com.example.weunion.CreateRegularEvent"
             android:label="@string/title_activity_create_regular_event" >
         </activity>
+        <activity
+            android:name="com.example.weunion.SecretList"
+            android:label="@string/title_activity_secret_list" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.MySecretList"
+            android:label="@string/title_activity_my_secret_list" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.AddSecretList"
+            android:label="@string/title_activity_add_secret_list" >
+        </activity>
     </application>
 
 </manifest>

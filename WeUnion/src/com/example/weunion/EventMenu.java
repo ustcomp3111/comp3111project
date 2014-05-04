@@ -41,7 +41,7 @@ private ProgressDialog pDialog;
 ActionBar bar;
 ViewPager pager;
 List<Fragment> fragment_list;
-Button create_event_button,debug;
+Button create_event_button,debug,debug2;
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,7 +83,8 @@ Button create_event_button,debug;
     create_event_button.setOnClickListener(this);
     debug =  (Button) findViewById(R.id.debug_button);
     debug.setOnClickListener(this);
-	
+    debug2 =  (Button) findViewById(R.id.secret_list_button);
+    debug2.setOnClickListener(this);
 	 bar = getActionBar();
 	    bar.setHomeButtonEnabled(false);
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -226,6 +227,11 @@ Global.active_user.event_ptr = null;
 		}
 		else if(v.getId()==R.id.debug_button)
 		{ i = new Intent(this, WeeklyAgenda.class);
+		finish();
+		startActivity(i);
+		}
+		else if(v.getId()==R.id.secret_list_button)
+		{ i = new Intent(this, SecretList.class);
 		finish();
 		startActivity(i);
 		}
