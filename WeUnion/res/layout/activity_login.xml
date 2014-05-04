@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Login" 
-    android:background="#ffffff">
+    android:background="@drawable/ptback">
 
     <ImageView
         android:id="@+id/middle"
@@ -16,32 +16,26 @@
         android:layout_height="214dp"
         android:src="@drawable/weunion_icon" />
 
-    <TextView
-        android:id="@+id/t_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+<RelativeLayout></RelativeLayout>
+
 
     <EditText
         android:id="@+id/et_id"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10" 
+        android:hint="Name"
 		android:singleLine="true"/>
 
-    <TextView
-        android:id="@+id/t_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 
 	 <EditText
         android:id="@+id/et_pw"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textWebPassword" 
 		android:singleLine="true"/>
 
@@ -49,12 +43,14 @@
         android:id="@+id/b_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Login" />
 
     <Button
         android:id="@+id/b_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
         android:text="Register" />
 
 </TableLayout>

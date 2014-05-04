@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -14,6 +15,8 @@ import org.json.JSONObject;
 import comp3111project.DateAndTime;
 import comp3111project.EventNode;
 import comp3111project.Events;
+import comp3111project.RegularEvent;
+import comp3111project.RegularEventNode;
 
 import android.app.*;
 import android.os.AsyncTask;
@@ -37,9 +40,15 @@ public class Schedule extends Activity {
 	ArrayList<String> dateStringArray=new ArrayList<String>();
 	ArrayList<String> wholeweekdays=new ArrayList<String>();
 	ArrayList<String> eventlist = new ArrayList<String>();
-	ArrayList<String> durationlist= new ArrayList<String>();
+	ArrayList<Integer> durationlist= new ArrayList<Integer>();
 	ArrayList<String> begindate= new ArrayList<String>();
 	ArrayList<Integer> begintime= new ArrayList<Integer>();
+	
+	ArrayList<String> r_eventlist=new ArrayList<String>();
+	ArrayList<Integer> r_daylist=new ArrayList<Integer>();
+	ArrayList<Integer> r_begintime=new ArrayList<Integer>();
+	ArrayList<Integer> r_duration=new ArrayList<Integer>();
+	
 	Button addEvent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +118,7 @@ public class Schedule extends Activity {
 				
 			new AttemptShowEvents().execute();
 			while(!Global.initialization_is_completed);
+			//show event joining
 			for(int day=0;day<wholeweekdays.size();day++)
 			{
 				for(int n=0;n<eventlist.size();n++){
@@ -139,17 +149,66 @@ public class Schedule extends Activity {
 				RelativeLayout targetday = (RelativeLayout)findViewById(layoutID);
 				TextView tv=new TextView(getApplicationContext());
 				int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics());
+				//Random rnd = new Random(); 
+				//int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));   
 				
+				tv.setBackgroundColor(Color.YELLOW);
 				tv.setText(eventlist.get(n));
 				tv.setTextColor(Color.BLACK);
 				tv.setId(5);
-				tv.setBackgroundColor(Color.YELLOW);
+				
 				RelativeLayout.LayoutParams lp= 
 						new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT
 								);
 
-				lp.height=px*Integer.valueOf(durationlist.get(n));
+				lp.height=px*durationlist.get(n);
 				lp.setMargins(0, px*begintime.get(n)+px*23/10,0, 0);
+				tv.setLayoutParams(lp);
+				targetday.addView(tv, lp);
+				}
+			}}
+			//show regular event
+			for(int day=0;day<7;day++)
+			{
+				for(int n=0;n<r_eventlist.size();n++){
+					if(day==r_daylist.get(n))
+						
+			{ int layoutID=0;
+						if(day==0){
+							layoutID=R.id.sundayRelativeLayout;
+						}
+						if(day==1){
+							layoutID=R.id.mondayRelativeLayout;
+						}
+						if(day==2){
+							layoutID=R.id.tuesdayRelativeLayout;
+						}
+						if(day==3){
+							layoutID=R.id.wednesdayRelativeLayout;
+						}
+						if(day==4){
+							layoutID=R.id.thursdayRelativeLayout;
+						}
+						if(day==5){
+							layoutID=R.id.fridayRelativeLayout;
+						}
+						if(day==6){
+							layoutID=R.id.saturdayRelativeLayout;
+						}
+				RelativeLayout targetday = (RelativeLayout)findViewById(layoutID);
+				TextView tv=new TextView(getApplicationContext());
+				int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics());
+				
+				tv.setText(r_eventlist.get(n));
+				tv.setTextColor(Color.BLACK);
+				tv.setId(5);
+				tv.setBackgroundColor(Color.MAGENTA);
+				RelativeLayout.LayoutParams lp= 
+						new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT
+								);
+
+				lp.height=px*r_duration.get(n);
+				lp.setMargins(0, px*r_begintime.get(n)+px*23/10,0, 0);
 				tv.setLayoutParams(lp);
 				targetday.addView(tv, lp);
 				}
@@ -183,10 +242,10 @@ Global.initialization_is_completed = false;
 			        	   
 			           JSONObject json2 = jArray2.getJSONObject(i);
 			           eventlist.add(json2.getString("event_name"));
-			           durationlist.add(json2.getString("duration"));
+			           durationlist.add(json2.getInt("duration"));
 			           begintime.add(json2.getInt("time"));
 			           begindate.add(json2.getString("date"));
-			          // begindate.add(json2.getString("begin"));
+			          
 			           String [] array = json2.getString("date").split("-");
 			           DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
 				       
@@ -207,7 +266,32 @@ Global.initialization_is_completed = false;
 		        	   			ptr = ptr.next;
 		           		i++;
 		           		}
-
+			           //get regular event detail
+			           JSONArray jArray = jsonParser.makeHttpRequest(Global.REGULAR_EVENT_URL, params2);
+			           
+			              for(int i = 0; i <jArray.length();i++ ) {
+			            	  int weekday = 0;
+			            		  JSONObject json2 = jArray.getJSONObject(i);
+			            		r_eventlist.add(json2.getString("r_event_name"));
+			            		r_begintime.add(json2.getInt("time"));
+			            		r_duration.add(json2.getInt("duration"));
+			            		
+			            		if(json2.getString("weekday").equals("sunday"))
+			            			weekday = 0;
+			            		else if(json2.getString("weekday").equals("monday"))
+			            			weekday = 1; 
+			            		else if(json2.getString("weekday").equals("tuesday"))
+			            			weekday = 2;
+			            		else if(json2.getString("weekday").equals("wednesday"))
+			            			weekday = 3;
+			            		else if(json2.getString("weekday").equals("thursday"))
+			            			weekday = 4;
+			            		else if(json2.getString("weekday").equals("friday"))
+			            			weekday = 5;
+			            		else if(json2.getString("weekday").equals("saturday"))
+			            			weekday = 6;
+			            		r_daylist.add(weekday);
+			              }
 	    	   		}
 	    	   catch(Exception e)
 	    	   {
@@ -221,7 +305,7 @@ Global.initialization_is_completed = false;
 	        	if (pDialog != null) { 
 	                pDialog.dismiss();
 	           }
-	        	/*Toast.makeText(Schedule.this,"i = "+i+"eventlist.size(): "+wholeweekdays.get(4)+durationlist.get(0),Toast.LENGTH_LONG).show();	*/
+	        	//Toast.makeText(Schedule.this,"i = "+i+"r_eventlist.size(): "+r_eventlist.get(0)+r_duration.get(0),Toast.LENGTH_LONG).show();	
 		 }
 		 }	
 		 
