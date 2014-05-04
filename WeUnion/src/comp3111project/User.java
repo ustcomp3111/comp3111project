@@ -46,7 +46,7 @@ public class User // object which stores user's info
        }}
     }
  
-    boolean AddRegularEvent(RegularEventNode node) {            	
+    public boolean AddRegularEvent(RegularEventNode node) {            	
     	RegularEventNode ptr = schedule_ptr, ptr2 = schedule_ptr;       
     	try{
     	if (schedule_ptr == null) {
@@ -65,8 +65,21 @@ public class User // object which stores user's info
         		System.out.println("^^^^^^");
         	*/return false;
         	}else
-        	ptr.next=node;        	       
-        }
+        	{
+        	if (node.regular_event.end.week_day < ptr.regular_event.begin.week_day
+            		|| (node.regular_event.end.week_day == ptr.regular_event.begin.week_day && node.regular_event.end.time_slot < ptr.regular_event.begin.time_slot))
+        		{
+        		ptr.next = node;
+        		node.next = ptr;
+        	schedule_ptr = node;
+        	}
+        	else
+        	{
+        		ptr.next=node;
+            	node.next = schedule_ptr;
+        	}
+        		}
+        	}
         else {
             while (true) {
 
@@ -216,7 +229,7 @@ boolean overlap(DateAndTime time, int duration)
 	EventNode ptr = event_ptr;
 		Events event = new Events("",0,this,time,duration,"");
 	RegularEventNode ptr2 = schedule_ptr; 
-	RegularEvent weekday_of_event = new RegularEvent("",0,time.weekday(),time.time_slot,duration);
+	RegularEvent weekday_of_event = new RegularEvent("",0,time.weekday(),time.time_slot,duration,"");
 	
 	do
 	{

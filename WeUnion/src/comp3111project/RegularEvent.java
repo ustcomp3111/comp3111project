@@ -3,18 +3,20 @@ package comp3111project;
 //For constructing linked lists
 //Too avoid redundancy, RegularEventNode is used instead of this
 public class RegularEvent {
-    String regular_event_name = "Occupied time slot";
-    int regular_event_id;
-	WeekdayAndTime begin, end;
-    int duration;
+    public String regular_event_name = "Occupied time slot";
+    public int regular_event_id;
+	public WeekdayAndTime begin, end;
+    public int duration;
+    public String venue;
     RegularEvent next;
     
-    public RegularEvent(String n,int i,int Weekday, int Begin, int Duration) {
+    public RegularEvent(String n,int i,int Weekday, int Begin, int Duration,String v) {
         regular_event_name = n;
         regular_event_id = i;
     	begin = new WeekdayAndTime(Weekday, Begin);
         duration = Duration;
         end = this.add(duration);
+        venue = v;
         next = null;
     }
     RegularEvent(int Weekday, int Begin, int Duration) {

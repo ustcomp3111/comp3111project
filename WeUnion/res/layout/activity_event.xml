@@ -9,13 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Events" >
 
-    <TextView
-        android:id="@+id/trytry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Events"
-        android:textSize="25dp" />
-
     <ListView
         android:id="@+id/my_events"
         android:layout_width="match_parent"

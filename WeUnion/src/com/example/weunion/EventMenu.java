@@ -41,7 +41,7 @@ private ProgressDialog pDialog;
 ActionBar bar;
 ViewPager pager;
 List<Fragment> fragment_list;
-Button create_event_button;
+Button create_event_button,debug;
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,7 +81,8 @@ Button create_event_button;
 	});
      create_event_button = (Button) findViewById(R.id.event_menu_create_event_button);
     create_event_button.setOnClickListener(this);
-    
+    debug =  (Button) findViewById(R.id.debug_button);
+    debug.setOnClickListener(this);
 	
 	 bar = getActionBar();
 	    bar.setHomeButtonEnabled(false);
@@ -139,11 +140,11 @@ Global.active_user.event_ptr = null;
 		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
 		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));		            	 
 		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		            		 Global.my_event_list.add(json2.getString("event_name"));
+		            		/* Global.my_event_list.add(json2.getString("event_name"));
 			            	 Global.my_event_id_list.add(json2.getInt("event_id"));
 			            	 Global.all_event_list.add(json2.getString("event_name"));
 			            	 Global.all_event_id_list.add(json2.getInt("event_id")); 
-		              }
+		              */}
 		              for(int i = 0; i <jArray3.length();i++ ) {
 			            	 JSONObject json3 = jArray3.getJSONObject(i);
 			            	 array = json3.getString("date").split("-");
@@ -151,12 +152,29 @@ Global.active_user.event_ptr = null;
 			            	  tmp = new Events(json3.getString("event_name"),json3.getInt("event_id"),new comp3111project.User(json3.getString("holder"),0),
 			            			  	date_and_time,json3.getInt("duration"),json3.getString("venue"));
 			            	  Global.active_user.AddEvent(new EventNode(tmp));
-			            		 Global.joined_event_list.add(json3.getString("event_name"));
+			            /*		 Global.joined_event_list.add(json3.getString("event_name"));
 				            	 Global.joined_event_id_list.add(json3.getInt("event_id"));
 				            	 Global.all_event_list.add(json3.getString("event_name"));
 				            	 Global.all_event_id_list.add(json3.getInt("event_id")); 
+		              */}
+		              EventNode ptr = Global.active_user.event_ptr;
+		              while(ptr != null)
+		              {
+		            	  Global.all_event_list.add(ptr.event.event_name);
+			            	 Global.all_event_id_list.add(ptr.event.event_id); 
+		              if(ptr.event.host.name.equals(Global.active_user.name))
+		              {
+		            	  Global.my_event_list.add(ptr.event.event_name);
+			            	 Global.my_event_id_list.add(ptr.event.event_id);
 		              }
-		         	}
+		              else
+		              {
+		            	  Global.joined_event_list.add(ptr.event.event_name);
+			            	 Global.joined_event_id_list.add(ptr.event.event_id);
+		              }
+		              ptr = ptr.next;
+		              }
+		   }
 		catch(Exception e)
 		{
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
@@ -206,7 +224,11 @@ Global.active_user.event_ptr = null;
 		finish();
 		startActivity(i);
 		}
-	
+		else if(v.getId()==R.id.debug_button)
+		{ i = new Intent(this, WeeklyAgenda.class);
+		finish();
+		startActivity(i);
+		}
 	}
 	public void onBackPressed() {
 	    finish();

@@ -9,7 +9,7 @@ class DateAndTime {
     private static GregorianCalendar now = new GregorianCalendar();
     int time_slot;
 //    Find the current time in DateAndTime format
-    static DateAndTime Now()
+    static public DateAndTime Now()
     {
     	DateAndTime Now = new DateAndTime(now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
@@ -34,7 +34,7 @@ else
 			 +" "+TimeSlotToString();
  }
  
-    int weekday() {
+   public int weekday() {
         return Date.get(Calendar.DAY_OF_WEEK);
     }
     WeekdayAndTime ReturnWeekdayAndTime()

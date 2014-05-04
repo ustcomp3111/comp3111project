@@ -28,5 +28,7 @@
     <string name="title_activity_pending_guest">PendingGuest</string>
     <string name="title_activity_invite_guest">InviteGuest</string>
     <string name="title_activity_joined_event">JoinedEvent</string>
+    <string name="title_activity_weekly_agenda">WeeklyAgenda</string>
+    <string name="title_activity_create_regular_event">CreateRegularEvent</string>
 
 </resources>

@@ -139,6 +139,14 @@
             android:name="com.example.weunion.JoinedEvent"
             android:label="@string/title_activity_joined_event" >
         </activity>
+        <activity
+            android:name="com.example.weunion.WeeklyAgenda"
+            android:label="@string/title_activity_weekly_agenda" >
+        </activity>
+        <activity
+            android:name="com.example.weunion.CreateRegularEvent"
+            android:label="@string/title_activity_create_regular_event" >
+        </activity>
     </application>
 
 </manifest>
