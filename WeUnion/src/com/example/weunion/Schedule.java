@@ -149,7 +149,7 @@ public class Schedule extends Activity {
 								);
 
 				lp.height=px*Integer.valueOf(durationlist.get(n));
-				lp.setMargins(0, px*begintime.get(n),0, 0);
+				lp.setMargins(0, px*begintime.get(n)+px*23/10,0, 0);
 				tv.setLayoutParams(lp);
 				targetday.addView(tv, lp);
 				}
@@ -199,14 +199,14 @@ Global.initialization_is_completed = false;
 			           EventNode ptr = Global.active_user.event_ptr;
 			          
 			           while(ptr!=null)
-			           		{          
-			        	   		if(ptr.event.host.name.equals(Global.active_user.name))
-			        	   			Global.my_event_list.add(ptr.event.event_name);
-			        	   			Global.joined_event_list.add(ptr.event.event_name);
-			        	   		
-			        	   			ptr = ptr.next;
-			           		i++;
-			           		}
+		           		{          
+		        	   		if(ptr.event.host.name.equals(Global.active_user.name))
+		        	   			Global.my_event_list.add(ptr.event.event_name);
+		        	   			Global.joined_event_list.add(ptr.event.event_name);
+		        	   		
+		        	   			ptr = ptr.next;
+		           		i++;
+		           		}
 
 	    	   		}
 	    	   catch(Exception e)

@@ -11,36 +11,45 @@
     android:paddingTop="@dimen/activity_vertical_margin" 
     tools:context=".Msgbox" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
     <ListView
         android:id="@+id/msg"
         android:layout_width="fill_parent"
         android:layout_height="316dp"
+        android:layout_above="@+id/postmsg"
         android:layout_alignParentTop="true"
         android:layout_weight="1.86"
         android:stackFromBottom="true" >
 
     </ListView>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
     <EditText
         android:id="@+id/post_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/msg_event"
-        android:layout_alignParentBottom="true"
+        android:layout_weight="1.12"
         android:ems="10"
-        android:inputType="textMultiLine" 
-        android:windowSoftInputMode="adjustResize">
-	
-        
+        android:inputType="textMultiLine" >
     </EditText>
 
     <Button
         android:id="@+id/post_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/post_msg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/post_msg"
-        android:layout_toRightOf="@+id/post_msg"
-        android:text="Post" />
+        android:layout_alignRight="@+id/msg"
+        android:background="@drawable/post" />
+</LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -15,6 +15,12 @@
      android:background="#D9DBDD"
      android:orientation="horizontal" >
 
+		<TextView
+         android:id="@+id/textYear"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_weight="2"
+         android:text="" />
       <TextView
           android:id="@+id/textMonth"
           android:layout_width="0dp"
@@ -22,20 +28,13 @@
           android:layout_weight="2"
           android:text="" />
 
-      <TextView
-         android:id="@+id/textYear"
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_weight="2"
-         android:text="" />
+      
 
       <Button
           android:id="@+id/addEvent"
-          style="?android:attr/buttonStyleSmall"
           android:layout_width="40dp"
           android:layout_height="40dp"
-          android:layout_weight="0.5"
-          android:text="+" />
+          android:background="@drawable/plus"/>
 
       </LinearLayout>
  <LinearLayout
@@ -55,7 +54,8 @@
          android:layout_height="wrap_content"
          android:layout_alignStart="@+id/sundayRelativeLayout"
          android:layout_weight="2"
-         android:text="Sun"
+         android:text="Sun "
+         android:gravity="right"
          android:textSize="12sp"/>
 
      <TextView
@@ -73,7 +73,8 @@
          android:layout_alignStart="@+id/mondayRelativeLayout"
          android:layout_weight="2"
          android:textSize="12sp"
-         android:text="Mon" />
+         android:gravity="right"
+         android:text="Mon " />
 
      <TextView
          android:id="@+id/textDate1"
@@ -90,7 +91,8 @@
          android:layout_alignStart="@+id/tuesdayRelativeLayout"
          android:layout_weight="2"
          android:textSize="12sp"
-         android:text="Tue" />
+         android:gravity="right"
+         android:text="Tue " />
 
      <TextView
          android:id="@+id/textDate2"
@@ -107,7 +109,8 @@
          android:layout_alignStart="@+id/wednesdayRelativeLayout"
          android:layout_weight="2"
          android:textSize="12sp"
-         android:text="Wed" />
+         android:gravity="right"
+         android:text="Wed " />
 
      <TextView
          android:id="@+id/textDate3"
@@ -124,7 +127,8 @@
          android:layout_alignStart="@+id/thursdayRelativeLayout"
          android:layout_weight="2"
          android:textSize="12sp"
-         android:text="Thu"/>
+         android:gravity="right"
+         android:text="Thu "/>
 
      <TextView
          android:id="@+id/textDate4"
@@ -141,7 +145,8 @@
          android:layout_alignStart="@+id/fridayRelativeLayout"
          android:layout_weight="2"
          android:textSize="12sp"
-         android:text="Fri"/>
+         android:gravity="right"
+         android:text="Fri "/>
 
      <TextView
          android:id="@+id/textDate5"
@@ -158,7 +163,8 @@
          android:layout_alignStart="@+id/saturdayRelativeLayout"
          android:layout_weight="2"
          android:textSize="12sp"
-         android:text="Sat" />
+         android:gravity="right"
+         android:text="Sat " />
 
      <TextView
          android:id="@+id/textDate6"
@@ -184,7 +190,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#fff" >
-
+<TextView
+                android:id="@+id/textTimeblank"
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:text="" />
             <TextView
                 android:id="@+id/textTime00a"
                 android:layout_width="wrap_content"
@@ -195,6 +205,7 @@
                 android:id="@+id/textTime01"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                
                 android:text="1am " />
 
 
@@ -208,6 +219,7 @@
                 android:id="@+id/textTime03"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                
                 android:text="3am " />
 
             <TextView
@@ -220,6 +232,7 @@
                 android:id="@+id/textTime05"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                
                 android:text="5am " />
 
             <TextView
@@ -232,6 +245,7 @@
                 android:id="@+id/textTime07"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                 
                 android:text="7am " />
 
             <TextView
@@ -244,6 +258,7 @@
                 android:id="@+id/textTime09"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                
                 android:text="9am " />
 
            <TextView
@@ -256,6 +271,7 @@
                 android:id="@+id/textTime11"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                
                 android:text="11am " />
 
  
@@ -270,6 +286,7 @@
                 android:id="@+id/textTime13"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                
                 android:text="1pm " />
 
  
@@ -389,8 +406,7 @@
 		android:layout_width="0dp"
 		android:layout_height="match_parent"
 		android:layout_weight="2" >
-
-		                      <include layout="@layout/zebraline" />
+<include layout="@layout/zebraline" />
 	</RelativeLayout>
 	
 	<RelativeLayout
