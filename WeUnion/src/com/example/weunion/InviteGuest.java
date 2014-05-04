@@ -81,6 +81,8 @@ boolean friend_invited = false;
 			if(!end)
 			{
 			new AttemptInviteFd().execute();
+			while(!Global.initialization_is_completed);
+			Global.initialization_is_completed = false;
 			if(friend_invited)
 				Toast.makeText(getActivity(),Global.friend_list.get(p)+" invited!", Toast.LENGTH_LONG).show();	
 			friend_invited = false;
@@ -166,6 +168,7 @@ class AttemptInviteFd extends AsyncTask<String, String, String> {
          catch (Exception e) {
             e.printStackTrace();
         }
+        Global.initialization_is_completed = true;
         return null;
 		
 	}

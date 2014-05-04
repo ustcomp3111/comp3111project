@@ -101,7 +101,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		
+	 	pager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override

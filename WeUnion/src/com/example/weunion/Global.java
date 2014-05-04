@@ -22,6 +22,7 @@ public class Global {
 	public static final String CREATE_REGULAR_EVENT_URL = SERVER_URL+"/weu/postr_event.php";
 	public static final String SHOW_SECRET_LIST_URL = SERVER_URL+"/weu/secretlist.php";
 	public static final String ADD_SECRET_LIST_URL = SERVER_URL+"/weu/addsecretlist.php";
+	public static final String REMOVE_SECRET_LIST_URL = SERVER_URL+"/weu/delsecretlist.php";
 	public static comp3111project.User active_user = new comp3111project.User("",0) , other_users = null;
     public static EventNode active_event;
     public static ArrayList<String> joined_event_list = new ArrayList<String>(),
