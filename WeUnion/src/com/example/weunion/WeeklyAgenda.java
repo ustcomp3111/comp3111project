@@ -38,6 +38,7 @@ public class WeeklyAgenda extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_weekly_agenda);
+		Global.initialization_is_completed = false;
 		agenda_listview = (ListView) findViewById(R.id.my_agenda);
 		     create_regular_event_button = (Button) findViewById(R.id.weekly_agenda_create_regular_event_button);
 		     create_regular_event_button.setOnClickListener(this);

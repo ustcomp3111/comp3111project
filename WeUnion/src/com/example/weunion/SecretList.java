@@ -114,10 +114,11 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					
+					dialog.dismiss();
 				}				
 			}
 					);							
+		matching_dialog.show();
 		}
 	}
 

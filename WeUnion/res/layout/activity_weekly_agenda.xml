@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,17 +11,15 @@
     <ListView
         android:id="@+id/my_agenda"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/weekly_agenda_create_regular_event_button" >
-
+        android:layout_height="346dp"
+        android:layout_above="@+id/weekly_agenda_create_regular_event_button"
+        android:layout_weight="0.53" >
     </ListView>
 
     <Button
         android:id="@+id/weekly_agenda_create_regular_event_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:text="Create Regular Event" />
 
-</RelativeLayout>
+</TableLayout>
