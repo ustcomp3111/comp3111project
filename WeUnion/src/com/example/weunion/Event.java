@@ -66,6 +66,9 @@ LinearLayout l;
 			}
 	    	
 	    });
+	    while(!Global.initialization_is_completed);
+	    event_listview.invalidateViews();
+	   
 	    return l;
 	}
 

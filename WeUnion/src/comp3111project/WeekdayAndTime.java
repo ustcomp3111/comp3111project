@@ -41,13 +41,13 @@ public String print()
 	weekday = "Wednesday";
 	break;
 	case(5):
-	weekday = "Friday";
+	weekday = "Thursday";
 	break;
 	case(6):
-	weekday = "Saturday";
+	weekday = "Friday";
 	break;	
 	default:
-	weekday = "Sunday";
+	weekday = "Saturday";
 	break;
 	}
 	return weekday+" "+time;

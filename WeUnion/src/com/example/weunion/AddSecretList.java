@@ -61,17 +61,30 @@ int p;
 					}
 					if(!end)
 					{
-					new  AttemptAddSecretList().execute();
+						Global.initialization_is_completed = false;
+						new  AttemptAddSecretList().execute();
 					while(!Global.initialization_is_completed);
 					Global.initialization_is_completed = false;
 					if(friend_added)
+					{
 						Toast.makeText(getActivity(),Global.add_secret_list.get(p)+" added!", Toast.LENGTH_LONG).show();	
+						if(Global.my_secret_id_list.get(0)==-1)
+						{
+							Global.my_secret_list = new ArrayList<String>();
+							Global.my_secret_id_list = new ArrayList<Integer>();
+						}
+						Global.my_secret_id_list.add(Global.add_secret_id_list.get(p));
+						Global.my_secret_list.add(Global.add_secret_list.get(p));
+						Global.my_secret_list_listview.invalidateViews();
+					}
 					friend_added = false;
-				Global.my_secret_id_list.add(Global.add_secret_id_list.get(p));
-				Global.my_secret_list.add(Global.add_secret_list.get(p));
+	
 				}
 		    	
 		    }});
+			while(!Global.initialization_is_completed);
+		    add_secret_list_listview.invalidateViews();
+
 	    return l;
 	}
 class AttemptAddSecretList extends AsyncTask<String, String, String> {

@@ -1,6 +1,7 @@
 package com.example.weunion;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -98,23 +99,23 @@ Global.agenda_id_list = new ArrayList<Integer>();
 Global.active_user.schedule_ptr = null;
 
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.REGULAR_EVENT_URL, params2);
-			       int weekday = 7;
+			       int weekday = Calendar.SUNDAY;
 		              for(int i = 0; i <jArray2.length();i++ ) {		            	 		            	  		            	  		            	  
 		            		  JSONObject json2 = jArray2.getJSONObject(i);
 		            		if(json2.getString("weekday").equals("sunday"))
-		            			weekday = 1;
+		            			weekday = Calendar.SUNDAY;
 		            		else if(json2.getString("weekday").equals("monday"))
-		            			weekday = 2; 
+		            			weekday = Calendar.MONDAY; 
 		            		else if(json2.getString("weekday").equals("tuesday"))
-		            			weekday = 3;
+		            			weekday = Calendar.TUESDAY;
 		            		else if(json2.getString("weekday").equals("wednesday"))
-		            			weekday = 4;
+		            			weekday = Calendar.WEDNESDAY;
 		            		else if(json2.getString("weekday").equals("thursday"))
-		            			weekday = 5;
+		            			weekday = Calendar.THURSDAY;
 		            		else if(json2.getString("weekday").equals("friday"))
-		            			weekday = 6;
+		            			weekday = Calendar.FRIDAY;
 		            		else if(json2.getString("weekday").equals("saturday"))
-		            			weekday = 7;
+		            			weekday = Calendar.SATURDAY;
 		            			
 		            		
 		            		  //array = json2.getString("date").split("-");

@@ -48,8 +48,9 @@ Button create_event_button,debug,debug2;
 		setContentView(R.layout.activity_event_menu);
 	    //Global.active_user.name = User.getInstance().getName();   
 	   Global.active_user = new comp3111project.User(User.getInstance().getName(),User.getInstance().getId());
-	    new AttemptShowEvents().execute();
-	    while(!Global.initialization_is_completed);
+	   Global.initialization_is_completed = false;
+	   new AttemptShowEvents().execute();
+	  //  while(!Global.initialization_is_completed);
 		
 	    	fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, Event.class.getName()));
@@ -91,7 +92,7 @@ Button create_event_button,debug,debug2;
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events I Joined").setTabListener(this));
-	Global.initialization_is_completed = false;	
+	
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -68,6 +68,8 @@ LinearLayout l;
 			}
 	    	
 	    });
+	    while(!Global.initialization_is_completed);
+	    joined_event_listview.invalidateViews();
 	    return l;
 	}
 	

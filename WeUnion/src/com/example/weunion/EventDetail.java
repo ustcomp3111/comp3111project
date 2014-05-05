@@ -47,7 +47,7 @@ public class EventDetail extends FragmentActivity implements ActionBar.TabListen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_detail);
 		setTitle(Global.active_event.event.event_name);
-
+Global.initialization_is_completed = false;
 		Msgbox.Event_Name = Global.active_event.event.event_name;
 	fragment_list = new Vector<Fragment>();
 	fragment_list.add(Fragment.instantiate(this, EventInfo.class.getName()));

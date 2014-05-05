@@ -38,11 +38,11 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_secret_list);
-		
+		Global.initialization_is_completed = false;
 		new AttemptShowSecretList().execute();
 		new AttemptShowFd(1).execute();
-		while(!Global.initialization_is_completed);
-		Global.initialization_is_completed = false;
+		//while(!Global.initialization_is_completed);
+		//Global.initialization_is_completed = false;
 		
 		fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, MySecretList.class.getName()));
@@ -140,12 +140,15 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	         	                 Global.my_secret_list.add(json.getString("B_name"));	         	                 
 	            }
 	            if(Global.my_secret_list.size()==0)
+	            	{
 	            	Global.my_secret_list.add("(your list is empty)");
-	        }
+	            	Global.my_secret_id_list.add(-1);
+	            	}
+	            }
 	    } catch (JSONException e) {
 	        e.printStackTrace();
 	    }
-	  //  Global.initialization_is_completed = true;
+	    Global.initialization_is_completed = true;
 	    return null;
 		
 	}
