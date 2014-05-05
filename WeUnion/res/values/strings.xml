@@ -33,5 +33,6 @@
     <string name="title_activity_secret_list">SecretList</string>
     <string name="title_activity_my_secret_list">MySecretList</string>
     <string name="title_activity_add_secret_list">AddSecretList</string>
+    <string name="title_activity_check_list">CheckList</string>
 
 </resources>

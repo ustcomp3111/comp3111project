@@ -159,6 +159,10 @@
             android:name="com.example.weunion.AddSecretList"
             android:label="@string/title_activity_add_secret_list" >
         </activity>
+        <activity
+            android:name="com.example.weunion.CheckList"
+            android:label="@string/title_activity_check_list" >
+        </activity>
     </application>
 
 </manifest>
