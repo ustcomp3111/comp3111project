@@ -70,8 +70,8 @@ int p;
 						Toast.makeText(getActivity(),Global.add_secret_list.get(p)+" added!", Toast.LENGTH_LONG).show();	
 						if(Global.my_secret_id_list.get(0)==-1)
 						{
-							Global.my_secret_list = new ArrayList<String>();
-							Global.my_secret_id_list = new ArrayList<Integer>();
+							Global.my_secret_list.clear();
+							Global.my_secret_id_list.clear();
 						}
 						Global.my_secret_id_list.add(Global.add_secret_id_list.get(p));
 						Global.my_secret_list.add(Global.add_secret_list.get(p));

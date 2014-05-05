@@ -17,14 +17,19 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 public class SecretList extends FragmentActivity implements ActionBar.TabListener,OnClickListener{
 	PagerAdapter pageradapter;
@@ -33,6 +38,8 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	ActionBar bar;
 	ViewPager pager;
 	List<Fragment> fragment_list;
+	Button matching_button;
+	
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 		new AttemptShowFd(1).execute();
 		//while(!Global.initialization_is_completed);
 		//Global.initialization_is_completed = false;
+		matching_button = (Button) findViewById(R.id.matching_button);
+		matching_button.setOnClickListener(this);
 		
 		fragment_list = new Vector<Fragment>();
 		fragment_list.add(Fragment.instantiate(this, MySecretList.class.getName()));
@@ -87,9 +96,29 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	}
 
 	@Override
-	public void onClick(View arg0) {
+	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+		if(v.getId()==R.id.matching_button)
+		{
+			Global.initialization_is_completed = false;
+			new AttemptMatchSecretList().execute();
+			while(!Global.initialization_is_completed);
+			Global.initialization_is_completed = false;
+			AlertDialog.Builder matching_dialog = new AlertDialog.Builder(SecretList.this);
+			matching_dialog.setAdapter(
+			new ArrayAdapter<String>(this,
+			android.R.layout.simple_list_item_1, Global.matching_list),				
+			new DialogInterface.OnClickListener()
+			{
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}				
+			}
+					);							
+		}
 	}
 
 	@Override
@@ -116,10 +145,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	@Override
 	protected void onPreExecute() {
 	    super.onPreExecute();
-
-
 	}
-
 	@Override
 	protected String doInBackground(String... args) {
 		// TODO Auto-generated method stub
@@ -154,9 +180,50 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	}
 
 	protected void onPostExecute(String file_url) {
+	}
+	}
+	public class AttemptMatchSecretList extends AsyncTask<String, String, String> {
+		private ProgressDialog pDialog;
 
+		JSONParser jsonParser = new JSONParser();
+	@Override
+	protected void onPreExecute() {
+	    super.onPreExecute();
+	}
+	@Override
+	protected String doInBackground(String... args) {
+		// TODO Auto-generated method stub
+	    try {
+	    	
+	    	List<NameValuePair> params = new ArrayList<NameValuePair>();
+	        params.add(new BasicNameValuePair("A_id", Integer.toString(User.getInstance().getId())));
+	        params.add(new BasicNameValuePair("A_name", User.getInstance().getName()));
+	        Global.matching_id_list.clear();
+	        Global.matching_list.clear();
+	        JSONArray jArray = jsonParser.makeHttpRequest(Global.MATCH_SECRET_LIST_URL, params);
 
+	        if (jArray!=null) {
+
+	            for(int i = 0; i <jArray.length();i++ ) {
+	         	                   JSONObject json = jArray.getJSONObject(i);;
+	         	                  Global.matching_id_list.add(json.getInt("A_id"));
+	         	                 Global.matching_list.add(json.getString("A_name"));	         	                 
+	            }
+	            if(Global.my_secret_list.size()==0)
+	            	{
+	            	Global.my_secret_list.add("(your list is empty)");
+	            	Global.my_secret_id_list.add(-1);
+	            	}
+	            }
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	    }
+	    Global.initialization_is_completed = true;
+	    return null;
+		
 	}
 
+	protected void onPostExecute(String file_url) {
+	}
 	}
 }

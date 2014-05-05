@@ -84,59 +84,23 @@ boolean friend_invited = false;
 			while(!Global.initialization_is_completed);
 			Global.initialization_is_completed = false;
 			if(friend_invited)
+			{
 				Toast.makeText(getActivity(),Global.friend_list.get(p)+" invited!", Toast.LENGTH_LONG).show();	
+			Global.all_guest_list.add(Global.friend_list.get(p));
+			if(Global.pending_guest_list.get(0)=="(empty)")
+				Global.pending_guest_list.clear();
+			Global.pending_guest_list.add(Global.friend_list.get(p));
+			
+				Global.active_event.event.AddGuest(new Guest(Global.friend_list.get(p),Global.friend_id_list.get(p),false,false));
+			Global.all_guest_listview.invalidateViews();
+			Global.pending_guest_listview.invalidateViews();
+			}
 			friend_invited = false;
-			Global.active_event.event.AddGuest(new Guest(Global.friend_list.get(p),Global.friend_id_list.get(p),false,false));
+			
 			}}});
 	    return l;
 	}
-/*class AttemptDisplayfd extends AsyncTask<String, String, String> {
-		
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-   
 
-        }
-		
-		@Override
-		protected String doInBackground(String... args) {
-			// TODO Auto-generated method stub
-            try {
-            	
-            	List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair(TAG_A_ID, Integer.toString(User.getInstance().getId())));
-                params.add(new BasicNameValuePair(TAG_A_NAME, User.getInstance().getName()));
-                Global.friend_list = new ArrayList<String>();
-                Global.friend_id_list = new ArrayList<Integer>();
-                JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_FD_URL, params);
-
-                if (jArray!=null) {
-
-                    for(int i = 0; i <jArray.length();i++ ) {
-                 	                   JSONObject json = jArray.getJSONObject(i);;
-                 	                  Global.friend_id_list.add(json.getInt(TAG_B_ID));
-                 	                 Global.friend_list.add(json.getString(TAG_B_NAME));             	                   
-                 	                 
-                    }
-                    if(Global.friend_list.size()==0)
-                    	Global.friend_list.add("(you have no friend :forever alone: )");
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Global.initialization_is_completed = true;
-            return null;
-			
-		}
-
-        protected void onPostExecute(String file_url) {
-
-
-        }
-  	
-	}
-*/
 class AttemptInviteFd extends AsyncTask<String, String, String> {
 	
     @Override

@@ -47,13 +47,13 @@ protected String doInBackground(String... args) {
         params.add(new BasicNameValuePair(TAG_A_NAME, User.getInstance().getName()));
         if(list == 0)
         {
-        Global.friend_list = new ArrayList<String>();
-        Global.friend_id_list = new ArrayList<Integer>();
+        Global.friend_list.clear();
+        Global.friend_id_list.clear();
         }
         else if(list == 1)
         {
-        	  Global.add_secret_list = new ArrayList<String>();
-              Global.add_secret_id_list = new ArrayList<Integer>();
+        	  Global.add_secret_list.clear();
+              Global.add_secret_id_list.clear();
         }
         JSONArray jArray = jsonParser.makeHttpRequest(DISPLAY_FD_URL, params);
 

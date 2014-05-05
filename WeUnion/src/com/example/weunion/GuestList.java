@@ -51,10 +51,10 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 		   // new AttemptShowEvents().execute();
 		   // while(!Global.initialization_is_completed);
 			Guest ptr = Global.active_event.event.guest_list_ptr;
-			Global.all_guest_list = new ArrayList<String>();
-			Global.going_guest_list = new ArrayList<String>();
-			Global.declined_guest_list = new ArrayList<String>();
-			Global.pending_guest_list  = new ArrayList<String>();
+			Global.all_guest_list.clear();
+			Global.going_guest_list.clear();
+			Global.declined_guest_list.clear();
+			Global.pending_guest_list.clear();
 			 Global.all_guest_list.add(Global.active_user.name);
 			 Global.going_guest_list.add(Global.active_user.name);
 			while(ptr!=null)

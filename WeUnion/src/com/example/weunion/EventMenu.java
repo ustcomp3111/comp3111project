@@ -124,13 +124,14 @@ private void initialize()
 		               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
 		               params3.add(new BasicNameValuePair("user_name",User.getInstance().getName()));  
 		               Events tmp ;
-Global.joined_event_list = new ArrayList<String>();
-Global.my_event_list = new ArrayList<String>();
-Global.all_event_list = new ArrayList<String>();
-Global.joined_event_id_list = new ArrayList<Integer>();
-Global.my_event_id_list = new ArrayList<Integer>();
-Global.all_event_id_list = new ArrayList<Integer>();
-Global.active_user.event_ptr = null;
+Global.joined_event_list.clear();
+Global.my_event_list.clear();
+Global.all_event_list.clear();
+Global.joined_event_id_list.clear();
+Global.my_event_id_list.clear();
+Global.all_event_id_list.clear();
+
+		               Global.active_user.event_ptr = null;
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
 			              JSONArray jArray3 = jsonParser.makeHttpRequest(Global.JOINED_EVENT_URL, params3);
 			              String [] array;
@@ -142,11 +143,7 @@ Global.active_user.event_ptr = null;
 		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
 		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));		            	 
 		            	  Global.active_user.AddEvent(new EventNode(tmp));
-		            		/* Global.my_event_list.add(json2.getString("event_name"));
-			            	 Global.my_event_id_list.add(json2.getInt("event_id"));
-			            	 Global.all_event_list.add(json2.getString("event_name"));
-			            	 Global.all_event_id_list.add(json2.getInt("event_id")); 
-		              */}
+		            		}
 		              for(int i = 0; i <jArray3.length();i++ ) {
 			            	 JSONObject json3 = jArray3.getJSONObject(i);
 			            	 array = json3.getString("date").split("-");
@@ -154,11 +151,8 @@ Global.active_user.event_ptr = null;
 			            	  tmp = new Events(json3.getString("event_name"),json3.getInt("event_id"),new comp3111project.User(json3.getString("holder"),0),
 			            			  	date_and_time,json3.getInt("duration"),json3.getString("venue"));
 			            	  Global.active_user.AddEvent(new EventNode(tmp));
-			            /*		 Global.joined_event_list.add(json3.getString("event_name"));
-				            	 Global.joined_event_id_list.add(json3.getInt("event_id"));
-				            	 Global.all_event_list.add(json3.getString("event_name"));
-				            	 Global.all_event_id_list.add(json3.getInt("event_id")); 
-		              */}
+
+		              }
 		              EventNode ptr = Global.active_user.event_ptr;
 		              while(ptr != null)
 		              {

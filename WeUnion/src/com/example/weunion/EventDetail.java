@@ -82,6 +82,7 @@ bar.setHomeButtonEnabled(false);
 bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 bar.addTab(bar.newTab().setText("Details").setTabListener(this));
 bar.addTab(bar.newTab().setText("Messages").setTabListener(this));
+Global.initialization_is_completed = false;
 	}
 	 @Override
 	 public void onTabReselected(Tab arg0, android.app.FragmentTransaction arg1) {
@@ -109,7 +110,7 @@ bar.addTab(bar.newTab().setText("Messages").setTabListener(this));
 	
 	public void onBackPressed() {
 	    finish();
-	//    startActivity(new Intent(this,EventMenu.class));
+	   startActivity(new Intent(this,EventMenu.class));
 	}
 
 
