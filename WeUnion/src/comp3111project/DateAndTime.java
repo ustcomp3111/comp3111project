@@ -5,9 +5,9 @@ import java.util.GregorianCalendar;
 
 public //Example: 1/1/2014 12:45pm = DateAndTime(2014,Calendar.January,1,51)
 class DateAndTime {
-   public GregorianCalendar Date;
+    GregorianCalendar Date;
     private static GregorianCalendar now = new GregorianCalendar();
-    public int time_slot;
+    int time_slot;
 //    Find the current time in DateAndTime format
     static public DateAndTime Now()
     {
