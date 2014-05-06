@@ -26,9 +26,7 @@ public class Global {
 	public static final String ADD_SECRET_LIST_URL = SERVER_URL+"/weu/addsecretlist.php";
 	public static final String REMOVE_SECRET_LIST_URL = SERVER_URL+"/weu/delsecretlist.php";
 	public static final String MATCH_SECRET_LIST_URL = SERVER_URL+"/weu/matchsecretlist.php";
-	public static final String EDIT_EVENT_URL = SERVER_URL+"/weu/updateevent.php";
-	public static final String DELETE_EVENT_URL = SERVER_URL+"/weu/delevent.php";
-	public static String Default_name = "";
+	public static final String VOTE_URL = SERVER_URL+"/weu/updatevote.php";
 	public static comp3111project.User active_user = new comp3111project.User("",0) , other_users = null;
     public static EventNode active_event;
     public static ArrayList<String> joined_event_list = new ArrayList<String>(),
@@ -42,8 +40,7 @@ public class Global {
     friend_list = new ArrayList<String>(),
     my_secret_list = new ArrayList<String>(),
     add_secret_list = new ArrayList<String>(),
-    matching_list = new ArrayList<String>(),
-    check_list = new ArrayList<String>();
+    matching_list = new ArrayList<String>();
     public static ArrayList<Integer> joined_event_id_list = new ArrayList<Integer>(),
     my_event_id_list = new ArrayList<Integer>(),
     all_event_id_list = new ArrayList<Integer>(),
@@ -52,7 +49,7 @@ public class Global {
     my_secret_id_list = new ArrayList<Integer>(),
     add_secret_id_list  = new ArrayList<Integer>(),
     matching_id_list  = new ArrayList<Integer>();
-    public static boolean initialization_is_completed = false,load_secret_list_is_completed = false,edit_event = false;
+    public static boolean initialization_is_completed = false;
    public static int guest_list_choice = 0;
    static ListView my_secret_list_listview,all_guest_listview,pending_guest_listview;
    

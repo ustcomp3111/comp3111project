@@ -163,14 +163,7 @@
             android:name="com.example.weunion.CheckList"
             android:label="@string/title_activity_check_list" >
         </activity>
-        <activity
-            android:name="com.example.weunion.EventSetting"
-            android:label="@string/title_activity_event_setting" >
-        </activity>
-        <activity
-            android:name="com.example.weunion.EditEvent"
-            android:label="@string/title_activity_edit_event" >
-        </activity>
+        <activity android:name="org.achartengine.GraphicalActivity"/>
     </application>
 
 </manifest>

@@ -55,6 +55,8 @@ public class Friend extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend);
+		
+		
 		adapter = new SimpleAdapter( this, fdlist,
 				 R.layout.friendlist,
 				 new String[] {TAG_B_ID, TAG_B_NAME},

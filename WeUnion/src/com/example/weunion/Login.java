@@ -100,6 +100,7 @@ public class Login extends Activity implements OnClickListener{
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
                 
+                Log.d("Login","Fetch from "+LOGIN_URL);
                 JSONArray jArray = jsonParser.makeHttpRequest(LOGIN_URL, params);
 
                 JSONObject json = jArray.getJSONObject(0);

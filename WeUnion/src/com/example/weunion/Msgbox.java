@@ -102,7 +102,7 @@ public class Msgbox extends Fragment implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.post_button:
-				if (!my_msg.getText().toString().equals("")) new AttemptPost().execute();
+				new AttemptPost().execute();
 			break;
 		default:
 			break;

@@ -67,6 +67,7 @@ public class Select_Event extends Activity {
 					
 					String event_name = eventlist.get(position);
 					String event_id = eventidlist.get(position);
+					Create_Option.eventname=event_name;
 					Toast.makeText(getApplicationContext(),event_name+" is selected", Toast.LENGTH_LONG).show();
 					Intent i = new Intent(Select_Event.this, Create_Option.class);
 					i.putExtra(EVENT_NAME, event_name);
