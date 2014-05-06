@@ -59,8 +59,7 @@ public class Vote extends Fragment implements OnClickListener{
 		create_polling_button.setOnClickListener(this);
 		MyAdapter.parentList.add(Global.active_event.event.event_name);
 		//new AttemptGetEvents().execute();
-
-
+		
 		
 		
 		ExpandableListView Listpolling=(ExpandableListView)l.findViewById(R.id.expandableListView1);
@@ -74,7 +73,7 @@ public class Vote extends Fragment implements OnClickListener{
 				
 				String ptitle=MyAdapter.childList.get(groupPosition).get(childPosition);
 				Vote_Option.pollingtitle=ptitle;
-				Vote_Option.pollingid=Global.pollidlist.get(groupPosition).get(childPosition);
+				Global.pollingid=Global.pollidlist.get(groupPosition).get(childPosition);
             	Toast.makeText(getActivity(),ptitle+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), Vote_Option.class);
 				startActivity(i);

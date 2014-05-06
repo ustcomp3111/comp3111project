@@ -126,6 +126,7 @@ Global.initialization_is_completed = false;
 	}
 
 	
+	
 	class AttemptGetEvents extends AsyncTask<String, String, String> {
 		
 	       @Override
@@ -177,6 +178,7 @@ Global.initialization_is_completed = false;
 	            	  
 	            	  
 	              }*/
+			   Global.pollidlist.clear();
 			   List<NameValuePair> params = new ArrayList<NameValuePair>();
 			   params.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
 			   JSONArray jArray;

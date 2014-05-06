@@ -67,8 +67,8 @@ public class Vote_Option extends Activity implements OnClickListener {
 	private TextView title;
 	ArrayList<Integer> votelist = new ArrayList<Integer>();
 	ArrayList<Integer> checked = new ArrayList<Integer>();
-	String[] options= {"1","2","3","4","5"};
-	double[] votes={0,0,0,0,0};
+	public static String[] options= {"1","2","3","4","5"};
+	public static double[] votes={0,0,0,0,0};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,8 @@ public class Vote_Option extends Activity implements OnClickListener {
 		optionlist=(ListView) findViewById(R.id.option_lv);
 		optionlist.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
-		
+		pollingid=Global.pollingid;
+		Toast.makeText(getApplicationContext(),pollingid, Toast.LENGTH_LONG).show();
 		new AttemptGetInfo().execute();
 		
 		
