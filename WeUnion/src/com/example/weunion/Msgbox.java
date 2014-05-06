@@ -59,6 +59,7 @@ public class Msgbox extends Fragment implements OnClickListener{
     
     public static String Event_Name = "First_test_event";	//default, use for debug
 
+
 	@Override
 	public	View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)  {
 		// TODO Auto-generated method stub
@@ -101,7 +102,7 @@ public class Msgbox extends Fragment implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.post_button:
-				if (!my_msg.getText().toString().equals("")) new AttemptPost().execute();
+				new AttemptPost().execute();
 			break;
 		default:
 			break;

@@ -45,7 +45,6 @@ public class Create_Option extends Activity implements OnClickListener{
 	private SimpleAdapter adapter;
 	private String[] options = new String[5];
 	String eid;
-	public static String eventname;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +60,9 @@ public class Create_Option extends Activity implements OnClickListener{
 			list=(ListView)findViewById(R.id.listOption);
 
 			Intent intent = getIntent();
+			String eee = intent.getStringExtra(Select_Event.EVENT_NAME);
 			eid = intent.getStringExtra(Select_Event.EVENT_ID);
-			eventname2.setText(eventname);
+			eventname2.setText(eee);
 			adapter = new SimpleAdapter(this, optionlist,
 			R.layout.optionlist,
 			new String[] {TAG_OPTIONNUM,TAG_OPTIONNAME, TAG_VOTE},

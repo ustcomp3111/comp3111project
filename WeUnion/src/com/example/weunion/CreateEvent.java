@@ -55,12 +55,26 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 confirm_button = (Button)findViewById(R.id.create_event_confirm_button);
 			 set_date_button = (Button) findViewById(R.id.create_event_set_date_button);
 			 now = Calendar.getInstance();
-			 year = now.get(Calendar.YEAR);
-			 month = now.get(Calendar.MONTH);
-			 day = now.get(Calendar.DAY_OF_MONTH);
-			 set_date_button.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR));
-			 
 			 set_event_name = (EditText)findViewById(R.id.create_event_event_name_input);
+			 if(!Global.edit_event)
+			 {
+			 year = now.get(Calendar.YEAR);
+			 month = now.get(Calendar.MONTH)+1;
+			 day = now.get(Calendar.DAY_OF_MONTH);
+			 set_date_button.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+now.get(Calendar.MONTH)+1+"-"+now.get(Calendar.YEAR));			 
+			 set_event_name.setText(Global.Default_name);
+			 Global.Default_name = "";
+			 }
+			 else
+			 {
+				 year = Global.active_event.event.begin.Date.get(Calendar.YEAR);
+				 month = Global.active_event.event.begin.Date.get(Calendar.MONTH);
+				 day = Global.active_event.event.begin.Date.get(Calendar.DAY_OF_MONTH);
+				 set_date_button.setText(day+"-"+month+"-"+year);				 
+				 set_event_name.setText(Global.active_event.event.event_name);
+				 
+			 }
+			 //set_date_button.setText(day+"-"+(month+1)+"-"+year);	
 			 //set_event_year = (EditText)findViewById(R.id.create_event_year);
 			 //set_event_month = (EditText)findViewById(R.id.create_event_month);
 			// set_event_day = (EditText)findViewById(R.id.create_event_day);
@@ -77,7 +91,13 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 select_hour = (NumberPicker) findViewById(R.id.create_event_hour_Picker);
 			 select_hour.setMaxValue(23);
 			 select_hour.setMinValue(0);
-			 select_hour.setValue(0);
+			 int tmp = (Global.active_event.event.begin.time_slot/4);
+			 if(!Global.edit_event)
+			 select_hour.setValue(0);			
+			else
+			select_hour.setValue(tmp);
+			 
+			 
 			 select_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {
                
@@ -91,7 +111,12 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 select_duration_hour = (NumberPicker) findViewById(R.id.create_event_duration_hour_Picker);
 			 select_duration_hour.setMaxValue(23);
 			 select_duration_hour.setMinValue(0);
-			 select_duration_hour.setValue(0);
+			 tmp = Global.active_event.event.duration/4;
+			 if(!Global.edit_event)
+			 select_duration_hour.setValue(0);			
+			else
+			select_duration_hour.setValue(tmp);
+			 
 			 select_duration_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {
                
@@ -109,6 +134,36 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 radio_button_duration_30 = (RadioButton) findViewById(R.id.create_event_duration_set_30);
 			 radio_button_duration_45 = (RadioButton) findViewById(R.id.create_event_duration_set_45);
 			 select_duration_min.setOnCheckedChangeListener(this);
+			 
+			 if(Global.edit_event)
+			 {
+				 set_event_venue.setText(Global.active_event.event.location);
+				 confirm_button.setText("Edit Event");
+				 if(Global.active_event.event.begin.time_slot%4==0)
+				 select_min.check(radio_button_00.getId());
+				 else if(Global.active_event.event.begin.time_slot%4==1)
+				 select_min.check(radio_button_15.getId());
+				 else if(Global.active_event.event.begin.time_slot%4==2)
+				 select_min.check(radio_button_30.getId());
+				 else
+				 select_min.check(radio_button_45.getId());
+				 
+				 if(Global.active_event.event.duration%4==0)
+				 select_duration_min.check(radio_button_duration_00.getId());
+				 else if(Global.active_event.event.duration%4==1)
+				 select_duration_min.check(radio_button_duration_15.getId());
+				 else if(Global.active_event.event.duration%4==2)
+				 select_duration_min.check(radio_button_duration_30.getId());
+				 else
+				 select_duration_min.check(radio_button_duration_45.getId());
+				 
+				 hour = Global.active_event.event.begin.time_slot/4;
+				 min = Global.active_event.event.begin.time_slot%4;
+				 selected_time.setText(hour+":"+min*15);
+				 duration_hour = Global.active_event.event.duration/4;
+				 duration_min = Global.active_event.event.duration%4;
+	             selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+"minute(s)");
+			 }
 			 //set_begin_time_button.setOnClickListener(this);
 			// datepicker = (DatePicker) findViewById(R.id.create_event_datepicker);
 			 //datepicker.init(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), null);
@@ -137,9 +192,10 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			Toast.makeText(getApplicationContext(),"Venue cannot be empty!", Toast.LENGTH_LONG).show();
 		else
 		{
+			if(!Global.edit_event)
 			new AttemptCreateEvent().execute();
-			    
-			
+			else
+			new AttemptEditEvent().execute();
 		}
 		}
 		else if(v.getId()==R.id.create_event_set_date_button)
@@ -176,8 +232,6 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 	  }
 	 }
 	    
-
-
 	class AttemptCreateEvent extends AsyncTask<String, String, String> {
 		 
 		int success = 0;
@@ -201,7 +255,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		              // params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
 		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
 		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
-		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
+		               params2.add(new BasicNameValuePair("begin_date",year+"-"+month+"-"+day));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    
 		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
@@ -231,12 +285,70 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 	            pDialog.dismiss();
 	            if (file_url != null){
 	            	Toast.makeText(CreateEvent.this, file_url, Toast.LENGTH_LONG).show();
-	            }
-	 
+	            }	 
 	        }
 	}
+	
+	class AttemptEditEvent extends AsyncTask<String, String, String> {
+		 
+		int success = 0;
+		
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(CreateEvent.this);
+            pDialog.setMessage("Editing event...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+
+        }
+		  @Override
+		protected String doInBackground(String... arg0) {
+			   try{
 
 
+		               params2.add(new BasicNameValuePair("event_name",set_event_name.getText().toString()));
+		              // params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
+		               params2.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
+		               params2.add(new BasicNameValuePair("holder",Global.active_event.event.host.name));
+		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
+		               params2.add(new BasicNameValuePair("begin_date",year+"-"+month+"-"+day));	
+		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    
+		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
+		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
+
+		                jArray = jsonParser.makeHttpRequest(Global.EDIT_EVENT_URL, params2);
+		            	Log.d("hi","here3");
+		               success = jArray.getJSONObject(0).getInt("success");
+		               if (success==1)
+		               {		            	
+		                  	 i = new Intent(CreateEvent.this, EventMenu.class);
+		                  	 Global.edit_event = false;
+		                  	 finish();
+		    				startActivity(i);
+		              
+		               }
+		               return jArray.getJSONObject(0).getString("message");
+		               
+		
+		}
+		catch(Exception e)
+		{
+			// Toast.makeText(getApplicationContext(),"Failed to create event!", Toast.LENGTH_LONG).show();		
+		}
+			// TODO Auto-generated method stub
+			return null;
+		}
+	
+		  protected void onPostExecute(String file_url) {
+	            pDialog.dismiss();
+	            if (file_url != null){
+	            	Toast.makeText(CreateEvent.this, file_url, Toast.LENGTH_LONG).show();
+	            }	 
+	        }
+	}
+	
 
 	@Override
 	public void onCheckedChanged(RadioGroup g, int id) {
@@ -264,7 +376,9 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+" minutes");
 	}
 	public void onBackPressed() {
-	    finish();
+		Global.edit_event = false;
+		Toast.makeText(this,"Event is not created!", Toast.LENGTH_LONG).show();
+		finish();
 	    startActivity(new Intent(this,EventMenu.class));
 	}	
 }

@@ -76,7 +76,7 @@ JSONParser jsonParser = new JSONParser();
 					}
 					}
 		    });
-			while(!Global.initialization_is_completed);
+			while(!Global.load_secret_list_is_completed);
 			Global.my_secret_list_listview.invalidateViews();
 		    
 		 return l;

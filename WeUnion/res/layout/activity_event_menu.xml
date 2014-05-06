@@ -8,7 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EventMenu" >
 
-      <LinearLayout
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -17,36 +18,33 @@
         <android.support.v4.view.ViewPager
             android:id="@+android:id/event_menu_viewpager"
             android:layout_width="fill_parent"
-            android:layout_height="385dp" />
-
+            android:layout_height="388dp" />
     </LinearLayout>
 
-      <Button
-          android:id="@+id/event_menu_create_event_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_centerHorizontal="true"
-          android:text="Create new event" />
+    <Button
+        android:id="@+id/event_menu_create_event_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/secret_list_button"
+        android:text="Create new event" />
 
-      <Button
-          android:id="@+id/debug_button"
-          style="?android:attr/buttonStyleSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_alignParentRight="true"
-          android:layout_toRightOf="@+id/event_menu_create_event_button"
-          android:text="R_event" />
+    <Button
+        android:id="@+id/secret_list_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:text="S_list" />
 
-      <Button
-          android:id="@+id/secret_list_button"
-          style="?android:attr/buttonStyleSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignBaseline="@+id/event_menu_create_event_button"
-          android:layout_alignBottom="@+id/event_menu_create_event_button"
-          android:layout_alignParentLeft="true"
-          android:text="S_list" />
+    <Button
+        android:id="@+id/create_regular_event_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/event_menu_create_event_button"
+        android:layout_toRightOf="@+id/event_menu_create_event_button"
+        android:text="r event" />
 
 </RelativeLayout>

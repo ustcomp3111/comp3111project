@@ -40,7 +40,7 @@ public class Vote extends Activity {
 	protected static String POLLING_ID;
 	private ExpandableListView Listpolling;
 	ArrayList<HashMap<String,String>> pollinglist = new ArrayList<HashMap<String,String>>();
-	public static String[] options;
+
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,6 @@ public class Vote extends Activity {
 					int groupPosition, int childPosition, long id) {
 				
 				String ptitle=MyAdapter.childList.get(groupPosition).get(childPosition);
-				Vote_Option.pollingtitle=ptitle;
 				Vote_Option.pollingid=pollidlist.get(groupPosition).get(childPosition);
             	Toast.makeText(getApplicationContext(),ptitle+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(Vote.this, Vote_Option.class);
@@ -128,7 +127,8 @@ public class Vote extends Activity {
 	            	  
 	              }
 	               
-	            
+
+	               
 	               
 		       	
 			   }

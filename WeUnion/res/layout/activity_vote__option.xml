@@ -11,14 +11,6 @@
     tools:context=".Vote_Option" >
 
     <TextView
-        android:id="@+id/textView_ptitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="35sp" />
-
-    <TextView
         android:id="@+id/option_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,19 +20,13 @@
     <ListView
         android:id="@+id/option_lv"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_weight="0.85" >
+        android:layout_height="268dp"
+        android:layout_weight="0.51" >
     </ListView>
 
     <Button
-        android:id="@+id/button_viewresult"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:text="View Result" />
-
-    <Button
         android:id="@+id/button_vote"
-        android:layout_width="270dp"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:text="Vote" />
 

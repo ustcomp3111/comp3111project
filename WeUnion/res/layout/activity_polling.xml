@@ -7,23 +7,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Polling" >
+
+     <Button
+        android:id="@+id/b_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="117dp"
+        android:text="Hold a Polling" />
      
       <Button
-          android:id="@+id/button2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/b_logout"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="44dp"
-          android:text="Vote / View result" />
-
-      <Button
-          android:id="@+id/b_logout"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentTop="true"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="90dp"
-          android:text="Hold a Polling" />
+         android:id="@+id/button2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/b_logout"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="44dp"
+         android:text="Vote" />
+    
 
 </RelativeLayout>
