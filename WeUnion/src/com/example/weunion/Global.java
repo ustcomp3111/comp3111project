@@ -28,8 +28,6 @@ public class Global {
 	public static final String MATCH_SECRET_LIST_URL = SERVER_URL+"/weu/matchsecretlist.php";
 	public static final String EDIT_EVENT_URL = SERVER_URL+"/weu/updateevent.php";
 	public static final String DELETE_EVENT_URL = SERVER_URL+"/weu/delevent.php";
-	public static final String DELETE_REGULAR_EVENT_URL =  SERVER_URL+"/weu/delr_event.php";
-	public static final String EDIT_REGULAR_EVENT_URL =  SERVER_URL+"/weu/updater_event.php";
 	public static String Default_name = "";
 	public static comp3111project.User active_user = new comp3111project.User("",0) , other_users = null;
     public static EventNode active_event;
@@ -57,6 +55,5 @@ public class Global {
     public static boolean initialization_is_completed = false,load_secret_list_is_completed = false,edit_event = false;
    public static int guest_list_choice = 0;
    static ListView my_secret_list_listview,all_guest_listview,pending_guest_listview;
-public static int regular_event_position = 0;
    
 }
