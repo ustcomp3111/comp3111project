@@ -66,7 +66,7 @@ public class Vote_Option extends Activity implements OnClickListener {
 	private Button vote,view;
 	private TextView title;
 	ArrayList<Integer> votelist = new ArrayList<Integer>();
-	ArrayList<Integer> checked = new ArrayList<Integer>();
+	boolean[] checked = new boolean [5];
 	public static String[] options= {"1","2","3","4","5"};
 	public static double[] votes={0,0,0,0,0};
 	
@@ -84,8 +84,8 @@ public class Vote_Option extends Activity implements OnClickListener {
 		optionlist.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		pollingid=Global.pollingid;
-		Toast.makeText(getApplicationContext(),pollingid, Toast.LENGTH_LONG).show();
-		new AttemptGetInfo().execute();
+		
+		//new AttemptGetInfo().execute();
 		
 		
 		MyCustomAdapter cadapter=new MyCustomAdapter(this, R.layout.optionnamelist,options);
@@ -104,7 +104,7 @@ public class Vote_Option extends Activity implements OnClickListener {
 	
 	
 	public class MyCustomAdapter extends ArrayAdapter<String> {
-
+		
         private ArrayList<Boolean> status = new ArrayList<Boolean>();
         private ArrayList<String> name = new ArrayList<String>();
 
@@ -139,9 +139,10 @@ public class Vote_Option extends Activity implements OnClickListener {
                     //Toast.makeText(getApplicationContext(), "" + position,Toast.LENGTH_SHORT).show();
                     if (isChecked) {
                         status.set(position, true);
-                        checked.add(position);
+                        checked[position]=true;
                     } else {
                         status.set(position, false);
+                        checked[position]=false;
                     }
                 }
             });
@@ -150,7 +151,21 @@ public class Vote_Option extends Activity implements OnClickListener {
         }
     }
 
-
+	public String[] clean(String[] s){
+		
+		int length=0;
+		for(int i=0;i<s.length;i++)
+		{
+			if(!(s[i].equals("")))
+				length++;
+		}
+		String[] temp=new String[length];
+		for(int i=0;i<length;i++)
+		{
+			temp[i]=s[i];
+		}
+		return temp;
+	}
 	
 	@Override
 	public void onClick(View v) {
@@ -158,11 +173,12 @@ public class Vote_Option extends Activity implements OnClickListener {
 		if(v.getId()==R.id.button_vote) 
 		{
 	        new AttemptVote().execute();
+	        
 		}
 		else if(v.getId()==R.id.button_viewresult)
 		{
 			
-			new AttemptGetInfo().execute();
+			//new UpdateVote().execute();
 			CreatePieChart();
 			
 		}
@@ -182,7 +198,7 @@ public class Vote_Option extends Activity implements OnClickListener {
 		  // Pie Chart Section Value
 		for(int i=0;i<code.size();i++)
 		{
-			distribution.add(votes[i]);
+			distribution.add(Global.votelist[i]);
 		}
 		
 
@@ -226,8 +242,45 @@ public class Vote_Option extends Activity implements OnClickListener {
 		  
 		 }
 	
-	
-	
+	class UpdateVote extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+		
+		@Override
+		protected String doInBackground(String... args) {
+			// TODO Auto-generated method stub
+
+            try {
+            	
+            	List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("polling_id", Global.pollingid));
+
+                JSONArray jArray = jsonParser.makeHttpRequest(Global.POLLINGID_URL, params);
+
+                if (jArray!=null) {
+
+                    for(int i = 0; i <jArray.length();i++ ) {
+                 	               JSONObject json = jArray.getJSONObject(i);
+                 	               Global.votelist[0]=json.getDouble("vote1");
+                 	               Global.votelist[1]=json.getDouble("vote2");
+                 	               Global.votelist[2]=json.getDouble("vote3");
+                 	               Global.votelist[3]=json.getDouble("vote4");
+                 	               Global.votelist[4]=json.getDouble("vote5");
+                 	                  
+                    }
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            
+            return null;			
+		}		
+	}
 	
 	class AttemptGetInfo extends AsyncTask<String, String, String> {
 		
@@ -262,11 +315,11 @@ public class Vote_Option extends Activity implements OnClickListener {
 		            	  options[3]=json2.getString("option4");
 		            	  options[4]=json2.getString("option5");
 		            	  
-		            	  votes[0]=json2.getDouble("vote1");
-		            	  votes[1]=json2.getDouble("vote2");
-		            	  votes[2]=json2.getDouble("vote3");
-		            	  votes[3]=json2.getDouble("vote4");
-		            	  votes[4]=json2.getDouble("vote5");
+		            	  Global.votelist[0]=json2.getDouble("vote1");
+		            	  Global.votelist[1]=json2.getDouble("vote2");
+		            	  Global.votelist[2]=json2.getDouble("vote3");
+		            	  Global.votelist[3]=json2.getDouble("vote4");
+		            	  Global.votelist[4]=json2.getDouble("vote5");
 		            	  
 		              }
 		       	
@@ -327,10 +380,13 @@ public class Vote_Option extends Activity implements OnClickListener {
 	            	  votelist.add(json1.getInt("vote5"));
 	              }
 	              
-	              for(int i=0;i<checked.size();i++)
+	              for(int i=0;i<checked.length;i++)
 	              {
-	            	  votelist.set(checked.get(i), votelist.get(checked.get(i))+1);
-	            		  
+	            	  if(checked[i]==true)
+	            	  {
+	            		  votelist.set(i, votelist.get(i)+1);
+	            		  Global.votelist[i]++;
+	            	  }
 	              }
 	             
 	              
@@ -365,12 +421,24 @@ public class Vote_Option extends Activity implements OnClickListener {
 	                pDialog.dismiss();
 	           }
 	        	
-	        	Toast.makeText(getApplicationContext(),"Vote successful!", Toast.LENGTH_LONG).show();
 	        	
+	        	Toast.makeText(getApplicationContext(),"Vote successful!", Toast.LENGTH_LONG).show();
+	        	uncheckAllChildrenCascade(optionlist);
 	        
 		 }
 }
 
+		 private void uncheckAllChildrenCascade(ViewGroup vg) {
+			    for (int i = 0; i < vg.getChildCount(); i++) {
+			        View v = vg.getChildAt(i);
+			        if (v instanceof CheckBox) {
+			            ((CheckBox) v).setChecked(false);
+			        } else if (v instanceof ViewGroup) {
+			            uncheckAllChildrenCascade((ViewGroup) v);
+			        }
+			    }
+			}
+		 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

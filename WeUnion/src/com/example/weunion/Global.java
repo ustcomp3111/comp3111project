@@ -62,5 +62,5 @@ public class Global {
    public static String pollingid;
    
    public static ArrayList<ArrayList<String>> pollidlist = new ArrayList<ArrayList<String>>();
-   
+   public static double[] votelist =new double[5];
 }

@@ -74,6 +74,7 @@ public class Vote extends Fragment implements OnClickListener{
 				String ptitle=MyAdapter.childList.get(groupPosition).get(childPosition);
 				Vote_Option.pollingtitle=ptitle;
 				Global.pollingid=Global.pollidlist.get(groupPosition).get(childPosition);
+				new AttemptGetInfo().execute();
             	Toast.makeText(getActivity(),ptitle+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), Vote_Option.class);
 				startActivity(i);
@@ -96,76 +97,46 @@ public class Vote extends Fragment implements OnClickListener{
 		}
 	}
 
-	/*class AttemptGetEvents extends AsyncTask<String, String, String> {
+
+	
+	
+	class AttemptGetInfo extends AsyncTask<String, String, String> {
 		
 	       @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
-	            pDialog = new ProgressDialog(getActivity());
-	            pDialog.setMessage("Loading events...");
-	            pDialog.setIndeterminate(false);
-	            pDialog.setCancelable(true);
-	            pDialog.show();
-	            MyAdapter.parentList.clear();
-	            MyAdapter.childList.clear();
+	           
 	        }
 
 		@Override
 		protected String doInBackground(String... arg0) {
 		   try{
 
-		    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
-		    	 List<NameValuePair> params3 = new ArrayList<NameValuePair>();
-		    	 JSONArray jArray2,jArray3;
+			    	 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
+		               params2.add(new BasicNameValuePair("polling_id",Global.pollingid));
 
-	               params2.add(new BasicNameValuePair("username",User.getInstance().getName()));
 
-	               jArray2 = jsonParser.makeHttpRequest(Global.EVENT_URL, params2);
-
-	              for(int i = 0; i <jArray2.length();i++ ) {
-	            	  
-	            	  JSONObject json2 = jArray2.getJSONObject(i);
-	            	  MyAdapter.parentList.add(json2.getString("event_name"));
-	            	  eventidlist2.add(json2.getString("event_id"));
-	            	
+			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.POLLINGID_URL, params2);
+					
+		   			
+		              for(int i = 0; i <jArray2.length();i++ ) {
+		            	 
+		            	  JSONObject json2 = jArray2.getJSONObject(i);
+		            	  
+		            	  Vote_Option.options[0]=json2.getString("option1");
+		            	  Vote_Option.options[1]=json2.getString("option2");
+		            	  Vote_Option.options[2]=json2.getString("option3");
+		            	  Vote_Option.options[3]=json2.getString("option4");
+		            	  Vote_Option.options[4]=json2.getString("option5");
+		            	  
+		            	  Global.votelist[0]=json2.getDouble("vote1");
+		            	  Global.votelist[1]=json2.getDouble("vote2");
+		            	  Global.votelist[2]=json2.getDouble("vote3");
+		            	  Global.votelist[3]=json2.getDouble("vote4");
+		            	  Global.votelist[4]=json2.getDouble("vote5");
+		            	  
+		            	  
 		              }
-	              
-	              for(int i=0;i<eventidlist2.size();i++)
-	              {
-	            	  params3.add(new BasicNameValuePair("event_id",eventidlist2.get(i)));
-	            	  jArray3 = jsonParser.makeHttpRequest(Global.POLLING_URL, params3);
-	            	  ArrayList<String> temp = new ArrayList<String>();
-	            	  ArrayList<String> temp1 = new ArrayList<String>();
-	            	  for(int j = 0; j <jArray3.length();j++ ) {
-		            	   JSONObject json3 = jArray3.getJSONObject(j);
-		            	   temp1.add(json3.getString("polling_id"));
-		            	   temp.add(json3.getString("polling_title"));
-		               }
-		               MyAdapter.childList.add(temp);
-		               pollidlist.add(temp1);
-		               params3.clear();
-	            	  
-	            	  
-	              }
-	
-			   List<NameValuePair> params = new ArrayList<NameValuePair>();
-			   params.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
-			   JSONArray jArray;
-	            jArray= jsonParser.makeHttpRequest(Global.POLLING_URL, params);
-	            ArrayList<String> temp = new ArrayList<String>();
-          	  	ArrayList<String> temp1 = new ArrayList<String>();
-	            for(int j = 0; j <jArray.length();j++ ) {
-	            	   JSONObject json = jArray.getJSONObject(j);
-	            	   temp1.add(json.getString("polling_id"));
-	            	   temp.add(json.getString("polling_title"));
-	               }
-	            
-	            MyAdapter.childList.add(temp);
-	            pollidlist.add(temp1);
-	            params.clear();
-	            
-	            
-	            
 		       	
 			   }
 		catch(Exception e)
@@ -183,8 +154,6 @@ public class Vote extends Fragment implements OnClickListener{
 	           }
 
 		 }
-
-	}
-	*/
-
+}
+	
 }
