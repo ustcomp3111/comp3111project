@@ -57,7 +57,7 @@ boolean friend_invited = false;
 		invite_guest_listview = (ListView) l.findViewById(R.id.invite_friend_list);
 	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
 	     //create_event_button.setOnClickListener(this);
-		 
+
 		 invite_guest_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1,Global.friend_list ));
 		 invite_guest_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
@@ -90,26 +90,26 @@ boolean friend_invited = false;
 			if(Global.pending_guest_list.get(0)=="(empty)")
 				Global.pending_guest_list.clear();
 			Global.pending_guest_list.add(Global.friend_list.get(p));
-			
+
 				Global.active_event.event.AddGuest(new Guest(Global.friend_list.get(p),Global.friend_id_list.get(p),false,false));
 			Global.all_guest_listview.invalidateViews();
 			Global.pending_guest_listview.invalidateViews();
 			}
 			friend_invited = false;
-			
+
 			}}});
 	    return l;
 	}
 
 class AttemptInviteFd extends AsyncTask<String, String, String> {
-	
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
 
     }
-	
+
 	@Override
 	protected String doInBackground(String... args) {
 		// TODO Auto-generated method stub
@@ -134,13 +134,13 @@ class AttemptInviteFd extends AsyncTask<String, String, String> {
         }
         Global.initialization_is_completed = true;
         return null;
-		
+
 	}
 
     protected void onPostExecute(String file_url) {
 
 
     }
-	
+
 }
 }

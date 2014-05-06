@@ -38,7 +38,7 @@ LinearLayout l;
 		event_listview = (ListView) l.findViewById(R.id.my_events);
 	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
 	     //create_event_button.setOnClickListener(this);
-	     
+
 	    event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1, Global.all_event_list));
 
@@ -64,16 +64,16 @@ LinearLayout l;
 				getActivity().finish();
 				startActivity(i);
 			}
-	    	
+
 	    });
 	    while(!Global.initialization_is_completed);
 	    event_listview.invalidateViews();
-	   
+
 	    return l;
 	}
 
 public void onClick(View v) {
-	
+
 	/*	Intent i ;
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.event_menu_create_event_button)
@@ -83,5 +83,5 @@ public void onClick(View v) {
 		}
 	*/}
 
-	
+
 	}

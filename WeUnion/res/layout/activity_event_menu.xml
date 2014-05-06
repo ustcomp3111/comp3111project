@@ -30,7 +30,7 @@
           android:text="Create new event" />
 
       <Button
-          android:id="@+id/debug_button"
+          android:id="@+id/create_regular_event_button"
           style="?android:attr/buttonStyleSmall"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

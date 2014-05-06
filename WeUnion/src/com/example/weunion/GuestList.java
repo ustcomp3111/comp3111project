@@ -67,11 +67,11 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 						Global.declined_guest_list.add(ptr.user.name);
 					else
 						Global.going_guest_list.add(ptr.user.name);
-					
+
 					Global.all_guest_list.add(ptr.user.name);
 					ptr = ptr.next;
 				}
-				
+
 			}
 		    	fragment_list = new Vector<Fragment>();
 			fragment_list.add(Fragment.instantiate(this, AllGuest.class.getName()));
@@ -84,29 +84,29 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 		pager.setAdapter(pageradapter);
 		pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
 		{
-			
+
 			@Override
 			public void onPageSelected(int p) {
 				// TODO Auto-generated method stub
 				bar.setSelectedNavigationItem(p);
 			}
-			
+
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	  //   add_guest_button = (Button) findViewById(R.id.guest_list_invite_friends);
 	   // add_guest_button.setOnClickListener(this);
-	    
-		
+
+
 		 bar = getActionBar();
 		    //bar.setHomeButtonEnabled(false);
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -124,7 +124,7 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 			return true;
 		}
 
-		
+
 		 @Override
 		 public void onPause() {
 			    super.onPause();
@@ -136,7 +136,7 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 		 @Override
 		 public void onTabReselected(Tab arg0, android.app.FragmentTransaction arg1) {
 		 	// TODO Auto-generated method stub
-		 	
+
 		 }
 		 @Override
 		 public void onTabSelected(Tab tab, android.app.FragmentTransaction arg1) {
@@ -146,7 +146,7 @@ public class GuestList extends FragmentActivity implements ActionBar.TabListener
 		 @Override
 		 public void onTabUnselected(Tab arg0, android.app.FragmentTransaction arg1) {
 		 	// TODO Auto-generated method stub
-		 	
+
 		 }
 	/*	@Override
 		public void onClick(View v) {

@@ -38,8 +38,8 @@ LinearLayout l;
 		joined_event_listview = (ListView) l.findViewById(R.id.joined_event_list);
 	  //   create_event_button = (Button) l.findViewById(R.id.create_new_event_button2);
 	    // create_event_button.setOnClickListener(this);
-	  
-	  
+
+
 	    	 joined_event_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1, Global.joined_event_list));
 
@@ -49,7 +49,7 @@ LinearLayout l;
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
 				EventNode ptr =  Global.active_user.event_ptr;
-				
+
 				while(ptr!=null)
 				{
 					 if (ptr.event.event_id == Global.joined_event_id_list.get(position))
@@ -64,15 +64,15 @@ LinearLayout l;
 				Intent i = new Intent(getActivity(), EventDetail.class);
 				getActivity().finish();
 				startActivity(i);
-			
+
 			}
-	    	
+
 	    });
 	    while(!Global.initialization_is_completed);
 	    joined_event_listview.invalidateViews();
 	    return l;
 	}
-	
+
 public void onClick(View v) {
 	/*
 		Intent i ;
@@ -85,5 +85,5 @@ public void onClick(View v) {
 	*/
 	}
 
-	
+
 	}

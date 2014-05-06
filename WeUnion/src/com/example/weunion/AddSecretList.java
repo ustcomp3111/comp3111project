@@ -38,7 +38,7 @@ int p;
 		 add_secret_list_listview = (ListView) l.findViewById(R.id.add_secret_list);
 	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
 	     //create_event_button.setOnClickListener(this);
-	   
+
 		 add_secret_list_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1,Global.add_secret_list));
 		 add_secret_list_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
@@ -78,9 +78,9 @@ int p;
 						Global.my_secret_list_listview.invalidateViews();
 					}
 					friend_added = false;
-	
+
 				}
-		    	
+
 		    }});
 			while(!Global.initialization_is_completed);
 		    add_secret_list_listview.invalidateViews();
@@ -88,19 +88,19 @@ int p;
 	    return l;
 	}
 class AttemptAddSecretList extends AsyncTask<String, String, String> {
-		
+
 	    @Override
 	    protected void onPreExecute() {
 	        super.onPreExecute();
 
 
 	    }
-		
+
 		@Override
 		protected String doInBackground(String... args) {
 			// TODO Auto-generated method stub
 	        try {
-	        	
+
 	        	List<NameValuePair> params = new ArrayList<NameValuePair>();
 	            params.add(new BasicNameValuePair("A_id",Integer.toString(Global.active_user.user_id)));
 	            params.add(new BasicNameValuePair("A_name",Global.active_user.name));
@@ -111,21 +111,20 @@ class AttemptAddSecretList extends AsyncTask<String, String, String> {
 	            {		            	
 	         		friend_added = true;	           
 	            }
-	         
+
 	            }
 	         catch (Exception e) {
 	            e.printStackTrace();
 	        }
 	        Global.initialization_is_completed = true;
 	        return null;
-			
+
 		}
 
 	    protected void onPostExecute(String file_url) {
 
 
 	    }
-		
-	}
-	}
 
+	}
+	}

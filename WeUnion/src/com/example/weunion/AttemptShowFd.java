@@ -85,7 +85,7 @@ protected String doInBackground(String... args) {
     }
     Global.initialization_is_completed = true;
     return null;
-	
+
 }
 
 protected void onPostExecute(String file_url) {

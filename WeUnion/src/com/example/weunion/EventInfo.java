@@ -53,7 +53,7 @@ public class EventInfo extends Fragment implements OnClickListener,RadioGroup.On
 		//Global.initialization_is_completed = false;
 		while(!Global.initialization_is_completed);
 		Global.initialization_is_completed = false;
-		
+
 TextView host = (TextView) l.findViewById(R.id.event_info_event_holder_value);
 TextView begin = (TextView) l.findViewById(R.id.event_info_begin_time_value);
 TextView end = (TextView) l.findViewById(R.id.event_info_end_time_value);	
@@ -91,7 +91,7 @@ response_radio_group.setOnCheckedChangeListener(this);
 		response_message.setText("Your response: Going");
 	while(ptr!=null)
 	{
-		
+
 		if(!ptr.respond)
 	{
 		if(ptr.user.name.equals(Global.active_user.name))
@@ -123,8 +123,8 @@ response_radio_group.setOnCheckedChangeListener(this);
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		Intent i;
-		
-				
+
+
 		 if (v.getId()==R.id.event_info_all_guest_button)
 		{
 			i = new Intent(getActivity(), GuestList.class);
@@ -181,10 +181,10 @@ response_radio_group.setOnCheckedChangeListener(this);
 		}
 		}
 
-	
+
 	}
 	class AttemptGetGuests extends AsyncTask<String, String, String> {
-		
+
 	       @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
@@ -204,10 +204,10 @@ response_radio_group.setOnCheckedChangeListener(this);
 
 Global.active_event.event.guest_list_ptr = null;
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.SHOW_GUEST_URL, params2);
-					
+
 		   			//EventNode ptr = Global.active_user.event_ptr;
 		              for(int i = 0; i <jArray2.length();i++ ) {
-		         	 
+
 		            	  JSONObject json2 = jArray2.getJSONObject(i);
 		            	  boolean r = false, a = false;
 		            	  if(json2.getInt("responded")==1)
@@ -218,13 +218,13 @@ Global.active_event.event.guest_list_ptr = null;
 		            	  Global.active_event.event.AddGuest(new Guest(json2.getString("user_name"),json2.getInt("user_id"),r,a));
 		            	  		            			//Log.d(EventInfo,json2.getString("user_name"+" "+json2.getInt("user_id")+" "+);     
 		              }
-		        
-		       	
+
+
 			   }
 		catch(Exception e)
 		{
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
-			
+
 		}
 		   Global.initialization_is_completed = true;
 			// TODO Auto-generated method stub
@@ -238,7 +238,7 @@ Global.active_event.event.guest_list_ptr = null;
 		 }
 	}
 	class AttemptResponse extends AsyncTask<String, String, String> {
-		
+
 	       @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
@@ -260,7 +260,7 @@ Global.active_event.event.guest_list_ptr = null;
 			    	 params2.add(new BasicNameValuePair("responded",Integer.toString(1)));
 
 			              JSONArray jArray2 = jsonParser.makeHttpRequest(Global.UPDATE_GUEST_URL, params2);
-			              
+
 			               if (jArray2.getJSONObject(0).getInt("success")==1)
 			               {		            	
 			            		response_updated = true;	           
@@ -269,7 +269,7 @@ Global.active_event.event.guest_list_ptr = null;
 		catch(Exception e)
 		{
 			// Toast.makeText(getApplicationContext(),"exception!", Toast.LENGTH_LONG).show();
-		
+
 		}
 		   Global.initialization_is_completed = true;
 			// TODO Auto-generated method stub
@@ -282,7 +282,7 @@ Global.active_event.event.guest_list_ptr = null;
 	        //	Toast.makeText(getActivity(),"debug: "+debug, Toast.LENGTH_LONG).show();
 		 }
 	}
-	
+
 	@Override
 	public void onCheckedChanged(RadioGroup g, int id) {
 		// TODO Auto-generated method stub

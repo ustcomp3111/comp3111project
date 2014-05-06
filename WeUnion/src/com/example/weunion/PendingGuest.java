@@ -36,8 +36,8 @@ LinearLayout l;
 	}
 
 public void onClick(View v) {
-	
+
 }
 
-	
+
 	}
