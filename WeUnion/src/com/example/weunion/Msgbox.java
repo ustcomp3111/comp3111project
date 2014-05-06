@@ -83,7 +83,15 @@ public class Msgbox extends Fragment implements OnClickListener{
 		
 		post.setOnClickListener(this);
 		new AttemptDisplayMsg().execute();
-
+		task.cancel();
+		task = new TimerTask(){
+			
+			 @Override
+			 public void run() {
+			  // TODO Auto-generated method stub
+				 new UpdateMsg().execute();	
+			 }
+		};
         Timer timer = new Timer();
         timer.schedule(task, 1000, 1500);
 	return l;

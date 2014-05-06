@@ -89,8 +89,8 @@ Button create_event_button,create_regular_event_button,debug2;
     create_event_button.setOnClickListener(this);
     create_regular_event_button =  (Button) findViewById(R.id.create_regular_event_button);
     create_regular_event_button.setOnClickListener(this);
-    debug2 =  (Button) findViewById(R.id.secret_list_button);
-    debug2.setOnClickListener(this);
+    //debug2 =  (Button) findViewById(R.id.secret_list_button);
+    //debug2.setOnClickListener(this);
 	 bar = getActionBar();
 	    bar.setHomeButtonEnabled(false);
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -275,11 +275,11 @@ Global.active_user.schedule_ptr = null;
 		finish();
 		startActivity(i);
 		}
-		else if(v.getId()==R.id.secret_list_button)
+		/*else if(v.getId()==R.id.secret_list_button)
 		{ i = new Intent(this, SecretList.class);
 		finish();
 		startActivity(i);
-		}
+		}*/
 	}
 	public void onBackPressed() {
 	    finish();

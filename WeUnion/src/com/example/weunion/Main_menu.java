@@ -57,7 +57,7 @@ public class Main_menu extends Activity implements OnClickListener{
 			startActivity(j);
 			break;
 		case R.id.right:
-			Intent k = new Intent(Main_menu.this, Polling.class);
+			Intent k = new Intent(Main_menu.this, SecretList.class);
 			startActivity(k);			
 			break;
 		case R.id.bottom:

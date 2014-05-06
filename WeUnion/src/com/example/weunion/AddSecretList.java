@@ -51,7 +51,7 @@ int p;
 					boolean end = false;
 					while(i<Global.my_secret_id_list.size())
 					{
-						if(Global.my_secret_id_list.get(i)==Global.add_secret_id_list.get(p)||Global.add_secret_id_list.get(p)==Global.active_user.user_id)
+						if(Global.my_secret_id_list.get(i)==Global.add_secret_id_list.get(p))
 						{
 							Toast.makeText(getActivity(),Global.add_secret_list.get(p)+" is already addded!", Toast.LENGTH_LONG).show();		
 						end = true;

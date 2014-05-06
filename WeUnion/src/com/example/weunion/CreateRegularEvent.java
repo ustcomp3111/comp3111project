@@ -162,12 +162,14 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 			 select_duration_hour.setMaxValue(23);
 			 select_duration_hour.setMinValue(0);
 
-			 tmp = ptr.regular_event.duration/4;
+			
 			 if(!Global.edit_event)
 			 select_duration_hour.setValue(0);			
 			else
-			select_duration_hour.setValue(tmp);
-
+			{
+				 tmp = ptr.regular_event.duration/4;
+				select_duration_hour.setValue(tmp);
+			}
 			 select_duration_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {
                
@@ -192,7 +194,7 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 			 if(Global.edit_event)
 			 {
 
-
+				 setTitle("Edit Regular Event");
 				 set_event_venue.setText(ptr.regular_event.venue);
 				 confirm_button.setText("Edit Event");
 				 if(ptr.regular_event.begin.time_slot%4==0)
@@ -215,7 +217,10 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 
 				 hour = ptr.regular_event.begin.time_slot/4;
 				 min = ptr.regular_event.begin.time_slot%4;
+				 if(min!=0)
 				 selected_time.setText(hour+":"+min*15);
+				 else
+				 selected_time.setText(hour+":00");
 				 duration_hour = ptr.regular_event.duration/4;
 				 duration_min = ptr.regular_event.duration%4;
 	             selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+"minute(s)");
@@ -472,6 +477,11 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 		selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+" minutes");
 	}
 	public void onBackPressed() {
+		if(!Global.edit_event)
+			Toast.makeText(this,"Regular Event is not created!", Toast.LENGTH_LONG).show();
+			else
+				Toast.makeText(this,"Regular Event is not modified!", Toast.LENGTH_LONG).show();	
+			Global.edit_event = false;
 	    finish();
 	    startActivity(new Intent(this,EventMenu.class));
 	}	

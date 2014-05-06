@@ -53,6 +53,8 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 		//super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_weekly_agenda);
 		l = (LinearLayout) inflater.inflate(R.layout.activity_weekly_agenda,container,false);
+		Global.clicked = false;
+		option.clear();
 		option.add("Edit");
 		option.add("Delete");
 		//Global.initialization_is_completed = false;
@@ -91,6 +93,12 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 					}
 					else
 					{
+						if(!Global.clicked)
+						{
+							Global.clicked = true;
+							Toast.makeText(getActivity(),"Click again to confirm your action!", Toast.LENGTH_LONG).show();
+						}
+						else
 						new AttemptDeleteRegularEvent().execute();
 					}
 						}

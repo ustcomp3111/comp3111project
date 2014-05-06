@@ -57,7 +57,8 @@ Global.initialization_is_completed = false;
 	fragment_list.add(Fragment.instantiate(this, Msgbox.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, Vote.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, EventSetting.class.getName()));
-
+	
+	
 	pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
 	pager = (ViewPager)super.findViewById(R.id.event_detail_viewpager);
 pager.setAdapter(pageradapter);
@@ -90,6 +91,7 @@ bar.addTab(bar.newTab().setText("Details").setTabListener(this));
 bar.addTab(bar.newTab().setText("Messages").setTabListener(this));
 bar.addTab(bar.newTab().setText("Voting").setTabListener(this));
 bar.addTab(bar.newTab().setText("Setting").setTabListener(this));
+
 Global.initialization_is_completed = false;
 //pager.setCurrentItem(1);
 	}

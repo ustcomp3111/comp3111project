@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class SecretList extends FragmentActivity implements ActionBar.TabListener,OnClickListener{
 	PagerAdapter pageradapter;
@@ -50,7 +51,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 		Global.load_secret_list_is_completed = false;
 		new AttemptShowSecretList().execute();
 		new AttemptShowFd(1).execute();
-		//while(!Global.initialization_is_completed);
+		while(!Global.initialization_is_completed&&!Global.load_secret_list_is_completed);
 		//Global.initialization_is_completed = false;
 		matching_button = (Button) findViewById(R.id.matching_button);
 		matching_button.setOnClickListener(this);
@@ -121,7 +122,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-				Global.Default_name = "A Date With "+Global.matching_list.get(which);	
+				Global.Default_name = Global.matching_list.get(which)+" and "+Global.active_user.name+"'s Date";	
 				finish();
 				Intent i = new Intent(SecretList.this,CreateEvent.class);
 				dialog.dismiss();
@@ -220,7 +221,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	        if (jArray!=null) {
 
 	            for(int i = 0; i <jArray.length();i++ ) {
-	         	                   JSONObject json = jArray.getJSONObject(i);;
+	         	                   JSONObject json = jArray.getJSONObject(i);
 	         	                  Global.matching_id_list.add(json.getInt("A_id"));
 	         	                 Global.matching_list.add(json.getString("A_name"));	         	                 
 	            }
@@ -240,5 +241,10 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 
 	protected void onPostExecute(String file_url) {
 	}
+	}
+	public void onBackPressed() {
+			
+		finish();
+	    startActivity(new Intent(this,Main_menu.class));
 	}
 }

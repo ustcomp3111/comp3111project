@@ -40,6 +40,7 @@ public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle sa
 		matching.setOnClickListener(this);
 		delete = (Button) l.findViewById(R.id.event_setting_delete_button);
 		delete.setOnClickListener(this);
+		Global.clicked = false;
 		return l;
 
 	}
@@ -63,12 +64,19 @@ public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle sa
 
 			if(Global.active_event.event.host.name.equals(Global.active_user.name))
 			{
-				new AttemptDeleteEvent().execute();
+				if(!Global.clicked)
+				{
+					Global.clicked = true;
+					Toast.makeText(getActivity(),"Click again to confirm your action!", Toast.LENGTH_LONG).show();
+				}
+				else
+					{
+		new AttemptDeleteEvent().execute();
 		getActivity().finish();
-
+					}
 		}
 			else
-				Toast.makeText(getActivity(),"You are not the host,\nso you cannot edit this event!", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(),"You are not the host,\nso you cannot delete this event!", Toast.LENGTH_LONG).show();
 
 
 		}

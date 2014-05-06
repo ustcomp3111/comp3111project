@@ -56,7 +56,7 @@ public class Global {
     my_secret_id_list = new ArrayList<Integer>(),
     add_secret_id_list  = new ArrayList<Integer>(),
     matching_id_list  = new ArrayList<Integer>();
-    public static boolean initialization_is_completed = false,load_secret_list_is_completed = false,edit_event = false;
+    public static boolean initialization_is_completed = false,load_secret_list_is_completed = false,edit_event = false,clicked = false;
    public static int guest_list_choice = 0;
    static ListView my_secret_list_listview,all_guest_listview,pending_guest_listview;
    

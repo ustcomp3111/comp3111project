@@ -113,12 +113,14 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 select_duration_hour = (NumberPicker) findViewById(R.id.create_event_duration_hour_Picker);
 			 select_duration_hour.setMaxValue(23);
 			 select_duration_hour.setMinValue(0);
-			 tmp = Global.active_event.event.duration/4;
+			 
 			 if(!Global.edit_event)
 			 select_duration_hour.setValue(0);			
 			else
-			select_duration_hour.setValue(tmp);
-
+			{
+				tmp = Global.active_event.event.duration/4;
+				select_duration_hour.setValue(tmp);
+			}
 			 select_duration_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {
                
@@ -139,6 +141,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 
 			 if(Global.edit_event)
 			 {
+				 setTitle("Edit Event");
 				 set_event_venue.setText(Global.active_event.event.location);
 				 confirm_button.setText("Edit Event");
 				 if(Global.active_event.event.begin.time_slot%4==0)
@@ -161,7 +164,10 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 
 				 hour = Global.active_event.event.begin.time_slot/4;
 				 min = Global.active_event.event.begin.time_slot%4;
+				 if(min!=0)
 				 selected_time.setText(hour+":"+min*15);
+				 else
+					 selected_time.setText(hour+":00");	 
 				 duration_hour = Global.active_event.event.duration/4;
 				 duration_min = Global.active_event.event.duration%4;
 	             selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+"minute(s)");
@@ -378,8 +384,12 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+" minutes");
 	}
 	public void onBackPressed() {
-		Global.edit_event = false;
+		
+		if(!Global.edit_event)
 		Toast.makeText(this,"Event is not created!", Toast.LENGTH_LONG).show();
+		else
+			Toast.makeText(this,"Event is not modified!", Toast.LENGTH_LONG).show();	
+		Global.edit_event = false;
 		finish();
 	    startActivity(new Intent(this,EventMenu.class));
 	}	
