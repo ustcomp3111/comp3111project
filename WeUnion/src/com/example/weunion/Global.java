@@ -60,4 +60,6 @@ public class Global {
    public static int guest_list_choice = 0;
    static ListView my_secret_list_listview,all_guest_listview,pending_guest_listview;
    
+   public static ArrayList<ArrayList<String>> pollidlist = new ArrayList<ArrayList<String>>();
+   
 }

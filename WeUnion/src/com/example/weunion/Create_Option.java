@@ -60,9 +60,10 @@ public class Create_Option extends Activity implements OnClickListener{
 			ok=(Button)findViewById(R.id.b_ok);
 			list=(ListView)findViewById(R.id.listOption);
 
-			Intent intent = getIntent();
-			eid = intent.getStringExtra(Select_Event.EVENT_ID);
-			eventname2.setText(eventname);
+			//Intent intent = getIntent();
+			//eid = intent.getStringExtra(Select_Event.EVENT_ID);
+			eid=Integer.toString(Global.active_event.event.event_id);
+			eventname2.setText(Global.active_event.event.event_name);
 			adapter = new SimpleAdapter(this, optionlist,
 			R.layout.optionlist,
 			new String[] {TAG_OPTIONNUM,TAG_OPTIONNAME, TAG_VOTE},

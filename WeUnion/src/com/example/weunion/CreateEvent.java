@@ -91,12 +91,14 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 select_hour = (NumberPicker) findViewById(R.id.create_event_hour_Picker);
 			 select_hour.setMaxValue(23);
 			 select_hour.setMinValue(0);
-			 int tmp = (Global.active_event.event.begin.time_slot/4);
+			 int tmp = 0;
 			 if(!Global.edit_event)
 			 select_hour.setValue(0);			
 			else
+			{
+				tmp = (Global.active_event.event.begin.time_slot/4);
 			select_hour.setValue(tmp);
-
+			}
 
 			 select_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {

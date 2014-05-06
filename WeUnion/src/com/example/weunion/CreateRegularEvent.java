@@ -140,12 +140,14 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 			 select_hour.setMaxValue(23);
 			 select_hour.setMinValue(0);
 
-			 int tmp = (ptr.regular_event.begin.time_slot/4);
+			 int tmp = 0;
 			 if(!Global.edit_event)
 			 select_hour.setValue(0);			
 			else
+			{
+			tmp = (ptr.regular_event.begin.time_slot/4);	
 			select_hour.setValue(tmp);
-
+			}
 			 select_hour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener (){
              public void onValueChange(NumberPicker view, int oldValue, int newValue) {
                

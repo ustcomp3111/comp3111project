@@ -12,9 +12,19 @@
         android:id="@+id/expandableListView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" 
-        android:padding="3dp">
+        android:layout_alignParentTop="true"
+        android:padding="3dp" >
+
     </ExpandableListView>
+
+    <Button
+        android:id="@+id/createpollingbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Create Polling" />
 
 </RelativeLayout>
