@@ -24,6 +24,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -34,6 +35,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class WeeklyAgenda extends Fragment implements OnClickListener{
 	ListView agenda_listview;
@@ -44,6 +46,9 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 	LinearLayout l;
 	ArrayList<String> option = new ArrayList<String>();
 	
+	JSONArray jArray;
+	List<NameValuePair> params2 = new ArrayList<NameValuePair>();
+	Intent i;	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		//super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_weekly_agenda);
@@ -66,17 +71,28 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 				public void onItemClick(AdapterView<?> a, View v, int position,
 						long id) 
 				{
+					Global.regular_event_position = position;
 					AlertDialog.Builder matching_dialog = new AlertDialog.Builder(getActivity());
 					matching_dialog.setAdapter(
 					new ArrayAdapter<String>(getActivity(),
-					android.R.layout.simple_list_item_1, Global.matching_list),				
+					android.R.layout.simple_list_item_1, option),				
 					new DialogInterface.OnClickListener()
 					{
-
+						Intent i;
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-					
+					if(which==0)
+					{
+						Global.edit_event = true;
+					//	Global.regular_event_position = which;
+						i= new Intent(getActivity(),CreateRegularEvent.class);
+						startActivity(i);
+					}
+					else
+					{
+						new AttemptDeleteRegularEvent().execute();
+					}
 						}
 						
 					}
@@ -99,5 +115,56 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 	startActivity(i);
 	}
 		}
+	class AttemptDeleteRegularEvent extends AsyncTask<String, String, String> {
+		 
+		int success = 0;
+		
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Deleting event...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
 
+        }
+		  @Override
+		protected String doInBackground(String... arg0) {
+			   try{
+
+
+	
+		               params2.add(new BasicNameValuePair("r_event_id",Integer.toString(Global.agenda_id_list.get(Global.regular_event_position))));
+		
+
+		                jArray = jsonParser.makeHttpRequest(Global.DELETE_REGULAR_EVENT_URL, params2);
+		            	Log.d("hi","here3");
+		               success = jArray.getJSONObject(0).getInt("success");
+		               if (success==1)
+		               {		            	
+		                  	 i = new Intent(getActivity(), EventMenu.class);	                  	 
+		                  	 getActivity().finish();
+		    				startActivity(i);
+		              
+		               }
+		               return jArray.getJSONObject(0).getString("message");
+		               
+		
+		}
+		catch(Exception e)
+		{
+			// Toast.makeText(getApplicationContext(),"Failed to create event!", Toast.LENGTH_LONG).show();		
+		}
+			// TODO Auto-generated method stub
+			return null;
+		}
+	
+		  protected void onPostExecute(String file_url) {
+	            pDialog.dismiss();
+	            if (file_url != null){
+	            	Toast.makeText(getActivity(), file_url, Toast.LENGTH_LONG).show();
+	            }	 
+	        }
+}
 }
