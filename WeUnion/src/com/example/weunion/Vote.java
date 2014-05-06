@@ -20,42 +20,51 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter;
 
-public class Vote extends Activity {
+public class Vote extends Fragment implements OnClickListener{
 
 	JSONParser jsonParser = new JSONParser();
 	private ProgressDialog pDialog;
 	ArrayList<String> eventidlist2 = new ArrayList<String>();
 	ArrayList<String> polllist = new ArrayList<String>();
-	ArrayList<ArrayList<String>> pollidlist = new ArrayList<ArrayList<String>>();
+	//ArrayList<ArrayList<String>> pollidlist = new ArrayList<ArrayList<String>>();
 	protected static String POLLING_ID;
 	private ExpandableListView Listpolling;
-	ArrayList<HashMap<String,String>> pollinglist = new ArrayList<HashMap<String,String>>();
+	private Button create_polling_button;
+	//ArrayList<HashMap<String,String>> pollinglist = new ArrayList<HashMap<String,String>>();
 	public static String[] options;
 		
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_vote);
-	
-		new AttemptGetEvents().execute();
-  
-	
+	RelativeLayout l;
+
+	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
+		l = (RelativeLayout) inflater.inflate(R.layout.activity_vote,container,false);
+	create_polling_button =  (Button) l.findViewById(R.id.createpollingbutton);
+		create_polling_button.setOnClickListener(this);
+		MyAdapter.parentList.add(Global.active_event.event.event_name);
+		//new AttemptGetEvents().execute();
 
 
 		
 		
-		ExpandableListView Listpolling=(ExpandableListView)findViewById(R.id.expandableListView1);
-		Listpolling.setAdapter(new MyAdapter(this));
+		ExpandableListView Listpolling=(ExpandableListView)l.findViewById(R.id.expandableListView1);
+		Listpolling.setAdapter(new MyAdapter(getActivity()));
 
 		Listpolling.setOnChildClickListener(new OnChildClickListener() {
 
@@ -65,23 +74,35 @@ public class Vote extends Activity {
 				
 				String ptitle=MyAdapter.childList.get(groupPosition).get(childPosition);
 				Vote_Option.pollingtitle=ptitle;
-				Vote_Option.pollingid=pollidlist.get(groupPosition).get(childPosition);
-            	Toast.makeText(getApplicationContext(),ptitle+" is selected", Toast.LENGTH_LONG).show();
-				Intent i = new Intent(Vote.this, Vote_Option.class);
+				Vote_Option.pollingid=Global.pollidlist.get(groupPosition).get(childPosition);
+            	Toast.makeText(getActivity(),ptitle+" is selected", Toast.LENGTH_LONG).show();
+				Intent i = new Intent(getActivity(), Vote_Option.class);
 				startActivity(i);
 				return true;
 			}
         });
 	
-	
+	return l;
 	}
 
-	class AttemptGetEvents extends AsyncTask<String, String, String> {
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent i;
+		if(v.getId()==R.id.createpollingbutton)
+		{
+			
+			i = new Intent(getActivity(),Create_Option.class);
+			startActivity(i);
+		}
+	}
+
+	/*class AttemptGetEvents extends AsyncTask<String, String, String> {
 		
 	       @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
-	            pDialog = new ProgressDialog(Vote.this);
+	            pDialog = new ProgressDialog(getActivity());
 	            pDialog.setMessage("Loading events...");
 	            pDialog.setIndeterminate(false);
 	            pDialog.setCancelable(true);
@@ -127,9 +148,25 @@ public class Vote extends Activity {
 	            	  
 	            	  
 	              }
-	               
+	
+			   List<NameValuePair> params = new ArrayList<NameValuePair>();
+			   params.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
+			   JSONArray jArray;
+	            jArray= jsonParser.makeHttpRequest(Global.POLLING_URL, params);
+	            ArrayList<String> temp = new ArrayList<String>();
+          	  	ArrayList<String> temp1 = new ArrayList<String>();
+	            for(int j = 0; j <jArray.length();j++ ) {
+	            	   JSONObject json = jArray.getJSONObject(j);
+	            	   temp1.add(json.getString("polling_id"));
+	            	   temp.add(json.getString("polling_title"));
+	               }
 	            
-	               
+	            MyAdapter.childList.add(temp);
+	            pollidlist.add(temp1);
+	            params.clear();
+	            
+	            
+	            
 		       	
 			   }
 		catch(Exception e)
@@ -147,13 +184,8 @@ public class Vote extends Activity {
 	           }
 
 		 }
-}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.vote, menu);
-		return true;
+
 	}
+	*/
 
 }

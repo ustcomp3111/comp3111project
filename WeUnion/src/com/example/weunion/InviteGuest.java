@@ -92,9 +92,13 @@ boolean friend_invited = false;
 			Global.pending_guest_list.add(Global.friend_list.get(p));
 
 				Global.active_event.event.AddGuest(new Guest(Global.friend_list.get(p),Global.friend_id_list.get(p),false,false));
-			Global.all_guest_listview.invalidateViews();
-			Global.pending_guest_listview.invalidateViews();
-			}
+				if(Global.all_guest_listview!=null)		
+				Global.all_guest_listview.invalidateViews();
+				
+				if(Global.pending_guest_listview!=null)	
+				Global.pending_guest_listview.invalidateViews();
+				
+				}
 			friend_invited = false;
 
 			}}});
