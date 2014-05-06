@@ -16,10 +16,10 @@
         android:layout_weight="0.53" >
     </ListView>
 
-    <!-- <Button
+    <Button
         android:id="@+id/weekly_agenda_create_regular_event_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Regular Event" />
--->
+
 </TableLayout>

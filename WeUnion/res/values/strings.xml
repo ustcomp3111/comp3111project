@@ -34,7 +34,5 @@
     <string name="title_activity_my_secret_list">MySecretList</string>
     <string name="title_activity_add_secret_list">AddSecretList</string>
     <string name="title_activity_check_list">CheckList</string>
-    <string name="title_activity_event_setting">EventSetting</string>
-    <string name="title_activity_edit_event">EditEvent</string>
 
 </resources>

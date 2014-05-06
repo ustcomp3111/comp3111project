@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -55,7 +56,12 @@ public class Schedule extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule);
-		addEvent = (Button) findViewById(R.id.addEvent);
+		
+		ActionBar actionBar = getActionBar();  
+
+		actionBar.show();  
+
+		/*addEvent = (Button) findViewById(R.id.addEvent);
 		
 		addEvent.setOnClickListener (new OnClickListener() {
 			
@@ -65,7 +71,7 @@ public class Schedule extends Activity {
 				finish();
 				
 			}
-			});
+			});*/
 		
 		Calendar c = Calendar.getInstance();
 
@@ -312,9 +318,34 @@ Global.initialization_is_completed = false;
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.schedule, menu);
-		return true;
+		getMenuInflater().inflate(R.menu.schedule, menu);  
+
+		return super.onCreateOptionsMenu(menu);
 	}
+	@Override  
+	     public boolean onOptionsItemSelected(MenuItem item){  
+         // same as using a normal menu  
+		super.onOptionsItemSelected(item);
+	        switch(item.getItemId()) {  
+
+	        case R.id.item_addevent:  
+	            makeToast("Clicked add event");  
+	            break;  
+	        case R.id.item_addreu:  
+	            startActivity(new Intent(this,CreateEvent.class));
+	            break;  
+	        case R.id.item_addrevent:
+	            startActivity(new Intent(this,CreateRegularEvent.class));
+	            break;  
+	        }  
+
+	         return true;  
+
+	}
+	private void makeToast(String string) {
+		// TODO Auto-generated method stub
+		Toast.makeText(this,  string,  Toast.LENGTH_SHORT).show();
+	}  
 
 	}
 
