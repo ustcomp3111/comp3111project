@@ -57,7 +57,7 @@ public class Vote extends Fragment implements OnClickListener{
 		l = (RelativeLayout) inflater.inflate(R.layout.activity_vote,container,false);
 	create_polling_button =  (Button) l.findViewById(R.id.createpollingbutton);
 		create_polling_button.setOnClickListener(this);
-		MyAdapter.parentList.add(Global.active_event.event.event_name);
+		
 		//new AttemptGetEvents().execute();
 		
 		

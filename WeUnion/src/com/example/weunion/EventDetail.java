@@ -178,7 +178,9 @@ Global.initialization_is_completed = false;
 	            	  
 	            	  
 	              }*/
+			   
 			   Global.pollidlist.clear();
+			   MyAdapter.parentList.add(Global.active_event.event.event_name);
 			   List<NameValuePair> params = new ArrayList<NameValuePair>();
 			   params.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
 			   JSONArray jArray;
