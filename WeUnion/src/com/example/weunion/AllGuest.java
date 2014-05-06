@@ -27,7 +27,7 @@ LinearLayout l;
 		 Global.all_guest_listview = (ListView) l.findViewById(R.id.all_guest_list);
 	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
 	     //create_event_button.setOnClickListener(this);
-	   
+
 		 Global.all_guest_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1,Global.all_guest_list ));
 
@@ -35,8 +35,8 @@ LinearLayout l;
 	}
 
 public void onClick(View v) {
-	
+
 }
 
-	
+
 	}
