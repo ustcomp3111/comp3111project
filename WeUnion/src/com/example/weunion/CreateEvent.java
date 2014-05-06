@@ -61,6 +61,8 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 set_date_button.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR));
 			 
 			 set_event_name = (EditText)findViewById(R.id.create_event_event_name_input);
+			 set_event_name.setText(Global.Default_name);
+			 Global.Default_name = "";
 			 //set_event_year = (EditText)findViewById(R.id.create_event_year);
 			 //set_event_month = (EditText)findViewById(R.id.create_event_month);
 			// set_event_day = (EditText)findViewById(R.id.create_event_day);
@@ -264,7 +266,8 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		selected_duration.setText(duration_hour+"hour(s) "+duration_min*15+" minutes");
 	}
 	public void onBackPressed() {
-	    finish();
+		Toast.makeText(this,"Event is not created!", Toast.LENGTH_LONG).show();
+		finish();
 	    startActivity(new Intent(this,EventMenu.class));
 	}	
 }

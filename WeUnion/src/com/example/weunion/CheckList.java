@@ -17,6 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/*
+ * OBSOLETED FRAGMENT!
+ * PLEASE IGNORE THIS!
+ */
+
 public class CheckList extends Fragment {
 
 	LinearLayout l;

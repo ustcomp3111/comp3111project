@@ -22,6 +22,7 @@ import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -46,6 +47,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_secret_list);
 		Global.initialization_is_completed = false;
+		Global.load_secret_list_is_completed = false;
 		new AttemptShowSecretList().execute();
 		new AttemptShowFd(1).execute();
 		//while(!Global.initialization_is_completed);
@@ -104,6 +106,11 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 			new AttemptMatchSecretList().execute();
 			while(!Global.initialization_is_completed);
 			Global.initialization_is_completed = false;
+			if(Global.matching_list.size()==0)
+			{
+				Global.matching_list.add("No matching is found");
+				Global.matching_id_list.add(-1);
+			}
 			AlertDialog.Builder matching_dialog = new AlertDialog.Builder(SecretList.this);
 			matching_dialog.setAdapter(
 			new ArrayAdapter<String>(this,
@@ -114,8 +121,14 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					dialog.dismiss();
-				}				
+				Global.Default_name = "A Date With "+Global.matching_list.get(which);	
+				finish();
+				Intent i = new Intent(SecretList.this,CreateEvent.class);
+				dialog.dismiss();
+				finish();
+				startActivity(i);
+				}
+				
 			}
 					);							
 		matching_dialog.show();
@@ -155,8 +168,8 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	    	List<NameValuePair> params = new ArrayList<NameValuePair>();
 	        params.add(new BasicNameValuePair("A_id", Integer.toString(User.getInstance().getId())));
 	        params.add(new BasicNameValuePair("A_name", User.getInstance().getName()));
-	        Global.my_secret_list = new ArrayList<String>();
-	        Global.my_secret_id_list = new ArrayList<Integer>();
+	        Global.my_secret_list.clear();
+	        Global.my_secret_id_list.clear();
 	        JSONArray jArray = jsonParser.makeHttpRequest(Global.SHOW_SECRET_LIST_URL, params);
 
 	        if (jArray!=null) {
@@ -175,7 +188,8 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	    } catch (JSONException e) {
 	        e.printStackTrace();
 	    }
-	    Global.initialization_is_completed = true;
+	    //Global.initialization_is_completed = true;
+	    Global.load_secret_list_is_completed = true;
 	    return null;
 		
 	}

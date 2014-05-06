@@ -84,7 +84,7 @@ int p;
 		    }});
 			while(!Global.initialization_is_completed);
 		    add_secret_list_listview.invalidateViews();
-
+		    
 	    return l;
 	}
 class AttemptAddSecretList extends AsyncTask<String, String, String> {

@@ -63,6 +63,7 @@ LinearLayout l;
 				// Toast.makeText(getApplicationContext(),Global.active_event.event.event_name+" is selected", Toast.LENGTH_LONG).show();
 				Intent i = new Intent(getActivity(), EventDetail.class);
 			  getActivity().finish();
+			
 				startActivity(i);
 			
 			}

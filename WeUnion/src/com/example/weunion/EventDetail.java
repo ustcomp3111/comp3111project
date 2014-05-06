@@ -111,6 +111,7 @@ Global.initialization_is_completed = false;
 	public void onBackPressed() {
 	    finish();
 	   startActivity(new Intent(this,EventMenu.class));
+
 	}
 
 
