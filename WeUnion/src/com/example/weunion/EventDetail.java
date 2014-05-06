@@ -49,9 +49,12 @@ public class EventDetail extends FragmentActivity implements ActionBar.TabListen
 		setTitle(Global.active_event.event.event_name);
 Global.initialization_is_completed = false;
 		Msgbox.Event_Name = Global.active_event.event.event_name;
-	fragment_list = new Vector<Fragment>();
+	
+		fragment_list = new Vector<Fragment>();
+	//fragment_list.add(Fragment.instantiate(this, EventSetting.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, EventInfo.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, Msgbox.class.getName()));
+	fragment_list.add(Fragment.instantiate(this, EventSetting.class.getName()));
 	
 	pageradapter = new PagerAdapter(super.getSupportFragmentManager(),fragment_list);	
 	pager = (ViewPager)super.findViewById(R.id.event_detail_viewpager);
@@ -80,9 +83,12 @@ pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
 bar = getActionBar();
 bar.setHomeButtonEnabled(false);
 bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//bar.addTab(bar.newTab().setText("Setting").setTabListener(this));
 bar.addTab(bar.newTab().setText("Details").setTabListener(this));
 bar.addTab(bar.newTab().setText("Messages").setTabListener(this));
+bar.addTab(bar.newTab().setText("Setting").setTabListener(this));
 Global.initialization_is_completed = false;
+//pager.setCurrentItem(1);
 	}
 	 @Override
 	 public void onTabReselected(Tab arg0, android.app.FragmentTransaction arg1) {

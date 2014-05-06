@@ -19,7 +19,9 @@ import comp3111project.WeekdayAndTime;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,11 +42,14 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 	private ProgressDialog pDialog;
 
 	LinearLayout l;
-
-	public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+	ArrayList<String> option = new ArrayList<String>();
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		//super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_weekly_agenda);
 		l = (LinearLayout) inflater.inflate(R.layout.activity_weekly_agenda,container,false);
+		option.add("Edit");
+		option.add("Delete");
 		//Global.initialization_is_completed = false;
 		agenda_listview = (ListView) l.findViewById(R.id.my_agenda);
 		//     create_regular_event_button = (Button) l.findViewById(R.id.weekly_agenda_create_regular_event_button);
@@ -61,6 +66,22 @@ public class WeeklyAgenda extends Fragment implements OnClickListener{
 				public void onItemClick(AdapterView<?> a, View v, int position,
 						long id) 
 				{
+					AlertDialog.Builder matching_dialog = new AlertDialog.Builder(getActivity());
+					matching_dialog.setAdapter(
+					new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_list_item_1, Global.matching_list),				
+					new DialogInterface.OnClickListener()
+					{
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+					
+						}
+						
+					}
+							);							
+				matching_dialog.show();
 				}		    	
 		    });
 		    while(!Global.initialization_is_completed);
