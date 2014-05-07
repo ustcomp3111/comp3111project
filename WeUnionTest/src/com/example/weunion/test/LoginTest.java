@@ -1,12 +1,15 @@
 package com.example.weunion.test; 
 
-import com.example.weunion.Login;
-
 import android.app.Instrumentation.ActivityMonitor;
-import android.test.ActivityInstrumentationTestCase2; 
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.UiThreadTest;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.weunion.Login;
+import com.example.weunion.Main_menu;
  
 // ActivityInstrumentationTestCase2 provides functional testing of a single activity 
 public class LoginTest extends ActivityInstrumentationTestCase2<Login> { 
@@ -24,13 +27,14 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 	protected void setUp() throws Exception { 
 	 //this method is called every time before any test execution 
 	 super.setUp(); 
-	 mActivity = getActivity();
-	 
-	 id = (EditText)mActivity.findViewById(com.example.weunion.R.id.et_id);
-	 pw = (EditText)mActivity.findViewById(com.example.weunion.R.id.et_pw);
-	 login = (Button)mActivity.findViewById(com.example.weunion.R.id.b_confirm);
-	 reg = (Button)mActivity.findViewById(com.example.weunion.R.id.b_reg);	 
-
+	}
+	
+	private void getid() {
+		 mActivity = getActivity();		 
+		 id = (EditText)mActivity.findViewById(com.example.weunion.R.id.et_id);
+		 pw = (EditText)mActivity.findViewById(com.example.weunion.R.id.et_pw);
+		 login = (Button)mActivity.findViewById(com.example.weunion.R.id.b_confirm);
+		 reg = (Button)mActivity.findViewById(com.example.weunion.R.id.b_reg);	 
 	}
 	
 	@Override 
@@ -41,12 +45,15 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 
 	@SmallTest // SmallTest: this test doesn't interact with any file system or network. 
 	 public void testView() { // checks if the activity is created 
+		getid();
 		assertNotNull(getActivity()); 
 	 } 
 	
+	@UiThreadTest
+	@MediumTest
 	 public void testfail_Login() {
-	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Login.class.getName(), null, false);
-	 mActivity.runOnUiThread(new Runnable() {
+		 getid();
+		 mActivity.runOnUiThread(new Runnable() {
 		    @Override
 		    public void run() {
 			      // click button and open next activity.			    
@@ -54,11 +61,14 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 			      pw.setText("def");
 			      login.performClick();
 			}
-		  });	
-	 } 	
-	 
+		  });
+	 }
+	
+	@UiThreadTest
+	@MediumTest	 
 	 public void testcorrect_Login() {
-		 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Main_menu.class.getName(), null, false);
+		 getid();
+		 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(Main_menu.class.getName(), null, false);
 		 mActivity.runOnUiThread(new Runnable() {
 			    @Override
 			    public void run() {
@@ -69,10 +79,8 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 				}
 			  });	
 		 
-		 com.example.weunion.Main_menu nextActivity = (com.example.weunion.Main_menu) getInstrumentation().waitForMonitor(activityMonitor);
+		 Main_menu nextActivity = (Main_menu) getInstrumentation().waitForMonitor(activityMonitor);
 		 assertNotNull(nextActivity);
 		 nextActivity.finish();
-   
-	 }
- 
+   	 }		
 }
