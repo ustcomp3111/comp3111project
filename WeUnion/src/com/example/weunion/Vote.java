@@ -123,6 +123,7 @@ public class Vote extends Fragment implements OnClickListener{
 		            	 
 		            	  JSONObject json2 = jArray2.getJSONObject(i);
 		            	  
+		            	  Vote_Option.options=new String[5];
 		            	  Vote_Option.options[0]=json2.getString("option1");
 		            	  Vote_Option.options[1]=json2.getString("option2");
 		            	  Vote_Option.options[2]=json2.getString("option3");
