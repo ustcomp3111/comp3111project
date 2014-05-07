@@ -56,6 +56,7 @@ Global.initialization_is_completed = false;
 	fragment_list.add(Fragment.instantiate(this, EventInfo.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, Msgbox.class.getName()));
 	fragment_list.add(Fragment.instantiate(this, Vote.class.getName()));
+	if(Global.active_event.event.host.name.equals(Global.active_user.name))
 	fragment_list.add(Fragment.instantiate(this, EventSetting.class.getName()));
 	
 	
@@ -90,6 +91,7 @@ bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 bar.addTab(bar.newTab().setText("Details").setTabListener(this));
 bar.addTab(bar.newTab().setText("Messages").setTabListener(this));
 bar.addTab(bar.newTab().setText("Voting").setTabListener(this));
+if(Global.active_event.event.host.name.equals(Global.active_user.name))
 bar.addTab(bar.newTab().setText("Setting").setTabListener(this));
 
 Global.initialization_is_completed = false;

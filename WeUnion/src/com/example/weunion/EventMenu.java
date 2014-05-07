@@ -145,7 +145,7 @@ Global.all_event_id_list.clear();
 		              for(int i = 0; i <jArray2.length();i++ ) {		            	 		            	  		            	  		            	  
 		            		  JSONObject json2 = jArray2.getJSONObject(i);
 		            		  array = json2.getString("date").split("-");
-		            	  date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));		       
+		            	  date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1])-1,Integer.parseInt(array[2]),json2.getInt("time"));		       
 		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
 		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));		            	 
 		            	  Global.active_user.AddEvent(new EventNode(tmp));
@@ -153,7 +153,7 @@ Global.all_event_id_list.clear();
 		              for(int i = 0; i <jArray3.length();i++ ) {
 			            	 JSONObject json3 = jArray3.getJSONObject(i);
 			            	 array = json3.getString("date").split("-");
-			            	  date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json3.getInt("time"));
+			            	  date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1])-1,Integer.parseInt(array[2]),json3.getInt("time"));
 			            	  tmp = new Events(json3.getString("event_name"),json3.getInt("event_id"),new comp3111project.User(json3.getString("holder"),0),
 			            			  	date_and_time,json3.getInt("duration"),json3.getString("venue"));
 			            	  Global.active_user.AddEvent(new EventNode(tmp));

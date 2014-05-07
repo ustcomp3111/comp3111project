@@ -59,7 +59,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 			 if(!Global.edit_event)
 			 {
 			 year = now.get(Calendar.YEAR);
-			 month = now.get(Calendar.MONTH)+1;
+			 month = now.get(Calendar.MONTH);
 			 day = now.get(Calendar.DAY_OF_MONTH);
 			 set_date_button.setText(now.get(Calendar.DAY_OF_MONTH)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.YEAR));			 
 			 set_event_name.setText(Global.Default_name);
@@ -70,7 +70,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 				 year = Global.active_event.event.begin.Date.get(Calendar.YEAR);
 				 month = Global.active_event.event.begin.Date.get(Calendar.MONTH);
 				 day = Global.active_event.event.begin.Date.get(Calendar.DAY_OF_MONTH);
-				 set_date_button.setText(day+"-"+month+"-"+year);				 
+				 set_date_button.setText(day+"-"+(month+1)+"-"+year);				 
 				 set_event_name.setText(Global.active_event.event.event_name);
 
 			 }
@@ -263,7 +263,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		              // params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
 		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
 		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
-		               params2.add(new BasicNameValuePair("begin_date",year+"-"+month+"-"+day));	
+		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    
 		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
@@ -321,7 +321,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		               params2.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
 		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
 		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
-		               params2.add(new BasicNameValuePair("begin_date",year+"-"+month+"-"+day));	
+		               params2.add(new BasicNameValuePair("begin_date",year+"-"+(month+1)+"-"+day));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    
 		               params2.add(new BasicNameValuePair("begin_time",String.valueOf(hour*4+min)));
 		               params2.add(new BasicNameValuePair("venue",set_event_venue.getText().toString()));
