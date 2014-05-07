@@ -56,8 +56,8 @@ public class Schedule extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule);
-		new AttemptShowEvents().execute();
 		Global.initialization_is_completed = false;
+		new AttemptShowEvents().execute();
 		while(!Global.initialization_is_completed);	
 		ActionBar actionBar = getActionBar();  
 
@@ -254,7 +254,7 @@ Global.initialization_is_completed = false;
 			           begindate.add(json2.getString("date"));
 			          
 			           String [] array = json2.getString("date").split("-");
-			           DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]),json2.getInt("time"));
+			           DateAndTime date_and_time = new DateAndTime(Integer.parseInt(array[0]),Integer.parseInt(array[1])-1,Integer.parseInt(array[2]),json2.getInt("time"));
 				       
 		            	  tmp = new Events(json2.getString("event_name"),json2.getInt("event_id"),new comp3111project.User(json2.getString("holder"),0),
 		            			  	date_and_time,json2.getInt("duration"),json2.getString("venue"));

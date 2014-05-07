@@ -96,7 +96,7 @@ Button create_event_button,create_regular_event_button,debug2;
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.addTab(bar.newTab().setText("All Events").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Events By Me").setTabListener(this));
-		bar.addTab(bar.newTab().setText("Events I Joined").setTabListener(this));
+		bar.addTab(bar.newTab().setText("Events I Involved").setTabListener(this));
 		bar.addTab(bar.newTab().setText("Weekly Agenda").setTabListener(this));
 Global.initialization_is_completed = false;	
 }
