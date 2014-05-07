@@ -2,7 +2,7 @@ package com.example.weunion.test;
 
 import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.SmallTest;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +43,7 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 		 super.tearDown(); 
 	 } 
 	
+	@MediumTest
 	 public void testTop() {
 	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.EventMenu.class.getName(), null, false);
 	 mActivity.runOnUiThread(new Runnable() {
@@ -57,7 +58,8 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 	 assertNotNull(nextActivity);
 	 nextActivity.finish();
 	 } 	
-	 
+	
+	@MediumTest	 
 	 public void testLeft() {
 	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Friend.class.getName(), null, false);
 	 mActivity.runOnUiThread(new Runnable() {
@@ -72,7 +74,8 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 	 assertNotNull(nextActivity);
 	 nextActivity.finish();
 	 } 	
-	 
+	
+	@MediumTest	 
 	 public void testRight() {
 	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.SecretList.class.getName(), null, false);
 	 mActivity.runOnUiThread(new Runnable() {
@@ -87,7 +90,8 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 	 assertNotNull(nextActivity);
 	 nextActivity.finish();
 	 } 	
-	 
+	
+	@MediumTest	 
 	 public void testBottom() {
 	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Schedule.class.getName(), null, false);
 	 mActivity.runOnUiThread(new Runnable() {
@@ -102,7 +106,8 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 	 assertNotNull(nextActivity);
 	 nextActivity.finish();
 	 } 	
-	 	 
+	
+	@MediumTest	 	 
 	 public void testLogout() {
 	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.Login.class.getName(), null, false);
 	 mActivity.runOnUiThread(new Runnable() {

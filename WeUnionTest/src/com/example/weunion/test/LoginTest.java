@@ -50,7 +50,6 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 	 } 
 	
 	@UiThreadTest
-	@MediumTest
 	 public void testfail_Login() {
 		 getid();
 		 mActivity.runOnUiThread(new Runnable() {
@@ -64,7 +63,6 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 		  });
 	 }
 	
-	@UiThreadTest
 	@MediumTest	 
 	 public void testcorrect_Login() {
 		 getid();
