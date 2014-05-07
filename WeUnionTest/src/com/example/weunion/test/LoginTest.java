@@ -56,9 +56,9 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 			}
 		  });	
 	 
-	 com.example.weunion.Login nextActivity = (com.example.weunion.Login) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
-	 assertNull(nextActivity);
-	 
+	 com.example.weunion.Login nextActivity = (com.example.weunion.Login) getInstrumentation().waitForMonitor(activityMonitor);
+	 assertNotNull(nextActivity);
+	 nextActivity.finish();	 
 	 } 	
 	 
 	 public void testcorrect_Login() {
@@ -73,7 +73,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 				}
 			  });	
 		 
-		 com.example.weunion.Main_menu nextActivity = (com.example.weunion.Main_menu) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+		 com.example.weunion.Main_menu nextActivity = (com.example.weunion.Main_menu) getInstrumentation().waitForMonitor(activityMonitor);
 		 assertNotNull(nextActivity);
 		 nextActivity.finish();
    
