@@ -47,8 +47,12 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_secret_list);
+		 Global.active_user = new comp3111project.User(User.getInstance().getName(),User.getInstance().getId());
+		Global.add_secret_id_list.clear();
+		Global.add_secret_list.clear();
 		Global.initialization_is_completed = false;
 		Global.load_secret_list_is_completed = false;
+		
 		new AttemptShowSecretList().execute();
 		new AttemptShowFd(1).execute();
 		while(!Global.initialization_is_completed&&!Global.load_secret_list_is_completed);
@@ -122,14 +126,17 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-				Global.Default_name = Global.matching_list.get(which)+" and "+Global.active_user.name+"'s Date";	
+				if(Global.matching_id_list.get(0)!=-1)
+				{
+					Global.Default_name = Global.matching_list.get(which)+" and "+Global.active_user.name+"'s Date";	
 				finish();
 				Intent i = new Intent(SecretList.this,CreateEvent.class);
 				dialog.dismiss();
 				finish();
 				startActivity(i);
+				
+					}
 				}
-
 			}
 					);							
 		matching_dialog.show();

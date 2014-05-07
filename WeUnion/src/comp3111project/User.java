@@ -157,7 +157,7 @@ public class User // object which stores user's info
         System.out.println("***The end***");
     }*/
  // find a free time slot which is closest to 'time' , and duration = "duration"
-    DateAndTime FreeTimeSlot(DateAndTime time, int duration)                                                                
+    public  DateAndTime FreeTimeSlot(DateAndTime time, int duration)                                                                
     {
         EventNode Event_ptr = event_ptr;
         RegularEventNode Schedule_ptr = schedule_ptr;

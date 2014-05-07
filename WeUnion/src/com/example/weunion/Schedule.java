@@ -57,6 +57,7 @@ public class Schedule extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule);
 		new AttemptShowEvents().execute();
+		Global.initialization_is_completed = false;
 		while(!Global.initialization_is_completed);	
 		ActionBar actionBar = getActionBar();  
 

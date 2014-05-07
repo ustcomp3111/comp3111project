@@ -30,7 +30,7 @@ else
  }
     public String toString ()
  {
-	 return Integer.toString(this.Date.get(Calendar.DAY_OF_MONTH))+"/"+Integer.toString(this.Date.get(Calendar.MONTH))+"/"+Integer.toString(this.Date.get(Calendar.YEAR))
+	 return Integer.toString(this.Date.get(Calendar.DAY_OF_MONTH))+"/"+Integer.toString(this.Date.get(Calendar.MONTH)+1)+"/"+Integer.toString(this.Date.get(Calendar.YEAR))
 			 +" "+TimeSlotToString();
  }
  

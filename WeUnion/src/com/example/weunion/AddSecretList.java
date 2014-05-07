@@ -49,6 +49,7 @@ int p;
 					p = position;
 					int i = 0;
 					boolean end = false;
+					//Toast.makeText(getActivity(),Global.add_secret_list.get(p)+" "+Global.add_secret_id_list.get(p), Toast.LENGTH_LONG).show();
 					while(i<Global.my_secret_id_list.size())
 					{
 						if(Global.my_secret_id_list.get(i)==Global.add_secret_id_list.get(p))
@@ -64,7 +65,7 @@ int p;
 						Global.initialization_is_completed = false;
 						new  AttemptAddSecretList().execute();
 					while(!Global.initialization_is_completed);
-					Global.initialization_is_completed = false;
+					
 					if(friend_added)
 					{
 						Toast.makeText(getActivity(),Global.add_secret_list.get(p)+" added!", Toast.LENGTH_LONG).show();	
@@ -84,7 +85,7 @@ int p;
 		    }});
 			while(!Global.initialization_is_completed);
 		    add_secret_list_listview.invalidateViews();
-
+		    Global.initialization_is_completed = false;
 	    return l;
 	}
 class AttemptAddSecretList extends AsyncTask<String, String, String> {

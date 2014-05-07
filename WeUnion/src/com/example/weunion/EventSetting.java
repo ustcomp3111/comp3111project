@@ -9,6 +9,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 
+import comp3111project.DateAndTime;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -79,6 +81,11 @@ public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle sa
 				Toast.makeText(getActivity(),"You are not the host,\nso you cannot delete this event!", Toast.LENGTH_LONG).show();
 
 
+		}
+		else if (v.getId()==R.id.event_setting_time_matching_button)
+		{
+			Toast.makeText(getActivity(),Global.active_user.FreeTimeSlot(DateAndTime.Now(),Global.active_event.event.duration).toString(), Toast.LENGTH_LONG).show();
+			
 		}
 	}
 
