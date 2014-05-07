@@ -42,7 +42,7 @@ JSONParser jsonParser = new JSONParser();
 		Global.my_secret_list_listview = (ListView) l.findViewById(R.id.my_secret_list);
 	    // create_event_button = (Button) l.findViewById(R.id.event_create_new_event_button);
 	     //create_event_button.setOnClickListener(this);
-	   
+		Global.clicked = false;
 		Global.my_secret_list_listview.setAdapter(new ArrayAdapter<String>(getActivity(),
 	    android.R.layout.simple_list_item_1,Global.my_secret_list));
 		Global.my_secret_list_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() 
@@ -51,8 +51,12 @@ JSONParser jsonParser = new JSONParser();
 				public void onItemClick(AdapterView<?> a, View v, int position,
 						long id) {
 					p = position;
+					
 					if(Global.my_secret_id_list.get(p)!=-1)
 					{
+						if(Global.clicked)
+						{	
+						Global.clicked = false;
 					Global.initialization_is_completed = false;
 					new  AttemptRemoveSecretList().execute();
 					while(!Global.initialization_is_completed);
@@ -72,7 +76,12 @@ JSONParser jsonParser = new JSONParser();
 					else
 						Toast.makeText(getActivity(),"Failed to remove,\nsomething goes wrong in the app-_-", Toast.LENGTH_LONG).show();
 					friend_removed = false;
-
+						}
+						else
+						{
+							Global.clicked = true;
+							Toast.makeText(getActivity(),"Click again to confirm your action", Toast.LENGTH_LONG).show();	
+						}
 					}
 					}
 		    });
