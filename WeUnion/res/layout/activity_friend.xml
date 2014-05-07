@@ -18,7 +18,7 @@
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/ptitle_textview"
         android:stackFromBottom="true" 
         android:background="#fff"
         android:divider="@null"
@@ -27,7 +27,7 @@
     </ListView>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/ptitle_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_id"

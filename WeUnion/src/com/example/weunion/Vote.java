@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -45,9 +46,11 @@ public class Vote extends Fragment implements OnClickListener{
 	ArrayList<String> polllist = new ArrayList<String>();
 	//ArrayList<ArrayList<String>> pollidlist = new ArrayList<ArrayList<String>>();
 	protected static String POLLING_ID;
-	private ExpandableListView Listpolling;
+	private ListView Listpolling;
+	private SimpleAdapter adapter;
+	public static final String TAG_PNAME = "ppp";
 	private Button create_polling_button;
-	//ArrayList<HashMap<String,String>> pollinglist = new ArrayList<HashMap<String,String>>();
+	public static ArrayList<HashMap<String,String>> plist = new ArrayList<HashMap<String,String>>();
 	public static String[] options;
 		
 	RelativeLayout l;
@@ -62,10 +65,33 @@ public class Vote extends Fragment implements OnClickListener{
 		
 		
 		
-		ExpandableListView Listpolling=(ExpandableListView)l.findViewById(R.id.expandableListView1);
-		Listpolling.setAdapter(new MyAdapter(getActivity()));
-
-		Listpolling.setOnChildClickListener(new OnChildClickListener() {
+		ListView Listpolling=(ListView)l.findViewById(R.id.pt_listView);
+		adapter = new SimpleAdapter( getActivity(), plist,
+				 R.layout.ptitle,
+				 new String[] {TAG_PNAME},
+				 new int[] { R.id.ptitle_text} );	
+		
+		Listpolling.setAdapter(adapter);
+		Listpolling.setTextFilterEnabled(true);
+		
+		Listpolling.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				
+				String ptitle=Global.ptlist.get(position);
+				Vote_Option.pollingtitle=ptitle;
+				Global.pollingid=Global.pollidlist.get(position);
+				new AttemptGetInfo().execute();
+            	Toast.makeText(getActivity(),ptitle+" is selected", Toast.LENGTH_LONG).show();
+				Intent i = new Intent(getActivity(), Vote_Option.class);
+				startActivity(i);
+				
+			}
+        });
+		
+		
+		/*Listpolling.setOnChildClickListener(new OnChildClickListener() {
 
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
@@ -80,7 +106,7 @@ public class Vote extends Fragment implements OnClickListener{
 				startActivity(i);
 				return true;
 			}
-        });
+        });*/
 	
 	return l;
 	}

@@ -1,31 +1,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Vote" >
 
-    <ExpandableListView
-        android:id="@+id/expandableListView1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/ptitle_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:padding="3dp" >
-
-    </ExpandableListView>
+        android:layout_weight="0.41"
+        android:text="Select polling title : "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/createpollingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/button_o"
         android:text="Create Polling" />
+
+    <ListView
+        android:id="@+id/pt_listView"
+        android:layout_width="match_parent"
+        android:layout_height="308dp"
+        android:layout_above="@+id/createpollingbutton"
+        android:layout_alignLeft="@+id/ptitle_textview"
+        android:layout_below="@+id/ptitle_textview"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.61" >
+
+    </ListView>
 
 </RelativeLayout>

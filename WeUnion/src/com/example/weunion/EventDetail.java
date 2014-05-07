@@ -1,6 +1,7 @@
 package com.example.weunion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -182,7 +183,10 @@ Global.initialization_is_completed = false;
 	              }*/
 			   
 			   Global.pollidlist.clear();
-			   MyAdapter.parentList.add(Global.active_event.event.event_name);
+			   Global.ptlist.clear();
+			   Vote.plist.clear();
+			   
+			   //MyAdapter.parentList.add(Global.active_event.event.event_name);
 			   List<NameValuePair> params = new ArrayList<NameValuePair>();
 			   params.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
 			   JSONArray jArray;
@@ -191,12 +195,15 @@ Global.initialization_is_completed = false;
        	  	ArrayList<String> temp1 = new ArrayList<String>();
 	            for(int j = 0; j <jArray.length();j++ ) {
 	            	   JSONObject json = jArray.getJSONObject(j);
-	            	   temp1.add(json.getString("polling_id"));
-	            	   temp.add(json.getString("polling_title"));
+	            	   Global.pollidlist.add(json.getString("polling_id"));
+	            	   Global.ptlist.add(json.getString("polling_title"));
+	            	   HashMap<String, String> map = new HashMap<String, String>();
+ 	                   map.put(Vote.TAG_PNAME, json.getString("polling_title"));
+ 	                   Vote.plist.add(map);
 	               }
-	            
+	            	
 	            MyAdapter.childList.add(temp);
-	            Global.pollidlist.add(temp1);
+	            //Global.pollidlist.add(temp1);
 	            params.clear();
 	            
 	            

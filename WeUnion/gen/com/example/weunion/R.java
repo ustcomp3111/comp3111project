@@ -54,7 +54,7 @@ public final class R {
         public static final int RL=0x7f080064;
         public static final int RelativeLayout1=0x7f08005b;
         public static final int TableLayout1=0x7f080019;
-        public static final int action_settings=0x7f0800ca;
+        public static final int action_settings=0x7f0800cb;
         public static final int add_fd=0x7f080060;
         public static final int add_secret_list=0x7f080000;
         public static final int all_guest_list=0x7f080001;
@@ -109,7 +109,7 @@ public final class R {
         public static final int create_regular_event_set_min_radioGroup=0x7f080025;
         public static final int create_regular_event_set_weekday_button=0x7f080033;
         public static final int create_regular_event_show_selected_duration=0x7f080036;
-        public static final int createpollingbutton=0x7f0800b3;
+        public static final int createpollingbutton=0x7f0800b2;
         public static final int declined_guest_list=0x7f080037;
         public static final int editText_option=0x7f08001f;
         public static final int editText_title=0x7f08001d;
@@ -145,7 +145,6 @@ public final class R {
         public static final int event_setting_edit_button=0x7f080056;
         public static final int event_setting_time_matching_button=0x7f080057;
         public static final int eventlist1=0x7f0800b1;
-        public static final int expandableListView1=0x7f0800b2;
         public static final int fragment_event=0x7f080038;
         public static final int fragment_event_by_me=0x7f08003a;
         public static final int fridayRelativeLayout=0x7f08008d;
@@ -157,9 +156,9 @@ public final class R {
         public static final int going_guest_list=0x7f080061;
         public static final int guest_list_viewpager=0x01010002;
         public static final int invite_friend_list=0x7f080062;
-        public static final int item_addevent=0x7f0800cb;
-        public static final int item_addreu=0x7f0800cc;
-        public static final int item_addrevent=0x7f0800cd;
+        public static final int item_addevent=0x7f0800cc;
+        public static final int item_addreu=0x7f0800cd;
+        public static final int item_addrevent=0x7f0800ce;
         public static final int joined_event_list=0x7f080063;
         public static final int left=0x7f080071;
         public static final int linearLayout1=0x7f08003c;
@@ -183,6 +182,9 @@ public final class R {
         public static final int pending_guest_list=0x7f080079;
         public static final int post_button=0x7f080077;
         public static final int post_msg=0x7f080076;
+        public static final int pt_listView=0x7f0800b3;
+        public static final int ptitle_text=0x7f0800ca;
+        public static final int ptitle_textview=0x7f080007;
         public static final int relativeLayout_bottom=0x7f080072;
         public static final int relativeLayout_left=0x7f080070;
         public static final int relativeLayout_middle=0x7f08006b;
@@ -246,7 +248,6 @@ public final class R {
         public static final int textTime24=0x7f0800ac;
         public static final int textTimeblank=0x7f080093;
         public static final int textTue=0x7f080083;
-        public static final int textView1=0x7f080007;
         public static final int textView2=0x7f080013;
         public static final int textView5=0x7f080003;
         public static final int textView_ptitle=0x7f0800b5;
@@ -296,7 +297,8 @@ public final class R {
         public static final int msglist=0x7f030020;
         public static final int optionlist=0x7f030021;
         public static final int optionnamelist=0x7f030022;
-        public static final int zebraline=0x7f030023;
+        public static final int ptitle=0x7f030023;
+        public static final int zebraline=0x7f030024;
     }
     public static final class menu {
         public static final int add_secret_list=0x7f070000;

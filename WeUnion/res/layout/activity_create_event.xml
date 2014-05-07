@@ -49,12 +49,12 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/create_event_event_name_input"
         android:layout_alignRight="@+id/create_event_event_name_input"
-        android:layout_alignTop="@+id/textView1"
+        android:layout_alignTop="@+id/ptitle_textview"
         android:background="@drawable/button"
         android:text="Set Date" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/ptitle_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
