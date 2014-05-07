@@ -72,8 +72,6 @@ public class Login extends Activity implements OnClickListener{
 	}
 	
 	class AttemptLogin extends AsyncTask<String, String, String> {
-
-		boolean failure = false;
 		
         @Override
         protected void onPreExecute() {
@@ -125,7 +123,9 @@ public class Login extends Activity implements OnClickListener{
 		}
 
         protected void onPostExecute(String file_url) {
-            pDialog.dismiss();
+        	if (pDialog != null) { 
+                pDialog.dismiss();
+           }
             if (file_url != null){
             	Toast.makeText(Login.this, file_url, Toast.LENGTH_LONG).show();
             }
@@ -135,8 +135,6 @@ public class Login extends Activity implements OnClickListener{
 	}
 	
 	class AttemptRegister extends AsyncTask<String, String, String> {
-
-		boolean failure = false;
 		
         @Override
         protected void onPreExecute() {
