@@ -108,6 +108,8 @@ public class Create_Option extends Activity implements OnClickListener{
 			// put in server
 			new AttemptStartVote().execute();
 			finish();
+			Intent i = new Intent(Create_Option.this, EventDetail.class);
+			startActivity(i);
 		default:
 			break;
 		}
