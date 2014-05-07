@@ -412,7 +412,7 @@ public class CreateRegularEvent extends Activity implements OnClickListener,Radi
 		               params2.add(new BasicNameValuePair("r_event_name",set_event_name.getText().toString()));
 		              // params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
 		               params2.add(new BasicNameValuePair("r_event_id",Integer.toString(Global.agenda_id_list.get(Global.regular_event_position))));
-		               params2.add(new BasicNameValuePair("r_holder",Global.active_user.name));
+		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
 		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("weekday",weekday));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    

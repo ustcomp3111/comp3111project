@@ -56,7 +56,8 @@ public class Schedule extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule);
-		
+		new AttemptShowEvents().execute();
+		while(!Global.initialization_is_completed);	
 		ActionBar actionBar = getActionBar();  
 
 		actionBar.show();  
@@ -122,8 +123,7 @@ public class Schedule extends Activity {
 			TextView child = getLayoutInflater().inflate(R.layout.child);
 			layout.addView(child);*/
 				
-			new AttemptShowEvents().execute();
-			while(!Global.initialization_is_completed);
+	
 			//show event joining
 			for(int day=0;day<wholeweekdays.size();day++)
 			{
@@ -311,7 +311,7 @@ Global.initialization_is_completed = false;
 	        	if (pDialog != null) { 
 	                pDialog.dismiss();
 	           }
-	        	//Toast.makeText(Schedule.this,"i = "+i+"r_eventlist.size(): "+r_eventlist.get(0)+r_duration.get(0),Toast.LENGTH_LONG).show();	
+	        	//Toast.makeText(Schedule.this,"eventlist.size(): "+eventlist.size()+" eventlist.get(): "+eventlist.get(eventlist.size()-1),Toast.LENGTH_LONG).show();	
 		 }
 		 }	
 		 
@@ -346,6 +346,10 @@ Global.initialization_is_completed = false;
 		// TODO Auto-generated method stub
 		Toast.makeText(this,  string,  Toast.LENGTH_SHORT).show();
 	}  
-
+	public void onBackPressed() {
+		
+		finish();
+	    //startActivity(new Intent(this,Main_menu.class));
+	}
 	}
 

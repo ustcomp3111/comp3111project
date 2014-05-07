@@ -245,6 +245,6 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 	public void onBackPressed() {
 			
 		finish();
-	    startActivity(new Intent(this,Main_menu.class));
+	    //startActivity(new Intent(this,Main_menu.class));
 	}
 }

@@ -43,12 +43,16 @@ public class EventInfo extends Fragment implements OnClickListener,RadioGroup.On
 	RadioButton join_radio_button,decline_radio_button;
 	JSONParser jsonParser = new JSONParser();
 	private ProgressDialog pDialog;
-	int all,going,declined,pending,response = 0;
+	int all,going,declined,pending,response = 1;
 	boolean response_updated = false;
 	TextView response_message;
 	@Override
 	public	View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)  {
 		ScrollView l = (ScrollView) inflater.inflate(R.layout.activity_event_info,container,false);
+		all = 0;
+		going = 0;
+		declined = 0;
+		pending = 0;
 		new AttemptGetGuests().execute();
 		//Global.initialization_is_completed = false;
 		while(!Global.initialization_is_completed);

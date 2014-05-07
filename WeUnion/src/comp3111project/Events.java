@@ -31,7 +31,7 @@ public class Events {
        duration = e;
        end = d.add(e);
    }  
-  void printthis()
+ /* void printthis()
   {
 	  System.out.println("Event name: "+event_name+"\nEvent holder: "+host.name+"\n Guest list: ");
 	  Guest ptr = guest_list_ptr;
@@ -44,7 +44,7 @@ public class Events {
 				  ptr=ptr.next;		  
 	  }
   System.out.println("begin: "+begin.printthis()+"\nend: "+end.printthis()+"\n"); 		  
-  }
+  }*/
 
    boolean overlap(Events event) {
        if (!begin.before(event.end)||!end.after(event.begin))
@@ -52,6 +52,7 @@ public class Events {
        else
            return true;
    }
+   
    public void AddGuest(Guest guest)
    {
 	   Guest ptr = guest_list_ptr;
@@ -67,7 +68,7 @@ public class Events {
    }
    }  
    
-   DateAndTime Matching()
+   /*DateAndTime Matching()
    {
 	   return Matching(DateAndTime.Now());
 	 
@@ -102,8 +103,8 @@ public class Events {
 	   System.out.println("failed to find a suitable time for every guest");
 	   return DateAndTime.Now();
    }
+*/
 }
-
 
 
 

@@ -319,7 +319,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 		               params2.add(new BasicNameValuePair("event_name",set_event_name.getText().toString()));
 		              // params2.add(new BasicNameValuePair("host_name",User.getInstance().getId()));
 		               params2.add(new BasicNameValuePair("event_id",Integer.toString(Global.active_event.event.event_id)));
-		               params2.add(new BasicNameValuePair("holder",Global.active_event.event.host.name));
+		               params2.add(new BasicNameValuePair("host_name",Global.active_user.name));
 		               // params2.add(new BasicNameValuePair("begin_date",set_event_year.getText().toString()+"-"+set_event_month.getText().toString()+"-"+set_event_day.getText().toString()));		               
 		               params2.add(new BasicNameValuePair("begin_date",year+"-"+month+"-"+day));	
 		               params2.add(new BasicNameValuePair("duration",String.valueOf(duration_hour*4+duration_min)));		    

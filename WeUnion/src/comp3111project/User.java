@@ -130,7 +130,7 @@ public class User // object which stores user's info
     	return true;	
     }
  
-    void printregularevent() {
+  /*  void printregularevent() {
         System.out.println("Regular Event of " + this.name);
         RegularEventNode ptr = schedule_ptr,starting_point = schedule_ptr;
        do {
@@ -155,7 +155,7 @@ public class User // object which stores user's info
             ptr = ptr.next;
         }
         System.out.println("***The end***");
-    }
+    }*/
  // find a free time slot which is closest to 'time' , and duration = "duration"
     DateAndTime FreeTimeSlot(DateAndTime time, int duration)                                                                
     {
@@ -179,30 +179,31 @@ public class User // object which stores user's info
         		Schedule_ptr.next = starting_point;
         	}
         	while (true) {
-        	System.out.println("*******");
+        	/*System.out.println("*******");
         	System.out.println("comparing ");
         	Schedule_ptr.regular_event.printthis();
         	Schedule_ptr.next.regular_event.printthis();
         	System.out.println("difference: "+Schedule_ptr.regular_event.difference(Schedule_ptr.next.regular_event));
         	System.out.println("*******\n");        	
-        		//step 1: find a timeslot from regular event schedule of the user
+        */		//step 1: find a timeslot from regular event schedule of the user
              if (Schedule_ptr.next == null
                     || Schedule_ptr.regular_event.difference(Schedule_ptr.next.regular_event) >= duration) {
                 System.out.println("Proposed Date and time:");
             	result = result.FindDateOfWeekday(Schedule_ptr.regular_event);
                 Result = new Events("",0,this,result,duration,"");
-                Result.printthis();
+               // Result.printthis();
                 while (true) {
                 	// step 2: check if the time slot contradict to one-time events of the user                	
                 	if (Event_ptr == null)
                      //"Result" has been compared with all one-time events,and there is no conflict                 
                     	return result;
-                	System.out.println("#######");
+                	/*System.out.println("#######");
                 	System.out.println("comparing ");
                 	Event_ptr.event.printthis();
                 	Result.printthis();
                 	System.out.println("#######\n");
-                     if (!Event_ptr.event.overlap(Result))
+                    */
+                	if (!Event_ptr.event.overlap(Result))
                         Event_ptr = Event_ptr.next;           
                     	else {                    		                  
                     result = Event_ptr.event.end;
