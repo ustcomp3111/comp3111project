@@ -105,9 +105,12 @@ response_radio_group.setOnCheckedChangeListener(this);
 		else if(!ptr.attend)
 		{
 		if(ptr.user.name.equals(Global.active_user.name))
-		response_message.setText("Your response: Declined");
-			declined++;
+		{
+			response_message.setText("Your response: Declined");
 			response_radio_group.check(R.id.event_info_decline_radio_button);
+		}
+			declined++;
+			
 		}
 		else
 			going++;

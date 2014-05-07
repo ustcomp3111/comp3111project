@@ -162,7 +162,7 @@ public class User // object which stores user's info
         EventNode Event_ptr = event_ptr;
         RegularEventNode Schedule_ptr = schedule_ptr;
         boolean tmp;
-        DateAndTime result = time,fail = new DateAndTime(0,0,0,0);
+        DateAndTime result = time;
         Events Result;
         boolean return_flag = false;
         //Move schedule ptr to a suitable position for scanning
@@ -215,7 +215,7 @@ public class User // object which stores user's info
                 }
             }
             if (return_flag)
-                return fail;
+                return DateAndTime.fail;
             else {
                 if (Schedule_ptr.next == starting_point && !Schedule_ptr.equals(tmp))                
                 	return_flag = true;                

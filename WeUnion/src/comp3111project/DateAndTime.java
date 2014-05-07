@@ -8,6 +8,7 @@ class DateAndTime {
     public GregorianCalendar Date;
     private static GregorianCalendar now = new GregorianCalendar();
     public int time_slot;
+    public static final DateAndTime fail = new DateAndTime(0,0,0,0);
 //    Find the current time in DateAndTime format
     static public DateAndTime Now()
     {
@@ -30,8 +31,11 @@ else
  }
     public String toString ()
  {
+    	if(!this.equals(DateAndTime.fail))
 	 return Integer.toString(this.Date.get(Calendar.DAY_OF_MONTH))+"/"+Integer.toString(this.Date.get(Calendar.MONTH)+1)+"/"+Integer.toString(this.Date.get(Calendar.YEAR))
 			 +" "+TimeSlotToString();
+    	else
+    		return "Failed to find a suitable time!";
  }
  
    public int weekday() {

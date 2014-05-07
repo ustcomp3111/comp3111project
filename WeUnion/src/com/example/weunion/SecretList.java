@@ -128,8 +128,7 @@ public class SecretList extends FragmentActivity implements ActionBar.TabListene
 					// TODO Auto-generated method stub
 				if(Global.matching_id_list.get(0)!=-1)
 				{
-					Global.Default_name = Global.matching_list.get(which)+" and "+Global.active_user.name+"'s Date";	
-				finish();
+					Global.Default_name = (Global.matching_list.get(which).substring(0, 1).toUpperCase()+Global.matching_list.get(which).substring(1))+" And "+(Global.active_user.name.substring(0, 1).toUpperCase()+Global.active_user.name.substring(1))+"'s Date";	
 				Intent i = new Intent(SecretList.this,CreateEvent.class);
 				dialog.dismiss();
 				finish();

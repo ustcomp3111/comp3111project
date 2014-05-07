@@ -141,9 +141,28 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 
 			 if(Global.edit_event)
 			 {
-				 setTitle("Edit Event");
-				 set_event_venue.setText(Global.active_event.event.location);
-				 confirm_button.setText("Edit Event");
+				 if(Global.result!=null)
+				 {
+					 year = Global.result.Date.get(Calendar.YEAR);
+					 month = Global.result.Date.get(Calendar.MONTH);
+					 day = Global.result.Date.get(Calendar.DAY_OF_MONTH);
+					 set_date_button.setText(Global.result.Date.get(Calendar.DAY_OF_MONTH)+"-"+(Global.result.Date.get(Calendar.MONTH)+1)+"-"+Global.result.Date.get(Calendar.YEAR));
+				 
+					 if(Global.result.time_slot%4==0)
+						 select_min.check(radio_button_00.getId());
+						 else if( Global.result.time_slot%4==1)
+						 select_min.check(radio_button_15.getId());
+						 else if( Global.result.time_slot%4==2)
+						 select_min.check(radio_button_30.getId());
+						 else
+						 select_min.check(radio_button_45.getId());
+					 hour = Global.result.time_slot/4;
+					 min = Global.result.time_slot%4;
+
+					 Global.result = null;
+				 }
+				 else
+				 {
 				 if(Global.active_event.event.begin.time_slot%4==0)
 				 select_min.check(radio_button_00.getId());
 				 else if(Global.active_event.event.begin.time_slot%4==1)
@@ -152,7 +171,13 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 				 select_min.check(radio_button_30.getId());
 				 else
 				 select_min.check(radio_button_45.getId());
-
+			 
+				 hour = Global.active_event.event.begin.time_slot/4;
+				 min = Global.active_event.event.begin.time_slot%4;
+			 }
+				 setTitle("Edit Event");
+				 set_event_venue.setText(Global.active_event.event.location);
+				 confirm_button.setText("Edit Event");
 				 if(Global.active_event.event.duration%4==0)
 				 select_duration_min.check(radio_button_duration_00.getId());
 				 else if(Global.active_event.event.duration%4==1)
@@ -162,8 +187,7 @@ public class CreateEvent extends Activity implements OnClickListener,RadioGroup.
 				 else
 				 select_duration_min.check(radio_button_duration_45.getId());
 
-				 hour = Global.active_event.event.begin.time_slot/4;
-				 min = Global.active_event.event.begin.time_slot%4;
+	
 				 if(min!=0)
 				 selected_time.setText(hour+":"+min*15);
 				 else

@@ -11,7 +11,9 @@ import org.json.JSONArray;
 
 import comp3111project.DateAndTime;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ private ProgressDialog pDialog;
 JSONArray jArray;
 List<NameValuePair> params2 = new ArrayList<NameValuePair>();
 Intent i;
+ArrayList<String> time_matching_list = new ArrayList<String>();
 public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
 	{
 		l = (LinearLayout) inflater.inflate(R.layout.activity_event_setting,container,false);
@@ -52,20 +56,16 @@ public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle sa
 		Intent i;
 		if(v.getId()==R.id.event_setting_edit_button)
 		{
-			if(Global.active_event.event.host.name.equals(Global.active_user.name))
-			{	Global.edit_event = true;
+			Global.edit_event = true;
 			i = new Intent(getActivity(), CreateEvent.class);
 		getActivity().finish();
 		startActivity(i);
-		}
-			else
-				Toast.makeText(getActivity(),"You are not the host,\nso you cannot edit this event!", Toast.LENGTH_LONG).show();
+		
 			}
 		else if (v.getId()==R.id.event_setting_delete_button)
 		{
 
-			if(Global.active_event.event.host.name.equals(Global.active_user.name))
-			{
+			
 				if(!Global.clicked)
 				{
 					Global.clicked = true;
@@ -77,15 +77,35 @@ public	 View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle sa
 		getActivity().finish();
 					}
 		}
-			else
-				Toast.makeText(getActivity(),"You are not the host,\nso you cannot delete this event!", Toast.LENGTH_LONG).show();
-
-
-		}
 		else if (v.getId()==R.id.event_setting_time_matching_button)
 		{
-			Toast.makeText(getActivity(),Global.active_user.FreeTimeSlot(DateAndTime.Now(),Global.active_event.event.duration).toString(), Toast.LENGTH_LONG).show();
-			
+			Global.result = Global.active_user.FreeTimeSlot(DateAndTime.Now(),Global.active_event.event.duration);
+			time_matching_list.add("The best date and time:");
+			time_matching_list.add(Global.result.toString());
+			//Toast.makeText(getActivity(),Global.active_user.FreeTimeSlot(DateAndTime.Now(),Global.active_event.event.duration).toString(), Toast.LENGTH_LONG).show();
+			AlertDialog.Builder matching_dialog = new AlertDialog.Builder(getActivity());
+			matching_dialog.setAdapter(
+			new ArrayAdapter<String>(getActivity(),
+			android.R.layout.simple_list_item_1, time_matching_list),				
+			new DialogInterface.OnClickListener()
+			{
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				if(Global.result.equals(DateAndTime.fail));
+					else
+				{
+						Global.edit_event = true;
+				Intent i = new Intent(getActivity(),CreateEvent.class);
+				dialog.dismiss();
+				getActivity().finish();
+				startActivity(i);
+					}
+				}
+			}
+					);							
+		matching_dialog.show();
 		}
 	}
 
