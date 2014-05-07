@@ -87,7 +87,7 @@ public class Vote_Option extends Activity implements OnClickListener {
 		
 		//new AttemptGetInfo().execute();
 		
-		
+		options=clean(options);
 		MyCustomAdapter cadapter=new MyCustomAdapter(this, R.layout.optionnamelist,options);
 		
 		
