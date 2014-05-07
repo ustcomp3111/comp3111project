@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FBFF90"
     tools:context=".CreateRegularEvent" >
 
     <EditText
@@ -115,6 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/create_regular_event_event_venue"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
         android:text="Create regular event" />
 
     <Button
@@ -124,6 +126,7 @@
         android:layout_alignLeft="@+id/textView5"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/create_regular_event_event_name_input"
+        android:background="@drawable/button"
         android:text="Button" />
 
     <NumberPicker
