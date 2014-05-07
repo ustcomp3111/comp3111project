@@ -55,10 +55,6 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
 			      login.performClick();
 			}
 		  });	
-	 
-	 com.example.weunion.Login nextActivity = (com.example.weunion.Login) getInstrumentation().waitForMonitor(activityMonitor);
-	 assertNotNull(nextActivity);
-	 nextActivity.finish();	 
 	 } 	
 	 
 	 public void testcorrect_Login() {

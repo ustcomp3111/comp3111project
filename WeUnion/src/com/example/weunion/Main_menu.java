@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class Main_menu extends Activity implements OnClickListener{
 
 	TextView username;
-	ImageView events, friend, startvote, schedule;
+	ImageView events, friend, secret, schedule;
 	Button logout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +25,13 @@ public class Main_menu extends Activity implements OnClickListener{
 		username.setText("Logged in as "+User.getInstance().getName());
 		events = (ImageView) findViewById(R.id.top);
 		friend = (ImageView) findViewById(R.id.left);
-		startvote = (ImageView) findViewById(R.id.right);
+		secret = (ImageView) findViewById(R.id.right);
 		schedule = (ImageView) findViewById(R.id.bottom);
 		logout = (Button) findViewById(R.id.b_logout);
 		
 		logout.setOnClickListener(this);
 		schedule.setOnClickListener(this);
-		startvote.setOnClickListener(this);
+		secret.setOnClickListener(this);
 		events.setOnClickListener(this);
 		friend.setOnClickListener(this);
 		

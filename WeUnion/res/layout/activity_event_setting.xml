@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/button_pblue"
         android:text="Edit" />
 
     <Button
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/button1"
+        android:background="@drawable/button_pblue"
         android:text="Matching" />
 
     <Button
@@ -30,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button2"
         android:layout_below="@+id/button2"
+        android:background="@drawable/button_pblue"
         android:text="Delete" />
 
 </TableLayout>

@@ -44,13 +44,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Login" />
+        android:background="@drawable/button_g"
+        android:text="Login" 
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/b_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:layout_marginTop="10dp"
-        android:text="Register" />
+		android:background="@drawable/button_g"
+        android:text="Register"
+        android:textColor="#fff" />
 
 </TableLayout>

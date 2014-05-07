@@ -36,12 +36,14 @@
         android:id="@+id/button_viewresult"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_o"
         android:text="View Result" />
 
     <Button
         android:id="@+id/button_vote"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_o"
         android:text="Vote" />
 
 </LinearLayout>

@@ -16,7 +16,7 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 	private Main_menu mActivity;
 
 	TextView username;
-	ImageView events, friend, startvote, schedule;
+	ImageView events, friend, secret, schedule;
 	Button logout;
 
 	public Main_menuTest() { 
@@ -32,7 +32,7 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 		username = (TextView) mActivity.findViewById(R.id.username);
 		events = (ImageView) mActivity.findViewById(R.id.top);
 		friend = (ImageView) mActivity.findViewById(R.id.left);
-		startvote = (ImageView) mActivity.findViewById(R.id.right);
+		secret = (ImageView) mActivity.findViewById(R.id.right);
 		schedule = (ImageView) mActivity.findViewById(R.id.bottom);
 		logout = (Button) mActivity.findViewById(R.id.b_logout);
 	}
@@ -73,18 +73,17 @@ public class Main_menuTest extends ActivityInstrumentationTestCase2<Main_menu> {
 	 nextActivity.finish();
 	 } 	
 	 
-	 //CHANGE HERE-------------hlhlfahvmariahrlhrlwahfsafhlhfielahashhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 	 public void testRight() {
-	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.EventMenu.class.getName(), null, false);
+	 ActivityMonitor activityMonitor = getInstrumentation().addMonitor(com.example.weunion.SecretList.class.getName(), null, false);
 	 mActivity.runOnUiThread(new Runnable() {
 		    @Override
 		    public void run() {
 			      // click button and open next activity.
-		    	events.performClick();
+		    	secret.performClick();
 			}
 		  });	
 	 
-	 com.example.weunion.EventMenu nextActivity = (com.example.weunion.EventMenu) getInstrumentation().waitForMonitor(activityMonitor);
+	 com.example.weunion.SecretList nextActivity = (com.example.weunion.SecretList) getInstrumentation().waitForMonitor(activityMonitor);
 	 assertNotNull(nextActivity);
 	 nextActivity.finish();
 	 } 	
